@@ -15,9 +15,4 @@ def parse_arguments():
     # 添加正方形命令解析
     add_square_arguments(subparsers)
     
-    # 这里可以添加其他图形的参数解析
-    # 例如：
-    # house_parser = subparsers.add_parser('house', help='绘制房子')
-    # house_parser.add_argument(...)
-    
     return parser.parse_args()
