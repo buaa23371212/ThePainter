@@ -1,6 +1,6 @@
 import os
 import pyautogui
-import argparse
+from parser.command_parser import parse_arguments
 from drawer.utils import open_paint
 from drawer.circle_drawer import select_circle_tool, draw_circle, draw_circle_by_center
 
@@ -10,13 +10,7 @@ from drawer.circle_drawer import select_circle_tool, draw_circle, draw_circle_by
 
 def main():
     """主函数：解析命令行参数并执行对应操作"""
-    parser = argparse.ArgumentParser(description='在画图工具中绘制圆形')
-    parser.add_argument('-circle', nargs=4, type=int, metavar=('start_x', 'start_y', 'end_x', 'end_y'),
-                       help='通过起点和终点绘制圆形（四个整数坐标）')
-    parser.add_argument('-circle_by_center', nargs=3, type=int, metavar=('center_x', 'center_y', 'radius'),
-                       help='通过圆心和半径绘制圆形')
-    
-    args = parser.parse_args()
+    args = parse_arguments()  # 解析命令行参数
 
     try:
         # 打开画图工具并选择圆形工具
@@ -24,17 +18,20 @@ def main():
         select_circle_tool()
         
         # 根据参数执行不同绘制方式
-        if args.circle:
-            start_x, start_y, end_x, end_y = args.circle
-            draw_circle(start_x, start_y, end_x, end_y)
-        elif args.circle_by_center:
-            center_x, center_y, radius = args.circle_by_center
-            draw_circle_by_center(center_x, center_y, radius)
+        if args.command == 'circle':
+            if args.bounding:
+                start_x, start_y, end_x, end_y = args.bounding
+                draw_circle(start_x, start_y, end_x, end_y)
+            elif args.center:
+                center_x, center_y, radius = args.center
+                draw_circle_by_center(center_x, center_y, radius)
+            else:
+                # 默认行为：在屏幕中心绘制圆
+                screen_width, screen_height = pyautogui.size()
+                center_x, center_y = screen_width // 2, screen_height // 2
+                draw_circle_by_center(center_x, center_y, 100)
         else:
-            # 默认行为：在屏幕中心绘制圆
-            screen_width, screen_height = pyautogui.size()
-            center_x, center_y = screen_width // 2, screen_height // 2
-            draw_circle_by_center(center_x, center_y, 100)
+            print(f"[WARNING] 暂不支持的命令: {args.command}")
         
         print("[INFO] 画图工具保持打开状态")
     except Exception as e:

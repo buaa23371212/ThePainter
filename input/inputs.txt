@@ -1,1 +1,2 @@
-python main.py -circle 500 300 700 500
+python main.py circle -bounding 500 300 700 500
+python main.py circle -center 600 400 200
