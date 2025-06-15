@@ -1,8 +1,8 @@
 import os
 import time
 import pyautogui
-# from .utils import activate_canvas, click_shapes_button
-from utils import open_paint, activate_canvas, click_shapes_button  # 测试用
+from .utils import activate_canvas, click_shapes_button
+# from utils import open_paint, activate_canvas, click_shapes_button  # 测试用
 
 # ======================
 # 专用功能方法
@@ -69,45 +69,20 @@ def draw_square_by_center(center_x, center_y, side_length):
     # Step 2: 调用绘制函数
     draw_square(start_x, start_y, end_x, end_y)
 
-    # ======================
-# 主功能方法
+# ======================
+# 导出函数供主程序调用
 # ======================
 
-def draw_square_in_paint():
-    """
-    主函数：在画图工具中绘制正方形
-    """
-    try:
-        # Step 1: 打开画图工具
-        open_paint()
-        
-        # Step 2: 选择矩形工具
-        select_rectangle_tool()
-        
-        # Step 3: 定位画布中心
+def draw_square_command(args):
+    """处理正方形绘制命令"""
+    if args.bounding:
+        start_x, start_y, end_x, end_y = args.bounding
+        draw_square(start_x, start_y, end_x, end_y)
+    elif args.center:
+        center_x, center_y, side_length = args.center
+        draw_square_by_center(center_x, center_y, side_length)
+    else:
+        # 默认行为：在屏幕中心绘制正方形
         screen_width, screen_height = pyautogui.size()
         center_x, center_y = screen_width // 2, screen_height // 2
-        # print(f"[INFO] 屏幕分辨率: {screen_width}x{screen_height}, 画布中心: ({center_x}, {center_y})")
-        
-        # Step 4: 绘制正方形
         draw_square_by_center(center_x, center_y, 200)
-        
-        # print("[INFO] 画图工具保持打开状态")
-    except Exception as e:
-        print(f"[ERROR] 操作失败: {str(e)}")
-
-# ======================
-# 脚本入口
-# ======================
-
-if __name__ == "__main__":
-    # Step 1: 检查操作系统
-    if os.name == 'nt':
-        print("[INFO] 检测到Windows系统，开始执行绘制任务...")
-        
-        # Step 2: 执行主功能
-        draw_square_in_paint()
-        
-        print("[INFO] 脚本执行完毕")
-    else:
-        print("[ERROR] 此脚本仅支持Windows系统")

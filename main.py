@@ -2,7 +2,8 @@ import os
 import pyautogui
 from parser.command_parser import parse_arguments
 from drawer.utils import open_paint
-from drawer.circle_drawer import select_circle_tool, draw_circle, draw_circle_by_center
+from drawer.circle_drawer import select_circle_tool, draw_circle_command
+from drawer.square_drawer import select_rectangle_tool, draw_square_command
 
 # ======================
 # 主功能方法（支持命令行参数）
@@ -15,21 +16,16 @@ def main():
     try:
         # 打开画图工具并选择圆形工具
         open_paint()
-        select_circle_tool()
         
         # 根据参数执行不同绘制方式
         if args.command == 'circle':
-            if args.bounding:
-                start_x, start_y, end_x, end_y = args.bounding
-                draw_circle(start_x, start_y, end_x, end_y)
-            elif args.center:
-                center_x, center_y, radius = args.center
-                draw_circle_by_center(center_x, center_y, radius)
-            else:
-                # 默认行为：在屏幕中心绘制圆
-                screen_width, screen_height = pyautogui.size()
-                center_x, center_y = screen_width // 2, screen_height // 2
-                draw_circle_by_center(center_x, center_y, 100)
+            select_circle_tool()
+            draw_circle_command(args)
+            
+        elif args.command == 'square':
+            select_rectangle_tool()
+            draw_square_command(args)
+
         else:
             print(f"[WARNING] 暂不支持的命令: {args.command}")
         

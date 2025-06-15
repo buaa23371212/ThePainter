@@ -65,3 +65,21 @@ def draw_circle_by_center(center_x, center_y, radius):
     
     # Step 2: 调用绘制函数
     draw_circle(start_x, start_y, end_x, end_y)
+
+# ======================
+# 导出函数供主程序调用
+# ======================
+
+def draw_circle_command(args):
+    """处理圆形绘制命令"""
+    if args.bounding:
+        start_x, start_y, end_x, end_y = args.bounding
+        draw_circle(start_x, start_y, end_x, end_y)
+    elif args.center:
+        center_x, center_y, radius = args.center
+        draw_circle_by_center(center_x, center_y, radius)
+    else:
+        # 默认行为：在屏幕中心绘制圆
+        screen_width, screen_height = pyautogui.size()
+        center_x, center_y = screen_width // 2, screen_height // 2
+        draw_circle_by_center(center_x, center_y, 100)
