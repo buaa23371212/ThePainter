@@ -27,11 +27,11 @@ def main():
             draw_square_command(args)
 
         else:
-            warn(True, f"暂不支持的命令: {args.command}")
+            warn(True, f"暂不支持的命令: {args.command}", "main.py")
         
         info(True, "画图工具保持打开状态")
     except Exception as e:
-        error(True, f"操作失败: {str(e)}")
+        error(True, f"操作失败: {str(e)}", "main.py")
 
 # ======================
 # 脚本入口
@@ -43,4 +43,4 @@ if __name__ == "__main__":
         main()
         info(True, "脚本执行完毕")
     else:
-        error(True, "此脚本仅支持Windows系统")
+        error(True, "此脚本仅支持Windows系统", "main.py")
