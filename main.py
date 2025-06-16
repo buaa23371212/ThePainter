@@ -3,6 +3,7 @@ from drawer.utils import open_paint
 from parser.command_parser import parse_arguments
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.square_drawer import select_rectangle_tool, draw_square_command
+from terminal_logger.logger import info, warn, error
 
 # ======================
 # 主功能方法（支持命令行参数）
@@ -26,11 +27,11 @@ def main():
             draw_square_command(args)
 
         else:
-            print(f"[WARNING] 暂不支持的命令: {args.command}")
+            warn(True, f"暂不支持的命令: {args.command}")
         
-        print("[INFO] 画图工具保持打开状态")
+        info(True, "画图工具保持打开状态")
     except Exception as e:
-        print(f"[ERROR] 操作失败: {str(e)}")
+        error(True, f"操作失败: {str(e)}")
 
 # ======================
 # 脚本入口
@@ -38,8 +39,8 @@ def main():
 
 if __name__ == "__main__":
     if os.name == 'nt':
-        print("[INFO] 检测到Windows系统，开始执行绘制任务...")
+        info(True, "检测到Windows系统，开始执行绘制任务...")
         main()
-        print("[INFO] 脚本执行完毕")
+        info(True, "脚本执行完毕")
     else:
-        print("[ERROR] 此脚本仅支持Windows系统")
+        error(True, "此脚本仅支持Windows系统")
