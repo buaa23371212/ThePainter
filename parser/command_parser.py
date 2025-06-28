@@ -2,6 +2,7 @@ import argparse
 from .circle_parser import add_circle_arguments
 from .rectangle_parser import add_rectangle_arguments
 from .polygon_parser import add_polygon_arguments
+from .line_parser import add_line_arguments
 
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
@@ -13,13 +14,10 @@ def parse_arguments(args=None):
     # 添加绘图命令
     subparsers = parser.add_subparsers(dest='command', help='绘图命令')
 
-    # 添加圆形命令解析
+    # 添加各种图形命令解析
     add_circle_arguments(subparsers)
-
-    # 添加正方形命令解析
     add_rectangle_arguments(subparsers)
-
-    # 添加多边形命令解析
+    add_line_arguments(subparsers)
     add_polygon_arguments(subparsers)
 
     return parser.parse_args(args)
