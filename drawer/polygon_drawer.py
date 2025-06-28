@@ -223,10 +223,7 @@ def draw_polygon_command(args):
         if len(points) < 3:
             raise ValueError("多边形至少需要三个顶点")
         
-        # Step 3: 选择多边形工具
-        select_polygon_tool()
-        
-        # Step 4: 绘制多边形
+        # Step 3: 绘制多边形
         draw_polygon(points)
         
     except Exception as e:

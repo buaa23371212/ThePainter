@@ -3,6 +3,7 @@ from tool.utils import open_paint
 from parser.command_parser import parse_arguments
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
+from drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
 from terminal_logger.logger import info, warn, error
 
 def execute_command(args):
@@ -27,6 +28,11 @@ def execute_command(args):
             select_rectangle_tool()
             # Step 2: 执行绘图命令
             draw_rectangle_command(args)
+
+        elif args.command == 'polygon':
+            select_polygon_tool()
+            # Step 2: 执行绘图命令
+            draw_polygon_command(args)
 
         else:
             # Step 3: 处理不支持的命令

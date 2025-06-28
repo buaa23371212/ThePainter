@@ -1,2 +1,1 @@
-circle -bounding 500 300 700 500
-rectangle -bounding 500 300 700 500
+circle -bounding 390 280 700 920

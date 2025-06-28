@@ -55,6 +55,8 @@ def activate_canvas():
     # Step 1: 计算屏幕中心
     info(False, "激活画布...", True)
     screen_width, screen_height = pyautogui.size()
+
+    info(True, f"屏幕尺寸: {screen_width}x{screen_height}", True)
     
     # Step 2: 点击画布中心
     pyautogui.click(x=screen_width//2, y=screen_height//2)
