@@ -1,6 +1,7 @@
 import argparse
 from .circle_parser import add_circle_arguments
 from .rectangle_parser import add_rectangle_arguments
+from .polygon_parser import add_polygon_arguments
 
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
@@ -17,5 +18,8 @@ def parse_arguments(args=None):
 
     # 添加正方形命令解析
     add_rectangle_arguments(subparsers)
+
+    # 添加多边形命令解析
+    add_polygon_arguments(subparsers)
 
     return parser.parse_args(args)

@@ -1,0 +1,18 @@
+# 基本形状
+python main.py circle -bounding 500 300 700 500
+python main.py circle -center 600 400 200
+
+python main.py rectangle -bounding 500 300 700 500
+python main.py rectangle -center 600 400 200 200
+
+# 直接指定顶点
+python main.py polygon -vertices 500 300 700 500 300 500
+
+# 通过文件+名称引用
+python main.py polygon -file shapes.json -name "filled triangle"
+
+# 通过文件+ID引用
+python main.py polygon -file shapes.json -id star
+
+# 批量执行
+python main.py -input_file input/Sample-1/commands.txt
