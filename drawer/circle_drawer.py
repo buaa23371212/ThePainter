@@ -1,6 +1,6 @@
 import time
 import pyautogui
-from .utils import click_shapes_button, activate_canvas
+from ..tool.utils import click_shapes_button, activate_canvas
 
 # ======================
 # 专用功能方法

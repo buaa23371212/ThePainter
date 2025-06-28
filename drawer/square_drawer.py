@@ -1,8 +1,7 @@
 import os
 import time
 import pyautogui
-from .utils import activate_canvas, click_shapes_button
-# from utils import open_paint, activate_canvas, click_shapes_button  # 测试用
+from ..tool.utils import activate_canvas, click_shapes_button
 
 # ======================
 # 专用功能方法

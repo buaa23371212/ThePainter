@@ -1,5 +1,5 @@
 import os
-from drawer.utils import open_paint
+from tool.utils import open_paint
 from parser.command_parser import parse_arguments
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.square_drawer import select_rectangle_tool, draw_square_command
