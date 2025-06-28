@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas绘图艺术 - 可滚动页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ffdb4d, #ff9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #e0e0ff;
+        }
+        
+        .canvas-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .canvas-container {
+            position: relative;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            max-width: 100%;
+        }
+        
+        canvas {
+            background-color: #b3e0ff;
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        
+        button {
+            background: linear-gradient(to bottom, #ffdb4d, #ff9900);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            min-width: 160px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom, #ffcc00, #ff8800);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card h3 i {
+            margin-right: 10px;
+            color: #ff9900;
+        }
+        
+        .feature-card p {
+            color: #444;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .code-section {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 60px 0;
+            color: #f0f0f0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .code-title {
+            font-size: 1.6rem;
+            color: #ffdb4d;
+        }
+        
+        .code-block {
+            overflow-x: auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .code-comment {
+            color: #88c999;
+        }
+        
+        .code-function {
+            color: #ffcc66;
+        }
+        
+        .code-property {
+            color: #66b2ff;
+        }
+        
+        .code-value {
+            color: #ff9999;
+        }
+        
+        .tutorial {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+        
+        .tutorial h2 {
+            text-align: center;
+            color: #1a2a6c;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+        }
+        
+        .step {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 30px;
+        }
+        
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .step-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .step-number {
+            background: #ff9900;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .step-content h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .step-image {
+            flex: 1;
+            min-width: 300px;
+            height: 250px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            button {
+                min-width: 140px;
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .feature-card, .tutorial {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Canvas绘图艺术</h1>
+            <p class="subtitle">使用HTML5 Canvas API创建令人惊叹的图形和动画。这个页面完全支持滚动，让您可以探索所有内容。</p>
+        </header>
+        
+        <section class="canvas-section">
+            <h2 style="text-align: center; color: white; margin-bottom: 25px;">交互式风景画</h2>
+            <div class="canvas-container">
+                <canvas id="landscapeCanvas" width="800" height="500"></canvas>
+            </div>
+            
+            <div class="controls">
+                <button id="drawBtn">绘制风景</button>
+                <button id="animateBtn">动画模式</button>
+                <button id="nightBtn">切换夜晚</button>
+                <button id="clearBtn">清除画布</button>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <h3><i>🎨</i> Canvas基础</h3>
+                <p>HTML5 Canvas 元素提供了一套强大的API，用于通过JavaScript动态绘制图形。它支持路径、形状、文本、图像、渐变和阴影等绘图操作。</p>
+            </div>
+            <div class="feature-card">
+                <h3><i>🔄</i> 即时模式渲染</h3>
+                <p>Canvas使用即时模式渲染，所有绘图操作都是直接作用在像素上的，不会保留对象信息。这意味着您需要重新绘制整个场景来更新显示。</p>
+            </div>
+            <div class="feature-card">
+                <h3><i>💡</i> 广泛应用场景</h3>
+                <p>Canvas被广泛应用于数据可视化、游戏开发、图像处理、动画效果和交互式图形等场景，为现代Web应用提供强大的图形能力。</p>
+            </div>
+        </section>
+        
+        <section class="code-section">
+            <div class="code-header">
+                <h3 class="code-title">Canvas绘图示例代码</h3>
+            </div>
+            <div class="code-block">
+                <pre><code><span class="code-comment">// 绘制蓝天背景</span>
+<span class="code-function">const</span> skyGradient = ctx.<span class="code-function">createLinearGradient</span>(0, 0, 0, canvas.height * 0.7);
+skyGradient.<span class="code-function">addColorStop</span>(0, <span class="code-value">'#87CEEB'</span>);
+skyGradient.<span class="code-function">addColorStop</span>(1, <span class="code-value">'#B0E2FF'</span>);
+ctx.<span class="code-property">fillStyle</span> = skyGradient;
+ctx.<span class="code-function">fillRect</span>(0, 0, canvas.width, canvas.height * 0.7);
+
+<span class="code-comment">// 绘制太阳</span>
+ctx.<span class="code-function">beginPath</span>();
+ctx.<span class="code-function">arc</span>(700, 80, 50, 0, Math.PI * 2);
+<span class="code-function">const</span> sunGradient = ctx.<span class="code-function">createRadialGradient</span>(700, 80, 0, 700, 80, 50);
+sunGradient.<span class="code-function">addColorStop</span>(0, <span class="code-value">'#FFFF00'</span>);
+sunGradient.<span class="code-function">addColorStop</span>(1, <span class="code-value">'#FFA500'</span>);
+ctx.<span class="code-property">fillStyle</span> = sunGradient;
+ctx.<span class="code-function">fill</span>();
+
+<span class="code-comment">// 绘制山脉</span>
+ctx.<span class="code-property">fillStyle</span> = <span class="code-value">'#556B2F'</span>;
+ctx.<span class="code-function">beginPath</span>();
+ctx.<span class="code-function">moveTo</span>(0, canvas.height * 0.7);
+<span class="code-function">for</span> (<span class="code-function">let</span> i = 0; i < canvas.width; i += 20) {
+    <span class="code-function">const</span> height = canvas.height * 0.7 - Math.sin(i * 0.02) * 40 - Math.cos(i * 0.005) * 60;
+    ctx.<span class="code-function">lineTo</span>(i, height);
+}
+ctx.<span class="code-function">lineTo</span>(canvas.width, canvas.height * 0.7);
+ctx.<span class="code-function">lineTo</span>(0, canvas.height * 0.7);
+ctx.<span class="code-function">fill</span>();</code></pre>
+            </div>
+        </section>
+        
+        <section class="tutorial">
+            <h2>Canvas绘图入门教程</h2>
+            
+            <div class="step">
+                <div class="step-content">
+                    <div class="step-number">1</div>
+                    <h3>创建Canvas元素</h3>
+                    <p>在HTML中添加canvas元素，并设置其宽度和高度。Canvas元素是一个矩形区域，您可以在其中使用JavaScript绘制图形。</p>
+                    <p>使用getContext('2d')方法获取绘图上下文，这是所有绘图操作的基础。</p>
+                </div>
+                <div class="step-image">
+                    示例图片：Canvas元素结构
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-content">
+                    <div class="step-number">2</div>
+                    <h3>绘制基本形状</h3>
+                    <p>Canvas支持多种基本形状的绘制：矩形、圆形、线条、路径等。使用beginPath()开始新路径，使用moveTo()、lineTo()、arc()等方法定义形状。</p>
+                    <p>使用fill()填充路径或stroke()绘制轮廓。</p>
+                </div>
+                <div class="step-image">
+                    示例图片：基本形状展示
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-content">
+                    <div class="step-number">3</div>
+                    <h3>使用颜色和渐变</h3>
+                    <p>Canvas提供了丰富的颜色选项：使用fillStyle设置填充颜色，strokeStyle设置描边颜色。</p>
+                    <p>可以创建线性渐变(createLinearGradient)或径向渐变(createRadialGradient)实现更丰富的视觉效果。</p>
+                </div>
+                <div class="step-image">
+                    示例图片：渐变效果展示
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-content">
+                    <div class="step-number">4</div>
+                    <h3>添加动画效果</h3>
+                    <p>使用requestAnimationFrame创建流畅的动画效果。在每一帧中清除画布并重新绘制场景，通过改变对象的位置或属性实现动画。</p>
+                    <p>对于复杂的场景，可以使用变换(translate, rotate, scale)和状态保存(restore, save)来管理绘图状态。</p>
+                </div>
+                <div class="step-image">
+                    示例图片：动画效果展示
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 Canvas绘图艺术 | HTML5 Canvas API演示 | 页面完全支持滚动</p>
+            <p style="margin-top: 15px; opacity: 0.8;">使用Canvas创建令人惊叹的Web图形体验</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('landscapeCanvas');
+        const ctx = canvas.getContext('2d');
+        let isNight = false;
+        let animationId = null;
+        
+        // 调整Canvas大小以适应容器
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const maxWidth = Math.min(800, container.clientWidth - 40);
+            const aspectRatio = 500 / 800;
+            
+            canvas.width = maxWidth;
+            canvas.height = maxWidth * aspectRatio;
+            
+            if (!animationId) {
+                drawLandscape();
+            }
+        }
+        
+        // 初始化时调整大小
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // 绘制基本风景
+        function drawLandscape() {
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制天空
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+            if (isNight) {
+                skyGradient.addColorStop(0, '#0a1128');
+                skyGradient.addColorStop(1, '#1c3d6a');
+            } else {
+                skyGradient.addColorStop(0, '#87CEEB');
+                skyGradient.addColorStop(1, '#B0E2FF');
+            }
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.7);
+            
+            // 绘制太阳或月亮
+            const sunX = canvas.width * 0.85;
+            const sunY = canvas.height * 0.15;
+            const sunRadius = canvas.width * 0.06;
+            
+            ctx.beginPath();
+            ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+            if (isNight) {
+                ctx.fillStyle = '#F0F0FF';
+                ctx.fill();
+                
+                // 绘制月亮陨石坑
+                ctx.fillStyle = '#D0D0E0';
+                ctx.beginPath();
+                ctx.arc(sunX - sunRadius * 0.4, sunY - sunRadius * 0.4, sunRadius * 0.2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(sunX + sunRadius * 0.4, sunY + sunRadius * 0.2, sunRadius * 0.16, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
+                sunGradient.addColorStop(0, '#FFFF00');
+                sunGradient.addColorStop(1, '#FFA500');
+                ctx.fillStyle = sunGradient;
+                ctx.fill();
+            }
+            
+            // 绘制云朵
+            function drawCloud(x, y, size) {
+                ctx.fillStyle = isNight ? 'rgba(220, 220, 255, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(x, y, size * 0.8, 0, Math.PI * 2);
+                ctx.arc(x + size * 0.8, y - size * 0.2, size * 0.7, 0, Math.PI * 2);
+                ctx.arc(x + size * 1.5, y, size * 0.9, 0, Math.PI * 2);
+                ctx.arc(x + size * 1.2, y + size * 0.3, size * 0.6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            drawCloud(canvas.width * 0.1, canvas.height * 0.2, canvas.width * 0.04);
+            drawCloud(canvas.width * 0.3, canvas.height * 0.15, canvas.width * 0.05);
+            drawCloud(canvas.width * 0.6, canvas.height * 0.25, canvas.width * 0.045);
+            drawCloud(canvas.width * 0.2, canvas.height * 0.35, canvas.width * 0.035);
+            
+            // 绘制山脉
+            ctx.fillStyle = isNight ? '#2c3e50' : '#556B2F';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height * 0.7);
+            for (let i = 0; i < canvas.width; i += 10) {
+                const height = canvas.height * 0.7 - Math.sin(i * 0.02) * canvas.height * 0.08 - 
+                               Math.cos(i * 0.005) * canvas.height * 0.12;
+                ctx.lineTo(i, height);
+            }
+            ctx.lineTo(canvas.width, canvas.height * 0.7);
+            ctx.lineTo(0, canvas.height * 0.7);
+            ctx.fill();
+            
+            // 绘制草地
+            const grassGradient = ctx.createLinearGradient(0, canvas.height * 0.7, 0, canvas.height);
+            grassGradient.addColorStop(0, isNight ? '#1a3f1a' : '#32CD32');
+            grassGradient.addColorStop(1, isNight ? '#0d2c0d' : '#228B22');
+            ctx.fillStyle = grassGradient;
+            ctx.fillRect(0, canvas.height * 0.7, canvas.width, canvas.height * 0.3);
+            
+            // 绘制树
+            function drawTree(x, y, size) {
+                // 树干
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(x - size * 0.15, y, size * 0.3, size * 0.8);
+                
+                // 树冠
+                ctx.beginPath();
+                ctx.fillStyle = isNight ? '#1e5128' : '#2E8B57';
+                ctx.arc(x, y - size * 0.2, size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(x + size * 0.3, y - size * 0.4, size * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(x - size * 0.3, y - size * 0.4, size * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(x, y - size * 0.7, size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            drawTree(canvas.width * 0.25, canvas.height * 0.9, canvas.width * 0.1);
+            drawTree(canvas.width * 0.5, canvas.height * 0.86, canvas.width * 0.125);
+            drawTree(canvas.width * 0.75, canvas.height * 0.92, canvas.width * 0.09);
+            drawTree(canvas.width * 0.12, canvas.height * 0.94, canvas.width * 0.075);
+            drawTree(canvas.width * 0.87, canvas.height * 0.88, canvas.width * 0.11);
+            
+            // 绘制房屋
+            function drawHouse(x, y, size) {
+                // 房屋主体
+                ctx.fillStyle = isNight ? '#6b5b95' : '#FF6347';
+                ctx.fillRect(x, y - size * 0.7, size, size * 0.7);
+                
+                // 屋顶
+                ctx.fillStyle = isNight ? '#3a2d52' : '#8B0000';
+                ctx.beginPath();
+                ctx.moveTo(x - size * 0.1, y - size * 0.7);
+                ctx.lineTo(x + size * 0.5, y - size * 1.2);
+                ctx.lineTo(x + size * 1.1, y - size * 0.7);
+                ctx.closePath();
+                ctx.fill();
+                
+                // 门
+                ctx.fillStyle = isNight ? '#3d2b1f' : '#8B4513';
+                ctx.fillRect(x + size * 0.4, y - size * 0.3, size * 0.2, size * 0.4);
+                
+                // 窗户
+                ctx.fillStyle = isNight ? '#add8e6' : '#87CEEB';
+                ctx.fillRect(x + size * 0.15, y - size * 0.5, size * 0.2, size * 0.2);
+                ctx.fillRect(x + size * 0.65, y - size * 0.5, size * 0.2, size * 0.2);
+            }
+            
+            drawHouse(canvas.width * 0.35, canvas.height * 0.9, canvas.width * 0.1);
+            drawHouse(canvas.width * 0.65, canvas.height * 0.94, canvas.width * 0.075);
+            
+            // 绘制小鸟
+            if (!isNight) {
+                function drawBird(x, y, size) {
+                    ctx.strokeStyle = '#333';
+                    ctx.lineWidth = size * 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.quadraticCurveTo(x + size * 1.5, y - size * 2, x + size * 3, y);
+                    ctx.stroke();
+                }
+                
+                drawBird(canvas.width * 0.2, canvas.height * 0.3, canvas.width * 0.006);
+                drawBird(canvas.width * 0.25, canvas.height * 0.28, canvas.width * 0.005);
+                drawBird(canvas.width * 0.5, canvas.height * 0.35, canvas.width * 0.007);
+            }
+            
+            // 绘制星星（夜晚）
+            if (isNight) {
+                ctx.fillStyle = 'white';
+                for (let i = 0; i < 100; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * (canvas.height * 0.6);
+                    const radius = Math.random() * 1.5;
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // 闪烁的大星星
+                    if (Math.random() > 0.8) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, radius * 2, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`;
+                        ctx.fill();
+                    }
+                }
+            }
+        }
+        
+        // 动画模式
+        function animateScene() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            
+            let cloudOffset = 0;
+            let birdOffset = 0;
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新云朵位置
+                cloudOffset += 0.5;
+                if (cloudOffset > canvas.width) cloudOffset = 0;
+                
+                // 更新小鸟位置
+                birdOffset += 0.8;
+                if (birdOffset > canvas.width * 2) birdOffset = 0;
+                
+                // 绘制背景
+                const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+                skyGradient.addColorStop(0, '#87CEEB');
+                skyGradient.addColorStop(1, '#B0E2FF');
+                ctx.fillStyle = skyGradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height * 0.7);
+                
+                // 绘制太阳
+                const sunX = canvas.width * 0.85;
+                const sunY = canvas.height * 0.15;
+                const sunRadius = canvas.width * 0.06;
+                
+                ctx.beginPath();
+                ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+                const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
+                sunGradient.addColorStop(0, '#FFFF00');
+                sunGradient.addColorStop(1, '#FFA500');
+                ctx.fillStyle = sunGradient;
+                ctx.fill();
+                
+                // 绘制移动的云朵
+                function drawAnimatedCloud(x, y, size) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                    ctx.beginPath();
+                    ctx.arc(x, y, size * 0.8, 0, Math.PI * 2);
+                    ctx.arc(x + size * 0.8, y - size * 0.2, size * 0.7, 0, Math.PI * 2);
+                    ctx.arc(x + size * 1.5, y, size * 0.9, 0, Math.PI * 2);
+                    ctx.arc(x + size * 1.2, y + size * 0.3, size * 0.6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                drawAnimatedCloud(canvas.width * 0.1 + cloudOffset, canvas.height * 0.2, canvas.width * 0.04);
+                drawAnimatedCloud(canvas.width * 0.3 + cloudOffset * 0.7, canvas.height * 0.15, canvas.width * 0.05);
+                drawAnimatedCloud(canvas.width * 0.6 + cloudOffset * 1.2, canvas.height * 0.25, canvas.width * 0.045);
+                drawAnimatedCloud(canvas.width * 0.2 + cloudOffset * 0.5, canvas.height * 0.35, canvas.width * 0.035);
+                
+                // 绘制山脉
+                ctx.fillStyle = '#556B2F';
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height * 0.7);
+                for (let i = 0; i < canvas.width; i += 10) {
+                    const height = canvas.height * 0.7 - Math.sin(i * 0.02) * canvas.height * 0.08 - 
+                                   Math.cos(i * 0.005) * canvas.height * 0.12;
+                    ctx.lineTo(i, height);
+                }
+                ctx.lineTo(canvas.width, canvas.height * 0.7);
+                ctx.lineTo(0, canvas.height * 0.7);
+                ctx.fill();
+                
+                // 绘制草地
+                const grassGradient = ctx.createLinearGradient(0, canvas.height * 0.7, 0, canvas.height);
+                grassGradient.addColorStop(0, '#32CD32');
+                grassGradient.addColorStop(1, '#228B22');
+                ctx.fillStyle = grassGradient;
+                ctx.fillRect(0, canvas.height * 0.7, canvas.width, canvas.height * 0.3);
+                
+                // 绘制树
+                drawTree(canvas.width * 0.25, canvas.height * 0.9, canvas.width * 0.1);
+                drawTree(canvas.width * 0.5, canvas.height * 0.86, canvas.width * 0.125);
+                drawTree(canvas.width * 0.75, canvas.height * 0.92, canvas.width * 0.09);
+                drawTree(canvas.width * 0.12, canvas.height * 0.94, canvas.width * 0.075);
+                drawTree(canvas.width * 0.87, canvas.height * 0.88, canvas.width * 0.11);
+                
+                // 绘制房屋
+                drawHouse(canvas.width * 0.35, canvas.height * 0.9, canvas.width * 0.1);
+                drawHouse(canvas.width * 0.65, canvas.height * 0.94, canvas.width * 0.075);
+                
+                // 绘制小鸟
+                function drawAnimatedBird(x, y, size) {
+                    ctx.strokeStyle = '#333';
+                    ctx.lineWidth = size * 0.4;
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.quadraticCurveTo(x + size * 1.5, y - size * 2, x + size * 3, y);
+                    ctx.stroke();
+                }
+                
+                drawAnimatedBird(canvas.width * 0.2 + birdOffset * 0.2, 
+                                canvas.height * 0.3 + Math.sin(birdOffset * 0.1) * 10, 
+                                canvas.width * 0.006);
+                drawAnimatedBird(canvas.width * 0.25 + birdOffset * 0.25, 
+                                canvas.height * 0.28 + Math.sin(birdOffset * 0.12) * 12, 
+                                canvas.width * 0.005);
+                drawAnimatedBird(canvas.width * 0.5 + birdOffset * 0.3, 
+                                canvas.height * 0.35 + Math.sin(birdOffset * 0.15) * 15, 
+                                canvas.width * 0.007);
+                
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // 事件监听
+        document.getElementById('drawBtn').addEventListener('click', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            drawLandscape();
+        });
+        
+        document.getElementById('animateBtn').addEventListener('click', () => {
+            isNight = false;
+            animateScene();
+        });
+        
+        document.getElementById('nightBtn').addEventListener('click', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            isNight = !isNight;
+            drawLandscape();
+        });
+        
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+        
+        // 初始绘制
+        drawLandscape();
+    </script>
+</body>
+</html>
