@@ -12,7 +12,7 @@ def add_rectangle_arguments(subparsers):
     )
     rectangle_group.add_argument(
         '-center', 
-        nargs=3, 
+        nargs=4, 
         type=int, 
         metavar=('center_x', 'center_y', 'width', 'height'),
         help='通过中心点和长宽绘制矩形'
