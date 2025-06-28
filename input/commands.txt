@@ -1,2 +1,2 @@
 circle -bounding 500 300 700 500
-square -center 600 400 200
+rectangle -bounding 500 300 700 500

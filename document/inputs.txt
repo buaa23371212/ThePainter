@@ -1,7 +1,7 @@
 python main.py circle -bounding 500 300 700 500
 python main.py circle -center 600 400 200
 
-python main.py square -bounding 500 300 700 500
-python main.py square -center 600 400 200
+python main.py rectangle -bounding 500 300 700 500
+python main.py rectangle -center 600 400 200 200
 
 python main.py -input_file input/commands.txt

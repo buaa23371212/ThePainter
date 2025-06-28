@@ -1,6 +1,7 @@
 import time
 import pyautogui
-from ..tool.utils import click_shapes_button, activate_canvas
+from tool.utils import click_shapes_button, activate_canvas
+from terminal_logger.logger import info
 
 # ======================
 # 专用功能方法
@@ -10,7 +11,8 @@ def select_circle_tool():
     """
     在画图工具中选择圆形工具
     """
-    # print("[INFO] 选择圆形工具...")
+    # 使用info函数记录日志，但show=False不显示输出
+    info(False, "选择圆形工具...", True)
     
     # Step 1: 点击形状按钮
     click_shapes_button()
@@ -20,7 +22,7 @@ def select_circle_tool():
     time.sleep(0.5)
     pyautogui.press('enter')
     time.sleep(1)
-    # print("[INFO] 已选择圆形工具")
+    info(False, "已选择圆形工具", True)
     
     # Step 3: 激活画布
     activate_canvas()
@@ -35,7 +37,8 @@ def draw_circle(start_x, start_y, end_x, end_y):
         end_x (int): 结束点X坐标
         end_y (int): 结束点Y坐标
     """
-    # print(f"[INFO] 开始绘制圆形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))")
+    # 使用info函数记录日志，但show=False不显示输出
+    info(False, f"开始绘制圆形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
     
     # Step 1: 缓慢移动到起始位置
     pyautogui.moveTo(start_x, start_y, duration=0.5)
@@ -46,7 +49,7 @@ def draw_circle(start_x, start_y, end_x, end_y):
     pyautogui.dragTo(end_x, end_y, duration=0.5)
     pyautogui.keyUp('shift')
     
-    # print("[INFO] 成功绘制圆形！")
+    info(False, "成功绘制圆形！", True)
 
 def draw_circle_by_center(center_x, center_y, radius):
     """
