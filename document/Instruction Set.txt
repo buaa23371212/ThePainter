@@ -23,6 +23,18 @@ python main.py rectangle -bounding 500 300 700 500
 python main.py rectangle -center 600 400 200 200
 
 # ======================
+# 线段示例
+# ======================
+
+# 通过边界框绘制矩形
+# 格式: -points <start_x> <start_y> <end_x> <end_y>
+python main.py line -points 500 300 700 500
+
+# 通过中心点和尺寸绘制矩形
+# 格式: -vector <start_x> <start_y> <dx> <dy>
+python main.py line -vector 500 300 200 200
+
+# ======================
 # 多边形示例
 # ======================
 
@@ -44,4 +56,4 @@ python main.py polygon -file input/Sample-1/shapes.json -id star
 
 # 执行文件中的多个命令
 # 格式: -input_file <path>
-python main.py -input_file input/Sample-1/commands.txt
+python main.py -input_file input/Sample-2/commandss.txt

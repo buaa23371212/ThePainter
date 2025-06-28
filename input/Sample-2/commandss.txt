@@ -1,18 +1,5 @@
-# ================
-# 简笔画房子绘制
-# ================
-
-# 1. 绘制房子主体（矩形）
 rectangle -center 960 500 400 300
-
-# 2. 绘制屋顶（三角形）
 polygon -file input/Sample-2/shapes.json -id roof
-
-# 3. 绘制门（矩形）
 rectangle -center 960 600 80 120
-
-# 4. 绘制左窗户
 polygon -file input/Sample-2/shapes.json -id window_left
-
-# 5. 绘制右窗户
 polygon -file input/Sample-2/shapes.json -id window_right

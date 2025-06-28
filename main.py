@@ -6,6 +6,17 @@ from drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_comman
 from drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
 from drawer.line_drawer import select_line_tool, draw_line_command
 from terminal_logger.logger import info, warn, error
+from terminal_logger.command_logger import title, step
+
+def extract_comment_words(line: str) -> str:
+    """
+    提取以'#'开头的注释中的内容，支持'#'后有多个空白符的情况
+    :param line: 输入行
+    :return: 去除'#'及其后所有空白符后的内容，若不是'#'开头返回空字符串
+    """
+    if line.startswith("# "):
+        return line.lstrip()[1:].lstrip()
+    return ""
 
 def execute_command(args):
     """
@@ -67,13 +78,32 @@ def main():
             open_paint()
             
             # Step 3: 批量执行文件中的命令
-            with open(args.input_file, 'r') as file:
-                for line in file:
-                    # 解析每行命令
-                    command_args = line.strip().split()
-                    parsed_args = parse_arguments(command_args)
-                    # 执行命令
-                    execute_command(parsed_args)
+            with open(args.input_file, 'r', encoding='utf-8') as file:
+                lines = file.readlines()
+                i = 0
+                while i < len(lines):
+                    line = lines[i].strip()
+                    # 1. 跳过空行
+                    if not line:
+                        i += 1
+                        continue
+                    # 2. 识别并输出 title
+                    if line.startswith("# =") and i + 2 < len(lines):
+                        title_line = lines[i + 1].strip()
+                        title(True, extract_comment_words(title_line), True)
+                        i += 3  # 跳过三行（分隔符、标题、分隔符）
+                        continue
+                    # 3. 识别并输出步骤
+                    if line.startswith("# ") and "." in line:
+                        step(True, extract_comment_words(line), True)
+                        i += 1
+                        continue
+                    # 4. 解析并执行命令
+                    if not line.startswith("#"):
+                        command_args = line.split()
+                        parsed_args = parse_arguments(command_args)
+                        execute_command(parsed_args)
+                    i += 1
             
             # Step 4: 显示完成信息
             info(True, "画图工具保持打开状态", True)
