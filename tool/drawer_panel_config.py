@@ -1,8 +1,24 @@
 # 画图工具操作面板的快捷键配置
 from tool import screen_config
 
-# 形状按钮在屏幕上的相对位置（相对于屏幕宽高）
+# TODO
 SHAPES_BUTTON_POSITION = (screen_config.SCREEN_WIDTH // 4 + 65, 95)
+
+LAYERS_BUTTON_POSITION = (1440, 130)
+ADD_LAYER_BUTTON_POSITION = (1830, 260)
+# 图层视图的高度
+# 例如点击第一个图层按钮时，鼠标需移动到添加图层按钮的下方100像素位置
+# 且第一个图层为顶部图层
+LAYER_VIEW_HEIGHT = 100
+
+# 右键后在原地弹出图层操作菜单
+# 例如点击第一个选项时，鼠标移动到右键位置的向左200像素，向下25像素位置
+# 点击第二个选项时，向下移动40像素
+OPTION_BOX_PADDING = 5  # 选项内边距
+# 选项卡高度
+# 选项从上到下依次为
+# 隐藏/显示图层，复制图层，向下合并，上移，下移，删除图层
+TAB_HEIGHT = 40  
 
 # 每种形状对应按右方向键的次数
 SHAPE_PANEL_KEY_MAP = {

@@ -1,1 +1,4 @@
-circle -bounding 390 280 700 920
+mouse_click -x 1440 -y 130
+mouse_click -x 1830 -y 260
+right_click -x 1830 -y 360
+mouse_click -x 1630 -y 425
