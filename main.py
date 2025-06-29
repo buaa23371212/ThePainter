@@ -13,6 +13,7 @@ from terminal_logger.command_logger import title, step
 def extract_comment_words(line: str) -> str:
     """
     提取以'#'开头的注释中的内容，支持'#'后有多个空白符的情况
+    
     :param line: 输入行
     :return: 去除'#'及其后所有空白符后的内容，若不是'#'开头返回空字符串
     """
@@ -23,10 +24,12 @@ def extract_comment_words(line: str) -> str:
 def _dispatch_command(args):
     """
     根据命令类型选择对应的绘图工具并执行绘图命令
+
     Step:
     1. 选择绘图工具
     2. 执行绘图命令
     3. 处理不支持的命令
+
     :param args: 解析后的命令行参数
     """
     # Step 1: 选择绘图工具
@@ -63,6 +66,41 @@ def _dispatch_command(args):
     else:
         # Step 3: 处理不支持的命令
         warn(True, f"暂不支持的命令: {args.command}", True)
+
+def _process_batch_commands(input_file_path):
+    """
+    处理批量命令文件
+    """
+    with open(input_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+        i = 0
+        while i < len(lines):
+            line = lines[i].strip()
+
+            # 1. 跳过空行
+            if not line:
+                i += 1
+                continue
+
+            # 2. 识别并输出 title
+            if line.startswith("# =") and i + 2 < len(lines):
+                title_line = lines[i + 1].strip()
+                title(True, extract_comment_words(title_line), True)
+                i += 3  # 跳过三行（分隔符、标题、分隔符）
+                continue
+
+            # 3. 识别并输出步骤
+            if line.startswith("# ") and "." in line:
+                step(True, extract_comment_words(line), True)
+                i += 1
+                continue
+            
+            # 4. 解析并执行命令
+            if not line.startswith("#"):
+                command_args = line.split()
+                parsed_args = parse_arguments(command_args)
+                execute_command(parsed_args)
+                i += 1
 
 def execute_command(args):
     """
@@ -101,32 +139,7 @@ def main():
             open_paint()
             
             # Step 3: 批量执行文件中的命令
-            with open(args.input_file, 'r', encoding='utf-8') as file:
-                lines = file.readlines()
-                i = 0
-                while i < len(lines):
-                    line = lines[i].strip()
-                    # 1. 跳过空行
-                    if not line:
-                        i += 1
-                        continue
-                    # 2. 识别并输出 title
-                    if line.startswith("# =") and i + 2 < len(lines):
-                        title_line = lines[i + 1].strip()
-                        title(True, extract_comment_words(title_line), True)
-                        i += 3  # 跳过三行（分隔符、标题、分隔符）
-                        continue
-                    # 3. 识别并输出步骤
-                    if line.startswith("# ") and "." in line:
-                        step(True, extract_comment_words(line), True)
-                        i += 1
-                        continue
-                    # 4. 解析并执行命令
-                    if not line.startswith("#"):
-                        command_args = line.split()
-                        parsed_args = parse_arguments(command_args)
-                        execute_command(parsed_args)
-                    i += 1
+            _process_batch_commands(args.input_file)
             
             # Step 4: 显示完成信息
             info(True, "画图工具保持打开状态", True)

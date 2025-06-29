@@ -3,6 +3,7 @@ import json
 import pyautogui
 from tool.utils import activate_canvas, click_shapes_button
 from terminal_logger.logger import info, error
+from tool.drawer_panel_config import get_shape_panel_presses
 
 # ======================
 # 专用功能方法
@@ -18,7 +19,7 @@ def select_polygon_tool():
     click_shapes_button()
 
     # Step 2: 选择多边形工具
-    pyautogui.press('right', presses=5)  # 按右方向键5次选择多边形工具
+    pyautogui.press('right', presses=get_shape_panel_presses("polygon"))  # 按右方向键5次选择多边形工具
     time.sleep(0.5)
     pyautogui.press('enter')
     time.sleep(1)

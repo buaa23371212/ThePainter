@@ -2,6 +2,7 @@ import time
 import pyautogui
 from tool.utils import activate_canvas, click_shapes_button
 from terminal_logger.logger import info
+from tool.drawer_panel_config import get_shape_panel_presses
 
 # ======================
 # 专用功能方法
@@ -18,7 +19,7 @@ def select_rectangle_tool():
 
     # Step 2: 选择矩形工具
     # 通常圆形工具的下一个就是矩形工具
-    pyautogui.press('right', presses=3)  # 按右方向键3次选择矩形工具
+    pyautogui.press('right', presses=get_shape_panel_presses("rectangle"))  # 按右方向键3次选择矩形工具
     time.sleep(0.5)
     pyautogui.press('enter')
     time.sleep(1)

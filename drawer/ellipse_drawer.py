@@ -2,6 +2,8 @@ import time
 import pyautogui
 from tool.utils import click_shapes_button, activate_canvas
 from terminal_logger.logger import info
+from tool.drawer_panel_config import get_shape_panel_presses
+from tool import screen_config
 
 # ======================
 # 专用功能方法
@@ -17,7 +19,7 @@ def select_ellipse_tool():
     click_shapes_button()
     
     # Step 2: 选择椭圆工具
-    pyautogui.press('right', presses=2)  # 假设按右方向键2次选择椭圆工具，具体根据实际情况调整
+    pyautogui.press('right', presses=get_shape_panel_presses("ellipse"))  # 假设按右方向键2次选择椭圆工具，具体根据实际情况调整
     time.sleep(0.5)
     pyautogui.press('enter')
     time.sleep(1)
@@ -80,6 +82,7 @@ def draw_ellipse_command(args):
         draw_ellipse_by_center(center_x, center_y, width, height)
     else:
         # 默认行为：在屏幕中心绘制椭圆
-        screen_width, screen_height = pyautogui.size()
+        screen_width = screen_config.SCREEN_WIDTH
+        screen_height = screen_config.SCREEN_HEIGHT
         center_x, center_y = screen_width // 2, screen_height // 2
         draw_ellipse_by_center(center_x, center_y, 200, 100)

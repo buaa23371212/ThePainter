@@ -1,5 +1,0 @@
-rectangle -center 960 500 400 300
-polygon -file input/Sample-2/shapes.json -id roof
-rectangle -center 960 600 80 120
-polygon -file input/Sample-2/shapes.json -id window_left
-polygon -file input/Sample-2/shapes.json -id window_right

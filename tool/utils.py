@@ -41,7 +41,7 @@ def activate_window():
     """
     # Step 1: 点击左上角激活窗口
     info(False, "激活画图窗口...", True)
-    pyautogui.click(x=100, y=100)
+    pyautogui.click(screen_config.WINDOW_ACTIVATE_POSITION)
     time.sleep(0.5)
     info(False, "画图窗口已激活", True)
 
@@ -62,7 +62,7 @@ def activate_canvas():
         error(True, "屏幕宽高未设置", True)
     
     # Step 2: 点击画布中心
-    pyautogui.click(x=screen_width//2, y=screen_height//2)
+    pyautogui.click(screen_config.CANVAS_CENTER)
     time.sleep(0.5)
     info(False, "画布已激活", True)
 
