@@ -17,6 +17,7 @@ def select_line_tool():
     click_shapes_button()
     
     # Step 2: 选择直线工具
+    # presses=0
     time.sleep(0.5)
     pyautogui.press('enter')
     time.sleep(1)

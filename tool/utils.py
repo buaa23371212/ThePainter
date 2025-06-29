@@ -1,8 +1,8 @@
 import time
 import subprocess
 import pyautogui
-from terminal_logger.logger import info, warn
-from tool import screen_config
+from terminal_logger.logger import info, warn, error
+from tool import screen_config, drawer_panel_config
 
 # ======================
 # 通用功能方法
@@ -59,7 +59,7 @@ def activate_canvas():
     screen_width = screen_config.SCREEN_WIDTH
     screen_height = screen_config.SCREEN_HEIGHT
     if screen_width is None or screen_height is None:
-        screen_width, screen_height = pyautogui.size()
+        error(True, "屏幕宽高未设置", True)
     
     # Step 2: 点击画布中心
     pyautogui.click(x=screen_width//2, y=screen_height//2)
@@ -79,9 +79,9 @@ def click_shapes_button():
     activate_window()
     
     # Step 2: 计算形状按钮位置
-    screen_width, screen_height = pyautogui.size()
-    shapes_button_x = screen_width // 4 + 65 
-    shapes_button_y = 95  
+    shapes_button_x, shapes_button_y = drawer_panel_config.SHAPES_BUTTON_POSITION
+    if shapes_button_x is None or shapes_button_y is None:
+        error(True, "形状按钮位置未设置", True)
     
     # Step 3: 点击形状按钮
     pyautogui.click(x=shapes_button_x, y=shapes_button_y)

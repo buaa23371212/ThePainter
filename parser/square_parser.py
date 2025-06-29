@@ -6,7 +6,7 @@ def add_square_arguments(subparsers):
     
     # 添加边界参数
     square_parser.add_argument(
-        '--bounding',
+        '-bounding',
         nargs=4,
         type=int,
         metavar=('start_x', 'start_y', 'end_x', 'end_y'),
@@ -15,7 +15,7 @@ def add_square_arguments(subparsers):
     
     # 添加中心点和尺寸参数
     square_parser.add_argument(
-        '--center',
+        '-center',
         nargs=3,
         type=int,
         metavar=('center_x', 'center_y', 'size'),
