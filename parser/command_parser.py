@@ -1,5 +1,7 @@
 import argparse
 from .circle_parser import add_circle_arguments
+from .ellipse_parser import add_ellipse_arguments
+from .square_parser import add_square_arguments
 from .rectangle_parser import add_rectangle_arguments
 from .polygon_parser import add_polygon_arguments
 from .line_parser import add_line_arguments
@@ -16,10 +18,12 @@ def parse_arguments(args=None):
     subparsers = parser.add_subparsers(dest='command', help='绘图命令')
 
     # 添加各种图形命令解析
-    add_circle_arguments(subparsers)
+    add_ellipse_arguments(subparsers)
     add_rectangle_arguments(subparsers)
     add_line_arguments(subparsers)
     add_polygon_arguments(subparsers)
     add_rounded_rectangle_arguments(subparsers)
+    add_circle_arguments(subparsers)
+    add_square_arguments(subparsers)
 
     return parser.parse_args(args)

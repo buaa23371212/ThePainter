@@ -72,7 +72,7 @@ def draw_rounded_rectangle_by_center(center_x, center_y, width, height):
 # 导出函数供主程序调用
 # ======================
 
-def draw_rectangle_command(args):
+def draw_rounded_rectangle_command(args):
     """处理矩形绘制命令"""
     if args.bounding:
         start_x, start_y, end_x, end_y = args.bounding

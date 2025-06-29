@@ -1,73 +1,33 @@
-import time
 import pyautogui
-from tool.utils import click_shapes_button, activate_canvas
-from terminal_logger.logger import info
+from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse
 
 # ======================
 # 专用功能方法
 # ======================
 
 def select_circle_tool():
-    """
-    在画图工具中选择圆形工具
-    """
-    # 使用info函数记录日志，但show=False不显示输出
-    info(False, "选择圆形工具...", True)
-    
-    # Step 1: 点击形状按钮
-    click_shapes_button()
-    
-    # Step 2: 选择圆形工具
-    pyautogui.press('right', presses=2)  # 按右方向键2次选择圆形
-    time.sleep(0.5)
-    pyautogui.press('enter')
-    time.sleep(1)
-    info(False, "已选择圆形工具", True)
-    
-    # Step 3: 激活画布
-    activate_canvas()
+    select_ellipse_tool
 
 def draw_circle(start_x, start_y, end_x, end_y):
-    """
-    在画图工具中绘制圆形
-    
-    参数:
-        start_x (int): 起始点X坐标
-        start_y (int): 起始点Y坐标
-        end_x (int): 结束点X坐标
-        end_y (int): 结束点Y坐标
-    """
-    # 使用info函数记录日志，但show=False不显示输出
-    info(False, f"开始绘制圆形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
-    
-    # Step 1: 缓慢移动到起始位置
-    pyautogui.moveTo(start_x, start_y, duration=0.5)
-    time.sleep(0.2)  # 额外延迟确保识别
-    
-    # Step 2: 按住Shift键绘制正圆
-    pyautogui.keyDown('shift')
-    pyautogui.dragTo(end_x, end_y, duration=0.5)
-    pyautogui.keyUp('shift')
-    
-    info(False, "成功绘制圆形！", True)
+    draw_ellipse(start_x, start_y, end_x, end_y)
 
 def draw_circle_by_center(center_x, center_y, radius):
     """
-    通过圆心和半径绘制圆形
+    通过中心点和尺寸绘制椭圆
     
     参数:
-        center_x (int): 圆心X坐标
-        center_y (int): 圆心Y坐标
-        radius (int): 圆半径
+        center_x (int): 中心点X坐标
+        center_y (int): 中心点Y坐标
+        radius (int): 圆的半径
     """
     # Step 1: 计算起始点和结束点
-    start_x = center_x - radius
-    start_y = center_y - radius
-    end_x = center_x + radius
-    end_y = center_y + radius
+    start_x = center_x - radius // 2
+    start_y = center_y - radius // 2
+    end_x = center_x + radius // 2
+    end_y = center_y + radius // 2
     
     # Step 2: 调用绘制函数
-    draw_circle(start_x, start_y, end_x, end_y)
+    draw_ellipse(start_x, start_y, end_x, end_y)
 
 # ======================
 # 导出函数供主程序调用
@@ -82,7 +42,7 @@ def draw_circle_command(args):
         center_x, center_y, radius = args.center
         draw_circle_by_center(center_x, center_y, radius)
     else:
-        # 默认行为：在屏幕中心绘制圆
         screen_width, screen_height = pyautogui.size()
         center_x, center_y = screen_width // 2, screen_height // 2
-        draw_circle_by_center(center_x, center_y, 100)
+        radius = 100 # 默认半径
+        draw_circle_by_center(center_x, center_y, radius)

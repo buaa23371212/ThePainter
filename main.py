@@ -1,7 +1,7 @@
 import os
 from tool.utils import open_paint
 from parser.command_parser import parse_arguments
-from drawer.circle_drawer import select_circle_tool, draw_circle_command
+from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
 from drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
 from drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
 from drawer.line_drawer import select_line_tool, draw_line_command
@@ -37,27 +37,30 @@ def execute_command(args):
             # Step 2: 执行绘图命令
             draw_circle_command(args)
 
+        elif args.command == 'ellipse':
+            select_ellipse_tool()
+            # Step 2: 执行绘图命令
+            draw_ellipse_command(args)
+
         elif args.command == 'rectangle':
             select_rectangle_tool()
             # Step 2: 执行绘图命令
             draw_rectangle_command(args)
-
-        elif args.command == 'polygon':
-            select_polygon_tool()
-            # Step 2: 执行绘图命令
-            draw_polygon_command(args)
 
         elif args.command == 'rounded_rectangle':
             select_rounded_rectangle_tool()
             # Step 2: 执行绘图命令
             draw_rounded_rectangle_command(args)
 
+        elif args.command == 'polygon':
+            select_polygon_tool()
+            # Step 2: 执行绘图命令
+            draw_polygon_command(args)
+
         elif args.command == 'line':
             select_line_tool()
             # Step 2: 执行绘图命令
             draw_line_command(args)
-
-        
 
         else:
             # Step 3: 处理不支持的命令
