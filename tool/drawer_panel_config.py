@@ -13,6 +13,7 @@ ADD_LAYER_BUTTON_POSITION = (1830, 260)      # 添加图层按钮位置
 # 例如点击第一个图层按钮时，鼠标需移动到添加图层按钮的下方100像素位置
 # 且第一个图层为顶部图层
 LAYER_VIEW_HEIGHT = 100
+FIRST_LAYER_VIEW_POSITION = (ADD_LAYER_BUTTON_POSITION[0], ADD_LAYER_BUTTON_POSITION[1] + LAYER_VIEW_HEIGHT)
 
 # 右键后在原地弹出图层操作菜单
 # 例如：点击第一个选项时，鼠标移动到右键位置的向左200像素，向下25像素位置

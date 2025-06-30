@@ -65,19 +65,19 @@ def _dispatch_command(args):
         draw_line_command(args)
 
     elif args.command == 'move_mouse':
-        info(True, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
+        info(False, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
         pyautogui.moveTo(args.x, args.y)
-        info(True, f"鼠标已移动到位置 ({args.x}, {args.y})", True)
+        info(False, f"鼠标已移动到位置 ({args.x}, {args.y})", True)
 
     elif args.command == 'mouse_click':
-        info(True, f"在位置 ({args.x}, {args.y}) 模拟鼠标点击", True)
+        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标点击", True)
         pyautogui.click(x=args.x, y=args.y)
-        info(True, f"鼠标已在位置 ({args.x}, {args.y}) 点击", True)
+        info(False, f"鼠标已在位置 ({args.x}, {args.y}) 点击", True)
 
     elif args.command == 'right_click':
-        info(True, f"在位置 ({args.x}, {args.y}) 模拟鼠标右键点击", True)
+        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标右键点击", True)
         pyautogui.rightClick(x=args.x, y=args.y)
-        info(True, f"鼠标已在位置 ({args.x}, {args.y}) 右键点击", True)
+        info(False, f"鼠标已在位置 ({args.x}, {args.y}) 右键点击", True)
 
     else:
         # Step 3: 处理不支持的命令
