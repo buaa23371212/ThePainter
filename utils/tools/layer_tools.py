@@ -5,7 +5,7 @@ from utils.config import drawer_panel_config
 from utils.config import auto_speed_config
 from utils.tools.tools import activate_window
 
-def choose_layer(layer_index):
+def select_layer(layer_index):
     """
     选择指定的图层
 
@@ -27,3 +27,9 @@ def choose_layer(layer_index):
         time.sleep(auto_speed_config.CLICK_WAIT)  # 等待每次按键响应
 
     info(False, f"已选择图层 {layer_index}", True)
+
+def select_layer_operation(operation: str):
+    """
+    执行图层操作
+    """
+    pass
