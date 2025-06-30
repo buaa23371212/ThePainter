@@ -123,9 +123,31 @@
 
 ---
 
+## 鼠标控制命令
+
+- 移动鼠标到指定位置  
+  格式: `-x <X_COORD> -y <Y_COORD>`
+  ```shell
+  python main.py move_mouse -x 800 -y 600
+  ```
+
+- 在指定位置模拟鼠标点击  
+  格式: `-x <X_COORD> -y <Y_COORD>`
+  ```shell
+  python main.py mouse_click -x 800 -y 600
+  ```
+
+- 在指定位置模拟鼠标右键点击  
+  格式: `-x <X_COORD> -y <Y_COORD>`
+  ```shell
+  python main.py right_click -x 800 -y 600
+  ```
+
+---
+
 ## 批量执行
 
 - 执行文件中的多个命令  
   格式: `-input_file <path>`
   ```shell
-  python main.py -input_file input/Sample-
+  python main.py -input_file input/Sample-1/commands.txt

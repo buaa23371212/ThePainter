@@ -4,7 +4,7 @@
 MOUSE_MOVE_SPEED = 1
 
 # 拖拽绘图时的持续时间（秒）
-DRAW_DURATION = 0.3
+DRAW_DURATION = 0.5
 
 # 点击按钮后的等待时间（秒）
-CLICK_WAIT = 0.3
+CLICK_WAIT = 1

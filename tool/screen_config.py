@@ -14,11 +14,14 @@ CANVAS_TOP = 270       # 画布顶部位置
 CANVAS_BOTTOM = 920    # 画布底部位置
 CANVAS_LEFT = 380      # 画布左侧位置
 
+# 进入图层模式后画布偏移
+CANVAS_LEFT_OFFSET = 50         # 画布向左偏移量
+
 # 画布内边距
 CANVAS_PADDING = 10    # 画布边界与画布内容的间距
 
-# 点击左上角激活窗口
-WINDOW_ACTIVATE_POSITION = (100, 100)  # 左上角位置
+# 点击激活窗口
+WINDOW_ACTIVATE_POSITION = (1000, 50)
 
 # ======================
 # 计算部分

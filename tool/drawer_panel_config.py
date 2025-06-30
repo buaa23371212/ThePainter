@@ -2,21 +2,26 @@
 from tool import screen_config
 
 # TODO
+# 形状按钮在工具栏上的位置（即直线按钮位置）
 SHAPES_BUTTON_POSITION = (screen_config.SCREEN_WIDTH // 4 + 65, 95)
 
-LAYERS_BUTTON_POSITION = (1440, 130)
-ADD_LAYER_BUTTON_POSITION = (1830, 260)
+# 图层相关按钮位置
+LAYERS_BUTTON_POSITION = (1440, 130)         # 图层按钮位置
+ADD_LAYER_BUTTON_POSITION = (1830, 260)      # 添加图层按钮位置
+
 # 图层视图的高度
 # 例如点击第一个图层按钮时，鼠标需移动到添加图层按钮的下方100像素位置
 # 且第一个图层为顶部图层
 LAYER_VIEW_HEIGHT = 100
 
 # 右键后在原地弹出图层操作菜单
-# 例如点击第一个选项时，鼠标移动到右键位置的向左200像素，向下25像素位置
+# 例如：点击第一个选项时，鼠标移动到右键位置的向左200像素，向下25像素位置
 # 点击第二个选项时，向下移动40像素
-OPTION_BOX_PADDING = 5  # 选项内边距
+RIGHT_CLICK_OFFSET = (200, 25)              # 右键菜单偏移位置
+OPTION_BOX_PADDING = 5                      # 选项内边距
+
 # 选项卡高度
-# 选项从上到下依次为
+# 选项从上到下依次为：
 # 隐藏/显示图层，复制图层，向下合并，上移，下移，删除图层
 TAB_HEIGHT = 40  
 

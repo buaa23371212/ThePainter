@@ -2,7 +2,7 @@ import time
 import subprocess
 import pyautogui
 from terminal_logger.logger import info, warn, error
-from tool import screen_config, drawer_panel_config
+from tool import screen_config, drawer_panel_config, auto_speed_config
 
 # ======================
 # 通用功能方法
@@ -15,7 +15,8 @@ def open_paint():
     Step:
     1. 启动画图工具
     2. 最大化窗口
-    3. 显示系统兼容性提示
+    3. 进入图层模式
+    4. 显示系统兼容性提示
     """
     # Step 1: 启动画图工具
     subprocess.Popen("mspaint")
@@ -25,10 +26,13 @@ def open_paint():
     # Step 2: 最大化窗口
     pyautogui.hotkey('alt', 'space')
     pyautogui.press('x')
-    time.sleep(1)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待窗口最大化
     info(True, "画图工具已最大化", True)
 
-    # Step 3: 显示系统兼容性提示
+    # Step 3: 进入图层模式
+    enter_layer_mode()
+
+    # Step 4: 显示系统兼容性提示
     warn(True, "此脚本使用的画图软件为Win11系统自带的画图软件", True)
 
 
@@ -42,7 +46,7 @@ def activate_window():
     # Step 1: 点击左上角激活窗口
     info(False, "激活画图窗口...", True)
     pyautogui.click(screen_config.WINDOW_ACTIVATE_POSITION)
-    time.sleep(0.5)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待窗口响应
     info(False, "画图窗口已激活", True)
 
 def activate_canvas():
@@ -63,7 +67,7 @@ def activate_canvas():
     
     # Step 2: 点击画布中心
     pyautogui.click(screen_config.CANVAS_CENTER)
-    time.sleep(0.5)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待画布响应
     info(False, "画布已激活", True)
 
 def click_shapes_button():
@@ -85,5 +89,29 @@ def click_shapes_button():
     
     # Step 3: 点击形状按钮
     pyautogui.click(x=shapes_button_x, y=shapes_button_y)
-    time.sleep(1)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
     info(False, "已点击形状按钮", True)
+
+def enter_layer_mode():
+    """
+    进入图层模式
+
+    Step:
+    1. 激活窗口确保操作正确
+    2. 点击图层按钮
+    3. 等待界面切换
+    """
+    # Step 1: 激活窗口确保操作正确
+    activate_window()
+
+    # Step 2: 点击图层按钮
+    layers_button_x, layers_button_y = drawer_panel_config.LAYERS_BUTTON_POSITION
+    if layers_button_x is None or layers_button_y is None:
+        error(True, "图层按钮位置未设置", True)
+        return
+
+    pyautogui.click(x=layers_button_x, y=layers_button_y)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
+
+    # Step 3: 等待界面切换
+    info(True, "已进入图层模式", True)
