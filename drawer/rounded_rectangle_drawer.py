@@ -1,8 +1,8 @@
 import time
 import pyautogui
-from tool.utils import activate_canvas, click_shapes_button
+from utils.tools.tools import activate_canvas, click_shapes_button
 from terminal_logger.logger import info
-from tool.drawer_panel_config import get_shape_panel_presses
+from utils.config.drawer_panel_config import get_shape_panel_presses
 
 # ======================
 # 专用功能方法

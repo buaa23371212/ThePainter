@@ -1,6 +1,6 @@
 import os
 import pyautogui
-from tool.utils import open_paint
+from utils.tools.tools import open_paint
 from parser.command_parser import parse_arguments
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command

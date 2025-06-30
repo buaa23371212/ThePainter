@@ -1,6 +1,6 @@
 import time
 import pyautogui
-from tool.utils import click_shapes_button, activate_canvas
+from utils.tools.tools import click_shapes_button, activate_canvas
 from terminal_logger.logger import info
 
 # ======================

@@ -2,8 +2,7 @@ import time
 import subprocess
 import pyautogui
 from terminal_logger.logger import info, warn, error
-from tool import screen_config, drawer_panel_config, auto_speed_config
-from .layer_utils import enter_layer_mode
+from utils.config import screen_config, auto_speed_config, drawer_panel_config
 
 # ======================
 # 通用功能方法
@@ -92,3 +91,27 @@ def click_shapes_button():
     pyautogui.click(x=shapes_button_x, y=shapes_button_y)
     time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
     info(False, "已点击形状按钮", True)
+
+def enter_layer_mode():
+    """
+    进入图层模式
+
+    Step:
+    1. 激活窗口确保操作正确
+    2. 点击图层按钮
+    3. 等待界面切换
+    """
+    # Step 1: 激活窗口确保操作正确
+    activate_window()
+
+    # Step 2: 点击图层按钮
+    layers_button_x, layers_button_y = drawer_panel_config.LAYERS_BUTTON_POSITION
+    if layers_button_x is None or layers_button_y is None:
+        error(True, "图层按钮位置未设置", True)
+        return
+
+    pyautogui.click(x=layers_button_x, y=layers_button_y)
+    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
+
+    # Step 3: 等待界面切换
+    info(True, "已进入图层模式", True)

@@ -1,5 +1,5 @@
 # 画图工具操作面板的快捷键配置
-from tool import screen_config
+from utils.config import screen_config
 
 # TODO
 # 形状按钮在工具栏上的位置（即直线按钮位置）
