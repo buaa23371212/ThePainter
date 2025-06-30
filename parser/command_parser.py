@@ -6,7 +6,8 @@ from .shapes.rectangle_parser import add_rectangle_arguments
 from .shapes.polygon_parser import add_polygon_arguments
 from .shapes.line_parser import add_line_arguments
 from .shapes.rounded_rectangle_parser import add_rounded_rectangle_arguments
-from .mouse.mouse_parser import add_move_mouse_arguments, add_mouse_click_arguments, add_right_click_arguments
+from .control.mouse_parser import add_move_mouse_arguments, add_mouse_click_arguments, add_right_click_arguments
+from .control.layer_parser import add_layer_choose_arguments
 
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
@@ -30,5 +31,7 @@ def parse_arguments(args=None):
     add_move_mouse_arguments(subparsers)
     add_mouse_click_arguments(subparsers)
     add_right_click_arguments(subparsers)
+
+    add_layer_choose_arguments(subparsers)
 
     return parser.parse_args(args)
