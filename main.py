@@ -1,11 +1,25 @@
+"""
+绘图自动化工具主程序
+
+功能概述：
+1. 支持单命令执行和批量命令文件处理
+2. 实现图形绘制、图层操作和鼠标控制三大功能
+3. 提供详细的执行日志和错误处理
+"""
+
 import os
 import pyautogui
 
+# ==============================
+# 工具模块导入区
+# ==============================
 from utils.tools.tools import open_paint
 from utils.tools.layer_tools import select_layer, add_layer, select_layer_operation
-
 from parser.command_parser import parse_arguments
 
+# ==============================
+# 绘图命令模块导入区
+# ==============================
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
 from drawer.square_drawer import select_square_tool, draw_square_command
@@ -14,81 +28,97 @@ from drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
 from drawer.line_drawer import select_line_tool, draw_line_command
 from drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
 
+# ==============================
+# 日志记录模块导入区
+# ==============================
 from terminal_logger.logger import info, warn, error
 from terminal_logger.command_logger import title, step
 
+
+# ==============================
+# 批处理辅助函数模块
+# ==============================
 def extract_comment_words(line: str) -> str:
     """
-    提取以'#'开头的注释中的内容，支持'#'后有多个空白符的情况
+    提取命令文件中的注释内容
     
-    :param line: 输入行
-    :return: 去除'#'及其后所有空白符后的内容，若不是'#'开头返回空字符串
+    功能:
+    - 解析以'#'开头的注释行
+    - 移除注释符号及前导空白符
+    
+    :param line: 输入行文本
+    :return: 纯注释内容字符串（非注释行返回空字符串）
     """
     if line.startswith("# "):
         return line.lstrip()[1:].lstrip()
     return ""
 
+
+# ==============================
+# 命令分发核心模块
+# ==============================
 def _dispatch_command(args):
     """
-    根据命令类型分发到对应的操作函数
-
-    Step:
-    1. 判断命令类型
-    2. 分别调用分发方法
-    3. 处理不支持的命令
-
-    :param args: 解析后的命令行参数
+    命令分发主控制器
+    
+    功能:
+    - 根据命令类型路由到对应的处理模块
+    - 支持图形绘制、鼠标控制和图层操作三类命令
+    
+    :param args: 解析后的命令行参数对象
     """
-    # Step 1: 判断命令类型
-    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 'rounded_rectangle', 'polygon', 'line']:
-        # Step 2: 图形绘制命令分发
+    # 图形绘制命令路由
+    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
+                       'rounded_rectangle', 'polygon', 'line']:
         _dispatch_shape_command(args)
+    
+    # 鼠标控制命令路由
     elif args.command in ['move_mouse', 'mouse_click', 'right_click']:
-        # Step 2: 鼠标控制命令分发
         _dispatch_mouse_command(args)
+    
+    # 图层操作命令路由
     elif args.command in ['add_layer', 'choose_layer', 'layer_operation']:
-        # Step 2: 图层操作命令分发
         _dispatch_layer_command(args)
+    
+    # 未知命令处理
     else:
-        # Step 3: 处理不支持的命令
         warn(True, f"暂不支持的命令: {args.command}", True)
+
 
 def _dispatch_shape_command(args):
     """
-    分发图形绘制相关命令
-
-    Step:
-    1. 根据命令类型选择对应的绘图工具
-    2. 调用相应的绘图函数执行绘图操作
+    图形绘制命令分发器
+    
+    功能:
+    - 根据图形类型选择对应工具
+    - 执行图形绘制操作
+    
+    :param args: 包含图形参数的命令行参数对象
     """
-    if args.command == 'circle':
-        select_circle_tool()
-        draw_circle_command(args)
-    elif args.command == 'ellipse':
-        select_ellipse_tool()
-        draw_ellipse_command(args)
-    elif args.command == 'square':
-        select_square_tool()
-        draw_square_command(args)
-    elif args.command == 'rectangle':
-        select_rectangle_tool()
-        draw_rectangle_command(args)
-    elif args.command == 'rounded_rectangle':
-        select_rounded_rectangle_tool()
-        draw_rounded_rectangle_command(args)
-    elif args.command == 'polygon':
-        select_polygon_tool()
-        draw_polygon_command(args)
-    elif args.command == 'line':
-        select_line_tool()
-        draw_line_command(args)
+    shape_commands = {
+        'circle': (select_circle_tool, draw_circle_command),
+        'ellipse': (select_ellipse_tool, draw_ellipse_command),
+        'square': (select_square_tool, draw_square_command),
+        'rectangle': (select_rectangle_tool, draw_rectangle_command),
+        'rounded_rectangle': (select_rounded_rectangle_tool, draw_rounded_rectangle_command),
+        'polygon': (select_polygon_tool, draw_polygon_command),
+        'line': (select_line_tool, draw_line_command)
+    }
+    
+    if args.command in shape_commands:
+        select_tool, draw_command = shape_commands[args.command]
+        select_tool()
+        draw_command(args)
+
 
 def _dispatch_mouse_command(args):
     """
-    分发鼠标控制相关命令
-
-    Step:
-    1. 根据命令类型执行鼠标移动、点击或右键点击操作
+    鼠标控制命令分发器
+    
+    功能:
+    - 执行鼠标移动、左键点击和右键点击操作
+    
+    :param args: 包含坐标参数的命令行参数对象
     """
     if args.command == 'move_mouse':
         info(False, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
@@ -100,13 +130,15 @@ def _dispatch_mouse_command(args):
         info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标右键点击", True)
         pyautogui.rightClick(x=args.x, y=args.y)
 
+
 def _dispatch_layer_command(args):
     """
-    分发图层相关命令
-
-    Step:
-    1. 根据命令类型选择对应的图层操作
-    2. 调用相应的图层函数执行操作
+    图层操作命令分发器
+    
+    功能:
+    - 执行图层添加、选择和操作命令
+    
+    :param args: 包含图层参数的命令行参数对象
     """
     if args.command == 'add_layer':
         info(False, "添加新图层", True)
@@ -120,26 +152,45 @@ def _dispatch_layer_command(args):
     else:
         warn(True, f"暂不支持的图层命令: {args.command}", True)
 
+
+# ==============================
+# 命令执行模块
+# ==============================
 def execute_command(args):
     """
-    执行绘图命令
+    命令执行入口
     
-    Step:
-    1. 根据命令类型选择对应的绘图工具
-    2. 调用相应的绘图函数执行绘图操作
-    3. 捕获并处理可能发生的异常
+    功能:
+    - 执行单条绘图命令
+    - 提供异常捕获和处理
     
-    :param args: 解析后的命令行参数
+    :param args: 解析后的命令行参数对象
     """
     try:
         _dispatch_command(args)
     except Exception as e:
-        # Step 4: 捕获并记录异常
         error(True, f"操作失败: {str(e)}", True)
 
+
+# ==============================
+# 批处理模块
+# ==============================
 def _process_batch_commands(input_file_path):
     """
-    处理批量命令文件
+    批量命令处理器
+    
+    功能:
+    - 解析并执行命令文件中的指令序列
+    - 支持标题、步骤说明和命令混合格式
+    
+    文件格式说明:
+    # ====================
+    # 标题文本
+    # ====================
+    # 1. 步骤说明
+    command arg1 arg2
+    
+    :param input_file_path: 命令文件路径
     """
     with open(input_file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
@@ -147,85 +198,86 @@ def _process_batch_commands(input_file_path):
         while i < len(lines):
             line = lines[i].strip()
 
-            # 1. 跳过空行
+            # 跳过空行
             if not line:
                 i += 1
                 continue
 
-            # 2. 识别并输出 title
+            # 标题块处理 (三行格式)
             if line.startswith("# =") and i + 2 < len(lines):
                 title_line = lines[i + 1].strip()
                 title(True, extract_comment_words(title_line), True)
-                i += 3  # 跳过三行（分隔符、标题、分隔符）
+                i += 3  # 跳过标题块的三行
                 continue
 
-            # 3. 识别并输出步骤
+            # 步骤说明处理
             if line.startswith("# ") and "." in line:
                 step(True, extract_comment_words(line), True)
                 i += 1
                 continue
             
-            # 4. 解析并执行命令
+            # 命令执行
             if not line.startswith("#"):
                 command_args = line.split()
                 parsed_args = parse_arguments(command_args)
                 execute_command(parsed_args)
                 i += 1
 
+
+# ==============================
+# 主程序模块
+# ==============================
 def main():
     """
-    主程序入口
+    程序主控制器
     
-    Step:
+    执行流程:
     1. 解析命令行参数
-    2. 检查是否提供了输入文件
-    3. 打开画图工具
-    4. 执行绘图命令（单命令或批量命令）
-    5. 处理异常情况
+    2. 打开画图工具
+    3. 根据输入类型执行命令:
+       - 输入文件: 执行批量命令
+       - 单命令: 执行单个绘图命令
+    4. 异常处理和状态报告
     """
-    # Step 1: 解析命令行参数
+    # 步骤1: 解析命令行参数
     args = parse_arguments()
 
     if args.input_file:
+        # 批量命令模式
         try:
-            # Step 2: 打开画图工具
-            open_paint()
-            
-            # Step 3: 批量执行文件中的命令
-            _process_batch_commands(args.input_file)
-            
-            # Step 4: 显示完成信息
+            open_paint()  # 打开画图工具
+            _process_batch_commands(args.input_file)  # 执行批量命令
             info(True, "画图工具保持打开状态", True)
         except Exception as e:
-            # Step 5: 处理异常
-            error(True, f"操作失败: {str(e)}", True)
+            error(True, f"批量操作失败: {str(e)}", True)
     else:
+        # 单命令模式
         try:
-            # Step 2: 打开画图工具
-            open_paint()
-            # Step 3: 执行单条命令
-            execute_command(args)
-            # Step 4: 显示完成信息
+            open_paint()  # 打开画图工具
+            execute_command(args)  # 执行单条命令
             info(True, "画图工具保持打开状态", True)
         except Exception as e:
-            # Step 5: 处理异常
-            error(True, f"操作失败: {str(e)}", True)
+            error(True, f"命令执行失败: {str(e)}", True)
 
+
+# ==============================
+# 程序入口点
+# ==============================
 if __name__ == "__main__":
     """
-    程序入口点
+    程序入口
     
-    Step:
-    1. 检查操作系统类型
-    2. 在Windows系统上执行主程序
-    3. 在非Windows系统上显示错误
+    系统要求:
+    - 仅支持Windows操作系统
+    
+    执行流程:
+    1. 检测操作系统类型
+    2. Windows系统: 执行主程序
+    3. 非Windows系统: 显示错误并退出
     """
-    # Step 1: 检查操作系统
-    if os.name == 'nt':
+    if os.name == 'nt':  # Windows系统
         info(True, "检测到Windows系统，开始执行绘制任务...", True)
-        # Step 2: 执行主程序
         main()
         info(True, "脚本执行完毕", True)
-    else:
-        # Step 3: 非Windows系统提示
+    else:  # 非Windows系统
         error(True, "此脚本仅支持Windows系统", True)
