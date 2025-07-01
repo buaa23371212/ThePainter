@@ -166,7 +166,6 @@ def _dispatch_layer_command(args):
 # ==============================
 # 命令执行模块
 # ==============================
-# TODO
 def execute_command(args):
     """
     命令执行入口
