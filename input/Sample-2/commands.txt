@@ -17,5 +17,7 @@ polygon -file input/Sample-2/shapes.json -id window_left
 # 5. 绘制右窗户
 polygon -file input/Sample-2/shapes.json -id window_right
 
+add_layer
+
 # 6. 添加烟囱（可选）
 rectangle -center 1100 450 40 60

@@ -5,7 +5,9 @@
 
 ---
 
-## 圆形示例
+## 图形绘制命令
+
+### 圆形
 
 - 通过边界框绘制圆形  
   格式: `-bounding <start_x> <start_y> <end_x> <end_y>`
@@ -21,7 +23,7 @@
 
 ---
 
-## 椭圆示例
+### 椭圆
 
 - 通过边界框绘制椭圆  
   格式: `-bounding <start_x> <start_y> <end_x> <end_y>`
@@ -37,7 +39,7 @@
 
 ---
 
-## 矩形示例
+### 矩形
 
 - 通过边界框绘制矩形  
   格式: `-bounding <start_x> <start_y> <end_x> <end_y>`
@@ -53,7 +55,7 @@
 
 ---
 
-## 正方形示例
+### 正方形
 
 - 通过边界框绘制正方形  
   格式: `-bounding <start_x> <start_y> <end_x> <end_y>`
@@ -69,7 +71,7 @@
 
 ---
 
-## 圆角矩形示例
+### 圆角矩形
 
 - 通过边界框绘制圆角矩形（包含圆角半径）  
   格式: `-bounding <start_x> <start_y> <end_x> <end_y>`
@@ -85,7 +87,7 @@
 
 ---
 
-## 线段示例
+### 线段
 
 - 通过起点和终点坐标绘制直线  
   格式: `-points <start_x> <start_y> <end_x> <end_y>`
@@ -101,7 +103,7 @@
 
 ---
 
-## 多边形示例
+### 多边形
 
 - 直接指定顶点绘制多边形  
   格式: `-vertices <x1> <y1> <x2> <y2> ...`
@@ -141,6 +143,32 @@
   格式: `-x <X_COORD> -y <Y_COORD>`
   ```shell
   python main.py right_click -x 800 -y 600
+  ```
+
+---
+
+## 图层控制命令
+
+- 添加新图层  
+  格式: 无参数
+  ```shell
+  python main.py add_layer
+  ```
+
+- 选择指定图层  
+  格式: `-layer_id <图层ID>`
+  ```shell
+  python main.py choose_layer -layer_id 2
+  ```
+
+- 对指定图层执行操作  
+  格式: `-operation <操作类型> -layer_id <图层ID>`
+  - 操作类型可选：`hide`（隐藏/显示）、`copy`（复制）、`merge_down`（向下合并）、`move_up`（上移）、`move_down`（下移）、`delete`（删除）
+  - 图层ID默认为1（顶部图层）
+  ```shell
+  python main.py layer_operation -operation hide -layer_id 1
+  python main.py layer_operation -operation copy -layer_id 2
+  python main.py layer_operation -operation delete -layer_id 3
   ```
 
 ---

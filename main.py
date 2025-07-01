@@ -1,13 +1,19 @@
 import os
 import pyautogui
+
 from utils.tools.tools import open_paint
+from utils.tools.layer_tools import select_layer, add_layer, select_layer_operation
+
 from parser.command_parser import parse_arguments
+
 from drawer.circle_drawer import select_circle_tool, draw_circle_command
 from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
+from drawer.square_drawer import select_square_tool, draw_square_command
 from drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
 from drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
 from drawer.line_drawer import select_line_tool, draw_line_command
 from drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
+
 from terminal_logger.logger import info, warn, error
 from terminal_logger.command_logger import title, step
 
@@ -24,64 +30,112 @@ def extract_comment_words(line: str) -> str:
 
 def _dispatch_command(args):
     """
-    根据命令类型选择对应的绘图工具并执行绘图命令
+    根据命令类型分发到对应的操作函数
 
     Step:
-    1. 选择绘图工具
-    2. 执行绘图命令
+    1. 判断命令类型
+    2. 分别调用分发方法
     3. 处理不支持的命令
 
     :param args: 解析后的命令行参数
     """
-    # Step 1: 选择绘图工具
-    if args.command == 'circle':
-        select_circle_tool()
-        # Step 2: 执行绘图命令
-        draw_circle_command(args)
-
-    elif args.command == 'ellipse':
-        select_ellipse_tool()
-        # Step 2: 执行绘图命令
-        draw_ellipse_command(args)
-
-    elif args.command == 'rectangle':
-        select_rectangle_tool()
-        # Step 2: 执行绘图命令
-        draw_rectangle_command(args)
-
-    elif args.command == 'rounded_rectangle':
-        select_rounded_rectangle_tool()
-        # Step 2: 执行绘图命令
-        draw_rounded_rectangle_command(args)
-
-    elif args.command == 'polygon':
-        select_polygon_tool()
-        # Step 2: 执行绘图命令
-        draw_polygon_command(args)
-
-    elif args.command == 'line':
-        select_line_tool()
-        # Step 2: 执行绘图命令
-        draw_line_command(args)
-
-    elif args.command == 'move_mouse':
-        info(False, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
-        pyautogui.moveTo(args.x, args.y)
-        info(False, f"鼠标已移动到位置 ({args.x}, {args.y})", True)
-
-    elif args.command == 'mouse_click':
-        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标点击", True)
-        pyautogui.click(x=args.x, y=args.y)
-        info(False, f"鼠标已在位置 ({args.x}, {args.y}) 点击", True)
-
-    elif args.command == 'right_click':
-        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标右键点击", True)
-        pyautogui.rightClick(x=args.x, y=args.y)
-        info(False, f"鼠标已在位置 ({args.x}, {args.y}) 右键点击", True)
-
+    # Step 1: 判断命令类型
+    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 'rounded_rectangle', 'polygon', 'line']:
+        # Step 2: 图形绘制命令分发
+        _dispatch_shape_command(args)
+    elif args.command in ['move_mouse', 'mouse_click', 'right_click']:
+        # Step 2: 鼠标控制命令分发
+        _dispatch_mouse_command(args)
+    elif args.command in ['add_layer', 'choose_layer', 'layer_operation']:
+        # Step 2: 图层操作命令分发
+        _dispatch_layer_command(args)
     else:
         # Step 3: 处理不支持的命令
         warn(True, f"暂不支持的命令: {args.command}", True)
+
+def _dispatch_shape_command(args):
+    """
+    分发图形绘制相关命令
+
+    Step:
+    1. 根据命令类型选择对应的绘图工具
+    2. 调用相应的绘图函数执行绘图操作
+    """
+    if args.command == 'circle':
+        select_circle_tool()
+        draw_circle_command(args)
+    elif args.command == 'ellipse':
+        select_ellipse_tool()
+        draw_ellipse_command(args)
+    elif args.command == 'square':
+        select_square_tool()
+        draw_square_command(args)
+    elif args.command == 'rectangle':
+        select_rectangle_tool()
+        draw_rectangle_command(args)
+    elif args.command == 'rounded_rectangle':
+        select_rounded_rectangle_tool()
+        draw_rounded_rectangle_command(args)
+    elif args.command == 'polygon':
+        select_polygon_tool()
+        draw_polygon_command(args)
+    elif args.command == 'line':
+        select_line_tool()
+        draw_line_command(args)
+
+def _dispatch_mouse_command(args):
+    """
+    分发鼠标控制相关命令
+
+    Step:
+    1. 根据命令类型执行鼠标移动、点击或右键点击操作
+    """
+    if args.command == 'move_mouse':
+        info(False, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
+        pyautogui.moveTo(args.x, args.y)
+    elif args.command == 'mouse_click':
+        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标点击", True)
+        pyautogui.click(x=args.x, y=args.y)
+    elif args.command == 'right_click':
+        info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标右键点击", True)
+        pyautogui.rightClick(x=args.x, y=args.y)
+
+def _dispatch_layer_command(args):
+    """
+    分发图层相关命令
+
+    Step:
+    1. 根据命令类型选择对应的图层操作
+    2. 调用相应的图层函数执行操作
+    """
+    if args.command == 'add_layer':
+        info(False, "添加新图层", True)
+        add_layer()
+    elif args.command == 'choose_layer':
+        info(False, f"选择图层 ID: {args.layer_id}", True)
+        select_layer(args.layer_id)
+    elif args.command == 'layer_operation':
+        info(False, f"对图层 ID: {args.layer_id} 执行操作: {args.operation}", True)
+        select_layer_operation(args.operation, args.layer_id)
+    else:
+        warn(True, f"暂不支持的图层命令: {args.command}", True)
+
+def execute_command(args):
+    """
+    执行绘图命令
+    
+    Step:
+    1. 根据命令类型选择对应的绘图工具
+    2. 调用相应的绘图函数执行绘图操作
+    3. 捕获并处理可能发生的异常
+    
+    :param args: 解析后的命令行参数
+    """
+    try:
+        _dispatch_command(args)
+    except Exception as e:
+        # Step 4: 捕获并记录异常
+        error(True, f"操作失败: {str(e)}", True)
 
 def _process_batch_commands(input_file_path):
     """
@@ -117,23 +171,6 @@ def _process_batch_commands(input_file_path):
                 parsed_args = parse_arguments(command_args)
                 execute_command(parsed_args)
                 i += 1
-
-def execute_command(args):
-    """
-    执行绘图命令
-    
-    Step:
-    1. 根据命令类型选择对应的绘图工具
-    2. 调用相应的绘图函数执行绘图操作
-    3. 捕获并处理可能发生的异常
-    
-    :param args: 解析后的命令行参数
-    """
-    try:
-        _dispatch_command(args)
-    except Exception as e:
-        # Step 4: 捕获并记录异常
-        error(True, f"操作失败: {str(e)}", True)
 
 def main():
     """

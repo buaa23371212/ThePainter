@@ -22,9 +22,17 @@ RIGHT_CLICK_OFFSET = (200, 25)              # 右键菜单偏移位置
 OPTION_BOX_PADDING = 5                      # 选项内边距
 
 # 选项卡高度
-# 选项从上到下依次为：
-# 隐藏/显示图层，复制图层，向下合并，上移，下移，删除图层
-TAB_HEIGHT = 40  
+TAB_HEIGHT = 40
+
+# 每种选项对应按下方向键的次数
+TAB_KEY_MAP = {
+    "hide": 0,              # 隐藏/显示图层
+    "copy": 1,              # 复制图层
+    "merge_down": 2,        # 向下合并
+    "move_up": 3,           # 上移
+    "move_down": 4,         # 下移
+    "delete": 5,            # 删除图层
+}
 
 # 每种形状对应按右方向键的次数
 SHAPE_PANEL_KEY_MAP = {
@@ -40,7 +48,19 @@ SHAPE_PANEL_KEY_MAP = {
 def get_shape_panel_presses(shape: str) -> int:
     """
     获取选择指定形状工具时需要按右方向键的次数
+    若形状不在预设列表中，则返回-1
+
     :param shape: 形状名称
     :return: 按右方向键的次数
     """
-    return SHAPE_PANEL_KEY_MAP.get(shape, 0)
+    return SHAPE_PANEL_KEY_MAP.get(shape, -1)
+
+def get_tab_key_presses(operation: str) -> int:
+    """
+    获取执行指定图层操作时需要按下方向键的次数
+    若操作不在预设列表中，则返回-1
+
+    :param operation: 图层操作名称
+    :return: 按下方向键的次数
+    """
+    return TAB_KEY_MAP.get(operation, -1)
