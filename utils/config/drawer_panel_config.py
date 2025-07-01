@@ -1,42 +1,16 @@
 # 画图工具操作面板的快捷键配置
 from utils.config import screen_config
 
-# TODO
-# 形状按钮在工具栏上的位置（即直线按钮位置）
+# ============================================
+# 形状工具配置模块
+# ============================================
+
+# 形状按钮在工具栏上的位置（以直线按钮为基准）
 SHAPES_BUTTON_POSITION = (screen_config.SCREEN_WIDTH // 4 + 65, 95)
 
-# 图层相关按钮位置
-LAYERS_BUTTON_POSITION = (1440, 130)         # 图层按钮位置
-ADD_LAYER_BUTTON_POSITION = (1830, 260)      # 添加图层按钮位置
-
-# 图层视图的高度
-# 例如点击第一个图层按钮时，鼠标需移动到添加图层按钮的下方100像素位置
-# 且第一个图层为顶部图层
-LAYER_VIEW_HEIGHT = 100
-FIRST_LAYER_VIEW_POSITION = (ADD_LAYER_BUTTON_POSITION[0], ADD_LAYER_BUTTON_POSITION[1] + LAYER_VIEW_HEIGHT)
-
-# 右键后在原地弹出图层操作菜单
-# 例如：点击第一个选项时，鼠标移动到右键位置的向左200像素，向下25像素位置
-# 点击第二个选项时，向下移动40像素
-RIGHT_CLICK_OFFSET = (200, 25)              # 右键菜单偏移位置
-OPTION_BOX_PADDING = 5                      # 选项内边距
-
-# 选项卡高度
-TAB_HEIGHT = 40
-
-# 每种选项对应按下方向键的次数
-TAB_KEY_MAP = {
-    "hide": 0,              # 隐藏/显示图层
-    "copy": 1,              # 复制图层
-    "merge_down": 2,        # 向下合并
-    "move_up": 3,           # 上移
-    "move_down": 4,         # 下移
-    "delete": 5,            # 删除图层
-}
-
-# 每种形状对应按右方向键的次数
+# 形状选择快捷键映射表（按键次数 = 右方向键按下次数）
 SHAPE_PANEL_KEY_MAP = {
-    "line": 0,              # 直线
+    "line": 0,              # 直线（初始位置）
     "ellipse": 2,           # 椭圆
     "circle": 2,            # 圆
     "rectangle": 3,         # 矩形
@@ -45,22 +19,88 @@ SHAPE_PANEL_KEY_MAP = {
     "polygon": 5,           # 多边形
 }
 
+
+# ============================================
+# 图层管理配置模块
+# ============================================
+
+# 进入图层模式按钮位置（屏幕坐标）
+LAYERS_BUTTON_POSITION = (1440, 130)
+
+# 添加图层按钮位置（屏幕坐标）
+ADD_LAYER_BUTTON_POSITION = (1830, 260)
+
+# 图层视图参数配置
+LAYER_VIEW_HEIGHT = 100  # 单个图层视图的高度（像素）
+FIRST_LAYER_VIEW_POSITION = (  # 第一个图层视图的坐标
+    ADD_LAYER_BUTTON_POSITION[0],
+    ADD_LAYER_BUTTON_POSITION[1] + LAYER_VIEW_HEIGHT
+)
+
+# 右键菜单参数配置
+RIGHT_CLICK_OFFSET = (200, 25)  # 右键菜单相对于点击位置的偏移量
+OPTION_BOX_PADDING = 5          # 菜单选项内边距（像素）
+
+# 选项卡高度参数
+TAB_HEIGHT = 40  # 选项卡高度（像素）
+
+# 图层操作快捷键映射表（按键次数 = 下方向键按下次数）
+TAB_KEY_MAP = {
+    "hide": 0,        # 隐藏/显示图层
+    "copy": 1,        # 复制图层
+    "merge_down": 2,  # 向下合并图层
+    "move_up": 3,     # 上移图层
+    "move_down": 4,   # 下移图层
+    "delete": 5,      # 删除图层
+}
+
+
+# ============================================
+# 填充工具配置模块
+# ============================================
+
+# 填充工具（颜料桶）位置（屏幕坐标）
+FILL_TOOL_POSITION = (360, 100)
+
+# 默认填充颜色（黑色）位置（屏幕坐标）
+FILL_COLOR_POSITION = (955, 100)
+
+# 填充颜色快捷键映射表（按键次数 = 右方向键按下次数）
+FILL_COLOR_KEY_MAP = {
+    "black": 0,  # 黑色（初始颜色）
+}
+
+
+# ============================================
+# 快捷键辅助函数模块
+# ============================================
+
 def get_shape_panel_presses(shape: str) -> int:
     """
-    获取选择指定形状工具时需要按右方向键的次数
-    若形状不在预设列表中，则返回-1
-
-    :param shape: 形状名称
-    :return: 按右方向键的次数
+    获取选择指定形状工具所需的右方向键次数
+    若形状不在预设列表中返回-1
+    
+    :param shape: 形状名称（参考SHAPE_PANEL_KEY_MAP键名）
+    :return: 右方向键按下次数（不存在返回-1）
     """
     return SHAPE_PANEL_KEY_MAP.get(shape, -1)
 
 def get_tab_key_presses(operation: str) -> int:
     """
-    获取执行指定图层操作时需要按下方向键的次数
-    若操作不在预设列表中，则返回-1
-
-    :param operation: 图层操作名称
-    :return: 按下方向键的次数
+    获取执行图层操作所需的下方向键次数
+    若操作不在预设列表中返回-1
+    
+    :param operation: 图层操作名称（参考TAB_KEY_MAP键名）
+    :return: 下方向键按下次数（不存在返回-1）
     """
     return TAB_KEY_MAP.get(operation, -1)
+
+def get_fill_color_presses(color: str) -> int:
+    """
+    获取选择填充颜色所需的右方向键次数
+    若颜色不在预设列表中返回-1
+    
+    :param color: 颜色名称（参考FILL_COLOR_KEY_MAP键名）
+    :return: 右方向键按下次数（不存在返回-1）
+    """
+    return FILL_COLOR_KEY_MAP.get(color, -1)

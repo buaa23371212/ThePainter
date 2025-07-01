@@ -178,4 +178,4 @@
 - 执行文件中的多个命令  
   格式: `-input_file <path>`
   ```shell
-  python main.py -input_file input/Sample-2/commands.txt
+  python main.py -input_file input/Sample-1/commands.txt

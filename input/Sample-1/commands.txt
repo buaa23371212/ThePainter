@@ -1,1 +1,1 @@
-move_mouse -x 300 -y 920
+move_mouse -x 955 -y 100
