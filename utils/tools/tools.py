@@ -1,7 +1,9 @@
 import time
 import subprocess
 import pyautogui
+
 from terminal_logger.logger import info, warn, error
+
 from utils.config import screen_config, auto_speed_config, drawer_panel_config
 
 # ======================
@@ -26,7 +28,7 @@ def open_paint():
     # Step 2: 最大化窗口
     pyautogui.hotkey('alt', 'space')
     pyautogui.press('x')
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待窗口最大化
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待窗口最大化
     info(True, "画图工具已最大化", True)
 
     # Step 3: 进入图层模式
@@ -46,7 +48,7 @@ def activate_window():
     # Step 1: 点击左上角激活窗口
     info(False, "激活画图窗口...", True)
     pyautogui.click(screen_config.WINDOW_ACTIVATE_POSITION)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待窗口响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待窗口响应
     info(False, "画图窗口已激活", True)
 
 def activate_canvas():
@@ -67,7 +69,7 @@ def activate_canvas():
     
     # Step 2: 点击画布中心
     pyautogui.click(screen_config.CANVAS_CENTER)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待画布响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布响应
     info(False, "画布已激活", True)
 
 def click_shapes_button():
@@ -89,7 +91,7 @@ def click_shapes_button():
     
     # Step 3: 点击形状按钮
     pyautogui.click(x=shapes_button_x, y=shapes_button_y)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待按钮响应
     info(False, "已点击形状按钮", True)
 
 def enter_layer_mode():
@@ -111,7 +113,7 @@ def enter_layer_mode():
         return
 
     pyautogui.click(x=layers_button_x, y=layers_button_y)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待按钮响应
 
     # Step 3: 等待界面切换
     info(True, "已进入图层模式", True)

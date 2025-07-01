@@ -1,8 +1,11 @@
 import time
 import pyautogui
-from utils.tools.tools import activate_canvas, click_shapes_button
-from terminal_logger.logger import info
+
 from utils.config.drawer_panel_config import get_shape_panel_presses
+from utils.tools.tools import activate_canvas, click_shapes_button
+from utils.config import auto_speed_config, screen_config
+
+from terminal_logger.logger import info
 
 # ======================
 # 专用功能方法
@@ -19,9 +22,9 @@ def select_rounded_rectangle_tool():
 
     # Step 2: 选择圆角矩形工具
     pyautogui.press('right', presses=get_shape_panel_presses("rounded_rectangle"))  # 按右方向键4次选择圆角矩形工具
-    time.sleep(0.5)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
     pyautogui.press('enter')
-    time.sleep(1)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择圆角矩形工具", True)
     
     # Step 3: 激活画布确保进入绘图模式
@@ -40,11 +43,11 @@ def draw_rounded_rectangle(start_x, start_y, end_x, end_y):
     info(False, f"开始绘制圆角矩形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
     
     # Step 1: 缓慢移动到起始位置
-    pyautogui.moveTo(start_x, start_y, duration=0.5)
-    time.sleep(0.2)  # 额外延迟确保识别
+    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
+    time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
     # Step 2: 绘制圆角矩形（不再按住Shift键）
-    pyautogui.dragTo(end_x, end_y, duration=0.5)
+    pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION)
     
     info(False, "成功绘制圆角矩形！", True)
 
@@ -83,7 +86,7 @@ def draw_rounded_rectangle_command(args):
         draw_rounded_rectangle_by_center(center_x, center_y, width, height)
     else:
         # 默认行为：在屏幕中心绘制矩形
-        screen_width, screen_height = pyautogui.size()
+        screen_width, screen_height = screen_config.SCREEN_WIDTH, screen_config.SCREEN_HEIGHT
         center_x, center_y = screen_width // 2, screen_height // 2
         width, height = 200, 100 # 默认宽度和高度
         draw_rounded_rectangle_by_center(center_x, center_y, width, height)

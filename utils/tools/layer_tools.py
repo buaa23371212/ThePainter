@@ -43,12 +43,12 @@ def select_layer(layer_index):
 
     # Step 2: 点击第一个图层视图
     pyautogui.click(drawer_panel_config.FIRST_LAYER_VIEW_POSITION)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待按钮响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待按钮响应
 
     # Step 3: 敲击(index - 1)下方向键
     for _ in range(layer_index - 1):
         pyautogui.press('down')
-        time.sleep(auto_speed_config.CLICK_WAIT)  # 等待每次按键响应
+        time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待每次按键响应
 
     info(False, f"已选择图层 {layer_index}", True)
 
@@ -86,7 +86,7 @@ def select_layer_operation(operation: str, layer_index: int = 1):
 
     # Step 2: 右键点击目标图层视图
     pyautogui.rightClick(layer_view_position)
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待右键菜单弹出
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待右键菜单弹出
 
     # Step 3: 根据操作类型选择对应的操作
     # 1. 获取操作对应的按下方向键次数
@@ -99,9 +99,9 @@ def select_layer_operation(operation: str, layer_index: int = 1):
     if key_presses > 0:
         for _ in range(key_presses):
             pyautogui.press('down')
-            time.sleep(auto_speed_config.CLICK_WAIT)  # 等待每次按键响应
+            time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待每次按键响应
     
-    time.sleep(auto_speed_config.CLICK_WAIT)  # 等待操作响应
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待操作响应
 
     # Step 4: 按enter键确认操作
     pyautogui.press('enter')

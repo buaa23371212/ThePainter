@@ -1,6 +1,9 @@
 import time
 import pyautogui
+
 from utils.tools.tools import click_shapes_button, activate_canvas
+from utils.config import auto_speed_config
+
 from terminal_logger.logger import info
 
 # ======================
@@ -18,9 +21,9 @@ def select_line_tool():
     
     # Step 2: 选择直线工具
     # presses=0
-    time.sleep(0.5)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
     pyautogui.press('enter')
-    time.sleep(1)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择直线工具", True)
     
     # Step 3: 激活画布
@@ -40,12 +43,12 @@ def draw_line(start_x, start_y, end_x, end_y):
     info(False, f"开始绘制直线 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
     
     # Step 1: 缓慢移动到起始位置
-    pyautogui.moveTo(start_x, start_y, duration=0.5)
-    time.sleep(0.2)  # 额外延迟确保识别
+    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
+    time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
     # Step 2: 按住Shift键绘制直线
     pyautogui.keyDown('shift')
-    pyautogui.dragTo(end_x, end_y, duration=0.5)
+    pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION)
     pyautogui.keyUp('shift')
     
     info(False, "成功绘制直线！", True)

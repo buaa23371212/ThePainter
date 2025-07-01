@@ -1,9 +1,12 @@
 import time
 import json
 import pyautogui
+
 from utils.tools.tools import activate_canvas, click_shapes_button
-from terminal_logger.logger import info, error
 from utils.config.drawer_panel_config import get_shape_panel_presses
+from utils.config import auto_speed_config
+
+from terminal_logger.logger import info, error
 
 # ======================
 # 专用功能方法
@@ -20,9 +23,9 @@ def select_polygon_tool():
 
     # Step 2: 选择多边形工具
     pyautogui.press('right', presses=get_shape_panel_presses("polygon"))  # 按右方向键5次选择多边形工具
-    time.sleep(0.5)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
     pyautogui.press('enter')
-    time.sleep(1)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择多边形工具", True)
     
     # Step 3: 激活画布确保进入绘图模式
@@ -43,41 +46,41 @@ def draw_polygon(points):
     
     # Step 1: 缓慢移动到第一个顶点
     start_x, start_y = points[0]
-    pyautogui.moveTo(start_x, start_y, duration=0.5)
-    time.sleep(0.2)  # 额外延迟确保识别
+    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
+    time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
     # Step 2: 绘制第一条边（从第一个顶点到第二个顶点）
     # 在第一个顶点按下鼠标
     pyautogui.mouseDown()
-    time.sleep(0.1)
+    time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # 拖动到第二个顶点
     second_x, second_y = points[1]
-    pyautogui.dragTo(second_x, second_y, duration=0.3)
-    time.sleep(0.1)
+    pyautogui.dragTo(second_x, second_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # 释放鼠标（完成第一条边）
     pyautogui.mouseUp()
-    time.sleep(0.1)
+    time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # Step 3: 绘制后续顶点（从第三个顶点开始）
     for i in range(2, len(points)):
         # 移动到下一个顶点
         x, y = points[i]
-        pyautogui.moveTo(x, y, duration=0.2)
-        time.sleep(0.1)
+        pyautogui.moveTo(x, y, duration=auto_speed_config.BASIC_DRAW_DURATION_3)
+        time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
         
         # 点击添加顶点（自动连接到上一个点）
         pyautogui.click()
-        time.sleep(0.1)
+        time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # Step 4: 闭合多边形（回到第一个顶点）
-    pyautogui.moveTo(start_x, start_y, duration=0.3)
-    time.sleep(0.1)
+    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # 点击闭合多边形
     pyautogui.click()
-    time.sleep(0.1)
+    time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     info(False, "成功绘制多边形！", True)
 

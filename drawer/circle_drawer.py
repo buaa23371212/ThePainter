@@ -1,4 +1,5 @@
 import pyautogui
+
 from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse
 
 # ======================
@@ -6,7 +7,7 @@ from drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse
 # ======================
 
 def select_circle_tool():
-    select_ellipse_tool
+    select_ellipse_tool()
 
 def draw_circle(start_x, start_y, end_x, end_y):
     draw_ellipse(start_x, start_y, end_x, end_y)

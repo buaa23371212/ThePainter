@@ -1,4 +1,6 @@
 import pyautogui
+
+from utils.config import screen_config
 from drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle
 
 # ======================
@@ -54,7 +56,7 @@ def draw_square_command(args):
         center_x, center_y, size = args.center
         draw_square_by_center(center_x, center_y, size)
     else:
-        screen_width, screen_height = pyautogui.size()
+        screen_width, screen_height = screen_config.SCREEN_WIDTH, screen_config.SCREEN_HEIGHT
         center_x, center_y = screen_width // 2, screen_height // 2
         size = 100  # 默认边长
         draw_square_by_center(center_x, center_y, size)
