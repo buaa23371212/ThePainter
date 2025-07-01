@@ -39,6 +39,11 @@ from colorer.colorer import choose_color
 from terminal_logger.logger import info, warn, error
 from terminal_logger.command_logger import title, step
 
+# ==============================
+# 全局状态变量
+# ==============================
+current_color = None  # 当前已选择的颜色
+current_tool = None   # 当前已选择的绘图工具
 
 # ==============================
 # 批处理辅助函数模块
@@ -161,6 +166,7 @@ def _dispatch_layer_command(args):
 # ==============================
 # 命令执行模块
 # ==============================
+# TODO
 def execute_command(args):
     """
     命令执行入口
@@ -171,6 +177,8 @@ def execute_command(args):
     
     :param args: 解析后的命令行参数对象
     """
+    global current_color, current_tool
+
     try:
         if args.color:
             info(True, f"选择颜色: {args.color}", True)
