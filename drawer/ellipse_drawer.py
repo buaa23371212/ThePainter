@@ -15,6 +15,11 @@ from terminal_logger.logger import info
 def select_ellipse_tool():
     """
     在画图工具中选择椭圆工具
+
+    Step:
+    1. 点击形状按钮
+    2. 选择椭圆工具
+    3. 激活画布
     """
     info(False, "选择椭圆工具...", True)
     

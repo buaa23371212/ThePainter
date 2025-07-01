@@ -29,6 +29,11 @@ from drawer.line_drawer import select_line_tool, draw_line_command
 from drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
 
 # ==============================
+# 颜色填充模块导入区
+# ==============================
+from colorer.colorer import choose_color
+
+# ==============================
 # 日志记录模块导入区
 # ==============================
 from terminal_logger.logger import info, warn, error
@@ -167,6 +172,10 @@ def execute_command(args):
     :param args: 解析后的命令行参数对象
     """
     try:
+        if args.color:
+            info(True, f"选择颜色: {args.color}", True)
+            choose_color(args.color)
+
         _dispatch_command(args)
     except Exception as e:
         error(True, f"操作失败: {str(e)}", True)

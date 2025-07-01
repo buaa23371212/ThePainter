@@ -4,7 +4,7 @@ import pyautogui
 from utils.config import auto_speed_config, drawer_panel_config
 from utils.tools.tools import activate_window
 
-from terminal_logger import info
+from terminal_logger.logger import info
 
 def select_color(color: str) -> None:
     """
@@ -36,6 +36,6 @@ def select_color(color: str) -> None:
         time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待颜色选择
 
     # Step 4: 点击确认按钮
-    pyautogui.click(drawer_panel_config.FILL_TOOL_POSITION)
+    pyautogui.press('enter')
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待按钮响应
     info(False, f"已选择颜色: {color}", True)

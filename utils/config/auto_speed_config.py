@@ -4,7 +4,7 @@ MULTIPLIER_FACTOR = 1.0                     # 倍速因子，1.0表示正常速�
 BASIC_DRAW_DURATION_1 = 0.5                   # 基础绘图持续时间（秒）
 BASIC_DRAW_DURATION_2 = 0.3 
 BASIC_DRAW_DURATION_3 = 0.2  
-BASIC_CLICK_WAIT = 1                        # 基础点击等待时间（秒）
+BASIC_CLICK_WAIT = 0.5                        # 基础点击等待时间（秒）
 BASIC_MOUSE_MOVE_SPEED = 0.5                # 基础鼠标移动速度（像素/秒）
 BASIC_EXTRA_MOVE_DELAY = 0.2                # 移动到起点后额外延迟，确保识别（秒）
 

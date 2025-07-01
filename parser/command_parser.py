@@ -34,7 +34,8 @@ def parse_arguments(args=None):
     add_square_arguments(subparsers)
 
     # 添加颜色选择命令
-    add_color_parser(subparsers)
+    # 给 parser 添加一个可选参数
+    add_color_parser(parser)
 
     # 添加鼠标控制命令
     add_move_mouse_arguments(subparsers)

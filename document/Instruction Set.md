@@ -173,9 +173,20 @@
 
 ---
 
+## 填充工具命令
+
+- 选择指定颜色
+  格式: `-color <颜色>`
+  - 颜色可选：`black`
+  ```shell
+  python main.py -color black
+  ```
+
+---
+
 ## 批量执行
 
 - 执行文件中的多个命令  
   格式: `-input_file <path>`
   ```shell
-  python main.py -input_file input/Sample-1/commands.txt
+  python main.py -input_file input/Sample-2/commands.txt

@@ -20,4 +20,4 @@ polygon -file input/Sample-2/shapes.json -id window_right
 add_layer
 
 # 6. 添加烟囱（可选）
-rectangle -center 1100 450 40 60
+-color red rectangle -center 1100 450 40 60

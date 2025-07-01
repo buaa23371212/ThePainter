@@ -35,7 +35,7 @@ def open_paint():
     enter_layer_mode()
 
     # Step 4: 显示系统兼容性提示
-    warn(True, "此脚本使用的画图软件为Win11系统自带的画图软件", True)
+    warn(True, "此脚本使用的画图软件为 Win11 系统自带的画图软件", True)
 
 
 def activate_window():
@@ -140,4 +140,4 @@ def enter_color_mode():
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待按钮响应
 
     # Step 3: 等待界面切换
-    info(True, "已进入颜色填充模式", True)
+    info(False, "已进入颜色填充模式", True)

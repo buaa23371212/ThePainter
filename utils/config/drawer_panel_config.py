@@ -68,6 +68,7 @@ FILL_COLOR_POSITION = (955, 100)
 # 填充颜色快捷键映射表（按键次数 = 右方向键按下次数）
 FILL_COLOR_KEY_MAP = {
     "black": 0,  # 黑色（初始颜色）
+    "red": 3,    # 红色
 }
 
 

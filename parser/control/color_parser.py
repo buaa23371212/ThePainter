@@ -2,7 +2,6 @@ def add_color_parser(parser):
     """
     Add color parser to the given parser.
     """
-    # Add color parser
     parser.add_argument(
         "-color",
         type=str,
