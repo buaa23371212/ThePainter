@@ -12,6 +12,8 @@ from .control.mouse_parser import add_move_mouse_arguments, add_mouse_click_argu
 
 from .control.layer_parser import add_layer_choose_arguments, add_layer_operation_arguments, add_new_layer_arguments
 
+from .control.color_parser import add_color_parser
+
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
     parser = argparse.ArgumentParser(description='在画图工具中绘制图形')
@@ -31,10 +33,15 @@ def parse_arguments(args=None):
     add_circle_arguments(subparsers)
     add_square_arguments(subparsers)
 
+    # 添加颜色选择命令
+    add_color_parser(subparsers)
+
+    # 添加鼠标控制命令
     add_move_mouse_arguments(subparsers)
     add_mouse_click_arguments(subparsers)
     add_right_click_arguments(subparsers)
 
+    # 添加图层控制命令
     add_layer_choose_arguments(subparsers)
     add_layer_operation_arguments(subparsers)
     add_new_layer_arguments(subparsers)
