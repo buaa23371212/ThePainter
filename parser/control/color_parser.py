@@ -5,8 +5,7 @@ def add_color_parser(parser):
     parser.add_argument(
         "-color",
         type=str,
-        default="black",
-        help="The color to use for filling. Default is 'black'.",
+        help="The color to use for filling. 若未指定则使用当前颜色。",
         choices=[
             "black", "white", "red", "green", "blue", "yellow",
             "gray", "lightgray", "darkgray", "orange", "purple", "brown"

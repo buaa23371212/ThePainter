@@ -42,8 +42,8 @@ from terminal_logger.command_logger import title, step
 # ==============================
 # 全局状态变量
 # ==============================
-current_color = None  # 当前已选择的颜色
-current_tool = None   # 当前已选择的绘图工具
+current_color = "black"     # 当前已选择的颜色
+current_tool = None         # 当前已选择的绘图工具
 
 # ==============================
 # 批处理辅助函数模块
@@ -77,8 +77,11 @@ def _dispatch_command(args):
     
     :param args: 解析后的命令行参数对象
     """
+    if args.command is None:
+        pass
+    
     # 图形绘制命令路由
-    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
+    elif args.command in ['circle', 'ellipse', 'square', 'rectangle', 
                        'rounded_rectangle', 'polygon', 'line']:
         _dispatch_shape_command(args)
     
@@ -179,7 +182,7 @@ def execute_command(args):
     global current_color, current_tool
 
     try:
-        if args.color:
+        if args.color is not None and args.color != current_color:
             info(True, f"选择颜色: {args.color}", True)
             choose_color(args.color)
 
