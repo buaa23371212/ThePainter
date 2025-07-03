@@ -32,7 +32,8 @@ from terminal_logger.command_logger import title, step
 # 全局状态变量
 # ==============================
 current_color = "black"     # 当前已选择的颜色
-current_tool = None         # 当前已选择的绘图工具
+current_shape = None         # 当前已选择的绘图工具
+current_layer = None        # 当前已选择的图层
 
 # ==============================
 # 批处理辅助函数模块
@@ -97,6 +98,8 @@ def _dispatch_shape_command(args):
     
     :param args: 包含图形参数的命令行参数对象
     """
+    global current_shape
+
     shape_commands = {
         'circle': (select_circle_tool, draw_circle_command),
         'ellipse': (select_ellipse_tool, draw_ellipse_command),
@@ -109,7 +112,11 @@ def _dispatch_shape_command(args):
     
     if args.command in shape_commands:
         select_tool, draw_command = shape_commands[args.command]
-        select_tool()
+
+        if current_shape != args.command:
+            current_shape = args.command
+            select_tool()
+
         draw_command(args)
 
 
@@ -168,7 +175,7 @@ def execute_command(args):
     
     :param args: 解析后的命令行参数对象
     """
-    global current_color, current_tool
+    global current_color
 
     try:
         if args.color is not None and args.color != current_color:
