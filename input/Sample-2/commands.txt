@@ -3,23 +3,23 @@
 # ================
 
 # 1. 绘制房子主体（矩形）
-rectangle -center 960 595 400 300
+# rectangle -center 960 595 400 300
 
 # 2. 绘制屋顶（三角形）
-polygon -file input/Sample-2/shapes.json -id roof
+# polygon -file input/Sample-2/shapes.json -id roof
 
 # 3. 绘制门（矩形）
-rectangle -center 960 660 80 120
+# rectangle -center 960 660 80 120
 
 # 4. 绘制左窗户
-polygon -file input/Sample-2/shapes.json -id window_left
+# polygon -file input/Sample-2/shapes.json -id window_left
 
 # 5. 绘制右窗户
-polygon -file input/Sample-2/shapes.json -id window_right
+# polygon -file input/Sample-2/shapes.json -id window_right
 
 add_layer
 
--color red 
-
 # 6. 添加烟囱（可选）
 rectangle -center 1100 450 40 60
+
+fill -x 1100 -y 450 -color brown

@@ -1,7 +1,10 @@
+import time
 import pyautogui
 
 from utils.tools.color_tools import select_color
-from utils.tools.tools import enter_color_mode
+from utils.tools.tools import enter_color_mode, activate_canvas
+from utils.config import auto_speed_config
+from terminal_logger.logger import info, warn, error, debug
 
 def fill_color(color: str, x: int, y: int):
     """
@@ -15,8 +18,7 @@ def fill_color(color: str, x: int, y: int):
     Step:
     1. 进入颜色填充模式
     2. 选择指定颜色
-    3. 移动鼠标到指定坐标
-    4. 执行点击进行填充
+    3. 执行点击进行填充
     """
     # Step 1: 进入颜色填充模式
     enter_color_mode()
@@ -24,11 +26,15 @@ def fill_color(color: str, x: int, y: int):
     # Step 2: 选择指定颜色
     select_color(color)
 
-    # Step 3: 移动鼠标到指定坐标
-    pyautogui.moveTo(x, y)
-
-    # Step 4: 执行点击进行填充
+    # Step 3: 执行点击进行填充
+    activate_canvas()  # 确保画布处于活动状态
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布激活
+    pyautogui.moveTo(x, y)  # 移动鼠标到指定位置
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待鼠标移动完成
     pyautogui.click()
+    info(False, f"在 ({x}, {y}) 位置填充颜色: {color}", True)
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待填充完成
+    
 
 def choose_color(color: str):
     """
@@ -38,11 +44,7 @@ def choose_color(color: str):
         color (str): 颜色名称或代码
 
     Step:
-    1. 进入颜色选择模式
-    2. 选择指定颜色
+    1. 选择指定颜色
     """
-    # Step 1: 进入颜色选择模式
-    enter_color_mode()
-
-    # Step 2: 选择指定颜色
+    # Step 1: 选择指定颜色
     select_color(color)

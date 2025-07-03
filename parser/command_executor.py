@@ -20,20 +20,20 @@ from drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_
 # ==============================
 # 颜色填充模块导入区
 # ==============================
-from colorer.colorer import choose_color
+from colorer.colorer import choose_color, fill_color
 
 # ==============================
 # 日志记录模块导入区
 # ==============================
-from terminal_logger.logger import info, warn, error
+from terminal_logger.logger import info, warn, error, debug
 from terminal_logger.command_logger import title, step
 
 # ==============================
 # 全局状态变量
 # ==============================
 current_color = "black"     # 当前已选择的颜色
-current_shape = None         # 当前已选择的绘图工具
-current_layer = None        # 当前已选择的图层
+current_shape = None        # 当前已选择的绘图工具
+current_layer = 1           # 当前已选择的图层
 
 # ==============================
 # 批处理辅助函数模块
@@ -73,6 +73,7 @@ def _dispatch_command(args):
     # 图形绘制命令路由
     elif args.command in ['circle', 'ellipse', 'square', 'rectangle', 
                        'rounded_rectangle', 'polygon', 'line']:
+        info(False, f"绘制图形: {args.command}", True)
         _dispatch_shape_command(args)
     
     # 鼠标控制命令路由
@@ -118,6 +119,18 @@ def _dispatch_shape_command(args):
             select_tool()
 
         draw_command(args)
+
+
+def _dispatch_fill_command(args):
+    """
+    填充命令分发器
+    
+    功能:
+    - 执行颜色填充操作
+    
+    :param args: 包含填充参数的命令行参数对象
+    """
+    fill_color(args.color, args.x, args.y)
 
 
 def _dispatch_mouse_command(args):
@@ -178,8 +191,13 @@ def execute_command(args):
     global current_color
 
     try:
+        if args.command == "fill":
+            _dispatch_fill_command(args)
+            return
+            
         if args.color is not None and args.color != current_color:
             info(True, f"选择颜色: {args.color}", True)
+            current_color = args.color
             choose_color(args.color)
 
         _dispatch_command(args)
@@ -226,8 +244,13 @@ def _process_batch_commands(input_file_path):
                 continue
 
             # 步骤说明处理
-            if line.startswith("# ") and "." in line:
-                step(True, extract_comment_words(line), True)
+            if line.startswith("# "):
+                comment = extract_comment_words(line)
+                # 如果注释内容以数字加点开头，视为步骤，否则视为普通说明
+                if comment and (comment[0].isdigit() and comment[1:3] == ". "):
+                    step(True, comment)
+                elif comment:
+                    step(False, comment)
                 i += 1
                 continue
             
@@ -236,4 +259,5 @@ def _process_batch_commands(input_file_path):
                 command_args = line.split()
                 parsed_args = parse_arguments(command_args)
                 execute_command(parsed_args)
-                i += 1
+                
+            i += 1

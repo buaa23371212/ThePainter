@@ -115,3 +115,22 @@ def error(show: bool, message: str, show_caller: bool = False) -> None:
     
     # Step 2: 调用核心日志函数
     log("ERROR", show, message, source_file)
+
+def debug(show: bool, message: str, show_caller: bool = False) -> None:
+    """
+    记录DEBUG级别日志
+
+    Step:
+    1. 根据show_caller参数决定是否获取调用文件名
+    2. 调用log函数并传入'DEBUG'标签
+
+    :param show: 是否实际输出日志的标志
+    :param message: 需要记录的日志信息
+    :param show_caller: 是否显示调用文件名（默认为False）
+    """
+    source_file = None
+    if show_caller:
+        caller_frame = inspect.stack()[1]
+        caller_file = caller_frame.filename
+        source_file = os.path.basename(caller_file)
+    log("DEBUG", show, message, source_file)

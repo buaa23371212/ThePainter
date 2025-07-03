@@ -199,8 +199,12 @@
 
   - 支持的颜色有：`black`, `white`, `red`, `green`, `blue`, `yellow`, `gray`, `lightgray`, `darkgray`, `orange`, `purple`, `brown`
 
-- 选择指定填充颜色
-  
+- 对指定位置进行颜色填充  
+  格式: `fill -color <颜色> -x <X坐标> -y <Y坐标>`
+  ```shell
+  python main.py fill -color red -x 500 -y 400
+  ```
+  该命令会在 (500, 400) 位置用红色进行填充。
 
 ---
 

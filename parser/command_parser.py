@@ -13,6 +13,7 @@ from .control.mouse_parser import add_move_mouse_arguments, add_mouse_click_argu
 from .control.layer_parser import add_layer_choose_arguments, add_layer_operation_arguments, add_new_layer_arguments
 
 from .control.color_parser import add_color_parser
+from .control.color_parser import add_fill_arguments
 
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
@@ -36,6 +37,7 @@ def parse_arguments(args=None):
     # 添加颜色选择命令
     # 给 parser 添加一个可选参数
     add_color_parser(parser)
+    add_fill_arguments(subparsers)
 
     # 添加鼠标控制命令
     add_move_mouse_arguments(subparsers)

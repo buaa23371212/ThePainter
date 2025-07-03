@@ -67,10 +67,27 @@ FILL_COLOR_POSITION = (955, 100)
 
 # 填充颜色快捷键映射表（按键次数 = 右方向键按下次数）
 FILL_COLOR_KEY_MAP = {
-    "black": 0,  # 黑色（初始颜色）
-    "red": 3,    # 红色
+    "black": 0,        # 黑色（初始颜色）
+    "gray": 1,         # 灰色
+    "darkred": 2,      # 深红色
+    "red": 3,          # 红色
+    "orange": 4,       # 橙色
+    "yellow": 5,       # 黄色
+    "green": 6,        # 绿色
+    "cyan": 7,         # 青绿
+    "blue": 8,         # 靛蓝
+    "purple": 9,       # 紫色
+    "white": 10,       # 白色
+    "lightgray": 11,   # 浅灰色
+    "brown": 12,       # 褐色
+    "rose": 13,        # 玫瑰红
+    "gold": 14,        # 金色
+    "lightyellow": 15, # 浅黄色
+    "lime": 16,        # 酸橙色
+    "lightcyan": 17,   # 淡青绿色
+    "bluegray": 18,    # 蓝灰色
+    "lightpurple": 19  # 浅紫色
 }
-
 
 # ============================================
 # 快捷键辅助函数模块
