@@ -175,12 +175,32 @@
 
 ## 填充工具命令
 
-- 选择指定颜色
-  格式: `-color <颜色>`
-  - 颜色可选：`black`
-  ```shell
-  python main.py -color black
-  ```
+- 选择指定线条颜色
+
+  你可以通过 `-color <颜色>` 参数指定线条颜色，有两种用法：
+
+  1. **全局指定颜色（影响后续所有命令）**  
+     单独执行 `python main.py -color <颜色>`，会将当前线条颜色切换为指定颜色，影响后续所有未显式指定 `-color` 的命令。例如：
+
+     ```shell
+     python main.py -color red
+     python main.py circle -bounding 500 300 700 500
+     python main.py rectangle -bounding 100 100 200 200
+     ```
+     上述命令后，圆和矩形都会用红色线条绘制，直到再次切换颜色。
+
+  2. **临时指定颜色（只影响本条命令，并将全局颜色切换为该颜色）**  
+     在具体绘图命令前加 `-color`，会切换当前颜色，并用该颜色绘制。例如：
+
+     ```shell
+     python main.py -color black circle -bounding 500 300 700 500
+     ```
+     上述命令会绘制一个黑色边界的圆，且接下来所有的线条也都是黑色，直到再次切换颜色。
+
+  - 支持的颜色有：`black`, `white`, `red`, `green`, `blue`, `yellow`, `gray`, `lightgray`, `darkgray`, `orange`, `purple`, `brown`
+
+- 选择指定填充颜色
+  
 
 ---
 

@@ -37,6 +37,18 @@ def open_paint():
     # Step 4: 显示系统兼容性提示
     warn(True, "此脚本使用的画图软件为 Win11 系统自带的画图软件", True)
 
+def minimize_paint():
+    """
+    最小化画图工具窗口
+
+    Step:
+    1. 激活画图窗口
+    2. 发送最小化快捷键
+    """
+    activate_window()
+    pyautogui.hotkey('alt', 'space')
+    pyautogui.press('n')
+    info(True, "画图工具已最小化", True)
 
 def activate_window():
     """
