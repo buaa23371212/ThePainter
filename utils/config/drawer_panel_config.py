@@ -2,6 +2,18 @@
 from utils.config import screen_config
 
 # ============================================
+# 工具类型配置模块
+# ============================================
+
+# 支持的工具类型
+TOOL_TYPE_LIST = [
+    "shape",   # 图形绘制工具
+    "fill",    # 填充工具
+    "brush",   # 画笔工具
+    "layer"    # 图层操作工具
+]
+
+# ============================================
 # 形状工具配置模块
 # ============================================
 
@@ -32,11 +44,11 @@ LAYERS_BUTTON_POSITION = (1440, 130)
 ADD_LAYER_BUTTON_POSITION = (1830, 260)
 
 # 图层视图参数配置
-LAYER_VIEW_HEIGHT = 100  # 单个图层视图的高度（像素）
-FIRST_LAYER_VIEW_POSITION = (  # 第一个图层视图的坐标
+LAYER_VIEW_HEIGHT = 100         # 单个图层视图的高度（像素）
+FIRST_LAYER_VIEW_POSITION = (  
     ADD_LAYER_BUTTON_POSITION[0],
     ADD_LAYER_BUTTON_POSITION[1] + LAYER_VIEW_HEIGHT
-)
+)                               # 第一个图层视图的坐标
 
 # 右键菜单参数配置
 RIGHT_CLICK_OFFSET = (200, 25)  # 右键菜单相对于点击位置的偏移量

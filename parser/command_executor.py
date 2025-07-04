@@ -32,7 +32,7 @@ from terminal_logger.command_logger import title, step
 # 全局状态变量
 # ==============================
 current_color = "black"     # 当前已选择的颜色
-current_tool = "brush"         # 当前已选择的绘图工具
+current_tool = "brush"      # 当前已选择的绘图工具
 current_shape = None        # 当前已选择的图形工具
 current_layer = 1           # 当前已选择的图层
 
