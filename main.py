@@ -15,7 +15,7 @@ import pyautogui
 # ==============================
 from utils.tools.tools import open_paint, minimize_paint
 from parser.command_parser import parse_arguments
-from parser.command_executor import execute_command, _process_batch_commands
+from parser.command_executor import execute_command, process_batch_commands
 
 # ==============================
 # 日志记录模块导入区
@@ -44,7 +44,7 @@ def main():
         # 批量命令模式
         try:
             open_paint()  # 打开画图工具
-            _process_batch_commands(args.input_file)  # 执行批量命令
+            process_batch_commands(args.input_file)  # 执行批量命令
             info(True, "画图工具保持打开状态", True)
             minimize_paint()
         except Exception as e:

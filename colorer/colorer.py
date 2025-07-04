@@ -18,7 +18,8 @@ def fill_color(color: str, x: int, y: int):
     Step:
     1. 进入颜色填充模式
     2. 选择指定颜色
-    3. 执行点击进行填充
+    3. 移动鼠标到指定位置
+    4. 点击填充
     """
     # Step 1: 进入颜色填充模式
     enter_color_mode()
@@ -26,9 +27,10 @@ def fill_color(color: str, x: int, y: int):
     # Step 2: 选择指定颜色
     select_color(color)
 
-    # Step 3: 执行点击进行填充
     activate_canvas()  # 确保画布处于活动状态
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布激活
+
+    # Step 3: 移动鼠标到指定位置并点击填充
     pyautogui.moveTo(x, y)  # 移动鼠标到指定位置
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待鼠标移动完成
     pyautogui.click()

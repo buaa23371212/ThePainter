@@ -28,8 +28,6 @@ def select_rectangle_tool():
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择矩形工具", True)
     
-    # Step 3: 激活画布确保进入绘图模式
-    activate_canvas()
 
 def draw_rectangle(start_x, start_y, end_x, end_y):
     """
@@ -43,11 +41,14 @@ def draw_rectangle(start_x, start_y, end_x, end_y):
     """
     info(False, f"开始绘制矩形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
     
+    activate_canvas()  # 确保画布处于活动状态
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布激活
+
     # Step 1: 缓慢移动到起始位置
     pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
     time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
-    # Step 2: 绘制矩形（不再按住Shift键）
+    # Step 2: 绘制矩形
     pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION)
     
     info(False, "成功绘制矩形！", True)

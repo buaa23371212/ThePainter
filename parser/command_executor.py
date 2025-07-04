@@ -32,13 +32,14 @@ from terminal_logger.command_logger import title, step
 # 全局状态变量
 # ==============================
 current_color = "black"     # 当前已选择的颜色
-current_shape = None        # 当前已选择的绘图工具
+current_tool = "brush"         # 当前已选择的绘图工具
+current_shape = None        # 当前已选择的图形工具
 current_layer = 1           # 当前已选择的图层
 
 # ==============================
 # 批处理辅助函数模块
 # ==============================
-def extract_comment_words(line: str) -> str:
+def _extract_comment_words(line: str) -> str:
     """
     提取命令文件中的注释内容
     
@@ -75,6 +76,11 @@ def _dispatch_command(args):
                        'rounded_rectangle', 'polygon', 'line']:
         info(False, f"绘制图形: {args.command}", True)
         _dispatch_shape_command(args)
+
+    # 填充颜色命令路由
+    elif args.command == 'fill':
+        info(False, f"填充颜色: {args.color} 到位置 ({args.x}, {args.y})", True)
+        _dispatch_fill_command(args)
     
     # 鼠标控制命令路由
     elif args.command in ['move_mouse', 'mouse_click', 'right_click']:
@@ -99,7 +105,7 @@ def _dispatch_shape_command(args):
     
     :param args: 包含图形参数的命令行参数对象
     """
-    global current_shape
+    global current_shape, current_tool, current_color
 
     shape_commands = {
         'circle': (select_circle_tool, draw_circle_command),
@@ -110,6 +116,10 @@ def _dispatch_shape_command(args):
         'polygon': (select_polygon_tool, draw_polygon_command),
         'line': (select_line_tool, draw_line_command)
     }
+
+    # Step 1: 选工具
+    if current_tool != 'shape':
+        current_tool = 'shape'
     
     if args.command in shape_commands:
         select_tool, draw_command = shape_commands[args.command]
@@ -118,7 +128,18 @@ def _dispatch_shape_command(args):
             current_shape = args.command
             select_tool()
 
+        # Step 2: 选择颜色
+        if args.color is not None and args.color != current_color:
+            info(False, f"选择颜色: {args.color}", True)
+            current_color = args.color
+            choose_color(args.color)
+
+        # Step 3: 执行绘制命令
         draw_command(args)
+    
+    else:
+        warn(True, f"未知图形命令: {args.command}", True)
+        return
 
 
 def _dispatch_fill_command(args):
@@ -130,6 +151,14 @@ def _dispatch_fill_command(args):
     
     :param args: 包含填充参数的命令行参数对象
     """
+    global current_color, current_tool
+
+    if args.color != current_color:
+        current_color = args.color
+
+    if current_tool != 'fill':
+        current_tool = 'fill'
+
     fill_color(args.color, args.x, args.y)
 
 
@@ -191,15 +220,6 @@ def execute_command(args):
     global current_color
 
     try:
-        if args.command == "fill":
-            _dispatch_fill_command(args)
-            return
-            
-        if args.color is not None and args.color != current_color:
-            info(True, f"选择颜色: {args.color}", True)
-            current_color = args.color
-            choose_color(args.color)
-
         _dispatch_command(args)
     except Exception as e:
         error(True, f"操作失败: {str(e)}", True)
@@ -208,7 +228,7 @@ def execute_command(args):
 # ==============================
 # 批处理模块
 # ==============================
-def _process_batch_commands(input_file_path):
+def process_batch_commands(input_file_path):
     """
     批量命令处理器
     
@@ -239,13 +259,13 @@ def _process_batch_commands(input_file_path):
             # 标题块处理 (三行格式)
             if line.startswith("# =") and i + 2 < len(lines):
                 title_line = lines[i + 1].strip()
-                title(True, extract_comment_words(title_line), True)
+                title(True, _extract_comment_words(title_line), True)
                 i += 3  # 跳过标题块的三行
                 continue
 
             # 步骤说明处理
             if line.startswith("# "):
-                comment = extract_comment_words(line)
+                comment = _extract_comment_words(line)
                 # 如果注释内容以数字加点开头，视为步骤，否则视为普通说明
                 if comment and (comment[0].isdigit() and comment[1:3] == ". "):
                     step(True, comment)

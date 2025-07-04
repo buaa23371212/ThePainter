@@ -1,3 +1,5 @@
+from utils.config.drawer_panel_config import FILL_COLOR_KEY_MAP
+
 def add_color_parser(parser):
     """
     Add color parser to the given parser.
@@ -6,10 +8,7 @@ def add_color_parser(parser):
         "-color",
         type=str,
         help="The color to use for filling. 若未指定则使用当前颜色。",
-        choices=[
-            "black", "white", "red", "green", "blue", "yellow",
-            "gray", "lightgray", "darkgray", "orange", "purple", "brown"
-        ]
+        choices=list(FILL_COLOR_KEY_MAP.keys())
     )
 
 def add_fill_arguments(subparsers):
@@ -22,10 +21,7 @@ def add_fill_arguments(subparsers):
         '-color',
         type=str,
         required=True,
-        choices=[
-            "black", "white", "red", "green", "blue", "yellow",
-            "gray", "lightgray", "darkgray", "orange", "purple", "brown"
-        ],
+        choices=list(FILL_COLOR_KEY_MAP.keys()),
         help='填充颜色'
     )
     fill_parser.add_argument(

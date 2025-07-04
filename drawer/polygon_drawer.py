@@ -27,9 +27,7 @@ def select_polygon_tool():
     pyautogui.press('enter')
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择多边形工具", True)
-    
-    # Step 3: 激活画布确保进入绘图模式
-    activate_canvas()
+
 
 def draw_polygon(points):
     """
@@ -43,6 +41,7 @@ def draw_polygon(points):
         return
     
     info(False, f"开始绘制多边形，顶点数: {len(points)}", True)
+    activate_canvas()
     
     # Step 1: 缓慢移动到第一个顶点
     start_x, start_y = points[0]

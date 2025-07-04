@@ -25,9 +25,7 @@ def select_line_tool():
     pyautogui.press('enter')
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择直线工具", True)
-    
-    # Step 3: 激活画布
-    activate_canvas()
+
 
 def draw_line(start_x, start_y, end_x, end_y):
     """
@@ -41,6 +39,7 @@ def draw_line(start_x, start_y, end_x, end_y):
     """
     # 使用info函数记录日志，但show=False不显示输出
     info(False, f"开始绘制直线 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
+    activate_canvas()
     
     # Step 1: 缓慢移动到起始位置
     pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)

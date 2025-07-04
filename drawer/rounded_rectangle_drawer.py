@@ -26,9 +26,7 @@ def select_rounded_rectangle_tool():
     pyautogui.press('enter')
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
     info(False, "已选择圆角矩形工具", True)
-    
-    # Step 3: 激活画布确保进入绘图模式
-    activate_canvas()
+
 
 def draw_rounded_rectangle(start_x, start_y, end_x, end_y):
     """
@@ -41,6 +39,7 @@ def draw_rounded_rectangle(start_x, start_y, end_x, end_y):
         end_y (int): 结束点Y坐标
     """
     info(False, f"开始绘制圆角矩形 (起点: ({start_x}, {start_y}), 终点: ({end_x}, {end_y}))", True)
+    activate_canvas()
     
     # Step 1: 缓慢移动到起始位置
     pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
