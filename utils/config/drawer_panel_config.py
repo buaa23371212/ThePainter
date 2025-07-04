@@ -11,6 +11,7 @@ SHAPES_BUTTON_POSITION = (screen_config.SCREEN_WIDTH // 4 + 65, 95)
 # 形状选择快捷键映射表（按键次数 = 右方向键按下次数）
 SHAPE_PANEL_KEY_MAP = {
     "line": 0,              # 直线（初始位置）
+    "curve": 1,             # 曲线
     "ellipse": 2,           # 椭圆
     "circle": 2,            # 圆
     "rectangle": 3,         # 矩形
