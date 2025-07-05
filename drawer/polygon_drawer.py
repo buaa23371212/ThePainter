@@ -25,7 +25,7 @@ def select_polygon_tool():
     pyautogui.press('right', presses=get_shape_panel_presses("polygon"))  # 按右方向键5次选择多边形工具
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
     pyautogui.press('enter')
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
     info(False, "已选择多边形工具", True)
 
 

@@ -103,6 +103,14 @@
 
 ---
 
+### 曲线
+
+python main.py curve -points 500 300 300 300 500 500 700 500
+
+python main.py curve -file input/Sample-1/shapes.json -id curve1
+
+---
+
 ### 多边形
 
 - 直接指定顶点绘制多边形  
