@@ -105,10 +105,27 @@
 
 ### 曲线
 
-python main.py curve -points 500 300 300 300 500 500 700 500
+- 通过控制点直接绘制贝塞尔曲线  
+  格式: `-points <x0> <y0> <x1> <y1> <x2> <y2> <x3> <y3>`
+  ```shell
+  python main.py curve -points 500 300 300 300 500 500 700 500
+  ```
+  上述命令将使用4个控制点绘制一条三次贝塞尔曲线。
 
-python main.py curve -file input/Sample-1/shapes.json -id curve1
+- 通过JSON文件和ID绘制曲线  
+  格式: `-file <path> -id <curve_id>`
+  ```shell
+  python main.py curve -file input/Sample-1/shapes.json -id curve1
+  ```
+  上述命令会从指定的JSON文件中查找ID为`curve1`的曲线，并按其控制点绘制。
 
+- 通过JSON文件和名称绘制曲线  
+  格式: `-file <path> -name "<curve_name>"`
+  ```shell
+  python main.py curve -file input/Sample-1/shapes.json -name "mycurve"
+  ```
+  上述命令会从JSON文件中查找名称为`mycurve`的曲线并绘制。
+  
 ---
 
 ### 多边形
