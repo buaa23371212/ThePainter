@@ -20,7 +20,7 @@ from drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_
 # ==============================
 # 颜色填充模块导入区
 # ==============================
-from colorer.colorer import choose_color, fill_color
+from colorer.colorer import select_fill_tool, choose_color, fill_color
 
 # ==============================
 # 日志记录模块导入区
@@ -153,11 +153,13 @@ def _dispatch_fill_command(args):
     """
     global current_color, current_tool
 
-    if args.color != current_color:
-        current_color = args.color
-
     if current_tool != 'fill':
         current_tool = 'fill'
+        select_fill_tool()
+
+    if args.color != current_color:
+        current_color = args.color
+        choose_color(args.color)
 
     fill_color(args.color, args.x, args.y)
 

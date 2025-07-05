@@ -6,6 +6,17 @@ from utils.tools.tools import enter_color_mode, activate_canvas
 from utils.config import auto_speed_config
 from terminal_logger.logger import info, warn, error, debug
 
+def select_fill_tool():
+    """
+    选择填充工具（colorer 层接口）
+
+    Step:
+    1. 进入颜色模式
+    """
+    # Step 1: 进入颜色模式
+    enter_color_mode()
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待颜色模式激活
+
 def fill_color(color: str, x: int, y: int):
     """
     在指定坐标处进行颜色填充
@@ -16,17 +27,7 @@ def fill_color(color: str, x: int, y: int):
         y (int): 填充点的Y坐标
 
     Step:
-    1. 进入颜色填充模式
-    2. 选择指定颜色
-    3. 移动鼠标到指定位置
-    4. 点击填充
     """
-    # Step 1: 进入颜色填充模式
-    enter_color_mode()
-
-    # Step 2: 选择指定颜色
-    select_color(color)
-
     activate_canvas()  # 确保画布处于活动状态
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布激活
 
