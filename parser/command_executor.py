@@ -1,3 +1,4 @@
+import re
 import time
 import pyautogui
 
@@ -277,8 +278,8 @@ def process_batch_commands(input_file_path):
             # 步骤说明处理
             if line.startswith("# "):
                 comment = _extract_comment_words(line)
-                # 如果注释内容以数字加点开头，视为步骤，否则视为普通说明
-                if comment and (comment[0].isdigit() and comment[1:3] == ". "):
+                # 用正则判断是否以“数字+点+空格”开头，支持多位数字
+                if comment and re.match(r"^\d+\.\s", comment):
                     step(True, comment)
                 elif comment:
                     step(False, comment)
