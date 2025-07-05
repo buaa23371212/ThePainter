@@ -1,8 +1,11 @@
+import time
 import pyautogui
 
 # ==============================
 # 工具模块导入区
 # ==============================
+from utils.config.screen_config import CANVAS_BLANK_POSITION
+from utils.config import auto_speed_config
 from utils.tools.layer_tools import select_layer, add_layer, select_layer_operation
 from parser.command_parser import parse_arguments
 
@@ -224,6 +227,10 @@ def execute_command(args):
     global current_color
 
     try:
+        pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)  # 确保鼠标在画布空白处
+        pyautogui.click()  # 激活画布窗口
+        time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待点击生效
+
         _dispatch_command(args)
     except Exception as e:
         error(True, f"操作失败: {str(e)}", True)

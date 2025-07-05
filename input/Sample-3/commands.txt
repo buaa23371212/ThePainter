@@ -1,0 +1,52 @@
+# ================
+# 简笔画房子绘制
+# ================
+
+# 1. 绘制房子主体（矩形）
+-color brown rectangle -center 960 595 400 300
+
+# 2. 绘制屋顶（三角形）
+-color darkred polygon -file input/Sample-3/shapes.json -id roof
+
+# 3. 绘制门（矩形）
+-color gray rectangle -center 960 660 80 120
+
+# 4. 绘制门把手
+-color black circle -center 925 660 10
+
+# 5. 绘制左窗户
+-color lightcyan polygon -file input/Sample-3/shapes.json -id window_left
+
+# 6. 绘制左窗户窗框
+-color black polygon -file input/Sample-3/shapes.json -id window_left_frame
+
+# 7. 绘制右窗户
+-color lightcyan polygon -file input/Sample-3/shapes.json -id window_right
+
+# 8. 绘制右窗户窗框
+-color black polygon -file input/Sample-3/shapes.json -id window_right_frame
+
+add_layer
+
+# 9. 添加烟囱（可选）
+-color brown rectangle -center 1100 450 40 60
+
+# 10. 绘制烟囱冒出的烟
+-color lightgray polygon -file input/Sample-3/shapes.json -id chimney_smoke
+
+# 11. 绘制屋顶瓦片
+-color darkred polygon -file input/Sample-3/shapes.json -id roof_tiles
+
+# 12. 绘制砖墙纹理
+-color brown polygon -file input/Sample-3/shapes.json -id brick_wall_texture
+
+# 13. 绘制门口小路
+-color lightgray polygon -file input/Sample-3/shapes.json -id path
+
+# 14. 绘制房子旁边的花草
+-color green polygon -file input/Sample-3/shapes.json -id flowers
+
+# 15. 绘制太阳
+-color yellow circle -center 400 400 100
+
+fill -x 1100 -y 450 -color brown
