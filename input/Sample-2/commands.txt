@@ -1,29 +1,26 @@
-# 激活画布窗口
+# 1. 激活画布窗口
 mouse_click -x 1000 -y 50
 
-# 设置黑色线条
+# 2. 设置黑色线条
 -color black
 
-# 绘制地基（横长方形）
-rectangle -center 960 860 800 100
-
-# 绘制主体（竖长方形）
+# 3. 绘制主体（竖长方形）
 rectangle -center 960 660 600 400
 
-# 绘制门
+# 4. 绘制门
 rectangle -center 760 715 100 180
 
-# 绘制窗户
+# 5. 绘制窗户
 rectangle -center 760 540 80 80
 rectangle -center 1160 540 80 80
 
-# 绘制屋顶（从JSON文件加载）
+# 6. 绘制屋顶（从JSON文件加载）
 polygon -file input/Sample-2/shapes.json -id roof
 
-# 绘制烟囱
-rectangle -center 760 470 60 100
+# 7. 绘制烟囱
+rectangle -center 760 420 30 50
 
-# 绘制窗框（十字）
+# 8. 绘制窗框（十字）
 # 左窗水平框
 line -points 720 540 800 540
 # 左窗垂直框
@@ -33,8 +30,8 @@ line -points 1120 540 1200 540
 # 右窗垂直框
 line -points 1160 500 1160 580
 
-# 绘制烟（从JSON文件加载）
+# 9. 绘制烟（从JSON文件加载）
 curve -file input/Sample-2/shapes.json -id smoke
 
-# 添加门把手（小圆点）
+# 10. 添加门把手（小圆点）
 circle -center 790 715 5
