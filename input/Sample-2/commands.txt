@@ -1,25 +1,40 @@
-# ================
-# 简笔画房子绘制
-# ================
+# 激活画布窗口
+mouse_click -x 1000 -y 50
 
-# 1. 绘制房子主体（矩形）
-rectangle -center 960 595 400 300
+# 设置黑色线条
+-color black
 
-# 2. 绘制屋顶（三角形）
--color darkred polygon -file input/Sample-2/shapes.json -id roof
+# 绘制地基（横长方形）
+rectangle -center 960 860 800 100
 
-# 3. 绘制门（矩形）
--color gray rectangle -center 960 660 80 120
+# 绘制主体（竖长方形）
+rectangle -center 960 660 600 400
 
-# 4. 绘制左窗户
-# polygon -file input/Sample-2/shapes.json -id window_left
+# 绘制门
+rectangle -center 760 715 100 180
 
-# 5. 绘制右窗户
-# polygon -file input/Sample-2/shapes.json -id window_right
+# 绘制窗户
+rectangle -center 760 540 80 80
+rectangle -center 1160 540 80 80
 
-add_layer
+# 绘制屋顶（从JSON文件加载）
+polygon -file input/Sample-2/shapes.json -id roof
 
-# 6. 添加烟囱（可选）
--color brown rectangle -center 1100 450 40 60
+# 绘制烟囱
+rectangle -center 760 470 60 100
 
-fill -x 1100 -y 450 -color brown
+# 绘制窗框（十字）
+# 左窗水平框
+line -points 720 540 800 540
+# 左窗垂直框
+line -points 760 500 760 580
+# 右窗水平框
+line -points 1120 540 1200 540
+# 右窗垂直框
+line -points 1160 500 1160 580
+
+# 绘制烟（从JSON文件加载）
+curve -file input/Sample-2/shapes.json -id smoke
+
+# 添加门把手（小圆点）
+circle -center 790 715 5

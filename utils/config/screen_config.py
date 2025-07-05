@@ -50,7 +50,27 @@ CANVAS_DRAWABLE_BOTTOM = CANVAS_BOTTOM - CANVAS_PADDING
 CANVAS_DRAWABLE_WIDTH = CANVAS_DRAWABLE_RIGHT - CANVAS_DRAWABLE_LEFT
 CANVAS_DRAWABLE_HEIGHT = CANVAS_DRAWABLE_BOTTOM - CANVAS_DRAWABLE_TOP
 
-# TODO
-# 计算图层模式下画布中心点
+# ======================
+# 图层模式下的计算
+# ======================
 
-# 计算图层模式下可用绘画区域
+# 计算图层模式下画布中心点
+CANVAS_LAYER_MODE_CENTER = (CANVAS_CENTER[0] - CANVAS_LEFT_OFFSET, CANVAS_CENTER[1])
+
+# 计算图层模式下可用绘画区域(实际绘图区域整体向左平移了50像素)
+CANVAS_LAYER_MODE_DRAWABLE_LEFT = CANVAS_DRAWABLE_LEFT - CANVAS_LEFT_OFFSET
+CANVAS_LAYER_MODE_DRAWABLE_RIGHT = CANVAS_DRAWABLE_RIGHT - CANVAS_LEFT_OFFSET
+CANVAS_LAYER_MODE_DRAWABLE_TOP = CANVAS_DRAWABLE_TOP
+CANVAS_LAYER_MODE_DRAWABLE_BOTTOM = CANVAS_DRAWABLE_BOTTOM
+CANVAS_LAYER_MODE_DRAWABLE_WIDTH = CANVAS_DRAWABLE_WIDTH
+CANVAS_LAYER_MODE_DRAWABLE_HEIGHT = CANVAS_DRAWABLE_HEIGHT
+
+# ==============================================
+# 图层模式下可绘画区域：
+# ┌───────────────────────────────────────────────────────┐
+# │ 顶部: 280px                                           │
+# │ 左侧: 340px                     宽度: 1140px          │
+# │ 底部: 910px                                           │
+# │ 右侧: 1480px                                          │
+# └───────────────────────────────────────────────────────┘
+# ==============================================
