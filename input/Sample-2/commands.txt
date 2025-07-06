@@ -1,37 +1,167 @@
-# 1. 激活画布窗口
-mouse_click -x 1000 -y 50
+# ======================
+# 风景画绘制
+# ======================
 
-# 2. 设置黑色线条
+# 1. 绘制地平线
+line -points 300 700 1450 700
+
+# 2. 绘制远山（左山）
+polygon -vertices 340 700 600 500 800 700
+
+# 3. 绘制远山（右山）
+polygon -vertices 800 700 1000 550 1200 700
+
+# 4. 绘制太阳轮廓
+circle -center 1300 400 50
+
+# 5. 绘制太阳光芒（8条射线）
+# 水平/垂直射线（dx/dy=50）
+line -vector 1350 400 50 0
+line -vector 1250 400 -50 0
+line -vector 1300 450 0 50
+line -vector 1300 350 0 -50
+
+# 对角线射线（dx/dy=25）
+line -vector 1340 440 25 25
+line -vector 1340 360 25 -25
+line -vector 1260 440 -25 25
+line -vector 1260 360 -25 -25
+
+# 6. 绘制云朵（左侧）
+curve -points 500 350 450 300 400 320 450 350
+curve -points 450 350 500 370 550 330 500 350
+
+# 7. 绘制云朵（右侧）
+curve -points 1100 380 1050 350 1000 370 1050 390
+curve -points 1050 390 1100 410 1150 380 1100 380
+
+# 8. 填充天空（蓝色）
+fill -color blue -x 500 -y 300
+
+# 9. 填充太阳（黄色）
+fill -color yellow -x 1300 -y 400
+
+# 10. 填充远山（绿色）- 左山
+fill -color green -x 600 -y 600
+
+# 11 填充远山（绿色）- 右山
+fill -color green -x 1000 -y 600
+
+# 12. 填充地面（浅绿色）
+fill -color lime -x 500 -y 750
+
+# 13. 填充云朵（白色）
+fill -color white -x 450 -y 335
+fill -color white -x 1050 -y 375
+
+# 14. 新建图层
+add_layer
+
+# ======================
+# 在新图层上绘制房子
+# ======================
+
+# 15. 设置棕色为默认线条颜色
 -color black
 
-# 3. 绘制主体（竖长方形）
-rectangle -center 960 660 600 400
+# 16. 绘制房子主体（矩形）
+rectangle -center 700 800 200 200
 
-# 4. 绘制门
-rectangle -center 760 715 100 180
+# 17. 绘制屋顶（三角形）
+polygon -vertices 600 700 800 700 700 550
 
-# 5. 绘制窗户
-rectangle -center 760 540 80 80
-rectangle -center 1160 540 80 80
+# 18. 绘制门（矩形）
+rectangle -center 670 850 50 100
 
-# 6. 绘制屋顶（从JSON文件加载）
-polygon -file input/Sample-2/shapes.json -id roof
+# 19. 绘制窗户（两个矩形）
+rectangle -center 620 750 40 40
+rectangle -center 720 750 40 40
 
-# 7. 绘制烟囱
-rectangle -center 760 420 30 50
+# 20. 填充窗户（浅蓝色） - 先填充整个窗户
+fill -color lightcyan -x 620 -y 750
+fill -color lightcyan -x 720 -y 750
 
-# 8. 绘制窗框（十字）
+# 21. 重新设置黑色为默认线条颜色
+-color black
+
+# 22. 绘制窗框（十字）
 # 左窗水平框
-line -points 720 540 800 540
+line -points 600 750 640 750
 # 左窗垂直框
-line -points 760 500 760 580
+line -points 620 730 620 770
 # 右窗水平框
-line -points 1120 540 1200 540
+line -points 700 750 740 750
 # 右窗垂直框
-line -points 1160 500 1160 580
+line -points 720 730 720 770
 
-# 9. 绘制烟（从JSON文件加载）
-curve -file input/Sample-2/shapes.json -id smoke
+# 23. 绘制门把手（小圆点）
+circle -center 685 850 5
 
-# 10. 添加门把手（小圆点）
-circle -center 790 715 5
+# 24. 填充房子主体（米色）
+fill -color lightyellow -x 700 -y 800
+
+# 25. 填充屋顶（红色）
+fill -color red -x 700 -y 650
+
+# 26. 填充门（深棕色）
+fill -color brown -x 670 -y 850
+
+# 27. 新建图层
+add_layer
+
+# 28. 重新设置黑色为默认线条颜色
+-color black
+
+# 29. 绘制烟囱（矩形）
+rectangle -center 750 650 30 60
+
+# 30. 绘制烟（曲线）
+curve -points 750 600 730 600 770 580 750 560
+
+# 31. 填充烟囱（砖红色）
+fill -color darkred -x 750 -y 650
+
+# ======================
+# 在新图层上绘制树
+# ======================
+
+# 32. 新建图层（树）
+add_layer
+
+# 33. 绘制树干（矩形）
+-color black rectangle -center 1000 800 40 150
+
+# 34. 填充树干（深棕色）
+fill -color brown -x 1000 -y 800
+
+# 35. 绘制树冠
+# 36. 填充树冠（深绿色）
+-color black ellipse -bounding 920 650 1080 750   # 中心椭圆
+fill -color green -x 1000 -y 700
+
+# 37. 设置黑色为默认线条颜色（树枝细节）
+-color black
+
+# 38. 绘制树枝
+line -points 1000 750 1000 720
+
+# ======================
+# 绘制火柴人（前景）
+# ======================
+
+# 39. 设置黑色为默认线条颜色
+-color black
+
+# 40. 绘制头部（圆形）
+circle -center 850 750 20
+
+# 41. 绘制身体（垂直线）
+line -points 850 770 850 820
+
+# 42. 绘制手臂（斜线）
+line -points 850 790 820 810  # 左臂
+line -points 850 790 880 810  # 右臂
+
+# 43. 绘制腿部（斜线）
+line -points 850 820 830 850  # 左腿
+line -points 850 820 870 850  # 右腿
