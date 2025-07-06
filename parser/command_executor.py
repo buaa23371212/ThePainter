@@ -277,9 +277,14 @@ def process_batch_commands(input_file_path):
             # 标题块处理 (三行格式)
             if line.startswith("# =") and i + 2 < len(lines):
                 title_line = lines[i + 1].strip()
-                title(True, _extract_comment_words(title_line), True)
-                i += 3  # 跳过标题块的三行
-                continue
+                end_line = lines[i + 2].strip()
+                if end_line.startswith("# ="):
+                    title(True, _extract_comment_words(title_line))
+                    i += 3  # 跳过标题块的三行
+                    continue
+                else:
+                    i += 1
+                    continue
 
             # 步骤说明处理
             if line.startswith("# "):

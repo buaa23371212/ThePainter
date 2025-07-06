@@ -1,8 +1,13 @@
+import io
+import sys
 import os
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit, QSplitter
+    QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit, QSplitter, QStackedWidget
 )
 from PyQt5.QtCore import QDir, Qt
+from PyQt5.QtGui import QPixmap
+
+from utils.tools.previewer import preview_command_file
 
 class FileExplorer(QWidget):
     """
@@ -54,16 +59,15 @@ class FileExplorer(QWidget):
         # =====================================================
         # 右侧：文件内容预览组件
         # =====================================================
-        self.text_view = QTextEdit()            # 创建文本编辑框用于显示文件内容
-        self.text_view.setReadOnly(True)        # 设置为只读模式
-        self.text_view.setStyleSheet("""
-            QTextEdit {
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                font-family: Consolas, monospace;
-            }
-        """)
-        splitter.addWidget(self.text_view)      # 添加到分割器右侧
+        self.stack = QStackedWidget()
+        self.text_view = QTextEdit()
+        self.text_view.setReadOnly(True)
+        self.image_view = QLabel()
+        self.image_view.setAlignment(Qt.AlignCenter)
+        self.stack.addWidget(self.text_view)  # index 0
+        self.stack.addWidget(self.image_view) # index 1
+        splitter.addWidget(self.stack)
+        self.stack.setCurrentIndex(0)
         
         # 设置分割比例：右侧区域可伸缩（占比更大）
         splitter.setStretchFactor(1, 1)         # 索引1（右侧）的伸缩因子为1
@@ -114,15 +118,36 @@ class FileExplorer(QWidget):
         
         # 如果点击的是文件
         if path and os.path.isfile(path):
+            ext = os.path.splitext(path)[1].lower()
             try:
-                # 尝试读取文件内容
-                with open(path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                # 在右侧文本区域显示内容
-                self.text_view.setPlainText(content)
+                if ext in [".png", ".jpg", ".jpeg", ".bmp", ".gif"]:
+                    pixmap = QPixmap(path)
+                    if pixmap.isNull():
+                        self.image_view.setText("无法加载图片")
+                    else:
+                        self.image_view.setPixmap(pixmap.scaled(
+                            self.image_view.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
+                    self.stack.setCurrentIndex(1)
+                elif os.path.basename(path) == "commands.txt":
+                    # 捕获 preview_command_file 的输出到字符串
+                    buffer = io.StringIO()
+                    sys_stdout = sys.stdout
+                    sys.stdout = buffer
+                    preview_command_file(path)
+                    sys.stdout = sys_stdout
+                    content = buffer.getvalue()
+                    self.text_view.setPlainText(content)
+                    self.stack.setCurrentIndex(0)
+                else:
+                    # 普通文本文件直接显示内容
+                    with open(path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    self.text_view.setPlainText(content)
+                    self.stack.setCurrentIndex(0)
             except Exception as e:
-                # 读取失败时显示错误信息
                 self.text_view.setPlainText(f"无法读取文件内容: {e}")
+                self.stack.setCurrentIndex(0)
         else:
             # 点击的是文件夹时清空预览区
             self.text_view.clear()
+            self.stack.setCurrentIndex(0)
