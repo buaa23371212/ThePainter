@@ -80,7 +80,8 @@ def _dispatch_command(args):
             info(False, f"设置当前颜色: {args.color}", True)
             current_color = args.color
             choose_color(args.color)
-            return
+        
+        return
     
     # 图形绘制命令路由
     if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
