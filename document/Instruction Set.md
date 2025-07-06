@@ -222,7 +222,7 @@
      ```
      上述命令会绘制一个黑色边界的圆，且接下来所有的线条也都是黑色，直到再次切换颜色。
 
-  - 支持的颜色有：`black`, `white`, `red`, `green`, `blue`, `yellow`, `gray`, `lightgray`, `darkgray`, `orange`, `purple`, `brown`
+  - 支持的颜色有：
 
 - 对指定位置进行颜色填充  
   格式: `fill -color <颜色> -x <X坐标> -y <Y坐标>`

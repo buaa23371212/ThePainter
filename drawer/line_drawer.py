@@ -45,10 +45,8 @@ def draw_line(start_x, start_y, end_x, end_y):
     pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
     time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
-    # Step 2: 按住Shift键绘制直线
-    pyautogui.keyDown('shift')
+    # Step 2: 绘制直线
     pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION)
-    pyautogui.keyUp('shift')
     
     info(False, "成功绘制直线！", True)
 

@@ -73,11 +73,17 @@ def _dispatch_command(args):
     
     :param args: 解析后的命令行参数对象
     """
+    global current_color
+    
     if args.command is None:
-        pass
+        if args.color is not None and args.color != current_color:
+            info(False, f"设置当前颜色: {args.color}", True)
+            current_color = args.color
+            choose_color(args.color)
+            return
     
     # 图形绘制命令路由
-    elif args.command in ['circle', 'ellipse', 'square', 'rectangle', 
+    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
                        'rounded_rectangle', 'polygon', 'line', 'curve', 'multicurve']:
         info(False, f"绘制图形: {args.command}", True)
         _dispatch_shape_command(args)
@@ -124,14 +130,12 @@ def _dispatch_shape_command(args):
     }
 
     # Step 1: 选工具
-    if current_tool != 'shape':
-        current_tool = 'shape'
-    
     if args.command in shape_commands:
         select_tool, draw_command = shape_commands[args.command]
 
-        if current_shape != args.command:
+        if current_shape != args.command or current_tool != 'shape':
             current_shape = args.command
+            current_tool = 'shape'
             select_tool()
 
         # Step 2: 选择颜色
@@ -289,7 +293,13 @@ def process_batch_commands(input_file_path):
             
             # 命令执行
             if not line.startswith("#"):
-                command_args = line.split()
+                # 去除行内注释
+                command_line = line.split("#")[0].strip()
+                info(False, f"执行命令: {command_line}", True)
+                if not command_line:
+                    i += 1
+                    continue
+                command_args = command_line.split()
                 parsed_args = parse_arguments(command_args)
                 execute_command(parsed_args)
                 

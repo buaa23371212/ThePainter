@@ -24,7 +24,7 @@ CANVAS_PADDING = 10    # 画布边界与画布内容的间距
 WINDOW_ACTIVATE_POSITION = (1000, 50)
 
 # 画布空白位置
-CANVAS_BLANK_POSITION = (100, 800)
+CANVAS_BLANK_POSITION = (100, 500)
 
 # ======================
 # 计算部分

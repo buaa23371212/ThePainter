@@ -68,19 +68,10 @@ def activate_canvas():
     激活画布，确保处于绘图模式
     
     Step:
-    1. 计算屏幕中心
-    2. 点击画布中心
+    1. 点击画布中心
     """
-    # Step 1: 计算屏幕中心
-    info(False, "激活画布...", True)
-    
-    screen_width = screen_config.SCREEN_WIDTH
-    screen_height = screen_config.SCREEN_HEIGHT
-    if screen_width is None or screen_height is None:
-        error(True, "屏幕宽高未设置", True)
-    
-    # Step 2: 点击画布中心
-    pyautogui.click(screen_config.CANVAS_CENTER)
+    # Step 1: 点击画布中心
+    pyautogui.click(screen_config.CANVAS_BLANK_POSITION)
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布响应
     info(False, "画布已激活", True)
 
