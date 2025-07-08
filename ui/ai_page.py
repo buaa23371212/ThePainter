@@ -45,7 +45,7 @@ class AIPage(QWidget):
     def on_send_clicked(self):
         """处理发送按钮点击事件"""
         # 1. 获取用户输入
-        user_input = self.input_box.text().strip()
+        user_input = self.input_box.toPlainText().strip()
         
         if not user_input:
             return  # 忽略空输入
