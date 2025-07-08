@@ -7,29 +7,42 @@ class AIPage(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
+        # ==================================================
+        # 标题栏
+        # ==================================================
         label = QLabel("AI作画")
         label.setFixedHeight(28)  # 固定高度
         label.setStyleSheet("font-size: 18px; font-weight: bold; margin-bottom: 12px;")
         layout.addWidget(label)
 
+        # ==================================================
         # 历史对话记录显示区
+        # ==================================================
         self.history_box = QTextEdit()
         self.history_box.setReadOnly(True)
         self.history_box.setPlaceholderText("历史对话记录将在此显示...")
-        self.history_box.setFixedHeight(120)
         layout.addWidget(self.history_box)
 
+        # ==================================================
+        # 输入框和发送按钮
+        # ==================================================
         input_layout = QHBoxLayout()
-        self.input_box = QLineEdit()
+        self.input_box = QTextEdit()
         self.input_box.setPlaceholderText("请输入提示词...")
+        self.input_box.setFixedHeight(120)
         input_layout.addWidget(self.input_box)
 
         self.send_btn = QPushButton("发送")
         self.send_btn.clicked.connect(self.on_send_clicked)  # 连接点击信号
+        self.send_btn.setFixedHeight(120)
         input_layout.addWidget(self.send_btn)
 
         layout.addLayout(input_layout)
 
+
+    # ==================================================
+    # 事件处理
+    # ==================================================
     def on_send_clicked(self):
         """处理发送按钮点击事件"""
         # 1. 获取用户输入

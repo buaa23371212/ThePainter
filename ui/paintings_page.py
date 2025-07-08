@@ -22,8 +22,20 @@ class PaintingsPage(QWidget):
         self.current_image_path = None
 
     def init_ui(self):
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+
+        # ==================================================
+        # 标题栏
+        # ==================================================
+        label = QLabel("画作列表")
+        label.setFixedHeight(28)  # 固定高度
+        label.setStyleSheet("font-size: 18px; font-weight: bold; margin-bottom: 12px;")
+        layout.addWidget(label)
+
         main_layout = QHBoxLayout(self)
         main_layout.setContentsMargins(4, 4, 4, 4)
+        layout.addLayout(main_layout)
 
         # 左侧列表
         self.name_list = QListWidget()
@@ -35,12 +47,12 @@ class PaintingsPage(QWidget):
         splitter = QSplitter(Qt.Horizontal)
         main_layout.addWidget(splitter, stretch=1)
 
-        # 上半部分：commands.txt
+        # 左半部分：commands.txt
         self.commands_view = QTextEdit()
         self.commands_view.setReadOnly(True)
         splitter.addWidget(self.commands_view)
 
-        # 下半部分：图片显示（关键优化区域）
+        # 右半部分：图片显示
         self.image_view = QLabel()
         self.image_view.setAlignment(Qt.AlignCenter)
         self.image_view.setText("请选择左侧列表中的项目")
@@ -113,6 +125,9 @@ class PaintingsPage(QWidget):
             self.current_image_path = None
             self.image_view.setText(f"未找到 {selected_name} 对应的图片")
 
+    # ==============================================================
+    # 优化图片显示逻辑
+    # ==============================================================
     def update_image_display(self):
         """优化图片显示逻辑，让图片尽可能大"""
         if not self.current_image_path:
