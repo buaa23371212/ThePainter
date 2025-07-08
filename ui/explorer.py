@@ -45,7 +45,7 @@ class FileExplorer(QWidget):
         # =====================================================
         self.tree = QTreeWidget()               # 创建树形控件显示文件结构
         self.tree.setHeaderHidden(True)         # 隐藏表头
-        self.tree.setColumnWidth(0, 250)        # 设置列宽
+        self.tree.setColumnWidth(200, 250)        # 设置列宽
         splitter.addWidget(self.tree)           # 添加到分割器左侧
         
         # 设置树形控件的样式
@@ -128,16 +128,7 @@ class FileExplorer(QWidget):
                         self.image_view.setPixmap(pixmap.scaled(
                             self.image_view.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
                     self.stack.setCurrentIndex(1)
-                elif os.path.basename(path) == "commands.txt":
-                    # 捕获 preview_command_file 的输出到字符串
-                    buffer = io.StringIO()
-                    sys_stdout = sys.stdout
-                    sys.stdout = buffer
-                    preview_command_file(path)
-                    sys.stdout = sys_stdout
-                    content = buffer.getvalue()
-                    self.text_view.setPlainText(content)
-                    self.stack.setCurrentIndex(0)
+                
                 else:
                     # 普通文本文件直接显示内容
                     with open(path, 'r', encoding='utf-8') as f:
