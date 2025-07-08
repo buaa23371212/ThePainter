@@ -8,6 +8,7 @@ from PyQt5.QtCore import Qt, QDir
 
 from ui.explorer import FileExplorer
 from ui.ai_page import AIPage
+from ui.paintings_page import PaintingsPage
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -29,6 +30,7 @@ class MainWindow(QWidget):
         # 添加导航项 (可扩展)
         self.nav_list.addItem(QListWidgetItem("资源管理器"))    # 第一个功能入口
         self.nav_list.addItem(QListWidgetItem("AI作画"))        # 第二个功能入口
+        self.nav_list.addItem(QListWidgetItem("画作列表"))      # 第三个功能入口
         # 后续可添加更多功能项，例如：
         # self.nav_list.addItem(QListWidgetItem("画板"))
         # self.nav_list.addItem(QListWidgetItem("设置"))
@@ -44,9 +46,14 @@ class MainWindow(QWidget):
         self.file_explorer = FileExplorer()                     # 实例化文件管理器
         self.stack.addWidget(self.file_explorer)                # 添加到堆叠组件
         
-        # 页面2: AI作画（空白页）
-        self.ai_page = AIPage()                                 # 空白页面
-        self.stack.addWidget(self.ai_page)     
+        # 页面2: AI作画
+        self.ai_page = AIPage()
+        self.ai_page.input_box.setText("生成一幅简笔画")
+        self.stack.addWidget(self.ai_page)    
+
+        # 页面3: 
+        self.paintings_page = PaintingsPage()
+        self.stack.addWidget(self.paintings_page)
 
         # 后续可扩展更多页面，例如：
         # self.canvas_page = CanvasPage()

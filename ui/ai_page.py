@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QTextEdit, QPushButton, QLabel
+from PyQt5.QtCore import QTimer
 
 class AIPage(QWidget):
     def __init__(self, parent=None):
@@ -24,6 +25,34 @@ class AIPage(QWidget):
         input_layout.addWidget(self.input_box)
 
         self.send_btn = QPushButton("发送")
+        self.send_btn.clicked.connect(self.on_send_clicked)  # 连接点击信号
         input_layout.addWidget(self.send_btn)
 
         layout.addLayout(input_layout)
+
+    def on_send_clicked(self):
+        """处理发送按钮点击事件"""
+        # 1. 获取用户输入
+        user_input = self.input_box.text().strip()
+        
+        if not user_input:
+            return  # 忽略空输入
+        
+        # 2. 清空输入框
+        self.input_box.clear()
+        
+        # 3. 在历史记录中显示用户消息
+        self.append_message("用户", user_input)
+        
+        # 4. 模拟AI处理（1秒后回复）
+        QTimer.singleShot(1000, lambda: self.show_ai_response())
+
+    def append_message(self, sender, message):
+        """在历史记录框中添加消息"""
+        formatted_message = f"<b>{sender}:</b> {message}<br>"
+        self.history_box.append(formatted_message)
+        
+    def show_ai_response(self):
+        """显示AI回复"""
+        ai_response = "已生成commands.txt和配套的shapes.json，随时可以执行"
+        self.append_message("AI", ai_response)
