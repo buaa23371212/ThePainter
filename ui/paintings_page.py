@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QTextEdit, QPushButton, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
 
 class PaintingsPage(QWidget):
     def __init__(self, parent=None):
