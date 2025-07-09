@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QDir, Qt, QSize
 from PyQt5.QtGui import QPixmap, QResizeEvent
 
-from utils.tools.previewer import preview_command_file
+from ui.ui_tools.previewer import preview_command_file
 
 class PaintingsPage(QWidget):
     """
