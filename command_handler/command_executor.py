@@ -271,7 +271,7 @@ def execute_command(args):
 # ==============================
 # 批处理模块
 # ==============================
-def process_batch_commands(input_file_path):
+def process_batch_commands(input_file_path, flags=None):
     """
     批量命令处理器
     
@@ -292,6 +292,10 @@ def process_batch_commands(input_file_path):
         lines = file.readlines()
         i = 0
         while i < len(lines):
+            if flags.get('stop', False):  # 使用get方法安全访问
+                info(True, "用户通过热键中断批量命令执行", True)
+                break
+
             line = lines[i].strip()
 
             # 跳过空行

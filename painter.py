@@ -8,6 +8,7 @@
 """
 
 import os
+from pynput import keyboard
 
 # ==============================
 # 工具模块导入区
@@ -20,6 +21,25 @@ from command_handler.command_executor import execute_command, process_batch_comm
 # 日志记录模块导入区
 # ==============================
 from painter_tools.terminal_logger.logger import info, error
+
+# ==============================
+# 全局变量定义区
+# ==============================
+flags = {
+    'stop': False  # 全局停止标志，用于控制程序执行状态
+}
+
+# 定义热键回调函数
+def on_activate():
+    """热键回调函数，设置停止标志"""
+    flags['stop'] = True
+    return False
+
+# 定义热键组合，这里设置为 Ctrl + Q
+hotkey = keyboard.HotKey(
+    keyboard.HotKey.parse('<ctrl>+q'),
+    on_activate
+)
 
 # ==============================
 # 主程序模块
@@ -43,7 +63,20 @@ def main():
         # 批量命令模式
         try:
             open_paint()  # 打开画图工具
-            process_batch_commands(args.input_file)  # 执行批量命令
+
+            flags['stop'] = False  # 重置停止标志
+            
+            # 启动热键监听器
+            def for_canonical(f):
+                return lambda k: f(l.canonical(k))
+            
+            with keyboard.Listener(
+                    on_press=for_canonical(hotkey.press),
+                    on_release=for_canonical(hotkey.release)) as l:
+                
+                info(True, "热键监听器已启动，按 Ctrl + Q 可中断批量命令执行", True)
+                process_batch_commands(args.input_file, flags)  # 执行批量命令
+
             info(True, "画图工具保持打开状态", True)
             minimize_paint()
         except Exception as e:
