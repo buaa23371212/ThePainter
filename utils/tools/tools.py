@@ -66,11 +66,12 @@ def activate_window():
 def activate_canvas():
     """
     激活画布，确保处于绘图模式
+    取消选中上一次的绘图对象
     
     Step:
-    1. 点击画布中心
+    1. 点击
     """
-    # Step 1: 点击画布中心
+    # Step 1: 点击
     pyautogui.click(screen_config.CANVAS_BLANK_POSITION)
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待画布响应
     info(False, "画布已激活", True)
