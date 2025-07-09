@@ -257,8 +257,6 @@ def execute_command(args):
     
     :param args: 解析后的命令行参数对象
     """
-    global current_color
-
     try:
         # 取消上一个图案选中
         pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)  # 确保鼠标在画布空白处
