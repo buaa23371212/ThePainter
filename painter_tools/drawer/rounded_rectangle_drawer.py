@@ -1,9 +1,9 @@
 import time
 import pyautogui
 
-from painter_tools.utils.painter_tools.general_tools import click_shapes_button, activate_canvas
-from painter_tools.utils.painter_config import auto_speed_config, screen_config
-from painter_tools.utils.painter_config.drawer_panel_config import get_shape_panel_presses
+from painter_tools.painter_tools.general_tools import click_shapes_button, activate_canvas
+from painter_tools.painter_config import auto_speed_config, screen_config
+from painter_tools.painter_config.drawer_panel_config import get_shape_panel_presses
 
 from painter_tools.terminal_logger.logger import info
 

@@ -1,8 +1,8 @@
 import time
 import pyautogui
 
-from painter_tools.utils.painter_config import drawer_panel_config, auto_speed_config
-from painter_tools.utils.painter_tools.general_tools import activate_window
+from painter_tools.painter_config import drawer_panel_config, auto_speed_config
+from painter_tools.painter_tools.general_tools import activate_window
 
 from terminal_logger.logger import info, error
 

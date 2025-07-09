@@ -3,9 +3,9 @@ import pyautogui
 
 from painter_tools.terminal_logger.logger import info, error
 
-from painter_tools.utils.painter_config import drawer_panel_config
-from painter_tools.utils.painter_config import auto_speed_config
-from painter_tools.utils.painter_tools.general_tools import activate_window
+from painter_tools.painter_config import drawer_panel_config
+from painter_tools.painter_config import auto_speed_config
+from painter_tools.painter_tools.general_tools import activate_window
 
 def add_layer():
     """

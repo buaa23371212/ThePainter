@@ -5,9 +5,9 @@ import pyautogui
 # ==============================
 # 工具模块导入区
 # ==============================
-from painter_tools.utils.painter_config.screen_config import CANVAS_BLANK_POSITION
-from painter_tools.utils.painter_config import auto_speed_config
-from painter_tools.utils.painter_tools.layer_tools import select_layer, add_layer, select_layer_operation
+from painter_tools.painter_config.screen_config import CANVAS_BLANK_POSITION
+from painter_tools.painter_config import auto_speed_config
+from painter_tools.painter_tools.layer_tools import select_layer, add_layer, select_layer_operation
 from command_handler.command_parser import parse_arguments
 
 # ==============================

@@ -4,7 +4,7 @@ import pyautogui
 
 from painter_tools.terminal_logger.logger import info, warn, error
 
-from painter_tools.utils.painter_config import screen_config, auto_speed_config, drawer_panel_config
+from painter_tools.painter_config import screen_config, auto_speed_config, drawer_panel_config
 
 # ======================
 # 通用功能方法
