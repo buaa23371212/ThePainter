@@ -1,1 +1,1 @@
-move_mouse -x 410 -y 100
+text -text test -x 500 -y 500

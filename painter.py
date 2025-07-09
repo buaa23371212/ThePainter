@@ -8,7 +8,6 @@
 """
 
 import os
-import pyautogui
 
 # ==============================
 # 工具模块导入区
@@ -46,7 +45,7 @@ def main():
             open_paint()  # 打开画图工具
             process_batch_commands(args.input_file)  # 执行批量命令
             info(True, "画图工具保持打开状态", True)
-            # minimize_paint()
+            minimize_paint()
         except Exception as e:
             error(True, f"批量操作失败: {str(e)}", True)
     else:

@@ -55,9 +55,9 @@ def activate_window():
     激活画图窗口，确保其处于活动状态
     
     Step:
-    1. 点击左上角激活窗口
+    1. 点击激活窗口
     """
-    # Step 1: 点击左上角激活窗口
+    # Step 1: 点击激活窗口
     info(False, "激活画图窗口...", True)
     pyautogui.click(screen_config.WINDOW_ACTIVATE_POSITION)
     time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待窗口响应

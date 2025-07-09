@@ -28,6 +28,11 @@ from painter_tools.drawer.rounded_rectangle_drawer import select_rounded_rectang
 from painter_tools.colorer.colorer import select_fill_tool, choose_color, fill_color
 
 # ==============================
+# 文本输入模块导入区
+# ==============================
+from painter_tools.texter.texter import select_texter_tool, create_text
+
+# ==============================
 # 日志记录模块导入区
 # ==============================
 from painter_tools.terminal_logger.logger import info, warn, error, debug
@@ -93,6 +98,11 @@ def _dispatch_command(args):
     elif args.command == 'fill':
         info(False, f"填充颜色: {args.color} 到位置 ({args.x}, {args.y})", True)
         _dispatch_fill_command(args)
+
+    # 文本输入命令路由
+    elif args.command == 'text':
+        info(False, f"输入文本: {args.text} 到位置 ({args.x}, {args.y})", True)
+        _dispatch_text_command(args)
     
     # 鼠标控制命令路由
     elif args.command in ['move_mouse', 'mouse_click', 'right_click']:
@@ -174,6 +184,23 @@ def _dispatch_fill_command(args):
 
     fill_color(args.color, args.x, args.y)
 
+def _dispatch_text_command(args):
+    """
+    文本输入命令分发器
+    
+    功能:
+    - 执行文本输入操作
+    
+    :param args: 包含文本参数的命令行参数对象
+    """
+    global current_tool
+
+    if current_tool != 'text':
+        current_tool = 'text'
+        select_texter_tool()
+
+    info(False, f"在位置 ({args.x}, {args.y}) 输入文本: {args.text}", True)
+    create_text(args.text, args.x, args.y)
 
 def _dispatch_mouse_command(args):
     """
@@ -235,8 +262,8 @@ def execute_command(args):
     try:
         # 取消上一个图案选中
         pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)  # 确保鼠标在画布空白处
-        pyautogui.click()  # 激活画布窗口
-        time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待点击生效
+        pyautogui.click()                                   # 激活画布窗口
+        time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)     # 等待点击生效
 
         _dispatch_command(args)
     except Exception as e:

@@ -11,10 +11,12 @@ from .shapes.curve_parser import add_curve_arguments, add_multicurve_arguments
 
 from .control.mouse_parser import add_move_mouse_arguments, add_mouse_click_arguments, add_right_click_arguments
 
-from .control.layer_parser import add_layer_choose_arguments, add_layer_operation_arguments, add_new_layer_arguments
+from .tools.layer_parser import add_layer_choose_arguments, add_layer_operation_arguments, add_new_layer_arguments
 
-from .control.color_parser import add_color_parser
-from .control.color_parser import add_fill_arguments
+from .tools.color_parser import add_color_parser
+from .tools.color_parser import add_fill_arguments
+
+from .tools.text_parser import add_text_arguments
 
 def parse_arguments(args=None):
     """解析命令行参数并返回结果"""
@@ -51,5 +53,8 @@ def parse_arguments(args=None):
     add_layer_choose_arguments(subparsers)
     add_layer_operation_arguments(subparsers)
     add_new_layer_arguments(subparsers)
+
+    # 添加文本输入命令
+    add_text_arguments(subparsers)
 
     return parser.parse_args(args)
