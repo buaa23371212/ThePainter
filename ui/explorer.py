@@ -10,7 +10,7 @@ from PyQt5.QtGui import QPixmap
 
 from ui.ui_tools.previewer import preview_command_file
 
-from painter_tools.terminal_logger.logger import info, warn, error
+from painter_tools.terminal_logger.logger import info, warn, error, debug
 
 class FileExplorer(QWidget):
     """
@@ -205,6 +205,8 @@ class FileExplorer(QWidget):
                     stylesheet = f.read()
                     self.setStyleSheet(stylesheet)
                 info(False, "样式表加载成功", True)
+
+                debug(True, f"全局样式表内容:\n{self.styleSheet()}", True)
             else:
                 warn(True, f"CSS文件不存在: {css_path}", True)
         except Exception as e:

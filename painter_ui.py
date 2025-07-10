@@ -48,7 +48,7 @@ class MainWindow(QWidget):
         
         # 页面2: AI作画
         self.ai_page = AIPage()
-        self.ai_page.input_box.setText("生成一幅简笔画")
+        self.ai_page.input_box.setText("生成一幅简笔画")        # 模拟输入
         self.stack.addWidget(self.ai_page)    
 
         # 页面3: 

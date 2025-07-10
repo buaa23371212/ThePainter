@@ -1,5 +1,5 @@
 /* styles.css */
-.execute-button {
+FileExplorer QPushButton.execute-button {
     background-color: red;
     color: white;
     border: none;
@@ -7,6 +7,6 @@
     padding: 5px;
 }
 
-.execute-button:hover {
+FileExplorer QPushButton.execute-button:hover {
     background-color: #45a049;
 }
