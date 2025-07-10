@@ -10,7 +10,7 @@ from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QPixmap
 
 from tools.terminal_logger.logger import info, warn, error, debug
-from tools.ui_tools.command_executor import execute_command_file
+from tools.ui_tools.command_generator import execute_command_file
 from tools.ui_tools.style_loader import load_stylesheets
 
 from configs.ui_config import ui_config

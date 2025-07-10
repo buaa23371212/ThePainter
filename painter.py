@@ -15,7 +15,7 @@ from pynput import keyboard
 # ==============================
 from tools.painter_tools.general_tools import open_paint, minimize_paint
 from command_handler.command_parser import parse_arguments
-from command_handler.command_executor import execute_command, process_batch_commands
+from tools.command_executor import execute_command, process_batch_commands
 
 # ==============================
 # 日志记录模块导入区

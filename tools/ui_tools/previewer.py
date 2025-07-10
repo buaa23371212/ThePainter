@@ -1,5 +1,5 @@
 import re
-from command_handler.command_executor import _extract_comment_words
+from tools.command_executor import _extract_comment_words
 from tools.terminal_logger.command_logger import title, step
 
 def preview_command_file(input_file_path):
