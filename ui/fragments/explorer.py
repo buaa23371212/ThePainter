@@ -11,6 +11,7 @@ from PyQt5.QtGui import QPixmap
 
 from tools.terminal_logger.logger import info, warn, error, debug
 from tools.ui_tools.command_executor import execute_command_file
+from tools.ui_tools.style_loader import load_stylesheets
 
 from configs.ui_config import ui_config
 
@@ -96,7 +97,7 @@ class FileExplorer(QWidget):
         # 初始化文件树结构
         # =====================================================
         # 只显示 input 和 output 文件夹
-        for folder in ["input", "output"]:
+        for folder in ui_config.DIR_FILTER:
             folder_path = os.path.join(QDir.currentPath(), folder)
             if os.path.exists(folder_path):
                 # 创建顶级文件夹项
@@ -153,7 +154,7 @@ class FileExplorer(QWidget):
         if path and os.path.isfile(path):
             ext = os.path.splitext(path)[1].lower()
             try:
-                if ext in [".png", ".jpg", ".jpeg", ".bmp", ".gif"]:
+                if ext in ui_config.IMAGE_EXTENSIONS:
                     pixmap = QPixmap(path)
                     if pixmap.isNull():
                         self.image_view.setText("无法加载图片")
@@ -179,20 +180,7 @@ class FileExplorer(QWidget):
 
     def load_stylesheet(self):
         """加载样式表"""
-        try:
-            css_dir = ui_config.css_dir
-            css_path = os.path.join(css_dir, "styles.css")
-            
-            if os.path.exists(css_path):
-                with open(css_path, "r", encoding="utf-8") as f:
-                    stylesheet = f.read()
-                    self.setStyleSheet(stylesheet)
-                info(False, "样式表加载成功", True)
-
-            else:
-                warn(True, f"CSS文件不存在: {css_path}", True)
-        except Exception as e:
-            error(True, f"加载样式表失败: {str(e)}", True)
+        load_stylesheets(self, "styles.css")
 
 
     def execute_commands(self):
