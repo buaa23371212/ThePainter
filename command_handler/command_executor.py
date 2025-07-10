@@ -258,12 +258,12 @@ def execute_command(args):
     :param args: 解析后的命令行参数对象
     """
     try:
+        _dispatch_command(args)
+        
         # 取消上一个图案选中
         pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)  # 确保鼠标在画布空白处
         pyautogui.click()                                   # 激活画布窗口
         time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)     # 等待点击生效
-
-        _dispatch_command(args)
     except Exception as e:
         error(True, f"操作失败: {str(e)}", True)
 
@@ -271,7 +271,7 @@ def execute_command(args):
 # ==============================
 # 批处理模块
 # ==============================
-def process_batch_commands(input_file_path, flags=None):
+def process_batch_commands(input_file_path, flags={}):
     """
     批量命令处理器
     

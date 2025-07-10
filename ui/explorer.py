@@ -1,6 +1,7 @@
 import io
 import sys
 import os
+import subprocess
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit, 
     QSplitter, QStackedWidget, QPushButton, QHBoxLayout, QFrame
@@ -24,20 +25,12 @@ class FileExplorer(QWidget):
         self.setLayout(main_layout)
         main_layout.setContentsMargins(4, 4, 4, 4)  # 设置内边距
         
-        # TODO: 加载样式表
-        # self.load_stylesheet()
-
         # ==================================================
         # 标题栏
         # ==================================================
         title_label = QLabel("资源管理器")
         title_label.setFixedHeight(28)  # 固定高度
-        title_label.setStyleSheet("""
-            font-size: 16px; 
-            font-weight: bold; 
-            margin: 4px;
-            border-bottom: 1px solid #ddd;
-        """)
+        title_label.setObjectName("explorerTitleLabel")  # 添加对象名
         main_layout.addWidget(title_label)
         
         # ===================================================
@@ -55,14 +48,6 @@ class FileExplorer(QWidget):
         self.tree.setColumnWidth(200, 250)        # 设置列宽
         splitter.addWidget(self.tree)           # 添加到分割器左侧
         
-        # 设置树形控件的样式
-        self.tree.setStyleSheet("""
-            QTreeWidget {
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-        """)
-
         # =====================================================
         # 右侧：文件内容预览组件
         # =====================================================
@@ -75,11 +60,7 @@ class FileExplorer(QWidget):
         # 工具栏（仅对命令文件显示）
         self.toolbar = QFrame()
         self.toolbar.setFixedHeight(40)
-        self.toolbar.setStyleSheet("""
-            background-color: #f0f0f0;
-            border-bottom: 1px solid #ddd;
-            padding: 4px;
-        """)
+        self.toolbar.setObjectName("explorerToolbar")  # 添加对象名
         self.toolbar.setVisible(False)  # 默认隐藏
         
         toolbar_layout = QHBoxLayout(self.toolbar)
@@ -88,18 +69,7 @@ class FileExplorer(QWidget):
         # 执行按钮
         self.execute_btn = QPushButton("执行命令")
         self.execute_btn.setFixedSize(100, 30)
-        self.execute_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #4CAF50; 
-                color: white;
-                border: none;
-                border-radius: 4px;
-                padding: 5px;
-            }
-            QPushButton:hover {
-                background-color: #45a049;
-            }
-        """)
+        self.execute_btn.setObjectName("executeButton")  # 添加对象名
         self.execute_btn.clicked.connect(self.execute_commands)
         toolbar_layout.addWidget(self.execute_btn)
         
@@ -139,6 +109,9 @@ class FileExplorer(QWidget):
         
         # 当前选中的文件路径
         self.current_file_path = None
+        
+        # 最后加载样式表
+        self.load_stylesheet()
 
     def _add_children(self, parent_item, folder_path):
         """
@@ -228,17 +201,55 @@ class FileExplorer(QWidget):
         执行命令文件
         """
         if self.current_file_path and os.path.isfile(self.current_file_path):
-            # TODO: 这里需要实现实际的命令执行逻辑
-            info(True, f"执行命令文件: {self.current_file_path}", True)
+            # 获取当前文件所在目录作为工作目录
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)                         # 假设项目根目录在ui目录的上一级
             
-            # 在实际应用中，您可能需要调用类似这样的函数：
-            # from command_handler.command_executor import process_batch_commands
-            # process_batch_commands(self.current_file_path)
+            # 构建命令
+            command = f"python painter.py -input_file \"{self.current_file_path}\""
             
-            # 显示执行状态
+            # 记录执行信息
+            info(True, f"执行命令: {command}", True)
             self.text_view.append("\n\n=== 命令执行开始 ===")
             self.text_view.append(f"执行文件: {os.path.basename(self.current_file_path)}")
-            self.text_view.append("状态: 执行成功 (模拟)")
+            self.text_view.append(f"执行命令: {command}")
+            
+            try:
+                # 执行命令
+                process = subprocess.Popen(
+                    command,
+                    cwd=project_root,  # 设置工作目录为项目根目录
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    shell=True,
+                    text=True,
+                    encoding='utf-8'
+                )
+                
+                # 读取输出并实时显示
+                while True:
+                    output = process.stdout.readline()
+                    if output == '' and process.poll() is not None:
+                        break
+                    if output:
+                        self.text_view.append(output.strip())
+                
+                # 检查退出码
+                return_code = process.poll()
+                if return_code == 0:
+                    self.text_view.append("状态: 执行成功")
+                else:
+                    # 读取错误输出
+                    error_output = process.stderr.read()
+                    self.text_view.append(f"状态: 执行失败 (退出码: {return_code})")
+                    self.text_view.append("错误信息:")
+                    self.text_view.append(error_output)
+            
+            except Exception as e:
+                self.text_view.append(f"执行命令时出错: {str(e)}")
+                error(True, f"执行命令时出错: {str(e)}", True)
+            
             self.text_view.append("=== 命令执行结束 ===")
         else:
             error(True, "没有可执行的命令文件", True)
+            self.text_view.append("错误: 没有可执行的命令文件")
