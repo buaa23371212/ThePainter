@@ -1,14 +1,14 @@
 import sys
-import os
-from PyQt5.QtWidgets import (
-    QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout,
-    QListWidget, QListWidgetItem, QStackedWidget, QFileSystemModel, QTreeView
-)
-from PyQt5.QtCore import Qt, QDir
 
-from ui.fragments.explorer import FileExplorer
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QHBoxLayout,
+    QListWidget, QListWidgetItem, QStackedWidget
+)
+
 from ui.fragments.ai_page import AIPage
+from ui.fragments.explorer import FileExplorer
 from ui.fragments.paintings_page import PaintingsPage
+
 
 class MainWindow(QWidget):
     def __init__(self):
