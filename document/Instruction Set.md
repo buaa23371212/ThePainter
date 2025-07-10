@@ -233,6 +233,16 @@
 
 ---
 
+## 文本工具命令
+
+- 在指定位置新建文本框并输入文本
+  格式: `text -text <文本> -x <X坐标> -y <Y坐标>`
+  ```shell
+  python painter.py fill text -text test -x 500 -y 500
+  ```
+  该命令会在 (500, 500) 位置新建文本框，并输入test
+---
+
 ## 批量执行
 
 - 执行文件中的多个命令  
@@ -240,7 +250,6 @@
   ```shell
   python painter.py -input_file input/Sample-1/commands.txt
   ```
-
 ---
 
 ## 批量执行命令文件格式
