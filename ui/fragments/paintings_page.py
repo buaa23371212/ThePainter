@@ -1,17 +1,17 @@
 import io
-import sys
 import os
-from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit, QSplitter, QStackedWidget,
-    QListWidget, QListWidgetItem
-)
-from PyQt5.QtCore import QDir, Qt, QSize
-from PyQt5.QtGui import QPixmap, QResizeEvent
+import sys
 
-from tools.ui_tools.previewer import preview_command_file
-from tools.ui_tools.image_utils import get_scaled_pixmap
+from PyQt5.QtCore import QDir, Qt
+from PyQt5.QtGui import QResizeEvent
+from PyQt5.QtWidgets import (
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QTextEdit, QSplitter, QListWidget, QListWidgetItem
+)
 
 from configs.ui_config import ui_config
+from tools.ui_tools.image_utils import get_scaled_pixmap
+from tools.ui_tools.previewer import preview_command_file
+
 
 class PaintingsPage(QWidget):
     """
