@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QPixmap
 
-from painter_tools.terminal_logger.logger import info, warn, error, debug
+from tools.terminal_logger.logger import info, warn, error, debug
 
 class FileExplorer(QWidget):
     """

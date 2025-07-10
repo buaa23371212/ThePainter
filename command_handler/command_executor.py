@@ -5,10 +5,10 @@ import pyautogui
 # ==============================
 # 工具模块导入区
 # ==============================
-from painter_tools.painter_config.screen_config import CANVAS_BLANK_POSITION
-from painter_tools.painter_config import auto_speed_config
-from painter_tools.painter_tools.layer_tools import select_layer, add_layer, select_layer_operation
+from configs.painter_config.screen_config import CANVAS_BLANK_POSITION
+from configs.painter_config import auto_speed_config
 from command_handler.command_parser import parse_arguments
+from tools.painter_tools.layer_tools import select_layer, add_layer, select_layer_operation
 
 # ==============================
 # 绘图命令模块导入区
@@ -35,8 +35,8 @@ from painter_tools.texter.texter import select_texter_tool, create_text
 # ==============================
 # 日志记录模块导入区
 # ==============================
-from painter_tools.terminal_logger.logger import info, warn, error, debug
-from painter_tools.terminal_logger.command_logger import title, step
+from tools.terminal_logger.logger import info, warn, error, debug
+from tools.terminal_logger.command_logger import title, step
 
 # ==============================
 # 全局状态变量

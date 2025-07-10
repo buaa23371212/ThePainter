@@ -1,4 +1,4 @@
-from painter_tools.painter_config.drawer_panel_config import FILL_COLOR_KEY_MAP
+from configs.painter_config.drawer_panel_config import FILL_COLOR_KEY_MAP
 
 def add_color_parser(parser):
     """

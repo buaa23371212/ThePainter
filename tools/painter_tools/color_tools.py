@@ -1,10 +1,10 @@
 import time
 import pyautogui
 
-from painter_tools.painter_config import auto_speed_config, drawer_panel_config
-from painter_tools.painter_tools.general_tools import activate_window
+from configs.painter_config import auto_speed_config, drawer_panel_config
+from tools.painter_tools.general_tools import activate_window
 
-from painter_tools.terminal_logger.logger import info
+from tools.terminal_logger.logger import info
 
 def select_color(color: str) -> None:
     """

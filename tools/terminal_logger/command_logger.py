@@ -1,4 +1,4 @@
-from painter_tools.terminal_logger.logger import log
+from tools.terminal_logger.logger import log
 
 def title(show: bool, message: str, show_caller: bool = True) -> None:
     """

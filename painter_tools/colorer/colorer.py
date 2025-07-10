@@ -1,10 +1,11 @@
 import time
 import pyautogui
 
-from painter_tools.painter_tools.color_tools import select_color
-from painter_tools.painter_tools.general_tools import enter_color_mode, activate_canvas
-from painter_tools.painter_config import auto_speed_config
-from painter_tools.terminal_logger.logger import info, warn, error, debug
+from tools.painter_tools.color_tools import select_color
+from tools.painter_tools.general_tools import enter_color_mode, activate_canvas
+from configs.painter_config import auto_speed_config
+
+from tools.terminal_logger.logger import info, warn, error, debug
 
 def select_fill_tool():
     """
