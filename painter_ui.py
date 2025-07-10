@@ -6,9 +6,9 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, QDir
 
-from ui.explorer import FileExplorer
-from ui.ai_page import AIPage
-from ui.paintings_page import PaintingsPage
+from ui.fragments.explorer import FileExplorer
+from ui.fragments.ai_page import AIPage
+from ui.fragments.paintings_page import PaintingsPage
 
 class MainWindow(QWidget):
     def __init__(self):

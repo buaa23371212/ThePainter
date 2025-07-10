@@ -9,8 +9,6 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QPixmap
 
-from ui.ui_tools.previewer import preview_command_file
-
 from painter_tools.terminal_logger.logger import info, warn, error, debug
 
 class FileExplorer(QWidget):
