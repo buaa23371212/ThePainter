@@ -7,7 +7,7 @@ import pyautogui
 # ==============================
 from configs.painter_config.screen_config import CANVAS_BLANK_POSITION
 from configs.painter_config import auto_speed_config
-from command_handler.command_parser import parse_arguments
+from command_parser.command_parser import parse_arguments
 from tools.painter_tools.layer_tools import select_layer, add_layer, select_layer_operation
 
 # ==============================
