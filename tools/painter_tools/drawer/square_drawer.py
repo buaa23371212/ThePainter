@@ -2,7 +2,7 @@ import pyautogui
 
 from configs.painter_config import screen_config
 
-from painter_tools.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle
+from tools.painter_tools.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle
 
 # ======================
 # 专用功能方法

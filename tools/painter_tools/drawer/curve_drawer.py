@@ -6,7 +6,7 @@ from tools.painter_tools.general_tools import click_shapes_button, activate_canv
 from configs.painter_config import auto_speed_config
 from configs.painter_config.drawer_panel_config import get_shape_panel_presses
 
-from painter_tools.drawer.line_drawer import draw_line
+from tools.painter_tools.drawer.line_drawer import draw_line
 
 from tools.terminal_logger.logger import info, error
 

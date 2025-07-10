@@ -1,6 +1,6 @@
 import pyautogui
 
-from painter_tools.drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse
+from tools.painter_tools.drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse
 
 # ======================
 # 专用功能方法

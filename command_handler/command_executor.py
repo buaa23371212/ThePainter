@@ -13,24 +13,24 @@ from tools.painter_tools.layer_tools import select_layer, add_layer, select_laye
 # ==============================
 # 绘图命令模块导入区
 # ==============================
-from painter_tools.drawer.circle_drawer import select_circle_tool, draw_circle_command
-from painter_tools.drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
-from painter_tools.drawer.square_drawer import select_square_tool, draw_square_command
-from painter_tools.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
-from painter_tools.drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
-from painter_tools.drawer.line_drawer import select_line_tool, draw_line_command
-from painter_tools.drawer.curve_drawer import select_curve_tool, draw_curve_command
-from painter_tools.drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
+from tools.painter_tools.drawer.circle_drawer import select_circle_tool, draw_circle_command
+from tools.painter_tools.drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
+from tools.painter_tools.drawer.square_drawer import select_square_tool, draw_square_command
+from tools.painter_tools.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
+from tools.painter_tools.drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
+from tools.painter_tools.drawer.line_drawer import select_line_tool, draw_line_command
+from tools.painter_tools.drawer.curve_drawer import select_curve_tool, draw_curve_command
+from tools.painter_tools.drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
 
 # ==============================
 # 颜色填充模块导入区
 # ==============================
-from painter_tools.colorer.colorer import select_fill_tool, choose_color, fill_color
+from tools.painter_tools.colorer.colorer import select_fill_tool, choose_color, fill_color
 
 # ==============================
 # 文本输入模块导入区
 # ==============================
-from painter_tools.texter.texter import select_texter_tool, create_text
+from tools.painter_tools.texter.texter import select_texter_tool, create_text
 
 # ==============================
 # 日志记录模块导入区
