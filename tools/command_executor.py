@@ -41,10 +41,15 @@ from tools.terminal_logger.command_logger import title, step
 # ==============================
 # 全局状态变量
 # ==============================
-current_color = "black"     # 当前已选择的颜色
-current_tool = "brush"      # 当前已选择的绘图工具
-current_shape = None        # 当前已选择的图形工具
-current_layer = 1           # 当前已选择的图层
+current_tool = "pen"                # 当前已选择的绘图工具
+current_color = "black"             # 当前已选择的颜色
+current_shape = None                # 当前已选择的图形工具
+# TODO
+current_shape_border = "solid"
+current_shape_fill = "solid"
+current_shape_thickness = 5
+current_pen = "brush"
+current_layer = 1                   # 当前已选择的图层
 
 # ==============================
 # 批处理辅助函数模块

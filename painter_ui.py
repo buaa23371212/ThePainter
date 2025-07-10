@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import (
 from ui.fragments.ai_page import AIPage
 from ui.fragments.explorer import FileExplorer
 from ui.fragments.paintings_page import PaintingsPage
+from ui.fragments.settings_page import SettingsPage
 
 
 class MainWindow(QWidget):
@@ -31,9 +32,9 @@ class MainWindow(QWidget):
         self.nav_list.addItem(QListWidgetItem("资源管理器"))    # 第一个功能入口
         self.nav_list.addItem(QListWidgetItem("AI作画"))        # 第二个功能入口
         self.nav_list.addItem(QListWidgetItem("画作列表"))      # 第三个功能入口
+        self.nav_list.addItem(QListWidgetItem("设置"))
         # 后续可添加更多功能项，例如：
         # self.nav_list.addItem(QListWidgetItem("画板"))
-        # self.nav_list.addItem(QListWidgetItem("设置"))
         
         main_layout.addWidget(self.nav_list)                    # 将导航栏添加到主布局左侧
 
@@ -49,11 +50,15 @@ class MainWindow(QWidget):
         # 页面2: AI作画
         self.ai_page = AIPage()
         self.ai_page.input_box.setText("生成一幅简笔画")        # 模拟输入
-        self.stack.addWidget(self.ai_page)    
+        self.stack.addWidget(self.ai_page)
 
         # 页面3: 
         self.paintings_page = PaintingsPage()
         self.stack.addWidget(self.paintings_page)
+
+        # 页面4:
+        self.setting_page = SettingsPage()
+        self.stack.addWidget(self.setting_page)
 
         # 后续可扩展更多页面，例如：
         # self.canvas_page = CanvasPage()
