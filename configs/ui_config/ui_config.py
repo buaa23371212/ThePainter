@@ -21,9 +21,9 @@ IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
 # 路径配置
 # =====================================================
 # 项目根目录计算
-current_file_path = os.path.abspath(__file__)           # 获取当前文件的绝对路径
-current_dir = os.path.dirname(current_file_path)        # 获取当前文件所在的目录: ./configs/ui_config
-project_root = os.path.dirname(os.path.dirname(current_dir))  # 项目根目录（上两级目录）
+current_file_path = os.path.abspath(__file__)                   # 获取当前文件的绝对路径
+current_dir = os.path.dirname(current_file_path)                # 获取当前文件所在的目录: ./configs/ui_config
+project_root = os.path.dirname(os.path.dirname(current_dir))    # 项目根目录（上两级目录）
 
 # 记录项目根目录（调试信息）
 info(True, f"项目根目录: {project_root}", True)
@@ -32,5 +32,5 @@ info(True, f"项目根目录: {project_root}", True)
 # 样式表配置
 # =====================================================
 # CSS 文件目录
-css_dir = os.path.join(project_root, "ui", "css")
+css_dir = os.path.join(project_root, "ui", "css")               # ./ui/css
 info(True, f"CSS 目录: {css_dir}", True)

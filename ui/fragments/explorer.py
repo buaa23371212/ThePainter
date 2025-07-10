@@ -10,6 +10,9 @@ from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QPixmap
 
 from tools.terminal_logger.logger import info, warn, error, debug
+from tools.ui_tools.command_executor import execute_command_file
+
+from configs.ui_config import ui_config
 
 class FileExplorer(QWidget):
     """
@@ -177,9 +180,7 @@ class FileExplorer(QWidget):
     def load_stylesheet(self):
         """加载样式表"""
         try:
-            # 获取当前文件所在目录
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            css_dir = os.path.join(current_dir, "css")
+            css_dir = ui_config.css_dir
             css_path = os.path.join(css_dir, "styles.css")
             
             if os.path.exists(css_path):
@@ -198,56 +199,4 @@ class FileExplorer(QWidget):
         """
         执行命令文件
         """
-        if self.current_file_path and os.path.isfile(self.current_file_path):
-            # 获取当前文件所在目录作为工作目录
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(current_dir)                         # 假设项目根目录在ui目录的上一级
-            
-            # 构建命令
-            command = f"python painter.py -input_file \"{self.current_file_path}\""
-            
-            # 记录执行信息
-            info(True, f"执行命令: {command}", True)
-            self.text_view.append("\n\n=== 命令执行开始 ===")
-            self.text_view.append(f"执行文件: {os.path.basename(self.current_file_path)}")
-            self.text_view.append(f"执行命令: {command}")
-            
-            try:
-                # 执行命令
-                process = subprocess.Popen(
-                    command,
-                    cwd=project_root,  # 设置工作目录为项目根目录
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    shell=True,
-                    text=True,
-                    encoding='utf-8'
-                )
-                
-                # 读取输出并实时显示
-                while True:
-                    output = process.stdout.readline()
-                    if output == '' and process.poll() is not None:
-                        break
-                    if output:
-                        self.text_view.append(output.strip())
-                
-                # 检查退出码
-                return_code = process.poll()
-                if return_code == 0:
-                    self.text_view.append("状态: 执行成功")
-                else:
-                    # 读取错误输出
-                    error_output = process.stderr.read()
-                    self.text_view.append(f"状态: 执行失败 (退出码: {return_code})")
-                    self.text_view.append("错误信息:")
-                    self.text_view.append(error_output)
-            
-            except Exception as e:
-                self.text_view.append(f"执行命令时出错: {str(e)}")
-                error(True, f"执行命令时出错: {str(e)}", True)
-            
-            self.text_view.append("=== 命令执行结束 ===")
-        else:
-            error(True, "没有可执行的命令文件", True)
-            self.text_view.append("错误: 没有可执行的命令文件")
+        execute_command_file(self.current_file_path, self.text_view)
