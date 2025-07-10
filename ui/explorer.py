@@ -94,7 +94,7 @@ class FileExplorer(QWidget):
                 color: white;
                 border: none;
                 border-radius: 4px;
-                padding: 5px 10px;
+                padding: 5px;
             }
             QPushButton:hover {
                 background-color: #45a049;
@@ -217,7 +217,6 @@ class FileExplorer(QWidget):
                     self.setStyleSheet(stylesheet)
                 info(False, "样式表加载成功", True)
 
-                debug(True, f"全局样式表内容:\n{self.styleSheet()}", True)
             else:
                 warn(True, f"CSS文件不存在: {css_path}", True)
         except Exception as e:
