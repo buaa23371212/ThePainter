@@ -1,19 +1,16 @@
-import io
-import sys
 import os
-import subprocess
-from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit, 
-    QSplitter, QStackedWidget, QPushButton, QHBoxLayout, QFrame
-)
+
 from PyQt5.QtCore import QDir, Qt
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import (
+    QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit,
+    QSplitter, QStackedWidget, QPushButton, QHBoxLayout, QFrame
+)
 
-from tools.terminal_logger.logger import info, warn, error, debug
+from configs.ui_config import ui_config
 from tools.ui_tools.command_generator import execute_command_file
 from tools.ui_tools.style_loader import load_stylesheets
 
-from configs.ui_config import ui_config
 
 class FileExplorer(QWidget):
     """
@@ -142,7 +139,7 @@ class FileExplorer(QWidget):
         self.current_file_path = path
         
         # 如果是命令文件，显示工具栏
-        if path and os.path.isfile(path) and path.endswith('.pcmd'):
+        if path and os.path.isfile(path) and any(path.endswith(ext) for ext in ui_config.COMMAND_FILE_TYPES):
             self.toolbar.setVisible(True)
         else:
             self.toolbar.setVisible(False)
