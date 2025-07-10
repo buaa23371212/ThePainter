@@ -47,7 +47,7 @@ class FileExplorer(QWidget):
         # =====================================================
         self.tree = QTreeWidget()               # 创建树形控件显示文件结构
         self.tree.setHeaderHidden(True)         # 隐藏表头
-        self.tree.setColumnWidth(200, 250)        # 设置列宽
+        self.tree.setColumnWidth(0, 250)        # 设置列宽
         splitter.addWidget(self.tree)           # 添加到分割器左侧
         
         # =====================================================
@@ -62,8 +62,8 @@ class FileExplorer(QWidget):
         # 工具栏（仅对命令文件显示）
         self.toolbar = QFrame()
         self.toolbar.setFixedHeight(40)
-        self.toolbar.setObjectName("explorerToolbar")  # 添加对象名
-        self.toolbar.setVisible(False)  # 默认隐藏
+        self.toolbar.setObjectName("explorerToolbar")   # 添加对象名
+        self.toolbar.setVisible(False)                  # 默认隐藏
         
         toolbar_layout = QHBoxLayout(self.toolbar)
         toolbar_layout.setAlignment(Qt.AlignRight)
@@ -83,15 +83,12 @@ class FileExplorer(QWidget):
         self.text_view.setReadOnly(True)
         self.image_view = QLabel()
         self.image_view.setAlignment(Qt.AlignCenter)
-        self.stack.addWidget(self.text_view)  # index 0
-        self.stack.addWidget(self.image_view) # index 1
+        self.stack.addWidget(self.text_view)            # index 0
+        self.stack.addWidget(self.image_view)           # index 1
         right_layout.addWidget(self.stack)
         self.stack.setCurrentIndex(0)
         
-        splitter.addWidget(right_container)
-        
-        # 设置分割比例：右侧区域可伸缩（占比更大）
-        splitter.setStretchFactor(1, 1)         # 索引1（右侧）的伸缩因子为1
+        splitter.addWidget(right_container)             # 添加到分割器右侧
 
         # =====================================================
         # 初始化文件树结构
@@ -155,12 +152,28 @@ class FileExplorer(QWidget):
             ext = os.path.splitext(path)[1].lower()
             try:
                 if ext in ui_config.IMAGE_EXTENSIONS:
+                    # 确保图片视图有最小尺寸
+                    self.image_view.setMinimumSize(1, 1)
+                    
+                    # 加载图片
                     pixmap = QPixmap(path)
                     if pixmap.isNull():
                         self.image_view.setText("无法加载图片")
                     else:
-                        self.image_view.setPixmap(pixmap.scaled(
-                            self.image_view.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
+                        # 获取标签当前可用大小
+                        available_size = self.image_view.size()
+                        
+                        # 缩放图片以适应当前大小
+                        scaled_pixmap = pixmap.scaled(
+                            available_size, 
+                            Qt.KeepAspectRatio, 
+                            Qt.SmoothTransformation
+                        )
+                        
+                        # 设置图片
+                        self.image_view.setPixmap(scaled_pixmap)
+                    
+                    # 切换到图片视图
                     self.stack.setCurrentIndex(1)
                 
                 else:

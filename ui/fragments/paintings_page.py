@@ -9,6 +9,9 @@ from PyQt5.QtCore import QDir, Qt, QSize
 from PyQt5.QtGui import QPixmap, QResizeEvent
 
 from tools.ui_tools.previewer import preview_command_file
+from tools.ui_tools.image_utils import get_scaled_pixmap
+
+from configs.ui_config import ui_config
 
 class PaintingsPage(QWidget):
     """
@@ -92,7 +95,7 @@ class PaintingsPage(QWidget):
         """
         input_path = os.path.join(QDir.currentPath(), "input")
         output_path = os.path.join(QDir.currentPath(), "output")
-        image_exts = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
+        image_exts = ui_config.IMAGE_EXTENSIONS
 
         # 获取 input 目录中的文件夹
         input_folders = []
@@ -129,7 +132,7 @@ class PaintingsPage(QWidget):
         selected_name = item.text()
         input_folder = os.path.join(QDir.currentPath(), "input", selected_name)
         output_path = os.path.join(QDir.currentPath(), "output")
-        image_exts = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
+        image_exts = ui_config.IMAGE_EXTENSIONS
 
         # ================= 更新命令文本 =================
         commands_path = os.path.join(input_folder, "commands.txt")
@@ -175,42 +178,19 @@ class PaintingsPage(QWidget):
         if not self.current_image_path:
             return
 
-        pixmap = QPixmap(self.current_image_path)
-        if pixmap.isNull():
-            self.image_view.setText("图片加载失败")
-            return
-
         # 获取可用显示区域
         available_size = self.image_view.contentsRect().size()
-        min_size = QSize(100, 100)  # 最小显示尺寸
         
-        # 计算缩放尺寸（保持比例）
-        scaled_size = pixmap.size().scaled(
-            available_size, 
-            Qt.KeepAspectRatio
+        # 使用工具函数获取缩放后的图片
+        scaled_pixmap, error_msg = get_scaled_pixmap(
+            self.current_image_path,
+            available_size
         )
         
-        # 确保不小于最小尺寸
-        if scaled_size.width() < min_size.width():
-            scale_factor = min_size.width() / scaled_size.width()
-            scaled_size = QSize(
-                min_size.width(),
-                int(scaled_size.height() * scale_factor)
-            )
-        if scaled_size.height() < min_size.height():
-            scale_factor = min_size.height() / scaled_size.height()
-            scaled_size = QSize(
-                int(scaled_size.width() * scale_factor),
-                min_size.height()
-            )
-        
-        # 应用缩放并显示
-        scaled_pixmap = pixmap.scaled(
-            scaled_size, 
-            Qt.KeepAspectRatio, 
-            Qt.SmoothTransformation
-        )
-        self.image_view.setPixmap(scaled_pixmap)
+        if scaled_pixmap:
+            self.image_view.setPixmap(scaled_pixmap)
+        else:
+            self.image_view.setText(error_msg)
 
     # =======================================================================
     # 窗口事件处理
