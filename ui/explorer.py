@@ -24,8 +24,8 @@ class FileExplorer(QWidget):
         self.setLayout(main_layout)
         main_layout.setContentsMargins(4, 4, 4, 4)  # 设置内边距
         
-        # 加载样式表
-        self.load_stylesheet()
+        # TODO: 加载样式表
+        # self.load_stylesheet()
 
         # ==================================================
         # 标题栏
@@ -88,7 +88,18 @@ class FileExplorer(QWidget):
         # 执行按钮
         self.execute_btn = QPushButton("执行命令")
         self.execute_btn.setFixedSize(100, 30)
-        self.execute_btn.setProperty("class", "execute-button")
+        self.execute_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #4CAF50; 
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 5px 10px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+        """)
         self.execute_btn.clicked.connect(self.execute_commands)
         toolbar_layout.addWidget(self.execute_btn)
         
