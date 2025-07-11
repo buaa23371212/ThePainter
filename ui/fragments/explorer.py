@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (
 )
 
 from configs.ui_config import ui_config
+
+from tools.terminal_logger.logger import info
 from tools.ui_tools.command_generator import execute_command_file
 from tools.ui_tools.style_loader import load_stylesheets
 
@@ -71,6 +73,13 @@ class FileExplorer(QWidget):
         self.execute_btn.setObjectName("executeButton")  # 添加对象名
         self.execute_btn.clicked.connect(self.execute_commands)
         toolbar_layout.addWidget(self.execute_btn)
+
+        # 刷新按钮
+        self.refresh_btn = QPushButton("刷新")
+        self.refresh_btn.setFixedSize(100, 30)
+        self.refresh_btn.setObjectName("refreshButton")
+        self.refresh_btn.clicked.connect(self.refresh_commands)
+        toolbar_layout.addWidget(self.refresh_btn)
         
         right_layout.addWidget(self.toolbar)
         
@@ -137,54 +146,62 @@ class FileExplorer(QWidget):
         # 获取存储在节点中的路径
         path = item.data(0, Qt.UserRole)
         self.current_file_path = path
-        
+
         # 如果是命令文件，显示工具栏
         if path and os.path.isfile(path) and any(path.endswith(ext) for ext in ui_config.COMMAND_FILE_TYPES):
             self.toolbar.setVisible(True)
         else:
             self.toolbar.setVisible(False)
-        
-        # 如果点击的是文件
+
+        # 显示文件内容或清空预览区
         if path and os.path.isfile(path):
-            ext = os.path.splitext(path)[1].lower()
-            try:
-                if ext in ui_config.IMAGE_EXTENSIONS:
-                    # 确保图片视图有最小尺寸
-                    self.image_view.setMinimumSize(1, 1)
-                    
-                    # 加载图片
-                    pixmap = QPixmap(path)
-                    if pixmap.isNull():
-                        self.image_view.setText("无法加载图片")
-                    else:
-                        # 获取标签当前可用大小
-                        available_size = self.image_view.size()
-                        
-                        # 缩放图片以适应当前大小
-                        scaled_pixmap = pixmap.scaled(
-                            available_size, 
-                            Qt.KeepAspectRatio, 
-                            Qt.SmoothTransformation
-                        )
-                        
-                        # 设置图片
-                        self.image_view.setPixmap(scaled_pixmap)
-                    
-                    # 切换到图片视图
-                    self.stack.setCurrentIndex(1)
-                
-                else:
-                    # 普通文本文件直接显示内容
-                    with open(path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                    self.text_view.setPlainText(content)
-                    self.stack.setCurrentIndex(0)
-            except Exception as e:
-                self.text_view.setPlainText(f"无法读取文件内容: {e}")
-                self.stack.setCurrentIndex(0)
+            self.display_file_content(path)
         else:
             # 点击的是文件夹时清空预览区
             self.text_view.clear()
+            self.stack.setCurrentIndex(0)
+
+
+    def display_file_content(self, path):
+        """
+        根据文件路径显示文件内容
+        :param path: 文件路径
+        """
+        ext = os.path.splitext(path)[1].lower()
+        try:
+            if ext in ui_config.IMAGE_EXTENSIONS:
+                # 确保图片视图有最小尺寸
+                self.image_view.setMinimumSize(1, 1)
+
+                # 加载图片
+                pixmap = QPixmap(path)
+                if pixmap.isNull():
+                    self.image_view.setText("无法加载图片")
+                else:
+                    # 获取标签当前可用大小
+                    available_size = self.image_view.size()
+
+                    # 缩放图片以适应当前大小
+                    scaled_pixmap = pixmap.scaled(
+                        available_size,
+                        Qt.KeepAspectRatio,
+                        Qt.SmoothTransformation
+                    )
+
+                    # 设置图片
+                    self.image_view.setPixmap(scaled_pixmap)
+
+                # 切换到图片视图
+                self.stack.setCurrentIndex(1)
+
+            else:
+                # 普通文本文件直接显示内容
+                with open(path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                self.text_view.setPlainText(content)
+                self.stack.setCurrentIndex(0)
+        except Exception as e:
+            self.text_view.setPlainText(f"无法读取文件内容: {e}")
             self.stack.setCurrentIndex(0)
 
 
@@ -198,3 +215,7 @@ class FileExplorer(QWidget):
         执行命令文件
         """
         execute_command_file(self.current_file_path, self.text_view)
+
+    def refresh_commands(self):
+        self.display_file_content(self.current_file_path)
+        info(True, "文件显示已刷新", True)

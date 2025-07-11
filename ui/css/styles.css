@@ -29,7 +29,8 @@ QTreeWidget {
 #explorerToolbar {
     background-color: #f0f0f0;
     border-bottom: 1px solid #ddd;
-    padding: 4px;
+    padding: 0;
+    height: 32px;
 }
 
 /* 执行按钮（特定于资源管理器） */
@@ -43,4 +44,9 @@ QTreeWidget {
 
 #executeButton:hover {
     background-color: #45a049;
+}
+
+#executeButton, #refreshButton {
+    height: 28px; /* 稍微减小高度 */
+    margin: 2px 5px; /* 添加垂直外边距 */
 }
