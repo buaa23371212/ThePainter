@@ -8,6 +8,7 @@
 """
 
 import os
+import pyautogui
 from pynput import keyboard
 
 # ==============================
@@ -15,7 +16,7 @@ from pynput import keyboard
 # ==============================
 from tools.painter_tools.general_tools import open_paint, minimize_paint
 from command_parser.command_parser import parse_arguments
-from tools.command_executor import execute_command, process_batch_commands
+from tools.command_executor import execute_command, process_batch_commands, save_png
 
 # ==============================
 # 日志记录模块导入区
@@ -81,6 +82,10 @@ def main():
             minimize_paint()
         except Exception as e:
             error(True, f"批量操作失败: {str(e)}", True)
+
+    elif args.command == 'save':
+        save_png(args)
+
     else:
         # 单命令模式
         try:
