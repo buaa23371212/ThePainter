@@ -3,5 +3,6 @@ def add_png_saver_arguments(subparsers):
     png_saver_parser.add_argument(
         '-file_name',
         type=str,
+        required=True,
         help='保存的文件名'
     )

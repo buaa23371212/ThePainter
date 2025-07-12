@@ -8,7 +8,6 @@
 """
 
 import os
-import pyautogui
 from pynput import keyboard
 
 # ==============================

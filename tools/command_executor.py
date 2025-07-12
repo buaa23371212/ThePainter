@@ -296,23 +296,23 @@ def save_png(args):
         # TODO: 手动最大化画图工具
 
         # 确保画布窗口激活
-        pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], 
-                         auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
-        pyautogui.click()
-        time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+        # pyautogui.moveTo(CANVAS_BLANK_POSITION[0], CANVAS_BLANK_POSITION[1], 
+        #                  auto_speed_config.ACTUAL_MOUSE_MOVE_SPEED)
+        # pyautogui.click()
+        # time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
         
-        # 发送保存快捷键 (Ctrl+S)
-        pyautogui.hotkey('ctrl', 's')
-        time.sleep(1.0)  # 等待保存对话框出现
+        # # 发送保存快捷键 (Ctrl+S)
+        # pyautogui.hotkey('ctrl', 's')
+        # time.sleep(1.0)  # 等待保存对话框出现
         
-        # 输入文件名（系统会自动添加.png后缀）
-        info(False, f"保存文件为: {args.file_name}.png", True)
-        pyautogui.write(args.file_name)
-        time.sleep(0.2)
+        # # 输入文件名（系统会自动添加.png后缀）
+        info(True, f"保存文件为: {args.file_name}.png", True)
+        # pyautogui.write(args.file_name)
+        # time.sleep(0.2)
         
-        # 按Enter键确认保存
-        pyautogui.press('enter')
-        time.sleep(0.5)  # 等待保存完成
+        # # 按Enter键确认保存
+        # pyautogui.press('enter')
+        # time.sleep(0.5)  # 等待保存完成
         
     except Exception as e:
         error(True, f"保存文件失败: {str(e)}", True)
