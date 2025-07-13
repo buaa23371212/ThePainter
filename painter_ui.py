@@ -2,7 +2,8 @@ import sys
 
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
-    QListWidget, QListWidgetItem, QStackedWidget
+    QListWidget, QListWidgetItem, QStackedWidget,
+    QTextEdit
 )
 
 from ui.fragments.ai_page import AIPage
@@ -66,6 +67,13 @@ class MainWindow(QWidget):
         # self.stack.addWidget(self.canvas_page)
         
         self.right_layout.addWidget(self.stack)
+
+        self.text_view = QTextEdit()
+        self.text_view.setReadOnly(True)
+        self.text_view.setVisible(False)
+
+        self.right_layout.addWidget(self.text_view)
+
         main_layout.addWidget(self.right_container)      # 将容器控件添加到主布局右侧
 
         # ==================================================
