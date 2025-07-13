@@ -1,6 +1,6 @@
 import os
 
-from utils.terminal_logger.logger import info, warn, error
+from ui.foo.utils.terminal_logger.logger import info, warn, error
 
 from ui.foo.configs import ui_config
 

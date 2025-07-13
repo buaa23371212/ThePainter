@@ -1,6 +1,6 @@
 import re
-from utils.command_executor import _extract_comment_words
-from utils.terminal_logger.command_logger import title, step
+from ui.foo.utils.command_executor import _extract_comment_words
+from ui.foo.utils.terminal_logger.command_logger import title, step
 
 def preview_command_file(input_file_path):
     """

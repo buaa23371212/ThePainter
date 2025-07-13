@@ -7,7 +7,7 @@ import pyautogui
 # ==============================
 from auto_drawer.foo.configs.screen_config import CANVAS_BLANK_POSITION
 from auto_drawer.foo.configs import auto_speed_config
-from command_parser.command_parser import parse_arguments
+from auto_drawer.foo.utils.command_parser.command_parser import parse_arguments
 from auto_drawer.foo.utils.layer_tools import select_layer, add_layer, select_layer_operation
 
 # ==============================
@@ -35,8 +35,8 @@ from auto_drawer.foo.utils.texter.texter import select_texter_tool, create_text
 # ==============================
 # 日志记录模块导入区
 # ==============================
-from utils.terminal_logger.logger import info, warn, error
-from utils.terminal_logger.command_logger import title, step
+from ui.foo.utils.terminal_logger.logger import info, warn, error
+from ui.foo.utils.terminal_logger.command_logger import title, step
 
 # ==============================
 # 全局状态变量

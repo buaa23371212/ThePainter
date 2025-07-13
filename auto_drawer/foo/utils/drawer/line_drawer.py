@@ -4,7 +4,7 @@ import pyautogui
 from auto_drawer.foo.utils.general_tools import click_shapes_button, activate_canvas
 from auto_drawer.foo.configs import auto_speed_config
 
-from utils.terminal_logger.logger import info
+from ui.foo.utils.terminal_logger.logger import info
 
 # ======================
 # 专用功能方法

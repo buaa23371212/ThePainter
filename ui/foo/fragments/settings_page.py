@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 
-from utils.terminal_logger.logger import info
+from ui.foo.utils.terminal_logger.logger import info
 
 class SettingsPage(QWidget):
     def __init__(self):

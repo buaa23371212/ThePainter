@@ -2,7 +2,7 @@ import time
 import subprocess
 import pyautogui
 
-from utils.terminal_logger.logger import info, warn, error
+from ui.foo.utils.terminal_logger.logger import info, warn, error
 
 from auto_drawer.foo.configs import drawer_panel_config, auto_speed_config, screen_config
 

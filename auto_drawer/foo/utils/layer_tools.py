@@ -1,7 +1,7 @@
 import time
 import pyautogui
 
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 from auto_drawer.foo.configs import drawer_panel_config, auto_speed_config
 from auto_drawer.foo.utils.general_tools import activate_window

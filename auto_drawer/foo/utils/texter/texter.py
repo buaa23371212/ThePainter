@@ -4,7 +4,7 @@ import pyautogui
 from auto_drawer.foo.utils.general_tools import activate_canvas, activate_window
 from auto_drawer.foo.configs import drawer_panel_config, auto_speed_config
 
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 def select_texter_tool():
     """

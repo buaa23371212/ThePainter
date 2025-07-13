@@ -1,4 +1,4 @@
-from utils.terminal_logger.logger import log
+from ui.foo.utils.terminal_logger.logger import log
 
 def title(show: bool, message: str, show_caller: bool = True) -> None:
     """

@@ -14,13 +14,13 @@ from pynput import keyboard
 # 工具模块导入区
 # ==============================
 from auto_drawer.foo.utils.general_tools import open_paint, minimize_paint
-from command_parser.command_parser import parse_arguments
-from utils.command_executor import execute_command, process_batch_commands, save_png
+from auto_drawer.foo.utils.command_parser.command_parser import parse_arguments
+from ui.foo.utils.command_executor import execute_command, process_batch_commands, save_png
 
 # ==============================
 # 日志记录模块导入区
 # ==============================
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 # ==============================
 # 全局变量定义区

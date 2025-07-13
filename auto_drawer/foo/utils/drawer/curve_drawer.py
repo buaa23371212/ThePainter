@@ -8,7 +8,7 @@ from auto_drawer.foo.configs.drawer_panel_config import get_shape_panel_presses
 
 from auto_drawer.foo.utils.drawer.line_drawer import draw_line
 
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 # ======================
 # 专用功能方法

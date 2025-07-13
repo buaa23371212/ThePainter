@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
 
 from ui.foo.configs import ui_config
 
-from utils.terminal_logger.logger import info
+from ui.foo.utils.terminal_logger.logger import info
 from ui.foo.utils.command_generator import execute_command_file
 from ui.foo.utils.style_loader import load_stylesheets
 

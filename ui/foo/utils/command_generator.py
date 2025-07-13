@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 from ui.foo.configs import ui_config
 
@@ -19,7 +19,7 @@ def execute_command_file(file_path, text_view):
         text_view.append("错误: 没有可执行的命令文件")
         return False
     
-    project_root = ui_config.project_root
+    project_root = ui_config.painter_dir
     
     # 构建命令
     command = f"python painter.py -input_file \"{file_path}\""

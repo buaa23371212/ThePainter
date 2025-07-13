@@ -6,7 +6,7 @@ from auto_drawer.foo.utils.general_tools import click_shapes_button, activate_ca
 from auto_drawer.foo.configs import auto_speed_config
 from auto_drawer.foo.configs.drawer_panel_config import get_shape_panel_presses
 
-from utils.terminal_logger.logger import info, error
+from ui.foo.utils.terminal_logger.logger import info, error
 
 # ======================
 # 专用功能方法

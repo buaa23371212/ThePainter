@@ -5,7 +5,7 @@ from auto_drawer.foo.utils.color_tools import select_color
 from auto_drawer.foo.utils.general_tools import enter_color_mode, activate_canvas
 from auto_drawer.foo.configs import auto_speed_config
 
-from utils.terminal_logger.logger import info
+from ui.foo.utils.terminal_logger.logger import info
 
 
 def select_fill_tool():
