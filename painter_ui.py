@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QHBoxLayout,
+    QApplication, QWidget, QHBoxLayout, QVBoxLayout,
     QListWidget, QListWidgetItem, QStackedWidget
 )
 
@@ -9,6 +9,7 @@ from ui.fragments.ai_page import AIPage
 from ui.fragments.explorer import FileExplorer
 from ui.fragments.paintings_page import PaintingsPage
 from ui.fragments.settings_page import SettingsPage
+from ui.fragments.navigate_bar import NavigationBar
 
 
 class MainWindow(QWidget):
@@ -25,22 +26,22 @@ class MainWindow(QWidget):
         # ==================================================
         # 左侧导航栏 (功能选择区)
         # ==================================================
-        self.nav_list = QListWidget()                           # 创建列表控件作为导航栏
-        self.nav_list.setFixedWidth(120)                        # 固定导航栏宽度
+        # 定义导航项名称
+        nav_items = ["资源管理器", "AI作画", "画作列表", "设置"]
         
-        # 添加导航项 (可扩展)
-        self.nav_list.addItem(QListWidgetItem("资源管理器"))    # 第一个功能入口
-        self.nav_list.addItem(QListWidgetItem("AI作画"))        # 第二个功能入口
-        self.nav_list.addItem(QListWidgetItem("画作列表"))      # 第三个功能入口
-        self.nav_list.addItem(QListWidgetItem("设置"))
-        # 后续可添加更多功能项，例如：
-        # self.nav_list.addItem(QListWidgetItem("画板"))
-        
-        main_layout.addWidget(self.nav_list)                    # 将导航栏添加到主布局左侧
+        # 创建导航栏实例
+        self.nav_list = NavigationBar(nav_items)                  
+        main_layout.addWidget(self.nav_list)            # 将导航栏添加到主布局左侧
 
         # ==================================================
         # 右侧内容区 (多页面容器)
         # ==================================================
+        # 创建一个容器控件来容纳右侧布局
+        self.right_container = QWidget()
+        self.right_layout = QVBoxLayout(self.right_container)
+        self.right_layout.setContentsMargins(0, 0, 0, 0)  # 移除内边距
+        self.right_layout.setSpacing(0)                   # 移除组件间距
+
         self.stack = QStackedWidget()                           # 创建堆叠组件实现多页面切换
         
         # 页面1: 文件资源管理器 (自定义组件)
@@ -64,7 +65,8 @@ class MainWindow(QWidget):
         # self.canvas_page = CanvasPage()
         # self.stack.addWidget(self.canvas_page)
         
-        main_layout.addWidget(self.stack)                       # 将堆叠组件添加到主布局右侧
+        self.right_layout.addWidget(self.stack)
+        main_layout.addWidget(self.right_container)      # 将容器控件添加到主布局右侧
 
         # ==================================================
         # 功能连接：导航栏切换控制内容区显示

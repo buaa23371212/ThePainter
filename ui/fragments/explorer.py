@@ -71,6 +71,7 @@ class FileExplorer(QWidget):
         self.execute_btn = QPushButton("执行命令")
         self.execute_btn.setFixedSize(100, 30)
         self.execute_btn.setObjectName("executeButton")  # 添加对象名
+        self.execute_btn.setVisible(False)
         self.execute_btn.clicked.connect(self.execute_commands)
         toolbar_layout.addWidget(self.execute_btn)
 
@@ -147,11 +148,13 @@ class FileExplorer(QWidget):
         path = item.data(0, Qt.UserRole)
         self.current_file_path = path
 
+        self.toolbar.setVisible(True)
+
         # 如果是命令文件，显示工具栏
         if path and os.path.isfile(path) and any(path.endswith(ext) for ext in ui_config.COMMAND_FILE_TYPES):
-            self.toolbar.setVisible(True)
+            self.execute_btn.setVisible(True)
         else:
-            self.toolbar.setVisible(False)
+            self.execute_btn.setVisible(False)
 
         # 显示文件内容或清空预览区
         if path and os.path.isfile(path):
@@ -160,6 +163,7 @@ class FileExplorer(QWidget):
             # 点击的是文件夹时清空预览区
             self.text_view.clear()
             self.stack.setCurrentIndex(0)
+            self.toolbar.setVisible(False)
 
 
     def display_file_content(self, path):
@@ -207,7 +211,7 @@ class FileExplorer(QWidget):
 
     def load_stylesheet(self):
         """加载样式表"""
-        load_stylesheets(self, "styles.css")
+        load_stylesheets(self, "explorer.css")
 
 
     def execute_commands(self):
