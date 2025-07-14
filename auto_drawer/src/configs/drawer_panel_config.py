@@ -89,6 +89,7 @@ FILL_COLOR_KEY_MAP = {
     "cyan": 7,         # 青绿
     "blue": 8,         # 靛蓝
     "purple": 9,       # 紫色
+
     "white": 10,       # 白色
     "lightgray": 11,   # 浅灰色
     "brown": 12,       # 褐色
