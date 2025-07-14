@@ -68,22 +68,6 @@ def draw_polygon(points):
 # ======================
 # 多边形数据处理方法
 # ======================
-def select_polygon_tool():
-    """
-    在画图工具中选择多边形工具
-    """
-    info(False, "选择多边形工具...", True)
-
-    # Step 1: 点击形状按钮
-    click_shapes_button()
-
-    # Step 2: 选择多边形工具
-    pyautogui.press('right', presses=get_shape_panel_presses("polygon"))  # 按右方向键5次选择多边形工具
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
-    pyautogui.press('enter')
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
-    info(False, "已选择多边形工具", True)
-
 def load_polygon_from_json(file_path, polygon_id=None, polygon_name=None):
     """
     从JSON文件加载多边形顶点数据
@@ -190,6 +174,21 @@ def validate_polygon_args(args):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_polygon_tool():
+    """
+    在画图工具中选择多边形工具
+    """
+    info(False, "选择多边形工具...", True)
+
+    # Step 1: 点击形状按钮
+    click_shapes_button()
+
+    # Step 2: 选择多边形工具
+    pyautogui.press('right', presses=get_shape_panel_presses("polygon"))  # 按右方向键5次选择多边形工具
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+    pyautogui.press('enter')
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+    info(False, "已选择多边形工具", True)
 
 def draw_polygon_command(args):
     """

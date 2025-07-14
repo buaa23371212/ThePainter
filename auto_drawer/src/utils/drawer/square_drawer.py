@@ -35,6 +35,7 @@ def draw_square_by_center(center_x, center_y, size):
     # Step 2: 调用绘制函数
     draw_rectangle(start_x, start_y, end_x, end_y)
 
+
 # ======================
 # 导出函数供主程序调用
 # ======================
