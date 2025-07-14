@@ -221,6 +221,7 @@ def _dispatch_mouse_command(args):
     if args.command == 'move_mouse':
         info(False, f"将鼠标移动到位置 ({args.x}, {args.y})", True)
         pyautogui.moveTo(args.x, args.y)
+        time.sleep(2)
     elif args.command == 'mouse_click':
         info(False, f"在位置 ({args.x}, {args.y}) 模拟鼠标点击", True)
         pyautogui.click(x=args.x, y=args.y)
