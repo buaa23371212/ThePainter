@@ -5,13 +5,6 @@ from auto_drawer.src.utils.drawer.rectangle_drawer import select_rectangle_tool,
 # ======================
 # 专用功能方法
 # ======================
-
-def select_square_tool():
-    """
-    在画图工具中选择正方形工具
-    """
-    select_rectangle_tool()
-
 def draw_square(start_x, start_y, end_x, end_y):
     """
     在画图工具中绘制正方形
@@ -45,6 +38,11 @@ def draw_square_by_center(center_x, center_y, size):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_square_tool():
+    """
+    在画图工具中选择正方形工具
+    """
+    select_rectangle_tool()
 
 def draw_square_command(args):
     """处理正方形绘制命令"""

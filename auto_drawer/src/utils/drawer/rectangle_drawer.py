@@ -11,25 +11,6 @@ from public_utils.terminal_logger.logger import info
 # ======================
 # 专用功能方法
 # ======================
-
-def select_rectangle_tool():
-    """
-    在画图工具中选择矩形工具
-    """
-    info(False, "选择矩形工具...", True)
-    
-    # Step 1: 点击形状按钮
-    click_shapes_button()
-
-    # Step 2: 选择矩形工具
-    # 通常圆形工具的下一个就是矩形工具
-    pyautogui.press('right', presses=get_shape_panel_presses("rectangle"))  # 按右方向键3次选择矩形工具
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
-    pyautogui.press('enter')
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
-    info(False, "已选择矩形工具", True)
-    
-
 def draw_rectangle(start_x, start_y, end_x, end_y):
     """
     在画图工具中绘制矩形
@@ -76,6 +57,22 @@ def draw_rectangle_by_center(center_x, center_y, width, height):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_rectangle_tool():
+    """
+    在画图工具中选择矩形工具
+    """
+    info(False, "选择矩形工具...", True)
+
+    # Step 1: 点击形状按钮
+    click_shapes_button()
+
+    # Step 2: 选择矩形工具
+    # 通常圆形工具的下一个就是矩形工具
+    pyautogui.press('right', presses=get_shape_panel_presses("rectangle"))  # 按右方向键3次选择矩形工具
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+    pyautogui.press('enter')
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
+    info(False, "已选择矩形工具", True)
 
 def draw_rectangle_command(args):
     """处理矩形绘制命令"""

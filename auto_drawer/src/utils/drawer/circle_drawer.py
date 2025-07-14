@@ -5,10 +5,6 @@ from auto_drawer.src.utils.drawer.ellipse_drawer import select_ellipse_tool, dra
 # ======================
 # 专用功能方法
 # ======================
-
-def select_circle_tool():
-    select_ellipse_tool()
-
 def draw_circle(start_x, start_y, end_x, end_y):
     draw_ellipse(start_x, start_y, end_x, end_y)
 
@@ -33,6 +29,8 @@ def draw_circle_by_center(center_x, center_y, radius):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_circle_tool():
+    select_ellipse_tool()
 
 def draw_circle_command(args):
     """处理圆形绘制命令"""

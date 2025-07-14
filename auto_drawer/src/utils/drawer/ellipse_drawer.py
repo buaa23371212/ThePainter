@@ -10,29 +10,6 @@ from public_utils.terminal_logger.logger import info
 # ======================
 # 专用功能方法
 # ======================
-
-def select_ellipse_tool():
-    """
-    在画图工具中选择椭圆工具
-
-    Step:
-    1. 点击形状按钮
-    2. 选择椭圆工具
-    3. 激活画布
-    """
-    info(False, "选择椭圆工具...", True)
-    
-    # Step 1: 点击形状按钮
-    click_shapes_button()
-    
-    # Step 2: 选择椭圆工具
-    pyautogui.press('right', presses=get_shape_panel_presses("ellipse"))  # 假设按右方向键2次选择椭圆工具，具体根据实际情况调整
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
-    pyautogui.press('enter')
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
-    info(False, "已选择椭圆工具", True)
-
-
 def draw_ellipse(start_x, start_y, end_x, end_y):
     """
     在画图工具中绘制椭圆
@@ -77,6 +54,26 @@ def draw_ellipse_by_center(center_x, center_y, width, height):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_ellipse_tool():
+    """
+    在画图工具中选择椭圆工具
+
+    Step:
+    1. 点击形状按钮
+    2. 选择椭圆工具
+    3. 激活画布
+    """
+    info(False, "选择椭圆工具...", True)
+
+    # Step 1: 点击形状按钮
+    click_shapes_button()
+
+    # Step 2: 选择椭圆工具
+    pyautogui.press('right', presses=get_shape_panel_presses("ellipse"))  # 假设按右方向键2次选择椭圆工具，具体根据实际情况调整
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+    pyautogui.press('enter')
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
+    info(False, "已选择椭圆工具", True)
 
 def draw_ellipse_command(args):
     """处理椭圆绘制命令"""

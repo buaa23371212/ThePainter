@@ -9,24 +9,6 @@ from public_utils.terminal_logger.logger import info
 # ======================
 # 专用功能方法
 # ======================
-def select_line_tool():
-    """
-    在画图工具中选择直线工具
-    """
-    # 使用info函数记录日志，但show=False不显示输出
-    info(False, "选择直线工具...", True)
-    
-    # Step 1: 点击形状按钮
-    click_shapes_button()
-    
-    # Step 2: 选择直线工具
-    # presses=0
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
-    pyautogui.press('enter')
-    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
-    info(False, "已选择直线工具", True)
-
-
 def draw_line(start_x, start_y, end_x, end_y):
     """
     在画图工具中绘制直线
@@ -67,6 +49,24 @@ def draw_line_by_vector(start_x, start_y, dx, dy):
 # ======================
 # 导出函数供主程序调用
 # ======================
+def select_line_tool():
+    """
+    在画图工具中选择直线工具
+    """
+    # 使用info函数记录日志，但show=False不显示输出
+    info(False, "选择直线工具...", True)
+
+    # Step 1: 点击形状按钮
+    click_shapes_button()
+
+    # Step 2: 选择直线工具
+    # presses=0
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)
+    pyautogui.press('enter')
+    time.sleep(auto_speed_config.ACTUAL_CLICK_WAIT)  # 等待工具选择完成
+    info(False, "已选择直线工具", True)
+
+
 def draw_line_command(args):
     """
     执行绘制直线的命令
