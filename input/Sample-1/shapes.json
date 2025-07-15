@@ -43,7 +43,7 @@
       ]
     }
   },
-  "multicurves": {
+  "multi-curves": {
     "path1": {
       "name": "Complex Path",
       "points": [

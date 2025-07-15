@@ -5,7 +5,7 @@ import pyautogui
 from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
-from auto_drawer.src.utils.data_processor import convert_points_to_coords, load_shape_from_json
+from auto_drawer.src.utils.data_processor import convert_points_to_coords, load_shape_from_json, validate_shape_args
 
 from public_utils.terminal_logger.logger import info, error
 
@@ -15,14 +15,13 @@ from public_utils.terminal_logger.logger import info, error
 def draw_polygon(points):
     """
     在画图工具中绘制多边形
+
+    前置条件
+    - 确保已验证参数合法性
     
     参数:
         points (list of tuple): 多边形顶点列表，每个顶点为 (x, y) 坐标元组
     """
-    if len(points) < 3:
-        info(True, "至少需要三个点来绘制多边形", True)
-        return
-    
     info(False, f"开始绘制多边形，顶点数: {len(points)}", True)
     activate_canvas()
     
@@ -88,34 +87,22 @@ def load_polygon_from_json(file_path, polygon_id=None, polygon_name=None):
 # ======================
 # 参数验证
 # ======================
+def validate_point_count(points):
+    if points:
+        if len(points) < 3:
+            raise ValueError("多边形至少需要3个顶点（6个坐标值）")
 
 def validate_polygon_args(args):
     """
     验证多边形参数的有效性
     
     Step:
-    1. 验证文件方式参数
-    2. 验证顶点方式参数
-    3. 确保参数组合有效
     
     参数:
         args: 命令行参数对象
     """
-    # Step 1: 验证文件方式参数
-    if args.file:
-        if not (args.id or args.name):
-            raise ValueError("使用文件时，必须提供-id或-name参数")
-        if args.id and args.name:
-            raise ValueError("不能同时使用-id和-name参数")
-    
-    # Step 2: 验证顶点方式参数
-    elif args.vertices:
-        if len(args.vertices) % 2 != 0:
-            raise ValueError("顶点坐标数量必须为偶数")
-        if len(args.vertices) < 6:
-            raise ValueError("多边形至少需要3个顶点（6个坐标值）")
-        if args.id or args.name:
-            raise ValueError("直接指定顶点时，不能使用-id或-name参数")
+    validate_shape_args(args)
+
 
 # ======================
 # 导出函数供主程序调用
@@ -164,9 +151,7 @@ def draw_polygon_command(args):
             # 转换顶点列表为点元组
             points = convert_points_to_coords(args.vertices)
         
-        # 确保有足够的点
-        if len(points) < 3:
-            raise ValueError("多边形至少需要三个顶点")
+        validate_point_count(points)
         
         # Step 3: 绘制多边形
         draw_polygon(points)

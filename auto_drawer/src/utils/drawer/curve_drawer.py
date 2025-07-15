@@ -1,8 +1,7 @@
 import time
-import json
 import pyautogui
 
-from auto_drawer.src.utils.data_processor import load_shape_from_json, convert_points_to_coords
+from auto_drawer.src.utils.data_processor import load_shape_from_json, convert_points_to_coords, validate_shape_args
 from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
@@ -18,14 +17,13 @@ from public_utils.terminal_logger.logger import info, error
 def draw_curve(points):
     """
     在画图工具中绘制三次贝塞尔曲线
+
+    前置条件
+    - 确保已验证参数合法性
     
     参数:
         points (list of tuple): 曲线控制点列表，包含4个点 (起点, 控制点1, 控制点2, 终点)
     """
-    if len(points) != 4:
-        info(True, "贝塞尔曲线需要4个点: 起点、控制点1、控制点2、终点", True)
-        return
-    
     info(False, f"开始绘制贝塞尔曲线: 起点={points[0]}, 终点={points[3]}", True)
     activate_canvas()
     
@@ -73,32 +71,22 @@ def load_curve_from_json(file_path, curve_id=None, curve_name=None):
 # ======================
 # 参数验证
 # ======================
+def validate_point_count(points):
+    if points:
+        if len(points) != 4:
+            raise ValueError("曲线需要8个坐标值（4个点）")
 
 def validate_curve_args(args):
     """
     验证曲线参数的有效性
     
     Step:
-    1. 验证文件方式参数
-    2. 验证点方式参数
-    3. 确保参数组合有效
     
     参数:
         args: 命令行参数对象
     """
-    # Step 1: 验证文件方式参数
-    if args.file:
-        if not (args.id or args.name):
-            raise ValueError("使用文件时，必须提供-id或-name参数")
-        if args.id and args.name:
-            raise ValueError("不能同时使用-id和-name参数")
-    
-    # Step 2: 验证点方式参数
-    elif args.points:
-        if len(args.points) != 8:
-            raise ValueError("曲线需要8个坐标值（4个点）")
-        if args.id or args.name:
-            raise ValueError("直接指定点时，不能使用-id或-name参数")
+    validate_shape_args(args)
+
 
 # ======================
 # 导出函数供主程序调用
@@ -148,11 +136,9 @@ def draw_curve_command(args):
         elif args.points:
             # 转换点列表为坐标元组
             points = convert_points_to_coords(args.points)
-        
-        # 确保有4个点
-        if len(points) != 4:
-            raise ValueError("曲线需要4个点（起点、控制点1、控制点2、终点）")
-        
+
+        validate_point_count(points)
+
         # Step 3: 绘制曲线
         draw_curve(points)
         

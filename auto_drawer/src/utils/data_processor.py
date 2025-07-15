@@ -78,3 +78,29 @@ def convert_points_to_coords(points):
         coords.append((x, y))
 
     return coords
+
+def validate_shape_args(args):
+    """
+    验证参数的有效性
+
+    Step:
+    1. 验证文件方式参数
+    2. 验证顶点方式参数
+    3. 确保参数组合有效
+
+    参数:
+        args: 命令行参数对象
+    """
+    # Step 1: 验证文件方式参数
+    if args.file:
+        if not (args.id or args.name):
+            raise ValueError("使用文件时，必须提供-id或-name参数")
+        if args.id and args.name:
+            raise ValueError("不能同时使用-id和-name参数")
+
+    # Step 2: 验证顶点方式参数
+    elif args.vertices:
+        if len(args.vertices) % 2 != 0:
+            raise ValueError("顶点坐标数量必须为偶数")
+        if args.id or args.name:
+            raise ValueError("直接指定顶点时，不能使用-id或-name参数")
