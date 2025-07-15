@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import (
     QSplitter, QStackedWidget, QPushButton, QHBoxLayout, QFrame
 )
 
+from public_configs.project_config import project_root
 from ui.src.configs import ui_config
 
 from public_utils.terminal_logger.logger import info
@@ -102,7 +103,7 @@ class FileExplorer(QWidget):
         # =====================================================
         # 只显示 input 和 output 文件夹
         for folder in ui_config.DIR_FILTER:
-            folder_path = os.path.join(QDir.currentPath(), folder)
+            folder_path = os.path.join(project_root, folder)
             if os.path.exists(folder_path):
                 # 创建顶级文件夹项
                 folder_item = QTreeWidgetItem([folder])

@@ -2,7 +2,8 @@ import time
 import json
 import pyautogui
 
-from auto_drawer.src.utils.painter_tools import click_shapes_button, activate_canvas
+from auto_drawer.src.utils.data_processor import load_shape_from_json, convert_points_to_coords
+from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
 
@@ -58,10 +59,6 @@ def load_curve_from_json(file_path, curve_id=None, curve_name=None):
     从JSON文件加载曲线点数据
     
     Step:
-    1. 打开并读取JSON文件
-    2. 解析JSON数据
-    3. 根据ID或名称查找曲线
-    4. 返回点列表
     
     参数:
         file_path (str): JSON文件路径
@@ -71,56 +68,7 @@ def load_curve_from_json(file_path, curve_id=None, curve_name=None):
     返回:
         list: 曲线点列表 [(x0, y0), (x1, y1), (x2, y2), (x3, y3)]
     """
-    try:
-        # Step 1: 打开文件
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-        
-        # Step 2: 获取曲线数据
-        curves = data.get('curves', {})
-        
-        # Step 3: 根据ID或名称查找
-        if curve_id and curve_id in curves:
-            return curves[curve_id].get('points', [])
-        
-        if curve_name:
-            for curve_id, curve_data in curves.items():
-                if curve_data.get('name') == curve_name:
-                    return curve_data.get('points', [])
-        
-        # 未找到曲线
-        raise ValueError(f"在文件 {file_path} 中未找到指定曲线: id={curve_id}, name={curve_name}")
-    
-    except FileNotFoundError:
-        raise FileNotFoundError(f"JSON文件未找到: {file_path}")
-    except json.JSONDecodeError:
-        raise ValueError(f"无效的JSON格式: {file_path}")
-
-def convert_points_to_coords(points):
-    """
-    将点整数列表转换为坐标元组列表
-
-    前置条件
-    - 确保验证过点的合法性
-    
-    Step:
-    1. 每两个整数组成一个点
-    2. 返回点元组列表
-    
-    参数:
-        points (list of int): 点坐标列表 [x0, y0, x1, y1, x2, y2, x3, y3]
-    
-    返回:
-        list: 点元组列表 [(x0, y0), (x1, y1), (x2, y2), (x3, y3)]
-    """
-    # Step 1: 转换格式
-    coords = []
-    for i in range(0, len(points), 2):
-        x = points[i]
-        y = points[i+1]
-        coords.append((x, y))
-    
-    return coords
+    return load_shape_from_json(file_path, "curves", curve_id, curve_name)
 
 # ======================
 # 参数验证

@@ -1,5 +1,6 @@
 import os
 
+from public_configs.project_config import get_project_root
 from public_utils.terminal_logger.logger import info
 
 # =====================================================
@@ -20,16 +21,7 @@ IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
 # =====================================================
 # 路径配置
 # =====================================================
-# 项目根目录计算
-current_file_path = os.path.abspath(__file__)                   # 获取当前文件的绝对路径
-current_dir = os.path.dirname(current_file_path)                # 获取当前文件所在的目录: ./configs/ui_config
-project_root = os.path.dirname(
-    os.path.dirname(
-        os.path.dirname(current_dir)
-    ))                                                          # 项目根目录（上3级目录）
-
-# 记录项目根目录（调试信息）
-info(True, f"项目根目录: {project_root}", True)
+project_root = get_project_root()
 
 # painter.py
 painter_dir = os.path.join(project_root, "auto_drawer", "src")

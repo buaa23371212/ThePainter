@@ -1,7 +1,7 @@
 import time
 import pyautogui
 
-from auto_drawer.src.utils.painter_tools import click_shapes_button, activate_canvas
+from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 
 from public_utils.terminal_logger.logger import info

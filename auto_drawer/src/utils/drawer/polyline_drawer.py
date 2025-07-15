@@ -1,5 +1,5 @@
 from auto_drawer.src.utils.drawer.line_drawer import draw_line, select_line_tool
-from auto_drawer.src.utils.drawer.curve_drawer import convert_points_to_coords
+from auto_drawer.src.utils.data_processor import convert_points_to_coords
 
 from public_utils.terminal_logger.logger import info, error
 

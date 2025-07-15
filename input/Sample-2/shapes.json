@@ -1,14 +1,14 @@
 {
   "polygons": {
     "left_mountain": {
-      "vertices": [
+      "points": [
         [340, 700],
         [600, 500],
         [800, 700]
       ]
     },
     "right_mountain": {
-      "vertices": [
+      "points": [
         [800, 700],
         [1000, 550],
         [1200, 700]

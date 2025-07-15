@@ -2,10 +2,10 @@ import time
 import json
 import pyautogui
 
-from auto_drawer.src.utils.painter_tools import click_shapes_button, activate_canvas
+from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
-from auto_drawer.src.utils.drawer.curve_drawer import convert_points_to_coords
+from auto_drawer.src.utils.data_processor import convert_points_to_coords, load_shape_from_json
 
 from public_utils.terminal_logger.logger import info, error
 
@@ -74,10 +74,6 @@ def load_polygon_from_json(file_path, polygon_id=None, polygon_name=None):
     从JSON文件加载多边形顶点数据
     
     Step:
-    1. 打开并读取JSON文件
-    2. 解析JSON数据
-    3. 根据ID或名称查找多边形
-    4. 返回顶点列表
     
     参数:
         file_path (str): JSON文件路径
@@ -87,30 +83,7 @@ def load_polygon_from_json(file_path, polygon_id=None, polygon_name=None):
     返回:
         list: 多边形顶点列表 [(x1, y1), (x2, y2), ...]
     """
-    try:
-        # Step 1: 打开文件
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-        
-        # Step 2: 获取多边形数据
-        polygons = data.get('polygons', {})
-        
-        # Step 3: 根据ID或名称查找
-        if polygon_id and polygon_id in polygons:
-            return polygons[polygon_id].get('vertices', [])
-        
-        if polygon_name:
-            for poly_id, poly_data in polygons.items():
-                if poly_data.get('name') == polygon_name:
-                    return poly_data.get('vertices', [])
-        
-        # 未找到多边形
-        raise ValueError(f"在文件 {file_path} 中未找到指定多边形: id={polygon_id}, name={polygon_name}")
-    
-    except FileNotFoundError:
-        raise FileNotFoundError(f"JSON文件未找到: {file_path}")
-    except json.JSONDecodeError:
-        raise ValueError(f"无效的JSON格式: {file_path}")
+    return load_shape_from_json(file_path, "polygons", polygon_id, polygon_name)
 
 # ======================
 # 参数验证

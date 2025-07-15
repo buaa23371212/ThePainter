@@ -4,7 +4,7 @@ import pyautogui
 from public_utils.terminal_logger.logger import info, error
 
 from auto_drawer.src.configs import drawer_panel_config, auto_speed_config
-from auto_drawer.src.utils.painter_tools import activate_window
+from auto_drawer.src.utils.canvas_tools import activate_window
 
 def add_layer():
     """
