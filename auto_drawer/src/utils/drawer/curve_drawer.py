@@ -101,7 +101,6 @@ def convert_points_to_coords(points):
     将点整数列表转换为坐标元组列表
     
     Step:
-    1. 验证点数量（必须是8个整数，表示4个点）
     2. 每两个整数组成一个点
     3. 返回点元组列表
     
@@ -111,10 +110,6 @@ def convert_points_to_coords(points):
     返回:
         list: 点元组列表 [(x0, y0), (x1, y1), (x2, y2), (x3, y3)]
     """
-    # Step 1: 验证点数量
-    if len(points) != 8:
-        raise ValueError("曲线需要8个坐标值（4个点）")
-    
     # Step 2: 转换格式
     coords = []
     for i in range(0, len(points), 2):

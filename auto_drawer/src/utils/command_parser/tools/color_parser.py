@@ -20,9 +20,8 @@ def add_fill_arguments(subparsers):
     fill_parser.add_argument(
         '-color',
         type=str,
-        required=True,
         choices=list(FILL_COLOR_KEY_MAP.keys()),
-        help='填充颜色'
+        help='填充颜色。若未指定则使用当前颜色。'
     )
     fill_parser.add_argument(
         '-x',

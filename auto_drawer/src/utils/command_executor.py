@@ -21,6 +21,7 @@ from auto_drawer.src.utils.drawer.polygon_drawer import select_polygon_tool, dra
 from auto_drawer.src.utils.drawer.line_drawer import select_line_tool, draw_line_command
 from auto_drawer.src.utils.drawer.curve_drawer import select_curve_tool, draw_curve_command
 from auto_drawer.src.utils.drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
+from auto_drawer.src.utils.drawer.polyline_drawer import draw_polyline_command
 
 # ==============================
 # 颜色填充模块导入区
@@ -97,7 +98,8 @@ def _dispatch_command(args):
     
     # 图形绘制命令路由
     if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
-                       'rounded_rectangle', 'polygon', 'line', 'curve', 'multicurve']:
+                       'rounded_rectangle', 'polygon', 'line', 'polyline',
+                        'curve', 'multicurve']:
         info(False, f"绘制图形: {args.command}", True)
         _dispatch_shape_command(args)
 
@@ -144,7 +146,8 @@ def _dispatch_shape_command(args):
         'rounded_rectangle': (select_rounded_rectangle_tool, draw_rounded_rectangle_command),
         'polygon': (select_polygon_tool, draw_polygon_command),
         'line': (select_line_tool, draw_line_command),
-        'curve': (select_curve_tool, draw_curve_command)
+        'curve': (select_curve_tool, draw_curve_command),
+        'polyline':(select_line_tool, draw_polyline_command)
     }
 
     # Step 1: 选工具

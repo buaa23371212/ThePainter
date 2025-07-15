@@ -1,1 +1,1 @@
-move_mouse -x 1799 -y 25
+polyline -points 500 500 600 600 700 700
