@@ -1,4 +1,5 @@
 import os
+from PyQt5.QtCore import QDir
 
 from public_utils.terminal_logger.logger import info
 
@@ -7,6 +8,10 @@ current_dir = os.path.dirname(current_file_path)                # 获取当前�
 project_root = os.path.dirname(current_dir)
 
 info(True, f"项目根目录: {project_root}", True)
+
+# work_dir = QDir.currentPath()
+#
+# info(True, f"当前工作目录: {work_dir}", True)
 
 def get_project_root():
     return project_root
