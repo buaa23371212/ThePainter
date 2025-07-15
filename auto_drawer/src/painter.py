@@ -14,8 +14,9 @@ from pynput import keyboard
 # 工具模块导入区
 # ==============================
 from auto_drawer.src.utils.canvas_tools import open_paint, minimize_paint
+from auto_drawer.src.utils.png_saver import save_png
 from auto_drawer.src.utils.command_parser.command_parser import parse_arguments
-from utils.command_executor import execute_command, process_batch_commands, save_png
+from utils.command_executor import execute_command, process_batch_commands
 
 # ==============================
 # 日志记录模块导入区
