@@ -48,8 +48,10 @@ def validate_polyline_args(args):
 
     # Step 2: 验证点方式参数
     elif args.points:
-        if len(args.points) != 6:
-            raise ValueError("折线需要6个坐标值（3个点）")
+        if len(args.points) % 2 != 0:
+            raise ValueError("顶点坐标数量必须为偶数")
+        if len(args.points) < 6:
+            raise ValueError("折线至少需要6个坐标值（3个点）")
         if args.id or args.name:
             raise ValueError("直接指定点时，不能使用-id或-name参数")
 
@@ -79,8 +81,8 @@ def draw_polyline_command(args):
             points = convert_points_to_coords(args.points)
 
         # 确保有4个点
-        if len(points) != 3:
-            raise ValueError("折线需要3个点")
+        if len(points) < 3:
+            raise ValueError("折线至少需要3个点")
 
         # Step 3: 绘制曲线
         draw_polyline(points)

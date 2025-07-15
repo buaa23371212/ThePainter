@@ -5,6 +5,7 @@ import pyautogui
 from auto_drawer.src.utils.painter_tools import click_shapes_button, activate_canvas
 from auto_drawer.src.configs import auto_speed_config
 from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
+from auto_drawer.src.utils.drawer.curve_drawer import convert_points_to_coords
 
 from public_utils.terminal_logger.logger import info, error
 
@@ -111,34 +112,6 @@ def load_polygon_from_json(file_path, polygon_id=None, polygon_name=None):
     except json.JSONDecodeError:
         raise ValueError(f"无效的JSON格式: {file_path}")
 
-def convert_vertices_to_points(vertices):
-    """
-    将顶点整数列表转换为点元组列表
-    
-    Step:
-    1. 验证顶点数量（必须是偶数）
-    2. 每两个整数组成一个点
-    3. 返回点元组列表
-    
-    参数:
-        vertices (list of int): 顶点坐标列表 [x1, y1, x2, y2, ...]
-    
-    返回:
-        list: 点元组列表 [(x1, y1), (x2, y2), ...]
-    """
-    # Step 1: 验证顶点数量
-    if len(vertices) % 2 != 0:
-        raise ValueError("顶点坐标数量必须为偶数")
-    
-    # Step 2: 转换格式
-    points = []
-    for i in range(0, len(vertices), 2):
-        x = vertices[i]
-        y = vertices[i+1]
-        points.append((x, y))
-    
-    return points
-
 # ======================
 # 参数验证
 # ======================
@@ -216,7 +189,7 @@ def draw_polygon_command(args):
             points = load_polygon_from_json(args.file, args.id, args.name)
         elif args.vertices:
             # 转换顶点列表为点元组
-            points = convert_vertices_to_points(args.vertices)
+            points = convert_points_to_coords(args.vertices)
         
         # 确保有足够的点
         if len(points) < 3:

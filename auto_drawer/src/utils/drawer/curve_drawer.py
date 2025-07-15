@@ -99,10 +99,13 @@ def load_curve_from_json(file_path, curve_id=None, curve_name=None):
 def convert_points_to_coords(points):
     """
     将点整数列表转换为坐标元组列表
+
+    前置条件
+    - 确保验证过点的合法性
     
     Step:
-    2. 每两个整数组成一个点
-    3. 返回点元组列表
+    1. 每两个整数组成一个点
+    2. 返回点元组列表
     
     参数:
         points (list of int): 点坐标列表 [x0, y0, x1, y1, x2, y2, x3, y3]
@@ -110,7 +113,7 @@ def convert_points_to_coords(points):
     返回:
         list: 点元组列表 [(x0, y0), (x1, y1), (x2, y2), (x3, y3)]
     """
-    # Step 2: 转换格式
+    # Step 1: 转换格式
     coords = []
     for i in range(0, len(points), 2):
         x = points[i]
