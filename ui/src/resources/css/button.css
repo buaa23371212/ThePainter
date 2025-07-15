@@ -4,7 +4,7 @@ QPushButton {
     border: 1px solid #ccc;       /* 边框 1px 实线 #ccc */
     border-radius: 4px;           /* 边框圆角 4px */
     padding: 5px 10px;            /* 内边距 上下5px 左右10px */
-    max-height: 28px;             /* 最小高度 28px */
+    max-height: 36px;             /* 最大高度 28px */
 }
 
 QPushButton:hover {
@@ -42,7 +42,6 @@ QPushButton:pressed {
 #explorerToolbar {
     background-color: #f5f5f5;    /* 背景颜色 #f5f5f5 */
     border-bottom: 1px solid #ddd;/* 底部边框 1px 实线 #ddd */
-    /*padding: 3px;                 !* 内边距 5px *!*/
-    /*height: 30px;                 !* 高度 40px *!*/
+    padding: 3px;                 /* 内边距 5px */
     max-height: 40px;
 }
