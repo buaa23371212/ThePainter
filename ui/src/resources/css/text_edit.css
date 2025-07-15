@@ -1,0 +1,27 @@
+/* 文本编辑区域 */
+QTextEdit {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    selection-background-color: #b3d7ff;
+}
+
+QTextEdit:disabled {
+    background-color: #f8f8f8;
+    color: #777;
+}
+
+/* 历史记录区域特定样式 */
+#historyBox {
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+}
+
+/* 输入框特定样式 */
+#inputBox {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}

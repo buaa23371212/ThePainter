@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QTextEdit, QPushButton, QLabel
 from PyQt5.QtCore import QTimer
 
+from ui.src.configs.ui_config import TITLE_HEIGHT
+
+
 class AIPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -11,8 +14,8 @@ class AIPage(QWidget):
         # 标题栏
         # ==================================================
         label = QLabel("AI作画")
-        label.setFixedHeight(28)  # 固定高度
-        label.setStyleSheet("font-size: 18px; font-weight: bold; margin-bottom: 12px;")
+        label.setFixedHeight(TITLE_HEIGHT)      # 固定高度
+        label.setObjectName("aiTitleLabel")     # 添加对象名
         layout.addWidget(label)
 
         # ==================================================

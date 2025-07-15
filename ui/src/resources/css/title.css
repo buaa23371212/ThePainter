@@ -1,0 +1,11 @@
+/* 所有页面的标题栏 */
+#explorerTitleLabel,
+#aiTitleLabel,
+#paintingTitleLabel,
+#settingTitleLabel {
+    font-size: 16px;                    /* 字体大小16px */
+    font-weight: bold;                  /* 字体加粗 */
+    margin: 4px;                        /* 外边距4px */
+    border-bottom: 1px solid #ddd;      /* 底部边框为1px实线，颜色#ddd */
+    padding-bottom: 8px;                /* 底部内边距8px */
+}

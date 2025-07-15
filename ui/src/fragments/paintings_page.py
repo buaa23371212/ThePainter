@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
 )
 
 from ui.src.configs import ui_config
+from ui.src.configs.ui_config import TITLE_HEIGHT
 from ui.src.utils.image_utils import get_scaled_pixmap
 from ui.src.utils.previewer import preview_command_file
 
@@ -48,8 +49,8 @@ class PaintingsPage(QWidget):
         # 标题栏
         # ==================================================
         label = QLabel("画作列表")
-        label.setFixedHeight(28)  # 固定高度
-        label.setStyleSheet("font-size: 18px; font-weight: bold; margin-bottom: 12px;")
+        label.setFixedHeight(TITLE_HEIGHT)          # 固定高度
+        label.setObjectName("paintingTitleLabel")   # 添加对象名
         main_vertical_layout.addWidget(label)
 
         # 主体水平布局 - 包含左侧列表和右侧内容区

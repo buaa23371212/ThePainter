@@ -1,0 +1,21 @@
+/* 导航栏和列表组件 */
+QListWidget {
+    background-color: #f8f8f8;
+    border: none;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+QListWidget::item:selected {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border-left: 3px solid #2196F3;
+}
+
+QListWidget::item:hover {
+    background-color: #f0f0f0;
+}

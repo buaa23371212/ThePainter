@@ -1,16 +1,16 @@
 import os
 
-from PyQt5.QtCore import QDir, Qt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QTreeWidget, QTreeWidgetItem, QTextEdit,
     QSplitter, QStackedWidget, QPushButton, QHBoxLayout, QFrame
 )
 
 from public_configs.project_config import project_root
-from ui.src.configs import ui_config
-
 from public_utils.terminal_logger.logger import info
+from ui.src.configs import ui_config
+from ui.src.configs.ui_config import TITLE_HEIGHT
 from ui.src.utils.command_generator import execute_command_file
 from ui.src.utils.style_loader import load_stylesheets
 
@@ -23,16 +23,17 @@ class FileExplorer(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         # 主布局：垂直布局（标题 + 分栏内容）
+        self.output_view = None
         main_layout = QVBoxLayout(self)
         self.setLayout(main_layout)
-        main_layout.setContentsMargins(4, 4, 4, 4)  # 设置内边距
+        main_layout.setContentsMargins(4, 4, 4, 4)          # 设置内边距
         
         # ==================================================
         # 标题栏
         # ==================================================
         title_label = QLabel("资源管理器")
-        title_label.setFixedHeight(28)  # 固定高度
-        title_label.setObjectName("explorerTitleLabel")  # 添加对象名
+        title_label.setFixedHeight(TITLE_HEIGHT)            # 固定高度
+        title_label.setObjectName("explorerTitleLabel")     # 添加对象名
         main_layout.addWidget(title_label)
         
         # ===================================================
@@ -61,7 +62,6 @@ class FileExplorer(QWidget):
         
         # 工具栏（仅对命令文件显示）
         self.toolbar = QFrame()
-        self.toolbar.setFixedHeight(40)
         self.toolbar.setObjectName("explorerToolbar")   # 添加对象名
         self.toolbar.setVisible(False)                  # 默认隐藏
         
@@ -70,7 +70,6 @@ class FileExplorer(QWidget):
         
         # 执行按钮
         self.execute_btn = QPushButton("执行命令")
-        self.execute_btn.setFixedSize(100, 30)
         self.execute_btn.setObjectName("executeButton")  # 添加对象名
         self.execute_btn.setVisible(False)
         self.execute_btn.clicked.connect(self.execute_commands)
@@ -78,7 +77,6 @@ class FileExplorer(QWidget):
 
         # 刷新按钮
         self.refresh_btn = QPushButton("刷新")
-        self.refresh_btn.setFixedSize(100, 30)
         self.refresh_btn.setObjectName("refreshButton")
         self.refresh_btn.clicked.connect(self.refresh_commands)
         toolbar_layout.addWidget(self.refresh_btn)
@@ -129,6 +127,10 @@ class FileExplorer(QWidget):
         for name in os.listdir(folder_path):
             path = os.path.join(folder_path, name)
             child_item = QTreeWidgetItem([name])    # 创建子节点
+            if os.path.isdir(path):
+                    child_item.setIcon(0, QIcon("folder_icon.png"))
+            else:
+                child_item.setIcon(0, QIcon("file_icon.png"))
             
             # 存储完整路径到用户数据
             child_item.setData(0, Qt.UserRole, path)
@@ -212,14 +214,22 @@ class FileExplorer(QWidget):
 
     def load_stylesheet(self):
         """加载样式表"""
-        load_stylesheets(self, "explorer.css")
+        # load_stylesheets(self,
+        #                  "title.css", "button.css", "tree.css",
+        #                  "scroll_bar.css", "text_edit.css")
+
+    def set_output_view(self, text_view):
+        """设置命令执行输出的目标文本视图"""
+        self.output_view = text_view
 
 
     def execute_commands(self):
-        """
-        执行命令文件
-        """
-        execute_command_file(self.current_file_path, self.text_view)
+        """执行命令文件，输出到指定的文本视图"""
+        if hasattr(self, 'output_view') and self.current_file_path:
+            self.output_view.setVisible(True)
+            execute_command_file(self.current_file_path, self.output_view)
+        else:
+            info(False, "未设置输出视图或未选择命令文件", True)
 
     def refresh_commands(self):
         self.display_file_content(self.current_file_path)

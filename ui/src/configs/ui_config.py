@@ -1,6 +1,7 @@
 import os
 
 from public_configs.project_config import get_project_root
+from public_utils.terminal_logger.command_logger import title
 from public_utils.terminal_logger.logger import info
 
 # =====================================================
@@ -32,3 +33,5 @@ painter_dir = os.path.join(project_root, "auto_drawer", "src")
 # CSS 文件目录
 css_dir = os.path.join(project_root, "ui", "src", "resources", "css")               # ./ui/css
 info(True, f"CSS 目录: {css_dir}", True)
+
+TITLE_HEIGHT = 40

@@ -11,10 +11,21 @@ from ui.src.fragments.explorer import FileExplorer
 from ui.src.fragments.paintings_page import PaintingsPage
 from ui.src.fragments.settings_page import SettingsPage
 from ui.src.fragments.navigate_bar import NavigationBar
-
+from ui.src.utils.style_loader import load_stylesheets
 
 class MainWindow(QWidget):
     def __init__(self):
+        """
+        MainWindow
+             ├── NavigationBar (导航栏)
+             └── right_container (右侧容器)
+                    ├── stack (堆叠组件，包含四个页面)
+                    |     ├── FileExplorer (0)
+                    |     ├── AIPage (1)
+                    |     ├── PaintingsPage (2)
+                    |     └── SettingsPage (3)
+                    └── text_view (输出显示栏，默认隐藏)
+        """
         super().__init__()
         # 主窗口基础设置
         self.setWindowTitle("ThePainter")               # 窗口标题
@@ -40,8 +51,8 @@ class MainWindow(QWidget):
         # 创建一个容器控件来容纳右侧布局
         self.right_container = QWidget()
         self.right_layout = QVBoxLayout(self.right_container)
-        self.right_layout.setContentsMargins(0, 0, 0, 0)  # 移除内边距
-        self.right_layout.setSpacing(0)                   # 移除组件间距
+        self.right_layout.setContentsMargins(0, 0, 0, 0)        # 移除内边距
+        self.right_layout.setSpacing(0)                         # 移除组件间距
 
         self.stack = QStackedWidget()                           # 创建堆叠组件实现多页面切换
         
@@ -51,7 +62,7 @@ class MainWindow(QWidget):
         
         # 页面2: AI作画
         self.ai_page = AIPage()
-        self.ai_page.input_box.setText("生成一幅简笔画")        # 模拟输入
+        self.ai_page.input_box.setText("生成一幅简笔画")           # 模拟输入
         self.stack.addWidget(self.ai_page)
 
         # 页面3: 
@@ -68,13 +79,17 @@ class MainWindow(QWidget):
         
         self.right_layout.addWidget(self.stack)
 
+        # ==================================================
+        # 右下输出显示栏
+        # ==================================================
         self.text_view = QTextEdit()
         self.text_view.setReadOnly(True)
         self.text_view.setVisible(False)
+        self.file_explorer.set_output_view(self.text_view)
 
         self.right_layout.addWidget(self.text_view)
 
-        main_layout.addWidget(self.right_container)      # 将容器控件添加到主布局右侧
+        main_layout.addWidget(self.right_container)             # 将容器控件添加到主布局右侧
 
         # ==================================================
         # 功能连接：导航栏切换控制内容区显示
@@ -82,7 +97,13 @@ class MainWindow(QWidget):
         # 绑定导航栏点击事件：当前行变化时切换堆叠页面
         self.nav_list.currentRowChanged.connect(self.stack.setCurrentIndex)
         # 默认选中第一项（资源管理器）
-        self.nav_list.setCurrentRow(0)  
+        self.nav_list.setCurrentRow(0)
+
+        # 加载并应用样式表
+        load_stylesheets(self,
+                         "main_window.css", "button.css", "list.css",
+                         "navigate_bar.css", "scroll_bar.css", "splitter.css",
+                         "text_edit.css", "title.css", "tree.css",)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)            # 创建Qt应用

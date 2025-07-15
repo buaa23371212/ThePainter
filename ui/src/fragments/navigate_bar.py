@@ -13,4 +13,4 @@ class NavigationBar(QListWidget):
         for item_text in items:
             self.addItem(QListWidgetItem(item_text))
         
-        load_stylesheets(self, "navigate_bar.css")
+        # load_stylesheets(self, "navigate_bar.css")

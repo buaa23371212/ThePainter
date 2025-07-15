@@ -1,0 +1,9 @@
+/* 分割器样式 */
+QSplitter::handle {
+    background-color: #e0e0e0;
+    width: 4px;
+}
+
+QSplitter::handle:hover {
+    background-color: #bdbdbd;
+}

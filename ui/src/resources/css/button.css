@@ -1,0 +1,48 @@
+/* 通用按钮样式 */
+QPushButton {
+    background-color: #f0f0f0;    /* 背景颜色 #f0f0f0 */
+    border: 1px solid #ccc;       /* 边框 1px 实线 #ccc */
+    border-radius: 4px;           /* 边框圆角 4px */
+    padding: 5px 10px;            /* 内边距 上下5px 左右10px */
+    max-height: 28px;             /* 最小高度 28px */
+}
+
+QPushButton:hover {
+    background-color: #e6e6e6;    /* 鼠标悬停时背景颜色 #e6e6e6 */
+}
+
+QPushButton:pressed {
+    background-color: #d9d9d9;    /* 鼠标按压时背景颜色 #d9d9d9 */
+}
+
+/* 执行按钮特定样式 */
+#executeButton {
+    background-color: #4CAF50;    /* 背景颜色 #4CAF50 */
+    color: white;                 /* 文字颜色 白色 */
+    border: none;                 /* 无边框 */
+}
+
+#executeButton:hover {
+    background-color: #45a049;    /* 鼠标悬停时背景颜色 #45a049 */
+}
+
+/* 发送按钮样式 */
+#sendButton {
+    background-color: #2196F3;    /* 背景颜色 #2196F3 */
+    color: white;                 /* 文字颜色 白色 */
+    border: none;                 /* 无边框 */
+    font-weight: bold;            /* 文字加粗 */
+}
+
+#sendButton:hover {
+    background-color: #0b7dda;    /* 鼠标悬停时背景颜色 #0b7dda */
+}
+
+/* 工具栏 */
+#explorerToolbar {
+    background-color: #f5f5f5;    /* 背景颜色 #f5f5f5 */
+    border-bottom: 1px solid #ddd;/* 底部边框 1px 实线 #ddd */
+    /*padding: 3px;                 !* 内边距 5px *!*/
+    /*height: 30px;                 !* 高度 40px *!*/
+    max-height: 40px;
+}
