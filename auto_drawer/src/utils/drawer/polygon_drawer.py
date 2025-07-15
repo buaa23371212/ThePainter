@@ -1,5 +1,4 @@
 import time
-import json
 import pyautogui
 
 from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
