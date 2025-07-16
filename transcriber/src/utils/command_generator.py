@@ -136,6 +136,16 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 
     return commands
 
+
+# ======================================================================
+# 模块：其他工具
+# ======================================================================
+def print_command(commands: List[str]):
+    print("\nGenerated Drawing Commands:")
+    for i, cmd in enumerate(commands, 1):
+        print(f"{i:>2}. {cmd}")
+
+
 # ======================================================================
 # 模块4：主执行流程
 # ======================================================================
@@ -150,6 +160,4 @@ if __name__ == "__main__":
     drawing_commands = convert_events_to_drawing_commands(mouse_events)
 
     # Step 4.4：打印生成的命令
-    print("\nGenerated Drawing Commands:")
-    for i, cmd in enumerate(drawing_commands, 1):
-        print(f"{i:>2}. {cmd}")
+    print_command(drawing_commands)

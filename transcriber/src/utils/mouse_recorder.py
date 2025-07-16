@@ -5,6 +5,8 @@ import time
 from pynput import mouse
 from typing import List, Dict, Tuple, Optional
 import math
+
+from public_utils.terminal_logger.logger import info, error
 from transcriber.src.configs.drawer_panel_config import manager
 
 # ======================================================================
@@ -102,7 +104,7 @@ def print_record(event_list: List[Dict]):
     """Prints recorded mouse events in formatted table"""
     # Step 4.1: Handle empty record case
     if not event_list:
-        print("未检测到任何鼠标事件")
+        info(True, "未检测到任何鼠标事件")
         return
 
     # Step 4.2: Print table header
@@ -137,9 +139,9 @@ def export_to_file(event_list: List[Dict], file_path: str) -> None:
         with open(file_path, 'w', encoding='utf-8') as f:
             # 确保中文等特殊字符正确编码
             json.dump(event_list, f, ensure_ascii=False, indent=4)
-        print(f"成功导出到文件: {file_path}")
+        info(True, f"成功导出到文件: {file_path}")
     except Exception as e:
-        print(f"导出文件失败: {str(e)}")
+        error(True, f"导出文件失败: {str(e)}")
 
 def parse_from_file(file_path: str) -> List[Dict]:
     """从JSON文件解析出事件列表"""
@@ -148,15 +150,15 @@ def parse_from_file(file_path: str) -> List[Dict]:
             event_list = json.load(f)
         # 验证解析结果是否为列表且元素为字典
         if isinstance(event_list, list) and all(isinstance(item, dict) for item in event_list):
-            print(f"成功从文件解析: {file_path}")
+            info(True, f"成功从文件解析: {file_path}")
             return event_list
         else:
             raise ValueError("文件内容格式不符合要求，应为列表且元素为字典")
     except FileNotFoundError:
-        print(f"文件不存在: {file_path}")
+        error(True, f"文件不存在: {file_path}")
         return []
     except Exception as e:
-        print(f"解析文件失败: {str(e)}")
+        error(True, f"解析文件失败: {str(e)}")
         return []
 
 
@@ -178,9 +180,9 @@ def record_mouse(max_duration: int = 300):
     start_time = time.time()
 
     # Step 5.2: Start message
-    print("开始记录鼠标事件...")
-    print("点击 'WindowClose' 或 'WindowMinimization' 按钮结束记录")
-    print(f"或等待 {max_duration} 秒自动结束")
+    info(True, "开始记录鼠标事件...")
+    info(True, "点击 'WindowClose' 或 'WindowMinimization' 按钮结束记录")
+    info(True, f"或等待 {max_duration} 秒自动结束")
 
     # Step 5.3: Create mouse listener
     with mouse.Listener(
@@ -193,7 +195,7 @@ def record_mouse(max_duration: int = 300):
         # Step 5.4: Main recording loop
         while listener.running:
             if time.time() > end_time:
-                print("\n达到最大记录时长，停止记录")
+                info(True, "\n达到最大记录时长，停止记录")
                 listener.stop()
                 break
             time.sleep(0.1)  # Reduce CPU usage
