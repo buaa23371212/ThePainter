@@ -42,7 +42,7 @@ class MainWindow(QWidget):
         nav_items = ["资源管理器", "AI作画", "画作列表", "设置"]
         
         # 创建导航栏实例
-        self.nav_list = NavigationBar(nav_items)                  
+        self.nav_list = NavigationBar(nav_items, 120)
         main_layout.addWidget(self.nav_list)            # 将导航栏添加到主布局左侧
 
         # ==================================================
@@ -102,7 +102,7 @@ class MainWindow(QWidget):
         # 加载并应用样式表
         load_stylesheets(self,
                          "main_window.css", "button.css", "list.css",
-                         "navigate_bar.css", "scroll_bar.css", "splitter.css",
+                         "scroll_bar.css", "splitter.css",
                          "text_edit.css", "title.css", "tree.css",)
 
 if __name__ == "__main__":

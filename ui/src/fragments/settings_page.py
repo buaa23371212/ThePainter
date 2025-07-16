@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt
 
 from public_utils.terminal_logger.logger import info
+from ui.src.fragments.navigate_bar import NavigationBar
+
 
 class SettingsPage(QWidget):
     def __init__(self):
@@ -17,13 +19,10 @@ class SettingsPage(QWidget):
         # ==================================================
         # 左侧设置类型列表
         # ==================================================
-        self.settings_list = QListWidget()
-        self.settings_list.setFixedWidth(150)
-
         # 添加设置类型
         settings_types = ["自动操作速度", "其他设置"]  # 可扩展更多设置类型
-        for setting in settings_types:
-            self.settings_list.addItem(QListWidgetItem(setting))
+
+        self.settings_list = NavigationBar(settings_types, 150)
 
         main_layout.addWidget(self.settings_list)
 

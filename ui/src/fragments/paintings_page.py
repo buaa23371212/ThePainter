@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (
 
 from ui.src.configs import ui_config
 from ui.src.configs.ui_config import TITLE_HEIGHT
+from ui.src.fragments.navigate_bar import NavigationBar
 from ui.src.utils.image_utils import get_scaled_pixmap
 from ui.src.utils.previewer import preview_command_file
 
@@ -21,8 +22,8 @@ class PaintingsPage(QWidget):
     """
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.name_list = None
         self.init_ui()
-        self.load_common_names()
         # 存储当前选中的图片路径，用于窗口 resize 时重新缩放
         self.current_image_path = None
 
@@ -60,8 +61,7 @@ class PaintingsPage(QWidget):
         main_vertical_layout.addLayout(body_horizontal_layout)
 
         # 左侧列表 - 显示共有名称
-        self.name_list = QListWidget()
-        self.name_list.setMinimumWidth(200)
+        self.name_list = NavigationBar(self.load_common_names(), 200)
         body_horizontal_layout.addWidget(self.name_list)
         self.name_list.itemClicked.connect(self.on_name_clicked)
 
@@ -87,7 +87,8 @@ class PaintingsPage(QWidget):
     # ==============================================================
     # 数据加载
     # ==============================================================
-    def load_common_names(self):
+    @staticmethod
+    def load_common_names():
         """
         加载 input 和 output 目录中公有的名称
         - 从 input 目录获取所有文件夹名称
@@ -118,8 +119,8 @@ class PaintingsPage(QWidget):
 
         # 取交集并排序添加到列表
         common_names = set(input_folders) & set(output_image_names)
-        for name in sorted(common_names):
-            self.name_list.addItem(QListWidgetItem(name))
+
+        return common_names
 
     # ========================================================
     # 事件处理

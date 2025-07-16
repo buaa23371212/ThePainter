@@ -66,6 +66,8 @@ class FileExplorer(QWidget):
         self.toolbar.setVisible(False)                  # 默认隐藏
         
         toolbar_layout = QHBoxLayout(self.toolbar)
+        toolbar_layout.setContentsMargins(0, 0, 0, 0)
+        toolbar_layout.setSpacing(0)
         toolbar_layout.setAlignment(Qt.AlignRight)
         
         # 执行按钮
@@ -116,7 +118,7 @@ class FileExplorer(QWidget):
         self.current_file_path = None
         
         # 最后加载样式表
-        self.load_stylesheet()
+        # self.load_stylesheet()
 
     def _add_children(self, parent_item, folder_path):
         """
@@ -214,9 +216,7 @@ class FileExplorer(QWidget):
 
     def load_stylesheet(self):
         """加载样式表"""
-        # load_stylesheets(self,
-        #                  "title.css", "button.css", "tree.css",
-        #                  "scroll_bar.css", "text_edit.css")
+        load_stylesheets(self, "")
 
     def set_output_view(self, text_view):
         """设置命令执行输出的目标文本视图"""
