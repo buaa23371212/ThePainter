@@ -7,7 +7,8 @@ from PyQt5.QtWidgets import (
 )
 
 from ui.src.fragments.ai_page import AIPage
-from ui.src.fragments.explorer import FileExplorer
+from ui.src.fragments.explorer_page import FileExplorer
+from ui.src.fragments.listener_page import ListenerPage
 from ui.src.fragments.paintings_page import PaintingsPage
 from ui.src.fragments.settings_page import SettingsPage
 from ui.src.fragments.navigate_bar import NavigationBar
@@ -39,7 +40,7 @@ class MainWindow(QWidget):
         # 左侧导航栏 (功能选择区)
         # ==================================================
         # 定义导航项名称
-        nav_items = ["资源管理器", "AI作画", "画作列表", "设置"]
+        nav_items = ["资源管理器", "屏幕监听器", "画作列表", "AI作画", "设置"]
         
         # 创建导航栏实例
         self.nav_list = NavigationBar(nav_items, 120)
@@ -59,23 +60,23 @@ class MainWindow(QWidget):
         # 页面1: 文件资源管理器 (自定义组件)
         self.file_explorer = FileExplorer()                     # 实例化文件管理器
         self.stack.addWidget(self.file_explorer)                # 添加到堆叠组件
-        
-        # 页面2: AI作画
-        self.ai_page = AIPage()
-        self.ai_page.input_box.setText("生成一幅简笔画")           # 模拟输入
-        self.stack.addWidget(self.ai_page)
+
+        # 页面2:
+        self.listener = ListenerPage()
+        self.stack.addWidget(self.listener)
 
         # 页面3: 
         self.paintings_page = PaintingsPage()
         self.stack.addWidget(self.paintings_page)
 
-        # 页面4:
+        # 页面4: AI作画
+        self.ai_page = AIPage()
+        self.ai_page.input_box.setText("生成一幅简笔画")           # 模拟输入
+        self.stack.addWidget(self.ai_page)
+
+        # 页面5:
         self.setting_page = SettingsPage()
         self.stack.addWidget(self.setting_page)
-
-        # 后续可扩展更多页面，例如：
-        # self.canvas_page = CanvasPage()
-        # self.stack.addWidget(self.canvas_page)
         
         self.right_layout.addWidget(self.stack)
 

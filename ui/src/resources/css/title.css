@@ -2,7 +2,8 @@
 #explorerTitleLabel,
 #aiTitleLabel,
 #paintingTitleLabel,
-#settingTitleLabel {
+#settingTitleLabel,
+#listenerTitleLabel{
     font-size: 16px;                    /* 字体大小16px */
     font-weight: bold;                  /* 字体加粗 */
     margin: 4px;                        /* 外边距4px */
