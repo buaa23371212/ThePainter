@@ -11,6 +11,9 @@ canvas_area = ButtonRecorder("Canvas", 280, 910, 310, 1440)
 canvas_area.set_tolerance(10)
 manager.add_button(canvas_area)
 
+# 取消选中区域
+cancel_area = ButtonRecorder("Canvas", 217, 973, 0, 1920)
+
 # ====================================================
 # 添加窗口控制按钮
 # ====================================================

@@ -1,0 +1,757 @@
+[
+    {
+        "state": "pressed",
+        "start_time": 0.9943037033081055,
+        "start_position": [
+            1376,
+            1049
+        ],
+        "button": "left",
+        "current_position": [
+            1376,
+            1049
+        ],
+        "end_time": 1.0625495910644531,
+        "end_position": [
+            1376,
+            1049
+        ],
+        "path": [],
+        "button_name": "WinTaskbar"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.225407361984253,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 2.299201488494873,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.367086410522461,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 2.4189774990081787,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.479766845703125,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 2.56978440284729,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.6520917415618896,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 2.7195699214935303,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.7869343757629395,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 2.8689088821411133,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 2.944615364074707,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.0123255252838135,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.0949482917785645,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.161508321762085,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.2294085025787354,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.2964181900024414,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.372159957885742,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.439004421234131,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.5141730308532715,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.589383363723755,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.664609909057617,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.732173204421997,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.792520761489868,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 3.874793529510498,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 3.942267656326294,
+        "start_position": [
+            354,
+            59
+        ],
+        "button": "left",
+        "current_position": [
+            354,
+            59
+        ],
+        "end_time": 4.2198100090026855,
+        "end_position": [
+            354,
+            59
+        ],
+        "path": [],
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 5.232034921646118,
+        "start_position": [
+            958,
+            101
+        ],
+        "button": "left",
+        "current_position": [
+            958,
+            101
+        ],
+        "end_time": 5.284669399261475,
+        "end_position": [
+            958,
+            101
+        ],
+        "path": [],
+        "button_name": "Color_black"
+    },
+    {
+        "state": "pressed",
+        "start_time": 6.175266742706299,
+        "start_position": [
+            541,
+            94
+        ],
+        "button": "left",
+        "current_position": [
+            541,
+            94
+        ],
+        "end_time": 6.234761476516724,
+        "end_position": [
+            541,
+            94
+        ],
+        "path": [],
+        "button_name": "Shape_line"
+    },
+    {
+        "state": "dragging",
+        "start_time": 12.129124164581299,
+        "start_position": [
+            383,
+            783
+        ],
+        "button": "left",
+        "current_position": [
+            389,
+            783
+        ],
+        "end_time": 15.50107455253601,
+        "end_position": [
+            1534,
+            782
+        ],
+        "path": [
+            {
+                "time": "12.129s",
+                "position": [
+                    389,
+                    783
+                ]
+            },
+            {
+                "time": "15.501s",
+                "position": [
+                    1534,
+                    782
+                ]
+            }
+        ],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 15.888707399368286,
+        "start_position": [
+            1648,
+            771
+        ],
+        "button": "left",
+        "current_position": [
+            1648,
+            771
+        ],
+        "end_time": 15.963474988937378,
+        "end_position": [
+            1648,
+            771
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "dragging",
+        "start_time": 18.985037088394165,
+        "start_position": [
+            522,
+            782
+        ],
+        "button": "left",
+        "current_position": [
+            529,
+            772
+        ],
+        "end_time": 19.910975694656372,
+        "end_position": [
+            746,
+            472
+        ],
+        "path": [
+            {
+                "time": "18.985s",
+                "position": [
+                    529,
+                    772
+                ]
+            },
+            {
+                "time": "19.911s",
+                "position": [
+                    746,
+                    472
+                ]
+            }
+        ],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 20.674665927886963,
+        "start_position": [
+            1620,
+            742
+        ],
+        "button": "left",
+        "current_position": [
+            1620,
+            742
+        ],
+        "end_time": 20.738973379135132,
+        "end_position": [
+            1620,
+            742
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "dragging",
+        "start_time": 23.091331958770752,
+        "start_position": [
+            746,
+            471
+        ],
+        "button": "left",
+        "current_position": [
+            749,
+            478
+        ],
+        "end_time": 24.304592609405518,
+        "end_position": [
+            955,
+            784
+        ],
+        "path": [
+            {
+                "time": "23.091s",
+                "position": [
+                    749,
+                    478
+                ]
+            },
+            {
+                "time": "24.305s",
+                "position": [
+                    955,
+                    784
+                ]
+            }
+        ],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 24.91020965576172,
+        "start_position": [
+            1646,
+            726
+        ],
+        "button": "left",
+        "current_position": [
+            1646,
+            726
+        ],
+        "end_time": 24.958460569381714,
+        "end_position": [
+            1646,
+            726
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "dragging",
+        "start_time": 27.002328634262085,
+        "start_position": [
+            953,
+            779
+        ],
+        "button": "left",
+        "current_position": [
+            963,
+            776
+        ],
+        "end_time": 28.823219776153564,
+        "end_position": [
+            1205,
+            651
+        ],
+        "path": [
+            {
+                "time": "27.002s",
+                "position": [
+                    963,
+                    776
+                ]
+            },
+            {
+                "time": "28.823s",
+                "position": [
+                    1205,
+                    651
+                ]
+            }
+        ],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 29.26950693130493,
+        "start_position": [
+            1678,
+            693
+        ],
+        "button": "left",
+        "current_position": [
+            1678,
+            693
+        ],
+        "end_time": 29.317111492156982,
+        "end_position": [
+            1678,
+            693
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "dragging",
+        "start_time": 30.57717800140381,
+        "start_position": [
+            1206,
+            652
+        ],
+        "button": "left",
+        "current_position": [
+            1212,
+            652
+        ],
+        "end_time": 31.487914562225342,
+        "end_position": [
+            1459,
+            781
+        ],
+        "path": [
+            {
+                "time": "30.577s",
+                "position": [
+                    1212,
+                    652
+                ]
+            },
+            {
+                "time": "31.488s",
+                "position": [
+                    1459,
+                    781
+                ]
+            }
+        ],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 31.79133439064026,
+        "start_position": [
+            1660,
+            753
+        ],
+        "button": "left",
+        "current_position": [
+            1660,
+            753
+        ],
+        "end_time": 31.83923864364624,
+        "end_position": [
+            1660,
+            753
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "pressed",
+        "start_time": 33.5926079750061,
+        "start_position": [
+            369,
+            112
+        ],
+        "button": "left",
+        "current_position": [
+            369,
+            112
+        ],
+        "end_time": 33.65655064582825,
+        "end_position": [
+            369,
+            112
+        ],
+        "path": [],
+        "button_name": "Tool_Fill"
+    },
+    {
+        "state": "pressed",
+        "start_time": 35.111318588256836,
+        "start_position": [
+            1139,
+            109
+        ],
+        "button": "left",
+        "current_position": [
+            1139,
+            109
+        ],
+        "end_time": 35.17615580558777,
+        "end_position": [
+            1139,
+            109
+        ],
+        "path": [],
+        "button_name": "Color_green"
+    },
+    {
+        "state": "pressed",
+        "start_time": 35.715882539749146,
+        "start_position": [
+            763,
+            609
+        ],
+        "button": "left",
+        "current_position": [
+            763,
+            609
+        ],
+        "end_time": 35.77919149398804,
+        "end_position": [
+            763,
+            609
+        ],
+        "path": [],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 36.14615821838379,
+        "start_position": [
+            1208,
+            711
+        ],
+        "button": "left",
+        "current_position": [
+            1208,
+            711
+        ],
+        "end_time": 36.21008610725403,
+        "end_position": [
+            1208,
+            711
+        ],
+        "path": [],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 37.05553102493286,
+        "start_position": [
+            1144,
+            142
+        ],
+        "button": "left",
+        "current_position": [
+            1144,
+            142
+        ],
+        "end_time": 37.11984086036682,
+        "end_position": [
+            1144,
+            142
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "pressed",
+        "start_time": 37.83681130409241,
+        "start_position": [
+            1159,
+            835
+        ],
+        "button": "left",
+        "current_position": [
+            1159,
+            835
+        ],
+        "end_time": 37.90085744857788,
+        "end_position": [
+            1159,
+            835
+        ],
+        "path": [],
+        "button_name": "Canvas"
+    },
+    {
+        "state": "pressed",
+        "start_time": 38.759697675704956,
+        "start_position": [
+            1205,
+            91
+        ],
+        "button": "left",
+        "current_position": [
+            1204,
+            93
+        ],
+        "end_time": 38.85569715499878,
+        "end_position": [
+            1204,
+            93
+        ],
+        "path": [],
+        "button_name": "Color_blue"
+    },
+    {
+        "state": "pressed",
+        "start_time": 39.49538516998291,
+        "start_position": [
+            1180,
+            433
+        ],
+        "button": "left",
+        "current_position": [
+            1180,
+            434
+        ],
+        "end_time": 39.54256224632263,
+        "end_position": [
+            1180,
+            434
+        ],
+        "path": [],
+        "button_name": "Canvas"
+    }
+]
