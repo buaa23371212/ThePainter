@@ -7,10 +7,11 @@ from auto_drawer.src.configs import screen_config
 
 # 支持的工具类型
 TOOL_TYPE_LIST = [
-    "shape",   # 图形绘制工具
-    "fill",    # 填充工具
-    "brush",   # 画笔工具
-    "layer"    # 图层操作工具
+    "shape",    # 图形绘制工具
+    "fill",     # 填充工具
+    "text",     # 文字工具
+    "brush",    # 画笔工具
+    "layer"     # 图层操作工具
 ]
 
 SHAPES_BUTTON_POSITION = (screen_config.SCREEN_WIDTH // 4 + 65, 95)         # 形状按钮在工具栏上的位置（以直线按钮为基准）

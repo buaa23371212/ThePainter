@@ -144,7 +144,7 @@ manager.add_buttons(color_buttons)
 # ====================================================
 # 填充工具按钮
 fill_tool_btn = ButtonRecorder(
-    name="Tool_Fill",
+    name="Tool_fill",
     top=91,
     bottom=131,
     left=345,
@@ -154,7 +154,7 @@ manager.add_button(fill_tool_btn)
 
 # 文本工具按钮
 text_tool_btn = ButtonRecorder(
-    name="Tool_Text",
+    name="Tool_text",
     top=91,
     bottom=131,
     left=395,
@@ -164,7 +164,7 @@ manager.add_button(text_tool_btn)
 
 # 图层工具按钮
 layer_tool_btn = ButtonRecorder(
-    name="Tool_Layer",
+    name="Tool_layer",
     top=112,
     bottom=158,
     left=1419,
