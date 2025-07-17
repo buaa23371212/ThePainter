@@ -4,7 +4,7 @@ import pyautogui
 
 from public_utils.terminal_logger.logger import info, warn, error
 
-from auto_drawer.src.configs import drawer_panel_config, auto_speed_config, screen_config
+from configs import auto_speed_config, drawer_panel_config, screen_config
 
 
 # ======================

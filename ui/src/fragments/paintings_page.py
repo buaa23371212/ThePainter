@@ -8,8 +8,8 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QTextEdit, QSplitter
 )
 
-from ui.src.configs import ui_config
-from ui.src.configs.ui_config import TITLE_HEIGHT
+from configs import ui_config
+from configs.ui_config import TITLE_HEIGHT
 from ui.src.fragments.navigate_bar import NavigationBar
 from ui.src.utils.file_display import FileDisplayUtils
 from ui.src.utils.previewer import preview_command_file

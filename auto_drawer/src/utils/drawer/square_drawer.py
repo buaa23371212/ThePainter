@@ -1,4 +1,4 @@
-from auto_drawer.src.configs import screen_config
+from configs import screen_config
 
 from auto_drawer.src.utils.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle
 

@@ -2,7 +2,7 @@ import os
 
 from public_utils.terminal_logger.logger import info, warn, error
 
-from ui.src.configs import ui_config
+from configs import ui_config
 
 
 def load_stylesheets(widget, *style_files):

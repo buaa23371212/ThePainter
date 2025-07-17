@@ -1,5 +1,5 @@
 # 画图工具操作面板的快捷键配置
-from auto_drawer.src.configs import screen_config
+from configs import screen_config
 
 # ============================================
 # 工具类型配置模块

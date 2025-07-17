@@ -1,10 +1,9 @@
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFrame
+    QWidget, QVBoxLayout, QLabel
 )
 
 from public_utils.terminal_logger.logger import info
-from ui.src.configs.ui_config import TITLE_HEIGHT
+from configs.ui_config import TITLE_HEIGHT
 from ui.src.fragments.tool_bar import ListenerToolbar
 
 

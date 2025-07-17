@@ -2,8 +2,8 @@ import time
 import pyautogui
 
 from auto_drawer.src.utils.canvas_tools import click_shapes_button, activate_canvas
-from auto_drawer.src.configs import auto_speed_config
-from auto_drawer.src.configs.drawer_panel_config import get_shape_panel_presses
+from configs import auto_speed_config
+from configs.drawer_panel_config import get_shape_panel_presses
 from auto_drawer.src.utils.data_processor import convert_points_to_coords, load_shape_from_json, validate_shape_args
 
 from public_utils.terminal_logger.logger import info, error

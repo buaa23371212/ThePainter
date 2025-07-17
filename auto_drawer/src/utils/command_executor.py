@@ -5,8 +5,8 @@ import pyautogui
 # ==============================
 # 工具模块导入区
 # ==============================
-from auto_drawer.src.configs.screen_config import CANVAS_BLANK_POSITION
-from auto_drawer.src.configs import auto_speed_config
+from configs.screen_config import CANVAS_BLANK_POSITION
+from configs import auto_speed_config
 from auto_drawer.src.utils.command_parser.command_parser import parse_arguments
 from auto_drawer.src.utils.layer_tools import select_layer, add_layer, select_layer_operation
 

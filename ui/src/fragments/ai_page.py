@@ -1,7 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QTextEdit, QPushButton, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, QLabel
 from PyQt5.QtCore import QTimer
 
-from ui.src.configs.ui_config import TITLE_HEIGHT
+from configs.ui_config import TITLE_HEIGHT
 
 
 class AIPage(QWidget):

@@ -1,7 +1,6 @@
-from auto_drawer.src.configs.drawer_panel_config import SHAPE_PANEL_KEY_MAP, FILL_COLOR_KEY_MAP
+from configs.drawer_panel_config import SHAPE_PANEL_KEY_MAP, FILL_COLOR_KEY_MAP
 from transcriber.src.utils.button_manager import ButtonManager
 from transcriber.src.utils.button_recorder import ButtonRecorder
-from public_utils.terminal_logger.logger import info
 
 # 创建按钮管理器
 manager = ButtonManager()

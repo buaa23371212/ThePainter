@@ -7,7 +7,7 @@ from typing import List, Dict, Tuple, Optional
 import math
 
 from public_utils.terminal_logger.logger import info, error
-from transcriber.src.configs.drawer_panel_config import manager
+from configs.bottons_config import manager
 
 # ======================================================================
 # Module 1: Global Variables Initialization

@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt, QSize, QDir
 from PyQt5.QtWidgets import QLabel
 
-from ui.src.configs import ui_config
+from configs import ui_config
 
 
 def get_scaled_pixmap(image_path, container_size, min_size=QSize(100, 100)):

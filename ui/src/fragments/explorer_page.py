@@ -6,10 +6,10 @@ from PyQt5.QtWidgets import (
     QSplitter, QStackedWidget
 )
 
-from public_configs.project_config import project_root
+from configs.project_config import project_root
+from configs import ui_config
+from configs.ui_config import TITLE_HEIGHT
 from public_utils.terminal_logger.logger import info
-from ui.src.configs import ui_config
-from ui.src.configs.ui_config import TITLE_HEIGHT
 from ui.src.fragments.tool_bar import PreviewToolbar
 from ui.src.utils.command_generator import execute_command_file
 from ui.src.utils.file_display import FileDisplayUtils

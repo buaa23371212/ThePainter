@@ -1,7 +1,6 @@
 import os
 
-from public_configs.project_config import get_project_root
-from public_utils.terminal_logger.command_logger import title
+from configs.project_config import get_project_root
 from public_utils.terminal_logger.logger import info
 
 # =====================================================

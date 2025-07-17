@@ -2,7 +2,7 @@ import os
 import json
 
 from public_utils.terminal_logger.logger import info, error
-from public_configs.project_config import get_project_root
+from configs.project_config import get_project_root
 
 def load_shape_from_json(file_path, shape_type, shape_id=None, shape_name=None):
     """

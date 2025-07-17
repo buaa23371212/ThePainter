@@ -3,7 +3,7 @@ import subprocess
 
 from public_utils.terminal_logger.logger import info, error
 
-from ui.src.configs import ui_config
+from configs import ui_config
 
 
 def execute_command_file(file_path, text_view):
