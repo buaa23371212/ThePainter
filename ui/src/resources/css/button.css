@@ -1,5 +1,6 @@
 /* 工具栏样式设置 */
-#explorerToolbar {
+#explorerToolbar,
+#listenerToolbar{
     background-color: #f5f5f5;    /* 工具栏背景色：浅灰色 */
     border-bottom: 1px solid #ddd;/* 工具栏底部边框：1px实线，浅灰色 */
     padding: 0px;                 /* 工具栏内边距：0px，消除与内部元素的间隙 */

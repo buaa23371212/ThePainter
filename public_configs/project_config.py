@@ -15,3 +15,6 @@ info(True, f"项目根目录: {project_root}", True)
 
 def get_project_root():
     return project_root
+
+input_dir = os.path.join(project_root, "input")
+output_dir = os.path.join(project_root, "output")
