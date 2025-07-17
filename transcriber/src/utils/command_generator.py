@@ -43,7 +43,7 @@ def generate_shape_command() -> Optional[str]:
     """
     if current_tool == "shape":
         # Step 2.1.1：处理闭合形状（圆/椭圆/矩形）
-        if current_shape in ["circle", "ellipse", "rectangle"]:
+        if current_shape in ["circle", "ellipse", "square", "rectangle", "rounded_rectangle"]:
             x1, y1 = start_position
             x2, y2 = end_position
             return f"{current_shape} -bounding {x1} {y1} {x2} {y2}"
@@ -104,27 +104,31 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                 current_shape = button_name[len('Shape_'):]  # 提取形状类型
 
             # Step 3.2.2：颜色选择
-            if button_name.startswith('Color_'):
+            elif button_name.startswith('Color_'):
                 current_color = button_name[len('Color_'):]
                 commands.append(generate_color_command())  # 生成颜色命令
 
             # Step 3.2.3：工具选择
-            if button_name.startswith('Tool_'):
+            elif button_name.startswith('Tool_'):
                 current_tool = button_name[len('Tool_'):]
 
-            # Step 3.2.4：取消图形选中状态
-            if (button_name == 'Canvas' or button_name == 'N/A') and is_graphic_selected == True:
+            # TODO: Step 3.2.5：图形控制点操作
+            elif button_name == 'Canvas' and current_tool == 'shape':
+                pass
+
+            # Step 3.2.5：填充操作
+            elif button_name == 'Canvas' and current_tool == 'fill':
+                start_position = event['start_position']  # 获取填充位置
+                commands.append(generate_fill_command())  # 生成填充命令
+
+            # Step 3.2.6：取消图形选中状态
+            elif (button_name == 'Canvas' or button_name == 'N/A') and is_graphic_selected == True:
                 is_graphic_selected = False
                 cmd = generate_shape_command()
                 if cmd:
                     commands.append(cmd)  # 生成最终形状命令
                 else:
-                    warn(True, 'line122')
-
-            # Step 3.2.5：填充操作
-            if current_tool == 'fill' and button_name == 'Canvas':
-                start_position = event['start_position']  # 获取填充位置
-                commands.append(generate_fill_command())  # 生成填充命令
+                    warn(True, 'line127', True)
 
         # Step 3.3：处理拖拽事件（图形绘制）
         if event_type == 'dragging':

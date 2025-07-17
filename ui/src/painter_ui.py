@@ -2,13 +2,13 @@ import sys
 
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QHBoxLayout, QVBoxLayout,
-    QStackedWidget,
-    QTextEdit
+    QStackedWidget
 )
 
 from ui.src.fragments.ai_page import AIPage
 from ui.src.fragments.explorer_page import FileExplorer
 from ui.src.fragments.listener_page import ListenerPage
+from ui.src.fragments.output_displayer import OutputDisplay
 from ui.src.fragments.paintings_page import PaintingsPage
 from ui.src.fragments.settings_page import SettingsPage
 from ui.src.fragments.navigate_bar import NavigationBar
@@ -20,12 +20,13 @@ class MainWindow(QWidget):
         MainWindow
              ├── NavigationBar (导航栏)
              └── right_container (右侧容器)
-                    ├── stack (堆叠组件，包含四个页面)
+                    ├── stack (堆叠组件，包含5个页面)
                     |     ├── FileExplorer (0)
-                    |     ├── AIPage (1)
+                    |     ├── ListenerPage (1)
                     |     ├── PaintingsPage (2)
-                    |     └── SettingsPage (3)
-                    └── text_view (输出显示栏，默认隐藏)
+                    |     ├── AIPage (3)
+                    |     └── SettingsPage (4)
+                    └── OutputDisplay (输出显示栏，默认隐藏)
         """
         super().__init__()
         # 主窗口基础设置
@@ -83,10 +84,10 @@ class MainWindow(QWidget):
         # ==================================================
         # 右下输出显示栏
         # ==================================================
-        self.text_view = QTextEdit()
-        self.text_view.setReadOnly(True)
-        self.text_view.setVisible(False)
+        self.text_view = OutputDisplay()
+
         self.file_explorer.set_output_view(self.text_view)
+        self.listener.set_output_view(self.text_view)
 
         self.right_layout.addWidget(self.text_view)
 

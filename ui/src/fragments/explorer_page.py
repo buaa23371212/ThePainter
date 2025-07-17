@@ -82,6 +82,12 @@ class FileExplorer(QWidget):
         self.refresh_btn.setObjectName("refreshButton")
         self.refresh_btn.clicked.connect(self.refresh_commands)
         toolbar_layout.addWidget(self.refresh_btn)
+
+        # 显示输出栏按钮
+        self.display_btn = QPushButton("显示输出")
+        self.display_btn.setObjectName("displayButton")
+        self.display_btn.clicked.connect(self.display_commands)
+        toolbar_layout.addWidget(self.display_btn)
         
         right_layout.addWidget(self.toolbar)
         
@@ -234,3 +240,7 @@ class FileExplorer(QWidget):
     def refresh_commands(self):
         self.display_file_content(self.current_file_path)
         info(True, "文件显示已刷新", True)
+
+    def display_commands(self):
+        self.output_view.setVisible(True)
+        info(True, "输出已显示", True)
