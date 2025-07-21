@@ -1,8 +1,6 @@
 from typing import List, Dict, Tuple, Optional
 
 from public_utils.terminal_logger.logger import warn
-from transcriber.src.listener import file_path
-from transcriber.src.utils.mouse_recorder import parse_from_file, print_record
 
 # ======================================================================
 # 模块1：全局状态管理
@@ -148,20 +146,3 @@ def print_command(commands: List[str]):
     print("\nGenerated Drawing Commands:")
     for i, cmd in enumerate(commands, 1):
         print(f"{i:>2}. {cmd}")
-
-
-# ======================================================================
-# 模块4：主执行流程
-# ======================================================================
-if __name__ == "__main__":
-    # Step 4.1：从文件解析记录的鼠标事件
-    mouse_events = parse_from_file(file_path)
-
-    # Step 4.2：打印事件记录（调试用）
-    print_record(mouse_events)
-
-    # Step 4.3：将事件转换为绘图命令
-    drawing_commands = convert_events_to_drawing_commands(mouse_events)
-
-    # Step 4.4：打印生成的命令
-    print_command(drawing_commands)
