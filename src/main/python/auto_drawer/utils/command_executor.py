@@ -6,7 +6,7 @@ import pyautogui
 # 工具模块导入区
 # ==============================
 from src.main.python.configs.screen_config import CANVAS_BLANK_POSITION
-from src.main.python.configs import auto_speed_config
+from src.main.python.configs.config_manager import auto_speed_config
 from src.main.python.auto_drawer.utils.command_parser.command_parser import parse_arguments
 from src.main.python.auto_drawer.utils.layer_tools import select_layer, add_layer, select_layer_operation
 

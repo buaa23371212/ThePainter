@@ -2,7 +2,8 @@ import time
 import pyautogui
 
 from src.main.python.auto_drawer.utils.canvas_tools import click_shapes_button, activate_canvas
-from src.main.python.configs import auto_speed_config, screen_config
+from src.main.python.configs import screen_config
+from src.main.python.configs.config_manager import auto_speed_config
 from src.main.python.configs.drawer_panel_config import get_shape_panel_presses
 
 from src.main.python.terminal_logger.logger import info
@@ -28,7 +29,7 @@ def draw_ellipse(start_x, start_y, end_x, end_y):
     time.sleep(auto_speed_config.ACTUAL_EXTRA_MOVE_DELAY)  # 额外延迟确保识别
     
     # Step 2: 绘制椭圆
-    pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION)
+    pyautogui.dragTo(end_x, end_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_1)
     
     info(False, "成功绘制椭圆！", True)
 

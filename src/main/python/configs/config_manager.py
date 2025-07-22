@@ -1,7 +1,6 @@
 import re
 
-from src.main.python.configs.project_config import auto_speed_config_path, test_auto_speed_config_path
-from src.main.python.terminal_logger.logger import debug
+from src.main.python.configs.project_config import auto_speed_config_path
 
 class AutoSpeedConfig:
     _instance = None  # 单例模式确保配置唯一
@@ -149,7 +148,5 @@ class AutoSpeedConfig:
         return "\n".join(config_str)
 
 
-config = AutoSpeedConfig()
-config.load_config()
-print(config.toString())
-config.save_config()
+auto_speed_config = AutoSpeedConfig()
+auto_speed_config.load_config()

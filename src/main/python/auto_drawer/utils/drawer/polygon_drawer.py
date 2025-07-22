@@ -2,7 +2,7 @@ import time
 import pyautogui
 
 from src.main.python.auto_drawer.utils.canvas_tools import click_shapes_button, activate_canvas
-from src.main.python.configs import auto_speed_config
+from src.main.python.configs.config_manager import auto_speed_config
 from src.main.python.configs.drawer_panel_config import get_shape_panel_presses
 from src.main.python.auto_drawer.utils.data_processor import convert_points_to_coords, load_shape_from_json, validate_shape_args
 
@@ -36,7 +36,7 @@ def draw_polygon(points):
     
     # 拖动到第二个顶点
     second_x, second_y = points[1]
-    pyautogui.dragTo(second_x, second_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    pyautogui.dragTo(second_x, second_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_2)
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # 释放鼠标（完成第一条边）
@@ -47,7 +47,7 @@ def draw_polygon(points):
     for i in range(2, len(points)):
         # 移动到下一个顶点
         x, y = points[i]
-        pyautogui.moveTo(x, y, duration=auto_speed_config.BASIC_DRAW_DURATION_3)
+        pyautogui.moveTo(x, y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_3)
         time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
         
         # 点击添加顶点（自动连接到上一个点）
@@ -55,7 +55,7 @@ def draw_polygon(points):
         time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # Step 4: 闭合多边形（回到第一个顶点）
-    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    pyautogui.moveTo(start_x, start_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_2)
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # 点击闭合多边形

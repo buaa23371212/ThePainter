@@ -3,7 +3,7 @@ import pyautogui
 
 from src.main.python.auto_drawer.utils.data_processor import load_shape_from_json, convert_points_to_coords, validate_shape_args
 from src.main.python.auto_drawer.utils.canvas_tools import click_shapes_button, activate_canvas
-from src.main.python.configs import auto_speed_config
+from src.main.python.configs.config_manager import auto_speed_config
 from src.main.python.configs.drawer_panel_config import get_shape_panel_presses
 
 from src.main.python.auto_drawer.utils.drawer.line_drawer import draw_line
@@ -34,14 +34,14 @@ def draw_curve(points):
     
     # Step 2: 调整第一个控制点
     ctrl1_x, ctrl1_y = points[1]
-    pyautogui.moveTo(ctrl1_x, ctrl1_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    pyautogui.moveTo(ctrl1_x, ctrl1_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_2)
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     pyautogui.click()
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     
     # Step 3: 调整第二个控制点
     ctrl2_x, ctrl2_y = points[2]
-    pyautogui.moveTo(ctrl2_x, ctrl2_y, duration=auto_speed_config.BASIC_DRAW_DURATION_2)
+    pyautogui.moveTo(ctrl2_x, ctrl2_y, duration=auto_speed_config.ACTUAL_DRAW_DURATION_2)
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
     pyautogui.click()
     time.sleep(auto_speed_config.ACTUAL_HALF_EXTRA_MOVE_DELAY)
