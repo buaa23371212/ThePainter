@@ -1,0 +1,2 @@
+multicurve -file src/main/resources/input/Sample-1/shapes.json -id path1
+# polyline -points 500 500 600 600 700 500 800 600

@@ -28,7 +28,7 @@
 
 > 2025年7月6日
 
-像写一个项目一样，我设计，deepseek 实现，我再微调。最终也是把 [/output/Sample-2.png](/output/Sample-2.png) 弄出来了
+像写一个项目一样，我设计，deepseek 实现，我再微调。最终也是把 [/output/Sample-2.png](/src/main/resources/output/Sample-2.png) 弄出来了
 
 > 2025年7月8日
 
