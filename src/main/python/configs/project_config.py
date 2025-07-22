@@ -37,6 +37,7 @@ def get_project_root():
 # painter.py
 painter_dir = os.path.join(project_root, "src", "main", "python", "auto_drawer")
 
+# listener.py
 listener_dir = os.path.join(project_root, "src", "main", "python", "transcriber")
 
 # CSS 文件目录
@@ -44,3 +45,10 @@ css_dir = os.path.join(project_root, "src", "main", "resources", "css")
 
 input_dir = os.path.join(project_root, "src", "main", "resources", "input")
 output_dir = os.path.join(project_root, "src", "main", "resources", "output")
+
+# configs 文件目录
+configs_dir = os.path.join(project_root, "src", "main", "python", "configs")
+auto_speed_config_path = os.path.join(configs_dir, "auto_speed_config.py")
+
+test_configs_dir = os.path.join(project_root, "src", "test", "python", "configs")
+test_auto_speed_config_path = os.path.join(test_configs_dir, "auto_speed_config.py")
