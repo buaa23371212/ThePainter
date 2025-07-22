@@ -84,7 +84,7 @@ class AutoOperationSpeedPage(QWidget):
 
     def load_settings(self):
         """从配置管理器加载真实设置"""
-        info(True, "加载自动操作速度设置中...", True)
+        info(False, "加载自动操作速度设置中...", True)
         
         # 从配置管理器加载设置
         self.multiplier_spin.setValue(auto_speed_config.MULTIPLIER_FACTOR)
@@ -95,7 +95,7 @@ class AutoOperationSpeedPage(QWidget):
         self.mouse_move_time.setValue(auto_speed_config.BASIC_MOUSE_MOVE_SPEED)
         self.extra_delay.setValue(auto_speed_config.BASIC_EXTRA_MOVE_DELAY)
 
-        info(True, "自动操作速度设置加载完成", True)
+        info(False, "自动操作速度设置加载完成", True)
 
     def get_current_settings(self):
         """获取当前设置值"""
@@ -111,7 +111,7 @@ class AutoOperationSpeedPage(QWidget):
 
     def save_settings(self):
         """保存设置到配置文件"""
-        info(True, "正在保存自动操作速度设置...", True)
+        info(False, "正在保存自动操作速度设置...", True)
         
         # 获取当前界面设置
         current_settings = self.get_current_settings()
@@ -131,5 +131,5 @@ class AutoOperationSpeedPage(QWidget):
         # 重新计算实际值
         auto_speed_config.calculate_actual_values()
         
-        info(True, "自动操作速度设置已保存", True)
-        info(True, auto_speed_config.toString(), True)  # 打印配置信息
+        info(False, "自动操作速度设置已保存", True)
+        info(False, auto_speed_config.toString(), True)  # 打印配置信息
