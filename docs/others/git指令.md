@@ -3,6 +3,8 @@
     git config --global http.proxy 127.0.0.1:1080  
     git config --global https.proxy 127.0.0.1:1080  
 
+    git reset --hard HEAD~1
+
     $env:PYTHONPATH += ";E:\sad\ThePainter"
     cd .\src\main\python\transcriber\
     python listener.py
