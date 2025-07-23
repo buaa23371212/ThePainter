@@ -1,17 +1,16 @@
 import os
 import argparse
-from src.main.python.configs.project_config import get_project_root
+
+from src.main.python.configs.project_config import json_dir, input_dir, test_json_dir
+
 from src.main.python.terminal_logger.logger import info
+
 from src.main.python.transcriber.utils.command_generator import convert_events_to_drawing_commands, print_command
 from src.main.python.transcriber.utils.mouse_recorder import record_mouse, print_record, export_to_file, parse_from_file
 
 # 默认文件路径
 DEFAULT_FILE_PATH = os.path.join(
-    get_project_root(),
-    "transcriber",
-    "test",
-    "resources",
-    "json",
+    test_json_dir,
     "mouse_event.json"
 )
 
@@ -22,21 +21,26 @@ def main():
     )
     parser.add_argument(
         '-a', '--action',
-        choices=['record', 'export', 'convert', 'full', 'parse'],
+        choices=['record', 'export', 'convert', 'full', 'parse', 'parse_and_save'],
         default='record',
         help="""
 选择要执行的操作：
-  record     : 记录并打印鼠标事件（默认）
-  export     : 记录并导出到文件
-  convert    : 记录并转换为绘图命令
-  full       : 记录、转换并打印绘图命令
-  parse      : 从文件解析并转换为绘图命令
+  record          : 记录并打印鼠标事件（默认）
+  export          : 记录并导出到文件
+  convert         : 记录并转换为绘图命令
+  full            : 记录、转换并打印绘图命令
+  parse           : 从文件解析并转换为绘图命令
+  parse_and_save  : 从文件解析、转换并保存绘图命令
         """
     )
     parser.add_argument(
         '-f', '--file',
         default=DEFAULT_FILE_PATH,
-        help=f"指定输入/输出文件路径（默认：{DEFAULT_FILE_PATH}）"
+        help=f"指定鼠标事件输入/输出文件路径（默认：{DEFAULT_FILE_PATH}）"
+    )
+    parser.add_argument(
+        '-c', '--command-file',
+        help="指定绘图命令输出文件路径（仅对parse_and_save操作有效）"
     )
     parser.add_argument(
         '-p', '--print-commands',
@@ -76,6 +80,20 @@ def main():
         commands = convert_events_to_drawing_commands(mouse_records)
         if args.print_commands:
             print_command(commands)
+
+    # 操作6：从文件解析、转换并保存（使用pass占位）
+    elif args.action == 'parse_and_save':
+        mouse_records = parse_from_file(args.file)
+        commands = convert_events_to_drawing_commands(mouse_records)
+
+        # 保存命令的功能占位符
+        if args.command_file:
+            # 这里应该是实际的保存命令实现
+            # 但根据需求使用pass占位
+            pass
+            info(True, f"绘图命令保存功能尚未实现（占位）")
+        else:
+            info(True, "错误：未指定绘图命令输出文件路径（使用-c参数）")
 
 if __name__ == "__main__":
     main()

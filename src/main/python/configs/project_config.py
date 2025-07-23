@@ -71,6 +71,12 @@ css_dir = os.path.join(project_root, "src", "main", "resources", "css")
 input_dir = os.path.join(project_root, "src", "main", "resources", "input")
 output_dir = os.path.join(project_root, "src", "main", "resources", "output")
 
+# json 资源目录
+json_dir = os.path.join(project_root, "src", "main", "resources", "json")
+
+# 测试用 json 资源目录
+test_json_dir = os.path.join(project_root, "src", "test", "resources", "json")
+
 # 配置文件目录
 configs_dir = os.path.join(project_root, "src", "main", "python", "configs")
 # 自动速度配置文件路径

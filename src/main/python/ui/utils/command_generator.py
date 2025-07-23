@@ -74,15 +74,34 @@ def execute_command_file(file_path, text_view):
     # 记录执行信息
     return record_execution_info(project_root, command, text_view, f"执行文件: {os.path.basename(file_path)}")
 
-def execute_listening_command(text_view, cmd_type=0):
-    project_root = project_config.listener_dir
-    command = None
+def execute_listening_command(text_view, action="record", input_file=None, output_file=None, print_commands=False):
+    """
+    执行监听器命令
 
-    if cmd_type == 0:
-        command = "python listener.py"
+    参数:
+        text_view: QTextEdit 对象，用于显示输出
+        action: 操作类型，可选值: 'record', 'export', 'convert', 'full', 'parse', 'parse_and_save'
+        input_file: 输入文件路径（用于parse和parse_and_save操作）
+        output_file: 输出文件路径（用于export和parse_and_save操作）
+        print_commands: 是否打印命令（用于convert和parse操作）
+    """
+    project_root = project_config.listener_dir
+    command = f"python listener.py -a {action}"
+
+    # 添加输入文件参数
+    if input_file and action in ['parse', 'parse_and_save']:
+        command += f" -f \"{input_file}\""
+
+    # 添加输出文件参数
+    if output_file and action in ['export', 'parse_and_save']:
+        command += f" -c \"{output_file}\""
+
+    # 添加打印命令参数
+    if print_commands and action in ['convert', 'parse']:
+        command += " -p"
 
     def run_command():
-        record_execution_info(project_root, command, text_view, "debug")
+        record_execution_info(project_root, command, text_view, f"执行监听器操作: {action}")
 
     # 启动线程执行命令，避免阻塞UI
     threading.Thread(target=run_command, daemon=True).start()

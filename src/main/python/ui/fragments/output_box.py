@@ -66,9 +66,26 @@ class OutputDisplay(QWidget):
         self.text_edit.copy()
 
     # 对外提供的文本追加接口（保持原有使用方式兼容）
+    # TODO:我们希望在OutputDisplay组件中能够显示带颜色的文本，特别是支持ANSI颜色转义序列（例如，绿色字体由`[92m`开头，`[0m`结尾）。
+    #  由于QTextEdit默认不支持ANSI转义序列，我们需要将ANSI转义序列转换为HTML格式。
+    #  我们可以编写一个函数，将包含ANSI转义序列的字符串转换为HTML字符串，然后在append时使用`text_edit.appendHtml`而不是`text_edit.append`。
     def append(self, text):
-        """追加文本内容"""
-        self.text_edit.append(text)
+        """追加文本内容，处理ANSI颜色转义序列"""
+        # 定义需要移除的ANSI颜色转义序列集合
+        ansi_codes = {
+            '\033[91m',     # 红色
+            '\033[92m',     # 绿色
+            '\033[93m',     # 黄色
+            '\033[94m',     # 蓝色
+            '\033[0m'       # 重置
+        }
+
+        # 遍历集合移除所有颜色转义序列
+        processed_text = text
+        for code in ansi_codes:
+            processed_text = processed_text.replace(code, '')
+
+        self.text_edit.append(processed_text)
 
     # 可选：其他常用接口封装
     def setText(self, text):
