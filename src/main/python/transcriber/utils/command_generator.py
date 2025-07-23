@@ -23,6 +23,7 @@ is_graphic_selected = False             # 标记是否有图形被选中
 # Step 1.3：绘图位置跟踪
 start_position = None                   # 当前绘图动作的起始位置
 end_position = None                     # 当前绘图动作的结束位置
+control_points = None
 
 
 # ======================================================================
@@ -51,6 +52,40 @@ def generate_shape_command() -> Optional[str]:
             x1, y1 = start_position
             x2, y2 = end_position
             return f"line -points {x1} {y1} {x2} {y2}"
+        
+        # Step 2.1.3：处理曲线
+        if current_shape == 'curve':
+            if control_points:
+                if len(control_points) != 2:
+                    raise ValueError('曲线应有两个控制点')
+                else:
+                    x0, y0 = start_position
+                    x1, y1 = control_points[0]
+                    x2, y2 = control_points[1]
+                    x3, y3 = end_position
+                    return f"curve -points {x0} {y0} {x1} {y1} {x2} {y2} {x3} {y3}"
+            else:
+                raise ValueError('未记录控制点')
+
+        # Step 2.1.4：处理多边形
+        if current_shape == 'polygon':
+            if control_points:
+                last_point = control_points[-1]
+                if last_point != start_position:
+                    raise ValueError('多边形未闭合')
+                else:
+                    x1, y1 = start_position
+                    x2, y2 = end_position
+                    # 先构建初始顶点字符串
+                    vertices = [f"{x1} {y1}", f"{x2} {y2}"]
+                    # 添加control_points中除最后一个点之外的所有点
+                    for point in control_points[:-1]:
+                        px, py = point
+                        vertices.append(f"{px} {py}")
+                    # 拼接成完整的字符串
+                    return f"polygon -vertices {' '.join(vertices)}"
+            else:
+                raise ValueError('未记录控制点')
 
         return None
     return None
@@ -83,7 +118,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
     返回值：
         List[str]: 生成的绘图命令列表
     """
-    global is_graphic_selected, start_position, end_position, current_shape, current_tool, current_color
+    global is_graphic_selected, start_position, end_position, control_points, current_shape, current_tool, current_color
 
     commands = []  # 存储生成的命令
     i = 0  # 事件索引
@@ -101,6 +136,9 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                 current_tool = 'shape'
                 current_shape = button_name[len('Shape_'):]  # 提取形状类型
 
+                if current_shape in ['curve', 'polygon']:
+                    control_points = []
+
             # Step 3.2.2：颜色选择
             elif button_name.startswith('Color_'):
                 current_color = button_name[len('Color_'):]
@@ -110,9 +148,10 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
             elif button_name.startswith('Tool_'):
                 current_tool = button_name[len('Tool_'):]
 
-            # TODO: Step 3.2.5：图形控制点操作
-            elif button_name == 'Canvas' and current_tool == 'shape':
-                pass
+            # Step 3.2.4：图形控制点操作
+            elif button_name == 'Canvas' and current_tool == 'shape' and is_graphic_selected == True:
+                if current_shape in ['curve', 'polygon']:
+                    control_points.append[event['start_position']]
 
             # Step 3.2.5：填充操作
             elif button_name == 'Canvas' and current_tool == 'fill':
@@ -122,11 +161,15 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
             # Step 3.2.6：取消图形选中状态
             elif (button_name == 'Canvas' or button_name == 'N/A') and is_graphic_selected == True:
                 is_graphic_selected = False
-                cmd = generate_shape_command()
+                try:
+                    cmd = generate_shape_command()
+                except Exception as e:
+                    # 捕获所有异常，将异常信息格式化为注释命令
+                    cmd = f"# {e}"
                 if cmd:
                     commands.append(cmd)  # 生成最终形状命令
                 else:
-                    warn(True, 'line127', True)
+                    warn(True, 'line172', True)
 
         # Step 3.3：处理拖拽事件（图形绘制）
         if event_type == 'dragging':
