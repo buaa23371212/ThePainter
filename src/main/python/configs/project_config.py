@@ -57,28 +57,33 @@ def get_project_root():
 # =============================================================================
 # 关键目录定义模块
 # =============================================================================
+# python 源代码目录
+python_dir = os.path.join(project_root, 'src', 'main', 'python')
+
+# resources 目录
+resources_dir = os.path.join(project_root, 'src', 'main', 'resources')
 
 # 自动绘图模块目录
-painter_dir = os.path.join(project_root, "src", "main", "python", "auto_drawer")
+painter_dir = os.path.join(python_dir, "auto_drawer")
 
 # 鼠标动作转录模块目录
-listener_dir = os.path.join(project_root, "src", "main", "python", "transcriber")
+listener_dir = os.path.join(python_dir, "transcriber")
 
 # CSS资源目录
-css_dir = os.path.join(project_root, "src", "main", "resources", "css")
+css_dir = os.path.join(resources_dir, "css")
 
 # 输入/输出资源目录
-input_dir = os.path.join(project_root, "src", "main", "resources", "input")
-output_dir = os.path.join(project_root, "src", "main", "resources", "output")
+input_dir = os.path.join(resources_dir, "input")
+output_dir = os.path.join(resources_dir, "output")
 
 # json 资源目录
-json_dir = os.path.join(project_root, "src", "main", "resources", "json")
+json_dir = os.path.join(resources_dir, "json")
 
 # 测试用 json 资源目录
 test_json_dir = os.path.join(project_root, "src", "test", "resources", "json")
 
 # 配置文件目录
-configs_dir = os.path.join(project_root, "src", "main", "python", "configs")
+configs_dir = os.path.join(python_dir, "configs")
 # 自动速度配置文件路径
 auto_speed_config_path = os.path.join(configs_dir, "auto_speed_config.py")
 
