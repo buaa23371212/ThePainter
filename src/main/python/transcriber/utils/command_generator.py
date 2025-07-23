@@ -166,6 +166,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                 except Exception as e:
                     # 捕获所有异常，将异常信息格式化为注释命令
                     cmd = f"# {e}"
+                control_points = []
                 if cmd:
                     commands.append(cmd)  # 生成最终形状命令
                 else:
