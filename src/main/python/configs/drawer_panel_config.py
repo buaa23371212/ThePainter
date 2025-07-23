@@ -30,12 +30,29 @@ TEXT_TOOL_POSITION = (410, 100)                                             # �
 SHAPE_PANEL_KEY_MAP = {
     "line": 0,              # 直线（初始位置）
     "curve": 1,             # 曲线
-    "ellipse": 2,           # 椭圆
+    "ellipse": 2,           # 椭圆(竖直轴对称)
     "circle": 2,            # 圆
-    "rectangle": 3,         # 矩形
-    "square": 3,            # 正方形
-    "rounded_rectangle": 4, # 圆角矩形
+    "rectangle": 3,         # 矩形(竖直轴对称)
+    "square": 3,            # 正方形(竖直轴对称)
+    "rounded_rectangle": 4, # 圆角矩形(竖直轴对称)
     "polygon": 5,           # 多边形
+    "isosceles_triangle": 6,
+    "right_triangle": 7,    # 直角三角形(直角在左边)
+    "rhomboid": 8,
+    "pentagonal": 9,
+    "hexagon": 10,
+    "right_arrow": 11,
+    "left_arrow": 12,
+    "up_arrow": 13,
+    "down_arrow": 14,
+    "four_pointed_star": 15,
+    "five_pointed_star": 16,
+    "six_pointed_star": 17,
+    "label1": 18,
+    "label2": 19,
+    "label3": 20,
+    "heart": 21,
+    "lighting": 22,
 }
 
 

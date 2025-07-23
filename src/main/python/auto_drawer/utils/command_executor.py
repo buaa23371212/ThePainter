@@ -7,32 +7,24 @@ import pyautogui
 # ==============================
 from src.main.python.configs.screen_config import CANVAS_BLANK_POSITION
 from src.main.python.configs.config_manager import auto_speed_config
-from src.main.python.auto_drawer.utils.command_parser.command_parser import parse_arguments
-from src.main.python.auto_drawer.utils.layer_tools import select_layer, add_layer, select_layer_operation
+from .command_parser.command_parser import parse_arguments
+from .layer_tools import select_layer, add_layer, select_layer_operation
 
 # ==============================
 # 绘图命令模块导入区
 # ==============================
-from src.main.python.auto_drawer.utils.drawer.circle_drawer import select_circle_tool, draw_circle_command
-from src.main.python.auto_drawer.utils.drawer.ellipse_drawer import select_ellipse_tool, draw_ellipse_command
-from src.main.python.auto_drawer.utils.drawer.square_drawer import select_square_tool, draw_square_command
-from src.main.python.auto_drawer.utils.drawer.rectangle_drawer import select_rectangle_tool, draw_rectangle_command
-from src.main.python.auto_drawer.utils.drawer.polygon_drawer import select_polygon_tool, draw_polygon_command
-from src.main.python.auto_drawer.utils.drawer.line_drawer import select_line_tool, draw_line_command
-from src.main.python.auto_drawer.utils.drawer.polyline_drawer import select_polyline_tool, draw_polyline_command
-from src.main.python.auto_drawer.utils.drawer.curve_drawer import select_curve_tool, draw_curve_command
-from src.main.python.auto_drawer.utils.drawer.multicurve_drawer import select_multicurve_tool, draw_multicurve_command
-from src.main.python.auto_drawer.utils.drawer.rounded_rectangle_drawer import select_rounded_rectangle_tool, draw_rounded_rectangle_command
+from .command_parser.shapes import SUPPORTED_SHAPES
+from .drawer import SHAPE_COMMANDS
 
 # ==============================
 # 颜色填充模块导入区
 # ==============================
-from src.main.python.auto_drawer.utils.colorer import select_fill_tool, choose_color, fill_color
+from .colorer import select_fill_tool, choose_color, fill_color
 
 # ==============================
 # 文本输入模块导入区
 # ==============================
-from src.main.python.auto_drawer.utils.texter import select_texter_tool, create_text
+from .texter import select_texter_tool, create_text
 
 # ==============================
 # 日志记录模块导入区
@@ -98,9 +90,7 @@ def _dispatch_command(args):
         return
     
     # 图形绘制命令路由
-    if args.command in ['circle', 'ellipse', 'square', 'rectangle', 
-                       'rounded_rectangle', 'polygon', 'line', 'polyline',
-                        'curve', 'multicurve']:
+    if args.command in SUPPORTED_SHAPES:
         info(False, f"绘制图形: {args.command}", True)
         _dispatch_shape_command(args)
 
@@ -139,18 +129,7 @@ def _dispatch_shape_command(args):
     """
     global current_shape, current_tool, current_color
 
-    shape_commands = {
-        'circle': (select_circle_tool, draw_circle_command),
-        'ellipse': (select_ellipse_tool, draw_ellipse_command),
-        'square': (select_square_tool, draw_square_command),
-        'rectangle': (select_rectangle_tool, draw_rectangle_command),
-        'rounded_rectangle': (select_rounded_rectangle_tool, draw_rounded_rectangle_command),
-        'polygon': (select_polygon_tool, draw_polygon_command),
-        'line': (select_line_tool, draw_line_command),
-        'polyline':(select_polyline_tool, draw_polyline_command),
-        'curve': (select_curve_tool, draw_curve_command),
-        'multicurve': (select_multicurve_tool, draw_multicurve_command)
-    }
+    shape_commands = SHAPE_COMMANDS
 
     # Step 1: 选工具
     if args.command in shape_commands:
