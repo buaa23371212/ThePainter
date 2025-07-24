@@ -1,0 +1,14 @@
+[[source]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+verify_ssl = true
+name = "pip_conf_index_global"
+
+[packages]
+pyqt5 = "*"
+pyautogui = "*"
+pynput = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
