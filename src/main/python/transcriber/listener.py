@@ -4,6 +4,7 @@ import argparse
 from src.main.python.configs.project_config import json_dir, input_dir, test_json_dir
 
 from src.main.python.terminal_logger.logger import info, error
+from src.main.python.transcriber import ACTION_CHOICE
 
 from src.main.python.transcriber.utils.command_generator import convert_events_to_drawing_commands, print_command, \
     export2pcmd
@@ -22,7 +23,7 @@ def main():
     )
     parser.add_argument(
         '-a', '--action',
-        choices=['record', 'export', 'convert', 'full', 'parse', 'parse_and_save'],
+        choices=ACTION_CHOICE,
         default='record',
         help="""
 选择要执行的操作：

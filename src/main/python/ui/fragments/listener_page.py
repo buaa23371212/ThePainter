@@ -3,9 +3,10 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel
 )
 
-from src.main.python.terminal_logger.logger import info
+from src.main.python.terminal_logger.logger import info, debug
 from src.main.python.configs.ui_config import TITLE_HEIGHT
 from src.main.python.ui.fragments.listener_setting import ListenerSettingsWidget
+from src.main.python.ui.fragments.listener_setting_page import ListenerSettingPage
 from src.main.python.ui.fragments.tool_bar import ListenerToolbar
 from src.main.python.ui.utils.command_generator import execute_listening_command
 from src.main.python.ui.utils.file_manager import FileManager
@@ -14,6 +15,7 @@ from src.main.python.ui.utils.file_manager import FileManager
 class ListenerPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setting_page = None
         # ====================================================================
         # STEP 1: 初始化主布局和基本设置
         # ====================================================================
@@ -85,12 +87,14 @@ class ListenerPage(QWidget):
             action = self.settings_widget.get_action()
             input_file = self.settings_widget.get_input_file()
             output_file = self.settings_widget.get_output_file()
+            print_commands = self.setting_page.is_print_commands_enabled()
             # 执行命令时可以使用这些参数
             execute_listening_command(
                 text_view=self.output_view,
                 action=action,
                 input_file=input_file,
-                output_file=output_file
+                output_file=output_file,
+                print_commands=print_commands,
             )
         else:
             # 输出错误信息
@@ -104,3 +108,6 @@ class ListenerPage(QWidget):
         if self.output_view:
             self.output_view.setVisible(True)  # 显示输出面板
             info(True, "输出已显示", True)  # 输出成功信息
+
+    def set_setting_page(self, setting_page: ListenerSettingPage):
+        self.setting_page = setting_page

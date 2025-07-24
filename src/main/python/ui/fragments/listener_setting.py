@@ -2,6 +2,9 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QHBoxLayout, QComboBox, QLineEdit, QPushButton
 )
 
+from src.main.python.transcriber import ACTION_CHOICE
+
+
 class ListenerSettingsWidget(QWidget):
     """监听器参数设置组件"""
     def __init__(self, file_manager, parent=None):
@@ -19,7 +22,7 @@ class ListenerSettingsWidget(QWidget):
         action_layout = QHBoxLayout()
         action_label = QLabel("操作类型:")
         self.action_combo = QComboBox()
-        self.action_combo.addItems(["record", "其他操作1", "其他操作2"])  # 根据实际需求添加选项
+        self.action_combo.addItems(ACTION_CHOICE)  # 根据实际需求添加选项
         self.action_combo.setCurrentText("record")  # 默认值
         action_layout.addWidget(action_label)
         action_layout.addWidget(self.action_combo)

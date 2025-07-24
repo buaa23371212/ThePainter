@@ -27,3 +27,7 @@ class ListenerSettingPage(QWidget):
 
         # 添加伸缩项，使内容靠上显示
         layout.addStretch()
+
+    def is_print_commands_enabled(self):
+        """返回print_commands_checkbox的勾选状态"""
+        return self.print_commands_checkbox.isChecked()

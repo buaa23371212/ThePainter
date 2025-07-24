@@ -1,23 +1,36 @@
 import os
 import subprocess
 import threading
+from PyQt5.QtCore import QObject, pyqtSignal
 
 from src.main.python.terminal_logger.logger import info, error, debug
 
 from src.main.python.configs import project_config
 
+# 新增：线程安全的文本更新器
+class TextUpdater(QObject):
+    append_signal = pyqtSignal(str)
+
+    def __init__(self, text_view):
+        super().__init__()
+        self.append_signal.connect(text_view.append)
+
 def record_execution_info(project_root, command, text_view, other_msg):
-    """记录执行信息"""
+    """记录执行信息（线程安全版本）"""
     info(True, f"执行命令: {command}", True)
-    text_view.append("\n\n=== 命令执行开始 ===")
-    text_view.append(other_msg)
-    text_view.append(f"执行命令: {command}")
+
+    # 创建线程安全的更新器
+    updater = TextUpdater(text_view)
+
+    # 使用信号更新UI
+    updater.append_signal.emit("\n\n=== 命令执行开始 ===")
+    updater.append_signal.emit(other_msg)
+    updater.append_signal.emit(f"执行命令: {command}")
 
     try:
-        # 执行命令
         process = subprocess.Popen(
             command,
-            cwd=project_root,  # 设置工作目录为项目根目录
+            cwd=project_root,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True,
@@ -25,32 +38,30 @@ def record_execution_info(project_root, command, text_view, other_msg):
             encoding='utf-8'
         )
 
-        # 读取输出并实时显示
+        # 读取输出并安全更新UI
         while True:
             output = process.stdout.readline()
             if output == '' and process.poll() is not None:
                 break
             if output:
-                text_view.append(output.strip())
+                updater.append_signal.emit(output.strip())
 
-        # 检查退出码
         return_code = process.poll()
         if return_code == 0:
-            text_view.append("状态: 执行成功")
+            updater.append_signal.emit("状态: 执行成功")
         else:
-            # 读取错误输出
             error_output = process.stderr.read()
-            text_view.append(f"状态: 执行失败 (退出码: {return_code})")
-            text_view.append("错误信息:")
-            text_view.append(error_output)
+            updater.append_signal.emit(f"状态: 执行失败 (退出码: {return_code})")
+            updater.append_signal.emit("错误信息:")
+            updater.append_signal.emit(error_output)
 
-        text_view.append("=== 命令执行结束 ===")
+        updater.append_signal.emit("=== 命令执行结束 ===")
         return return_code == 0
 
     except Exception as e:
-        text_view.append(f"执行命令时出错: {str(e)}")
+        updater.append_signal.emit(f"执行命令时出错: {str(e)}")
         error(True, f"执行命令时出错: {str(e)}", True)
-        text_view.append("=== 命令执行结束（异常） ===")
+        updater.append_signal.emit("=== 命令执行结束（异常） ===")
         return False
 
 def execute_command_file(file_path, text_view):

@@ -93,6 +93,8 @@ class MainWindow(QWidget):
         self.setting_page = SettingsPage()
         self.stack.addWidget(self.setting_page)    # 索引4
 
+        self.listener.set_setting_page(self.setting_page.get_other_setting_page())
+
         self.right_layout.addWidget(self.stack)    # 将堆叠组件添加到右侧布局
 
         # ====================================================================

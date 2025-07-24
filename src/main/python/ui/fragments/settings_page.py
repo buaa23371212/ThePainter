@@ -65,3 +65,6 @@ class SettingsPage(QWidget):
         - 调用自动操作速度页面的保存方法
         """
         self.speed_page.save_settings()  # 调用当前页面的保存方法
+
+    def get_other_setting_page(self):
+        return self.other_settings_page

@@ -1,0 +1,1 @@
+ACTION_CHOICE = ['record', 'export', 'convert', 'full', 'parse', 'parse_and_save']
