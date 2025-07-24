@@ -130,7 +130,7 @@ def print_record(event_list: List[Dict]):
     # Step 4.4: Print summary
     print(f"\n共检测到 {len(event_list)} 个事件")
 
-def export_to_file(event_list: List[Dict], file_path: str) -> None:
+def export2json(event_list: List[Dict], file_path: str) -> None:
     """将事件列表导出到JSON文件"""
     try:
         # 创建目录（如果不存在）

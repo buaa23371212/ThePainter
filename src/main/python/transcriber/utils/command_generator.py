@@ -1,5 +1,7 @@
+import os.path
 from typing import List, Dict, Optional
 
+from src.main.python.configs.project_config import generate_input_path
 from src.main.python.terminal_logger.logger import warn
 
 # ======================================================================
@@ -190,3 +192,14 @@ def print_command(commands: List[str]):
     print("\nGenerated Drawing Commands:")
     for i, cmd in enumerate(commands, 1):
         print(f"{i:>2}. {cmd}")
+
+def export2pcmd(foldername, commands: List[str]):
+    tar_path = generate_input_path(os.path.join(foldername, "commands.pcmd"))
+
+    # 确保目标目录存在
+    os.makedirs(os.path.dirname(tar_path), exist_ok=True)
+
+    # 将命令列表写入文件，每行一条命令
+    with open(tar_path, 'w', encoding='utf-8') as f:
+        for cmd in commands:
+            f.write(f"{cmd}\n")

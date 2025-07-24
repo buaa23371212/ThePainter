@@ -3,10 +3,11 @@ import argparse
 
 from src.main.python.configs.project_config import json_dir, input_dir, test_json_dir
 
-from src.main.python.terminal_logger.logger import info
+from src.main.python.terminal_logger.logger import info, error
 
-from src.main.python.transcriber.utils.command_generator import convert_events_to_drawing_commands, print_command
-from src.main.python.transcriber.utils.mouse_recorder import record_mouse, print_record, export_to_file, parse_from_file
+from src.main.python.transcriber.utils.command_generator import convert_events_to_drawing_commands, print_command, \
+    export2pcmd
+from src.main.python.transcriber.utils.mouse_recorder import record_mouse, print_record, export2json, parse_from_file
 
 # 默认文件路径
 DEFAULT_FILE_PATH = os.path.join(
@@ -58,7 +59,7 @@ def main():
     # 操作2：记录并导出
     elif args.action == 'export':
         mouse_records = record_mouse()
-        export_to_file(mouse_records, args.file)
+        export2json(mouse_records, args.file)
         info(True, f"鼠标事件已导出到: {args.file}")
 
     # 操作3：记录并转换
@@ -88,12 +89,9 @@ def main():
 
         # 保存命令的功能占位符
         if args.command_file:
-            # 这里应该是实际的保存命令实现
-            # 但根据需求使用pass占位
-            pass
-            info(True, f"绘图命令保存功能尚未实现（占位）")
+            export2pcmd(args.command_file, commands)
         else:
-            info(True, "错误：未指定绘图命令输出文件路径（使用-c参数）")
+            error(True, "错误：未指定绘图命令输出文件路径（使用-c参数）")
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,5 @@
+from src.main.python.auto_drawer.utils.command_parser.tools import LAYER_OPERATIONS_CHOICES
+
 def add_new_layer_arguments(subparsers):
     """为添加新图层命令添加参数解析"""
     new_layer_parser = subparsers.add_parser('add_layer', help='添加新图层')
@@ -25,7 +27,7 @@ def add_layer_operation_arguments(subparsers):
         type=str,
         required=True,
         metavar='OPERATION',
-        choices=['hide', 'copy', 'merge_down', 'move_up', 'move_down', 'delete'],
+        choices=LAYER_OPERATIONS_CHOICES,
         help='要执行的图层操作'
     )
     layer_operation_parser.add_argument(

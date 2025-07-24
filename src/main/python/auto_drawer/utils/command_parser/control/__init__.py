@@ -1,0 +1,1 @@
+SUPPORTED_MOUSE_OPERATIONS = ['move_mouse', 'mouse_click', 'right_click']

@@ -8,6 +8,8 @@ import pyautogui
 from src.main.python.configs.screen_config import CANVAS_BLANK_POSITION
 from src.main.python.configs.config_manager import auto_speed_config
 from .command_parser.command_parser import parse_arguments
+from .command_parser.control import SUPPORTED_MOUSE_OPERATIONS
+from .command_parser.tools import SUPPORTED_LAYER_OPERATION
 from .layer_tools import select_layer, add_layer, select_layer_operation
 
 # ==============================
@@ -105,11 +107,11 @@ def _dispatch_command(args):
         _dispatch_text_command(args)
     
     # 鼠标控制命令路由
-    elif args.command in ['move_mouse', 'mouse_click', 'right_click']:
+    elif args.command in SUPPORTED_MOUSE_OPERATIONS:
         _dispatch_mouse_command(args)
     
     # 图层操作命令路由
-    elif args.command in ['add_layer', 'choose_layer', 'layer_operation']:
+    elif args.command in SUPPORTED_LAYER_OPERATION:
         _dispatch_layer_command(args)
     
     # 未知命令处理
@@ -232,6 +234,7 @@ def _dispatch_layer_command(args):
     elif args.command == 'layer_operation':
         info(False, f"对图层 ID: {args.layer_id} 执行操作: {args.operation}", True)
         select_layer_operation(args.operation, args.layer_id)
+        pass    # TODO
     else:
         warn(True, f"暂不支持的图层命令: {args.command}", True)
 
