@@ -3,7 +3,7 @@ import pyautogui
 
 from src.main.python.auto_drawer.utils.data_processor import load_shape_from_json, convert_points_to_coords, validate_shape_args
 from src.main.python.auto_drawer.utils.canvas_tools import click_shapes_button, activate_canvas
-from src.main.python.configs.config_manager import auto_speed_config
+from src.main.python.configs.auto_speed_manager import auto_speed_config
 from src.main.python.configs.drawer_panel_config import get_shape_panel_presses
 
 from src.main.python.auto_drawer.utils.drawer.line_drawer import draw_line

@@ -12,7 +12,7 @@ from src.main.python.configs import ui_config
 from src.main.python.configs.project_config import input_dir, output_dir
 from src.main.python.configs.ui_config import TITLE_HEIGHT
 from src.main.python.ui.fragments.navigate_bar import NavigationBar
-from src.main.python.ui.utils.file_display import FileDisplayUtils
+from src.main.python.ui.utils.file_displayer import FileDisplayUtils
 from src.main.python.ui.utils.previewer import preview_command_file
 
 

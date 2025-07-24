@@ -12,8 +12,8 @@ from src.main.python.configs.ui_config import TITLE_HEIGHT
 from src.main.python.terminal_logger.logger import info
 from src.main.python.ui.fragments.tool_bar import PreviewToolbar
 from src.main.python.ui.utils.command_generator import execute_command_file
-from src.main.python.ui.utils.file_display import FileDisplayUtils
-from src.main.python.ui.utils.file_tree_utils import FileTreeUtils
+from src.main.python.ui.utils.file_displayer import FileDisplayUtils
+from src.main.python.ui.utils.file_manager import FileTreeUtils
 from src.main.python.ui.utils.style_loader import load_stylesheets
 
 

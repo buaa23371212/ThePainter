@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (
 )
 
 from src.main.python.ui.fragments.auto_speed_setting_page import AutoOperationSpeedPage
+from src.main.python.ui.fragments.listener_setting_page import ListenerSettingPage
 from src.main.python.ui.fragments.navigate_bar import NavigationBar
 
 
@@ -36,17 +37,15 @@ class SettingsPage(QWidget):
         # ====================================================================
         # STEP 3.1: 添加自动操作速度设置页面
         # ====================================================================
-        self.speed_page = AutoOperationSpeedPage()  # 创建自动操作速度设置页面
+        self.speed_page = AutoOperationSpeedPage()                          # 创建自动操作速度设置页面
         self.speed_page.confirm_button.clicked.connect(self.save_settings)  # 连接保存事件
-        self.settings_stack.addWidget(self.speed_page)  # 添加到堆叠组件（索引0）
+        self.settings_stack.addWidget(self.speed_page)                      # 添加到堆叠组件（索引0）
 
         # ====================================================================
-        # STEP 3.2: 添加其他设置占位页面
+        # STEP 3.2: 添加其他设置页面（包含print_commands开关）
         # ====================================================================
-        # 创建占位页面（后续可替换为实际设置页面）
-        other_settings_page = QLabel("其他设置页面（开发中）")
-        other_settings_page.setAlignment(Qt.AlignCenter)
-        self.settings_stack.addWidget(other_settings_page)  # 添加到堆叠组件（索引1）
+        self.other_settings_page = ListenerSettingPage()
+        self.settings_stack.addWidget(self.other_settings_page)     # 将页面添加到堆叠组件（索引1）
 
         # ====================================================================
         # STEP 4: 连接导航与页面切换功能
