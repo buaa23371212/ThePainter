@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (
     QWidget, QHBoxLayout, QStackedWidget, QLabel
 )
 
+from src.main.python.ui.fragments import SETTING_TYPES
 from src.main.python.ui.fragments.auto_speed_setting_page import AutoOperationSpeedPage
 from src.main.python.ui.fragments.listener_setting_page import ListenerSettingPage
 from src.main.python.ui.fragments.navigate_bar import NavigationBar
@@ -22,7 +23,7 @@ class SettingsPage(QWidget):
         # STEP 2: 创建左侧设置类型导航栏
         # ====================================================================
         # 定义设置类型列表
-        settings_types = ["自动操作速度", "其他设置"]  # 可扩展更多设置类型
+        settings_types = SETTING_TYPES  # 可扩展更多设置类型
 
         # 创建导航栏实例
         self.settings_list = NavigationBar(settings_types, 150)
@@ -42,10 +43,10 @@ class SettingsPage(QWidget):
         self.settings_stack.addWidget(self.speed_page)                      # 添加到堆叠组件（索引0）
 
         # ====================================================================
-        # STEP 3.2: 添加其他设置页面（包含print_commands开关）
+        # STEP 3.2: 添加鼠标动作监听器设置页面（包含print_commands开关）
         # ====================================================================
-        self.other_settings_page = ListenerSettingPage()
-        self.settings_stack.addWidget(self.other_settings_page)     # 将页面添加到堆叠组件（索引1）
+        self.listener_settings_page = ListenerSettingPage()
+        self.settings_stack.addWidget(self.listener_settings_page)     # 将页面添加到堆叠组件（索引1）
 
         # ====================================================================
         # STEP 4: 连接导航与页面切换功能
@@ -67,4 +68,4 @@ class SettingsPage(QWidget):
         self.speed_page.save_settings()  # 调用当前页面的保存方法
 
     def get_other_setting_page(self):
-        return self.other_settings_page
+        return self.listener_settings_page

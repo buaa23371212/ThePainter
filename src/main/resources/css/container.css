@@ -1,0 +1,18 @@
+QWidget {
+    background-color: #ffffff;
+}
+
+#settingsContainer {
+    background-color: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+#helpContainer {
+    background-color: #F5F9FC;
+    border: 1px solid #D0E0F0;
+    border-radius: 8px;
+    padding: 15px;
+}
+

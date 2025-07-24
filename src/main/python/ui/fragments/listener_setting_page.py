@@ -9,14 +9,6 @@ class ListenerSettingPage(QWidget):
     def init_ui(self):
         layout = QVBoxLayout(self)
 
-        # 添加标题
-        title_label = QLabel("其他设置")
-        title_font = title_label.font()
-        title_font.setPointSize(14)
-        title_font.setBold(True)
-        title_label.setFont(title_font)
-        layout.addWidget(title_label)
-
         # 添加print_commands开关
         self.print_commands_checkbox = QCheckBox("启用命令打印 (print_commands)")
         # 设置默认状态（例如默认不启用）

@@ -18,7 +18,7 @@ QPushButton {
     background-color: #f0f0f0;    /* 按钮背景色：浅灰色 */
     border: 1px solid #ccc;       /* 按钮边框：1px实线，灰色 */
     border-radius: 4px;           /* 按钮圆角：4px */
-    padding: 10px 10px;            /* 按钮内边距：上下10px，左右10px */
+    padding: 10px 10px;           /* 按钮内边距：上下10px，左右10px */
     width: 60px;                  /* 按钮宽度：60px */
     margin: 0 2px;                /* 按钮外边距：左右2px，避免按钮完全紧贴 */
 }
@@ -56,4 +56,17 @@ QPushButton:pressed {
 /* 发送按钮鼠标悬停状态样式 */
 #sendButton:hover {
     background-color: #0b7dda;    /* 悬停时背景色：比默认略深的蓝色 */
+}
+
+/* 浏览按钮（id: sendButton）特定样式 */
+#exploreBtn{
+    background-color: #5D9CEC;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#exploreBtn:hover {
+    background-color: #4A89DC;
 }

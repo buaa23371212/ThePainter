@@ -19,3 +19,4 @@ COMMAND_FILE_TYPES = ['.pcmd', '.cmd', '.txt']
 IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
 
 TITLE_HEIGHT = 40
+LABEL_WIDTH = 100

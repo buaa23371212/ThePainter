@@ -125,7 +125,7 @@ class MainWindow(QWidget):
         # STEP 9: 加载并应用样式表
         # ====================================================================
         load_stylesheets(self,
-                         "main_window.css", "button.css", "list.css",
+                         "container.css", "button.css", "list.css",
                          "scroll_bar.css", "splitter.css",
                          "text_edit.css", "title.css", "tree.css")
 

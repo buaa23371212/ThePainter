@@ -12,3 +12,9 @@ QListWidget::item:selected {
     background-color: #908484;
     font-weight: bold;
 }
+
+QComboBox {
+    padding: 5px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+}

@@ -19,21 +19,21 @@ class ListenerPage(QWidget):
         # ====================================================================
         # STEP 1: 初始化主布局和基本设置
         # ====================================================================
-        self.output_view = None  # 输出视图引用
-        main_layout = QVBoxLayout(self)  # 创建主垂直布局
+        self.output_view = None                     # 输出视图引用
+        main_layout = QVBoxLayout(self)             # 创建主垂直布局
         self.setLayout(main_layout)
         main_layout.setContentsMargins(4, 4, 4, 4)  # 设置内边距
 
         self.tk_root = tk.Tk()
-        self.tk_root.withdraw()  # 隐藏Tkinter窗口
+        self.tk_root.withdraw()                     # 隐藏Tkinter窗口
         self.file_manager = FileManager(self.tk_root)
 
         # ====================================================================
         # STEP 2: 创建标题栏
         # ====================================================================
         title_label = QLabel("屏幕监听器")
-        title_label.setFixedHeight(TITLE_HEIGHT)  # 固定高度
-        title_label.setObjectName("listenerTitleLabel")  # 添加对象名用于样式定制
+        title_label.setFixedHeight(TITLE_HEIGHT)            # 固定高度
+        title_label.setObjectName("listenerTitleLabel")     # 添加对象名用于样式定制
         main_layout.addWidget(title_label)
 
         # ====================================================================
