@@ -1,9 +1,10 @@
-import re
-
-from src.main.python.configs.project_config import auto_speed_config_path
+import os
+from src.main.python.configs.project_config import configs_dir
+from src.main.python.utils.config_loader import parse_config_file, replace_lines
 
 class AutoSpeedConfig:
     _instance = None  # 单例模式确保配置唯一
+    auto_speed_config_path = os.path.join(configs_dir, "auto_speed_config.py")
 
     def __new__(cls):
         if cls._instance is None:
@@ -13,39 +14,23 @@ class AutoSpeedConfig:
 
     def load_config(self):
         """从配置文件加载配置项"""
-        try:
-            with open(auto_speed_config_path, "r", encoding="utf-8") as f:
-                content = f.read()
-
-            # 提取配置值的正则表达式
-            pattern = r"^(\w+)\s*=\s*(.+)$"
-            configs = {}
-            
-            for line in content.split("\n"):
-                match = re.match(pattern, line.strip())
-                if match:
-                    key, value = match.groups()
-                    try:
-                        # 尝试转换为数值类型
-                        configs[key] = float(value) if '.' in value else int(value)
-                    except ValueError:
-                        configs[key] = value  # 保留原始字符串（如果转换失败）
-
-            # 初始化配置属性
-            self.MULTIPLIER_FACTOR = configs.get("MULTIPLIER_FACTOR", 1.0)
-            self.BASIC_DRAW_DURATION_1 = configs.get("BASIC_DRAW_DURATION_1", 0.5)
-            self.BASIC_DRAW_DURATION_2 = configs.get("BASIC_DRAW_DURATION_2", 0.3)
-            self.BASIC_DRAW_DURATION_3 = configs.get("BASIC_DRAW_DURATION_3", 0.2)
-            self.BASIC_CLICK_WAIT = configs.get("BASIC_CLICK_WAIT", 0.5)
-            self.BASIC_MOUSE_MOVE_SPEED = configs.get("BASIC_MOUSE_MOVE_SPEED", 0.5)
-            self.BASIC_EXTRA_MOVE_DELAY = configs.get("BASIC_EXTRA_MOVE_DELAY", 0.2)
-
-            # 计算派生属性
-            self.calculate_actual_values()
-
-        except FileNotFoundError:
-            # 文件不存在时使用默认值
+        configs = parse_config_file(self.auto_speed_config_path)
+        
+        if not configs:  # 如果配置为空（文件不存在或解析失败）
             self._set_defaults()
+            return
+            
+        # 初始化配置属性
+        self.MULTIPLIER_FACTOR = configs.get("MULTIPLIER_FACTOR", 1.0)
+        self.BASIC_DRAW_DURATION_1 = configs.get("BASIC_DRAW_DURATION_1", 0.5)
+        self.BASIC_DRAW_DURATION_2 = configs.get("BASIC_DRAW_DURATION_2", 0.3)
+        self.BASIC_DRAW_DURATION_3 = configs.get("BASIC_DRAW_DURATION_3", 0.2)
+        self.BASIC_CLICK_WAIT = configs.get("BASIC_CLICK_WAIT", 0.5)
+        self.BASIC_MOUSE_MOVE_SPEED = configs.get("BASIC_MOUSE_MOVE_SPEED", 0.5)
+        self.BASIC_EXTRA_MOVE_DELAY = configs.get("BASIC_EXTRA_MOVE_DELAY", 0.2)
+
+        # 计算派生属性
+        self.calculate_actual_values()
 
     def _set_defaults(self):
         """设置默认配置"""
@@ -72,7 +57,7 @@ class AutoSpeedConfig:
         """将当前配置保存到文件"""
         # 读取原始文件内容（保留注释和格式）
         try:
-            with open(auto_speed_config_path, "r", encoding="utf-8") as f:
+            with open(self.auto_speed_config_path, "r", encoding="utf-8") as f:
                 lines = f.readlines()
         except FileNotFoundError:
             lines = []
@@ -88,24 +73,7 @@ class AutoSpeedConfig:
             "BASIC_EXTRA_MOVE_DELAY": self.BASIC_EXTRA_MOVE_DELAY
         }
 
-        # 替换配置值，保留注释和格式
-        new_lines = []
-        for line in lines:
-            stripped = line.strip()
-            # 检查是否是配置行
-            for key, value in base_configs.items():
-                if stripped.startswith(f"{key} ="):
-                    # 保留注释部分
-                    if '#' in line:
-                        prefix, comment = line.split('#', 1)
-                        new_line = f"{key} = {value}  # {comment}"
-                    else:
-                        new_line = f"{key} = {value}\n"
-                    new_lines.append(new_line)
-                    break
-            else:
-                # 不是配置行，保留原样
-                new_lines.append(line)
+        new_lines = replace_lines(lines, base_configs)
 
         # 如果文件不存在或配置项缺失，创建新内容
         if not new_lines:
@@ -122,7 +90,7 @@ class AutoSpeedConfig:
             ]
 
         # 写入更新后的内容
-        with open(auto_speed_config_path, "w", encoding="utf-8") as f:
+        with open(self.auto_speed_config_path, "w", encoding="utf-8") as f:
             f.writelines(new_lines)
 
     def toString(self):
@@ -149,4 +117,3 @@ class AutoSpeedConfig:
 
 
 auto_speed_config = AutoSpeedConfig()
-auto_speed_config.load_config()

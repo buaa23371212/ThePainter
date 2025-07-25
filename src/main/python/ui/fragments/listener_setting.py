@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QSize
 
 from src.main.python.configs.ui_config import LABEL_WIDTH
+from src.main.python.configs.listener_manager import listener_config
 from src.main.python.transcriber import ACTION_CHOICE
 
 class ListenerSettingsWidget(QWidget):
@@ -27,7 +28,6 @@ class ListenerSettingsWidget(QWidget):
         settings_container = QFrame()
         settings_container.setObjectName("settingsContainer")
         settings_container.setFrameShape(QFrame.StyledPanel)
-        # settings_container.setFixedWidth(450)  # 固定宽度
 
         # 设置框布局
         settings_layout = QVBoxLayout(settings_container)
@@ -46,7 +46,7 @@ class ListenerSettingsWidget(QWidget):
         action_label.setFixedWidth(LABEL_WIDTH)
         self.action_combo = QComboBox()
         self.action_combo.addItems(ACTION_CHOICE)
-        self.action_combo.setCurrentText("record")
+        self.action_combo.setCurrentText(listener_config.DEFAULT_ACTION_CHOICE)
         action_layout.addWidget(action_label)
         action_layout.addWidget(self.action_combo)
         settings_layout.addLayout(action_layout)
@@ -91,7 +91,6 @@ class ListenerSettingsWidget(QWidget):
         help_container = QFrame()
         help_container.setObjectName("helpContainer")
         help_container.setFrameShape(QFrame.StyledPanel)
-        # help_container.setFixedWidth(300)  # 固定宽度
 
         # 帮助信息布局
         help_layout = QVBoxLayout(help_container)

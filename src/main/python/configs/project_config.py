@@ -63,6 +63,9 @@ python_dir = os.path.join(project_root, 'src', 'main', 'python')
 # resources 目录
 resources_dir = os.path.join(project_root, 'src', 'main', 'resources')
 
+# data 目录
+data_dir = os.path.join(project_root, "data")
+
 # 自动绘图模块目录
 painter_dir = os.path.join(python_dir, "auto_drawer")
 
@@ -73,24 +76,22 @@ listener_dir = os.path.join(python_dir, "transcriber")
 css_dir = os.path.join(resources_dir, "css")
 
 # 输入/输出资源目录
-input_dir = os.path.join(resources_dir, "input")
-output_dir = os.path.join(resources_dir, "output")
+input_dir = os.path.join(data_dir, "input")
+output_dir = os.path.join(data_dir, "output")
 
 # json 资源目录
-json_dir = os.path.join(resources_dir, "json")
+json_dir = os.path.join(data_dir, "json")
 
 # 测试用 json 资源目录
 test_json_dir = os.path.join(project_root, "src", "test", "resources", "json")
 
 # 配置文件目录
 configs_dir = os.path.join(python_dir, "configs")
-# 自动速度配置文件路径
-auto_speed_config_path = os.path.join(configs_dir, "auto_speed_config.py")
 
 # 测试配置文件目录
 test_configs_dir = os.path.join(project_root, "src", "test", "python", "configs")
 # 测试用自动速度配置文件路径
 test_auto_speed_config_path = os.path.join(test_configs_dir, "auto_speed_config.py")
 
-def generate_input_path(path):
-    return os.path.join(input_dir, path)
+def generate_input_path(path_frag):
+    return os.path.join(input_dir, path_frag)
