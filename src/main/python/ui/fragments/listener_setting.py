@@ -5,7 +5,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QSize
 
 from src.main.python.configs.ui_config import LABEL_WIDTH
-from src.main.python.configs.listener_manager import listener_config
+from src.main.python.configs.project_config import json_dir, input_dir
+from src.main.python.utils.listener_manager import listener_config
 from src.main.python.transcriber import ACTION_CHOICE
 
 class ListenerSettingsWidget(QWidget):
@@ -68,21 +69,40 @@ class ListenerSettingsWidget(QWidget):
         settings_layout.addLayout(input_layout)
 
         # 3. Output File设置
-        output_layout = QHBoxLayout()
-        output_label = QLabel("输出文件:")
-        output_label.setObjectName("listenerSettingOutputLabel")
-        output_label.setFixedWidth(LABEL_WIDTH)
-        self.output_file_edit = QLineEdit()
-        self.output_file_edit.setPlaceholderText("输出文件路径（可选）")
-        output_btn = QPushButton("浏览...")
-        output_btn.setObjectName("exploreBtn")
-        output_btn.setFixedWidth(70)
-        output_btn.setStyleSheet(input_btn.styleSheet())
-        output_btn.clicked.connect(self._select_output_file)
-        output_layout.addWidget(output_label)
-        output_layout.addWidget(self.output_file_edit)
-        output_layout.addWidget(output_btn)
-        settings_layout.addLayout(output_layout)
+        output_group = QGroupBox("输出文件设置")
+        output_group_layout = QVBoxLayout(output_group)
+
+        # 3.1 输出文件夹
+        folder_layout = QHBoxLayout()
+        folder_label = QLabel("保存文件夹:")
+        folder_label.setObjectName("listenerSettingFolderLabel")
+        folder_label.setFixedWidth(LABEL_WIDTH)
+        self.output_folder_edit = QLineEdit()
+        self.output_folder_edit.setPlaceholderText("输出文件夹路径（可选）")
+        folder_btn = QPushButton("浏览...")
+        folder_btn.setObjectName("exploreBtn")
+        folder_btn.setFixedWidth(70)
+        folder_btn.clicked.connect(self._select_output_folder)
+        folder_layout.addWidget(folder_label)
+        folder_layout.addWidget(self.output_folder_edit)
+        folder_layout.addWidget(folder_btn)
+
+        # 3.2 输出文件名
+        filename_layout = QHBoxLayout()
+        filename_label = QLabel("文件名称:")
+        filename_label.setObjectName("listenerSettingFilenameLabel")
+        filename_label.setFixedWidth(LABEL_WIDTH)
+        self.output_filename_edit = QLineEdit()
+        self.output_filename_edit.setPlaceholderText("输出文件名称（可选）")
+        filename_layout.addWidget(filename_label)
+        filename_layout.addWidget(self.output_filename_edit)
+
+        # 将文件夹和文件名布局添加到输出文件组
+        output_group_layout.addLayout(folder_layout)
+        output_group_layout.addLayout(filename_layout)
+
+        # 将输出文件组添加到设置布局
+        settings_layout.addWidget(output_group)
 
         # 添加弹性空间
         settings_layout.addStretch(1)
@@ -103,6 +123,7 @@ class ListenerSettingsWidget(QWidget):
 
         # 帮助内容
         help_content = QTextEdit(self.get_help_text())
+        help_content.setReadOnly(True)
         help_content.setAlignment(Qt.AlignTop | Qt.AlignLeft)
         help_layout.addWidget(help_content)
 
@@ -137,9 +158,10 @@ class ListenerSettingsWidget(QWidget):
         input_enabled = action in ['parse', 'parse_and_save']
         self.input_file_edit.setEnabled(input_enabled)
 
-        # 根据操作类型启用/禁用输出文件字段
+        # 根据操作类型启用/禁用输出文件相关字段
         output_enabled = action in ['export', 'parse_and_save']
-        self.output_file_edit.setEnabled(output_enabled)
+        self.output_folder_edit.setEnabled(output_enabled)
+        self.output_filename_edit.setEnabled(output_enabled)
 
         # 更新占位符文本
         if input_enabled:
@@ -148,9 +170,15 @@ class ListenerSettingsWidget(QWidget):
             self.input_file_edit.setPlaceholderText("当前操作不需要输入文件")
 
         if output_enabled:
-            self.output_file_edit.setPlaceholderText("请指定输出文件路径")
+            if action == 'export':
+                self.output_folder_edit.setPlaceholderText(json_dir)
+                self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_JSON_NAME)
+            if action == 'parse_and_save':
+                self.output_folder_edit.setPlaceholderText(input_dir)
+                self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_PCMD_NAME)
         else:
-            self.output_file_edit.setPlaceholderText("当前操作不需要输出文件")
+            self.output_folder_edit.setPlaceholderText("当前操作不需要输出文件夹")
+            self.output_filename_edit.setPlaceholderText("当前操作不需要文件名")
 
     def _select_input_file(self):
         """选择输入文件"""
@@ -163,6 +191,12 @@ class ListenerSettingsWidget(QWidget):
         file_path = self.file_manager.save_file()
         if file_path:
             self.output_file_edit.setText(file_path)
+
+    def _select_output_folder(self):
+        """选择输出文件夹"""
+        folder_path = self.file_manager.choose_directory()  # 需要在FileManager中实现此方法
+        if folder_path:
+            self.output_folder_edit.setText(folder_path)
 
     def get_action(self):
         """获取选中的操作类型"""

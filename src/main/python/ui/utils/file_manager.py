@@ -128,3 +128,11 @@ class FileManager:
     def get_recent_files(self) -> List[str]:
         """获取最近打开的文件列表"""
         return self.recent_files.copy()
+    
+    def choose_directory(self) -> Optional[str]:
+        """打开文件夹选择对话框，返回选中的文件夹路径"""
+        directory = filedialog.askdirectory(
+            parent=self.root,
+            title="选择文件夹"
+        )
+        return directory if directory else None

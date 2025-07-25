@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (
 
 from src.main.python.terminal_logger.logger import info, debug
 from src.main.python.configs.ui_config import TITLE_HEIGHT
+from src.main.python.utils.listener_manager import listener_config
 from src.main.python.ui.fragments.listener_setting import ListenerSettingsWidget
 from src.main.python.ui.fragments.listener_setting_page import ListenerSettingPage
 from src.main.python.ui.fragments.tool_bar import ListenerToolbar
@@ -57,6 +58,7 @@ class ListenerPage(QWidget):
         # ====================================================================
         self.toolbar.execute_btn.clicked.connect(self.execute_commands)
         self.toolbar.display_btn.clicked.connect(self.display_commands)
+        self.toolbar.save_btn.clicked.connect(self.save_settings)
 
         # ====================================================================
         # STEP 6: 创建参数设置区域
@@ -111,3 +113,6 @@ class ListenerPage(QWidget):
 
     def set_setting_page(self, setting_page: ListenerSettingPage):
         self.setting_page = setting_page
+
+    def save_settings(self):
+        listener_config.save_config()

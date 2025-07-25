@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 
 from src.main.python.terminal_logger.logger import info, warn
 
@@ -92,6 +93,3 @@ configs_dir = os.path.join(python_dir, "configs")
 test_configs_dir = os.path.join(project_root, "src", "test", "python", "configs")
 # 测试用自动速度配置文件路径
 test_auto_speed_config_path = os.path.join(test_configs_dir, "auto_speed_config.py")
-
-def generate_input_path(path_frag):
-    return os.path.join(input_dir, path_frag)

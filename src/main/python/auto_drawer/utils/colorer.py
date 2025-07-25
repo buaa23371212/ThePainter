@@ -2,7 +2,7 @@ import time
 import pyautogui
 
 from src.main.python.auto_drawer.utils.canvas_tools import enter_color_mode, activate_canvas, select_color
-from src.main.python.configs.auto_speed_manager import auto_speed_config
+from src.main.python.utils.auto_speed_manager import auto_speed_config
 
 from src.main.python.terminal_logger.logger import info
 

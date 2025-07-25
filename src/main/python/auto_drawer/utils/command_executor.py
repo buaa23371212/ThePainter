@@ -6,7 +6,7 @@ import pyautogui
 # 工具模块导入区
 # ==============================
 from src.main.python.configs.screen_config import CANVAS_BLANK_POSITION
-from src.main.python.configs.auto_speed_manager import auto_speed_config
+from src.main.python.utils.auto_speed_manager import auto_speed_config
 from .command_parser.command_parser import parse_arguments
 from .command_parser.control import SUPPORTED_MOUSE_OPERATIONS
 from .command_parser.tools import SUPPORTED_LAYER_OPERATION

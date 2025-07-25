@@ -1,7 +1,7 @@
 import os.path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Union
 
-from src.main.python.configs.project_config import generate_input_path
+from src.main.python.utils.file_manager import generate_input_path
 from src.main.python.terminal_logger.logger import warn
 
 # ======================================================================
@@ -193,12 +193,33 @@ def print_command(commands: List[str]):
     for i, cmd in enumerate(commands, 1):
         print(f"{i:>2}. {cmd}")
 
-def export2pcmd(foldername, commands: List[str]):
-    tar_path = generate_input_path(os.path.join(foldername, "commands.pcmd"))
-
+def export2pcmd(commands: List[str], folder: Union[str, None] = None) -> None:
+    """
+    将生成的绘图命令导出到.pcmd文件中
+    
+    参数:
+        folder: 可选参数，文件夹路径（folder_path）或文件夹名称（folder_name）
+                - 若为文件夹路径，直接使用该路径
+                - 若为文件夹名称，在当前工作目录下创建/使用该文件夹
+                - 若为None，使用默认路径（由generate_input_path决定）
+        commands: 要写入文件的命令列表，每条命令为一个字符串
+    
+    说明:
+        函数会自动创建目标文件夹（若不存在），并将命令按行写入commands.pcmd文件
+    """
+    # 处理文件夹路径
+    if folder is not None:
+        # 拼接文件夹与文件名
+        file_name = "commands.pcmd"
+        folder_path = folder  # 无论是路径还是名称，都直接用于拼接
+        tar_path = generate_input_path(os.path.join(folder_path, file_name))
+    else:
+        # 若未提供folder，直接使用默认路径生成（仅包含文件名）
+        tar_path = generate_input_path("commands.pcmd")
+    
     # 确保目标目录存在
     os.makedirs(os.path.dirname(tar_path), exist_ok=True)
-
+    
     # 将命令列表写入文件，每行一条命令
     with open(tar_path, 'w', encoding='utf-8') as f:
         for cmd in commands:

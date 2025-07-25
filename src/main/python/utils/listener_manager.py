@@ -4,7 +4,7 @@ from src.main.python.utils.config_loader import parse_config_file, replace_lines
 
 class ListenerConfig:
     _instance = None
-    listener_config_path = os.path.join(configs_dir, "lietener_config.py")
+    listener_config_path = os.path.join(configs_dir, "listener_config.py")
 
     def __new__(cls):
         if cls._instance is None:
@@ -23,23 +23,29 @@ class ListenerConfig:
         # 初始化配置属性
         self.DEFAULT_ACTION_CHOICE = configs.get("DEFAULT_ACTION_CHOICE", "record")
         self.DEFAULT_PRINT_STATE = configs.get("DEFAULT_PRINT_STATE", False)
+        self.DEFAULT_JSON_NAME = configs.get("DEFAULT_JSON_NAME", "mouse_event.json")
+        self.DEFAULT_PCMD_NAME = configs.get("DEFAULT_PCMD_NAME", "commands.pcmd")
     
     def _set_defaults(self):
         """设置默认配置"""
         self.DEFAULT_ACTION_CHOICE = "record"
         self.DEFAULT_PRINT_STATE = False
+        self.DEFAULT_JSON_NAME = "mouse_event.json"
+        self.DEFAULT_PCMD_NAME = "commands.pcmd"
 
     def save_config(self):
         """将当前配置保存到文件"""
         try:
-            with open(self.auto_speed_config_path, "r", encoding="utf-8") as f:
+            with open(self.listener_config_path, "r", encoding="utf-8") as f:
                 lines = f.readlines()
         except FileNotFoundError:
             lines = []
 
         base_configs = {
             "DEFAULT_ACTION_CHOICE": self.DEFAULT_ACTION_CHOICE,
-            "DEFAULT_PRINT_STATE": self.DEFAULT_PRINT_STATE
+            "DEFAULT_PRINT_STATE": self.DEFAULT_PRINT_STATE,
+            "DEFAULT_JSON_NAME": self.DEFAULT_JSON_NAME,
+            "DEFAULT_PCMD_NAME": self.DEFAULT_PCMD_NAME
         }
 
         new_lines = replace_lines(lines, base_configs)
@@ -50,6 +56,9 @@ class ListenerConfig:
                 f"DEFAULT_ACTION_CHOICE = {self.DEFAULT_ACTION_CHOICE}\n",
                 "\n",
                 f"DEFAULT_PRINT_STATE = {self.DEFAULT_PRINT_STATE}\n",
+                "\n",
+                f"DEFAULT_JSON_NAME = {self.DEFAULT_JSON_NAME}\n",
+                f"DEFAULT_PCMD_NAME = {self.DEFAULT_PCMD_NAME}\n"
             ]
 
         # 写入更新后的内容

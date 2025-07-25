@@ -52,3 +52,8 @@ class ListenerToolbar(QFrame):
         self.display_btn = QPushButton("显示输出")
         self.display_btn.setObjectName("refreshButton")
         toolbar_layout.addWidget(self.display_btn)
+
+        # 保存设置按钮
+        self.save_btn = QPushButton("保存设置")
+        self.save_btn.setObjectName("saveButton")
+        toolbar_layout.addWidget(self.save_btn)

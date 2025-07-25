@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 from src.main.python.terminal_logger.logger import info
-from src.main.python.configs.auto_speed_manager import auto_speed_config
+from src.main.python.utils.auto_speed_manager import auto_speed_config
 
 
 class AutoOperationSpeedPage(QWidget):
