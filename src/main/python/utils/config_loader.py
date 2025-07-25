@@ -49,8 +49,8 @@ def replace_lines(lines: str, base_configs):
                     new_line = f"{key} = {value}\n"
                 new_lines.append(new_line)
                 break
-            else:
-                # 不是配置行，保留原样
-                new_lines.append(line)
+        else:
+            # 不是配置行，保留原样
+            new_lines.append(line)
 
     return new_lines

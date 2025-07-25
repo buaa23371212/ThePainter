@@ -22,14 +22,14 @@ class ListenerConfig:
         
         # 初始化配置属性
         self.DEFAULT_ACTION_CHOICE = configs.get("DEFAULT_ACTION_CHOICE", "record")
-        self.DEFAULT_PRINT_STATE = configs.get("DEFAULT_PRINT_STATE", False)
+        self.DEFAULT_PRINT_STATE = configs.get("DEFAULT_PRINT_STATE", "False")
         self.DEFAULT_JSON_NAME = configs.get("DEFAULT_JSON_NAME", "mouse_event.json")
         self.DEFAULT_PCMD_NAME = configs.get("DEFAULT_PCMD_NAME", "commands.pcmd")
     
     def _set_defaults(self):
         """设置默认配置"""
         self.DEFAULT_ACTION_CHOICE = "record"
-        self.DEFAULT_PRINT_STATE = False
+        self.DEFAULT_PRINT_STATE = "False"
         self.DEFAULT_JSON_NAME = "mouse_event.json"
         self.DEFAULT_PCMD_NAME = "commands.pcmd"
 
