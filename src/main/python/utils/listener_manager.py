@@ -1,6 +1,7 @@
 import os
 from src.main.python.configs.project_config import configs_dir
 from src.main.python.utils.config_loader import parse_config_file, replace_lines
+from src.main.python.terminal_logger.logger import debug
 
 class ListenerConfig:
     _instance = None
@@ -65,4 +66,14 @@ class ListenerConfig:
         with open(self.listener_config_path, "w", encoding="utf-8") as f:
             f.writelines(new_lines)
 
+    def __str__(self):
+        """返回对象的字符串表示"""
+        return (f"\nListenerConfig(\n"
+                f"  DEFAULT_ACTION_CHOICE: {self.DEFAULT_ACTION_CHOICE}\n"
+                f"  DEFAULT_PRINT_STATE: {self.DEFAULT_PRINT_STATE}\n"
+                f"  DEFAULT_JSON_NAME: {self.DEFAULT_JSON_NAME}\n"
+                f"  DEFAULT_PCMD_NAME: {self.DEFAULT_PCMD_NAME}\n"
+                f")")
+
 listener_config = ListenerConfig()
+debug(True, listener_config)

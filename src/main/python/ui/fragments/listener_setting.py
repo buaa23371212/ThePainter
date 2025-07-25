@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt, QSize
 from src.main.python.configs.ui_config import LABEL_WIDTH
 from src.main.python.configs.project_config import json_dir, input_dir
 from src.main.python.utils.listener_manager import listener_config
+from src.main.python.terminal_logger.logger import debug
 from src.main.python.transcriber import ACTION_CHOICE
 
 class ListenerSettingsWidget(QWidget):
@@ -47,6 +48,9 @@ class ListenerSettingsWidget(QWidget):
         action_label.setFixedWidth(LABEL_WIDTH)
         self.action_combo = QComboBox()
         self.action_combo.addItems(ACTION_CHOICE)
+        
+        debug(True, f"当前DEFAULT_ACTION_CHOICE值：{listener_config.DEFAULT_ACTION_CHOICE}")
+        # TODO: [DEBUG] 当前DEFAULT_ACTION_CHOICE值："convert"
         self.action_combo.setCurrentText(listener_config.DEFAULT_ACTION_CHOICE)
         action_layout.addWidget(action_label)
         action_layout.addWidget(self.action_combo)
@@ -154,6 +158,8 @@ class ListenerSettingsWidget(QWidget):
 
     def update_ui_state(self, action):
         """根据选择的action更新UI状态"""
+        listener_config.DEFAULT_ACTION_CHOICE = f"\"{action}\""
+
         # 根据操作类型启用/禁用输入文件字段
         input_enabled = action in ['parse', 'parse_and_save']
         self.input_file_edit.setEnabled(input_enabled)
