@@ -49,8 +49,7 @@ class ListenerSettingsWidget(QWidget):
         self.action_combo = QComboBox()
         self.action_combo.addItems(ACTION_CHOICE)
         
-        debug(True, f"当前DEFAULT_ACTION_CHOICE值：{listener_config.DEFAULT_ACTION_CHOICE}")
-        # TODO: [DEBUG] 当前DEFAULT_ACTION_CHOICE值："convert"
+        debug(True, f"当前DEFAULT_ACTION_CHOICE值：{repr(listener_config.DEFAULT_ACTION_CHOICE)}")
         self.action_combo.setCurrentText(listener_config.DEFAULT_ACTION_CHOICE)
         action_layout.addWidget(action_label)
         action_layout.addWidget(self.action_combo)
@@ -158,7 +157,7 @@ class ListenerSettingsWidget(QWidget):
 
     def update_ui_state(self, action):
         """根据选择的action更新UI状态"""
-        listener_config.DEFAULT_ACTION_CHOICE = f"\"{action}\""
+        listener_config.DEFAULT_ACTION_CHOICE = action
 
         # 根据操作类型启用/禁用输入文件字段
         input_enabled = action in ['parse', 'parse_and_save']

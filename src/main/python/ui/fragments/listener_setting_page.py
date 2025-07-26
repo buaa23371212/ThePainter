@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QCheckBox, QPushButton
 
 from src.main.python.utils.listener_manager import listener_config
+from src.main.python.terminal_logger.logger import debug
 
 
 class ListenerSettingPage(QWidget):
@@ -15,10 +16,8 @@ class ListenerSettingPage(QWidget):
         self.print_commands_checkbox = QCheckBox("启用命令打印 (print_commands)")
 
         # 设置默认状态（例如默认不启用）
-        state = True
-        if listener_config.DEFAULT_PRINT_STATE == "False":
-            state = False
-        self.print_commands_checkbox.setChecked(state)
+        debug(True, repr(listener_config.DEFAULT_PRINT_STATE))
+        self.print_commands_checkbox.setChecked(listener_config.DEFAULT_PRINT_STATE)
         
         self.print_commands_checkbox.stateChanged.connect(self.update_print_state)
 

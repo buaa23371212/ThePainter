@@ -1,4 +1,5 @@
 import os
+import re  # 新增re模块导入
 from src.main.python.configs.project_config import configs_dir
 from src.main.python.utils.config_loader import parse_config_file, replace_lines
 from src.main.python.terminal_logger.logger import debug
@@ -21,16 +22,16 @@ class ListenerConfig:
             self._set_defaults()
             return
         
-        # 初始化配置属性
+        # 初始化配置属性（使用正确类型）
         self.DEFAULT_ACTION_CHOICE = configs.get("DEFAULT_ACTION_CHOICE", "record")
-        self.DEFAULT_PRINT_STATE = configs.get("DEFAULT_PRINT_STATE", "False")
+        self.DEFAULT_PRINT_STATE = configs.get("DEFAULT_PRINT_STATE", False)  # 布尔值
         self.DEFAULT_JSON_NAME = configs.get("DEFAULT_JSON_NAME", "mouse_event.json")
         self.DEFAULT_PCMD_NAME = configs.get("DEFAULT_PCMD_NAME", "commands.pcmd")
     
     def _set_defaults(self):
-        """设置默认配置"""
+        """设置默认配置（使用正确类型）"""
         self.DEFAULT_ACTION_CHOICE = "record"
-        self.DEFAULT_PRINT_STATE = "False"
+        self.DEFAULT_PRINT_STATE = False  # 布尔值
         self.DEFAULT_JSON_NAME = "mouse_event.json"
         self.DEFAULT_PCMD_NAME = "commands.pcmd"
 
@@ -51,15 +52,15 @@ class ListenerConfig:
 
         new_lines = replace_lines(lines, base_configs)
 
-        # 如果文件不存在或配置项缺失，创建新内容
+        # 如果文件不存在或配置项缺失，创建新内容（使用repr保持类型）
         if not new_lines:
             new_lines = [
-                f"DEFAULT_ACTION_CHOICE = {self.DEFAULT_ACTION_CHOICE}\n",
+                f"DEFAULT_ACTION_CHOICE = {repr(self.DEFAULT_ACTION_CHOICE)}\n",
                 "\n",
-                f"DEFAULT_PRINT_STATE = {self.DEFAULT_PRINT_STATE}\n",
+                f"DEFAULT_PRINT_STATE = {repr(self.DEFAULT_PRINT_STATE)}\n",
                 "\n",
-                f"DEFAULT_JSON_NAME = {self.DEFAULT_JSON_NAME}\n",
-                f"DEFAULT_PCMD_NAME = {self.DEFAULT_PCMD_NAME}\n"
+                f"DEFAULT_JSON_NAME = {repr(self.DEFAULT_JSON_NAME)}\n",
+                f"DEFAULT_PCMD_NAME = {repr(self.DEFAULT_PCMD_NAME)}\n"
             ]
 
         # 写入更新后的内容
@@ -69,10 +70,10 @@ class ListenerConfig:
     def __str__(self):
         """返回对象的字符串表示"""
         return (f"\nListenerConfig(\n"
-                f"  DEFAULT_ACTION_CHOICE: {self.DEFAULT_ACTION_CHOICE}\n"
-                f"  DEFAULT_PRINT_STATE: {self.DEFAULT_PRINT_STATE}\n"
-                f"  DEFAULT_JSON_NAME: {self.DEFAULT_JSON_NAME}\n"
-                f"  DEFAULT_PCMD_NAME: {self.DEFAULT_PCMD_NAME}\n"
+                f"  DEFAULT_ACTION_CHOICE: {repr(self.DEFAULT_ACTION_CHOICE)}\n"
+                f"  DEFAULT_PRINT_STATE: {repr(self.DEFAULT_PRINT_STATE)}\n"
+                f"  DEFAULT_JSON_NAME: {repr(self.DEFAULT_JSON_NAME)}\n"
+                f"  DEFAULT_PCMD_NAME: {repr(self.DEFAULT_PCMD_NAME)}\n"
                 f")")
 
 listener_config = ListenerConfig()
