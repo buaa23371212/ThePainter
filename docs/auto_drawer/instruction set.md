@@ -103,6 +103,24 @@
 
 ---
 
+### 多段折线
+
+- 通过JSON文件和ID绘制曲线  
+  格式: `-file <path> -id <polyline_id>`
+  ```shell
+  python painter.py polyline -file input/Sample-1/shapes.json -id curve1
+  ```
+  上述命令会从指定的JSON文件中查找ID为`curve1`的曲线，并按其控制点绘制。
+
+- 通过JSON文件和名称绘制曲线  
+  格式: `-file <path> -name "<polyline_name>"`
+  ```shell
+  python painter.py polyline -file input/Sample-1/shapes.json -name "mycurve"
+  ```
+  上述命令会从JSON文件中查找名称为`mycurve`的曲线并绘制。
+
+---
+
 ### 曲线
 
 - 通过控制点直接绘制贝塞尔曲线  
@@ -126,6 +144,27 @@
   ```
   上述命令会从JSON文件中查找名称为`mycurve`的曲线并绘制。
   
+---
+
+### 多段曲线
+
+- 通过JSON文件和ID绘制曲线  
+  格式: `-file <path> -id <multicurve_id>`
+  ```shell
+  python painter.py multicurve -file input/Sample-1/shapes.json -id curve1
+  ```
+  上述命令会从指定的JSON文件中查找ID为`curve1`的曲线，并按其控制点绘制。
+
+- 通过JSON文件和名称绘制曲线  
+  格式: `-file <path> -name "<multicurve_name>"`
+  ```shell
+  python painter.py multicurve -file input/Sample-1/shapes.json -name "mycurve"
+  ```
+  上述命令会从JSON文件中查找名称为`mycurve`的曲线并绘制。
+
+- 注意：若点依次为 (x0, y0)、 (x1, y1)、 (x2, y2)、 (x3, y3)、 (x4, y4)、 (x5, y5)、 (x6, y6)，则多段曲线由两条曲线构成：(x0, y0)、 (x1, y1)、 (x2, y2)、 (x3, y3)与 (x3, y3)、 (x4, y4)、 (x5, y5)、 (x6, y6)
+  且多段曲线路径的点数需为 `3n+1`（n=曲线段数）
+
 ---
 
 ### 多边形
@@ -201,6 +240,31 @@
      上述命令会绘制一个黑色边界的圆，且接下来所有的线条也都是黑色，直到再次切换颜色。
 
   - 支持的颜色有：
+  ```python
+  FILL_COLOR_KEY_MAP = {
+    "black": 0,        # 黑色（初始颜色）
+    "gray": 1,         # 灰色
+    "darkred": 2,      # 深红色
+    "red": 3,          # 红色
+    "orange": 4,       # 橙色
+    "yellow": 5,       # 黄色
+    "green": 6,        # 绿色
+    "cyan": 7,         # 青绿
+    "blue": 8,         # 靛蓝
+    "purple": 9,       # 紫色
+
+    "white": 10,       # 白色
+    "lightgray": 11,   # 浅灰色
+    "brown": 12,       # 褐色
+    "rose": 13,        # 玫瑰红
+    "gold": 14,        # 金色
+    "lightyellow": 15, # 浅黄色
+    "lime": 16,        # 酸橙色
+    "lightcyan": 17,   # 淡青绿色
+    "bluegray": 18,    # 蓝灰色
+    "lightpurple": 19  # 浅紫色
+  }
+  ```
 
 - 对指定位置进行颜色填充  
   格式: `fill -color <颜色> -x <X坐标> -y <Y坐标>`
@@ -289,6 +353,24 @@ rectangle -center 760 715 100 180
 3. 支持注释（以`#`开头的行）
 4. 命令顺序执行，从上到下
 5. 可引用外部JSON文件（如`-file shapes.json`）
+
+---
+
+### 画布
+```python
+# ==============================================
+# 图层模式下可绘画区域：
+# (310, 280)
+# ┌───────────────────────────────────────────────────────┐
+# │ 顶部: 280px                                           │
+# │ 左侧: 310px                     宽度: 1130px          │
+# │ 底部: 910px                                           │
+# │ 右侧: 1440px                                          │
+# └───────────────────────────────────────────────────────┘
+#                                                       (1440, 910)
+# 注意：画地平线时为了防止颜色填充错误应该从left=300画到right=1450，即将减去的内边距加回来
+# ==============================================
+```
 
 ---
 
