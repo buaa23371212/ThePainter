@@ -148,8 +148,9 @@ class FileDisplayUtils:
 
         # 取交集并排序添加到列表
         common_names = set(input_folders) & set(output_image_names)
+        sorted_common_names = sorted(common_names)  # 默认按字母升序排序
 
-        return common_names
+        return sorted_common_names
 
     def update_image_display(self, image_path, image_label: QLabel):
         """
