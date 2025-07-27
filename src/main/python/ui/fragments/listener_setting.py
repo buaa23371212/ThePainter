@@ -187,10 +187,10 @@ class ListenerSettingsWidget(QWidget):
         self.input_file_edit.setEnabled(input_enabled)
 
         # 根据操作类型启用/禁用输出文件相关字段
-        output_enabled = action in ['export', 'parse_and_save']
-        self.output_folder_edit.setEnabled(output_enabled)
-        self.painting_name_edit.setEnabled(output_enabled)
-        self.output_filename_edit.setEnabled(output_enabled)
+        self.output_enabled = action in ['export', 'parse_and_save']
+        self.output_folder_edit.setEnabled(self.output_enabled)
+        self.painting_name_edit.setEnabled(self.output_enabled)
+        self.output_filename_edit.setEnabled(self.output_enabled)
 
         # 更新占位符文本
         if input_enabled:
@@ -198,7 +198,7 @@ class ListenerSettingsWidget(QWidget):
         else:
             self.input_file_edit.setPlaceholderText("当前操作不需要输入文件")
 
-        if output_enabled:
+        if self.output_enabled:
             if action == 'export':
                 self.output_folder_edit.setPlaceholderText(json_dir)
                 self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_JSON_NAME)
@@ -248,8 +248,11 @@ class ListenerSettingsWidget(QWidget):
 
         # 过滤空值（避免多余的路径层级）
         path_parts = [part for part in [folder, painting_name, filename] if part]
+
+        if not self.output_enabled:
+            return ""
         
-        if not path_parts:
+        if self.output_enabled and not path_parts:
             raise ValueError("输出文件路径无效：文件夹、画作名和文件名不能同时为空")
         
         return os.path.join(*path_parts)
