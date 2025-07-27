@@ -150,28 +150,6 @@
 
 ---
 
-## 鼠标控制命令
-
-- 移动鼠标到指定位置  
-  格式: `-x <X_COORD> -y <Y_COORD>`
-  ```shell
-  python painter.py move_mouse -x 800 -y 600
-  ```
-
-- 在指定位置模拟鼠标点击  
-  格式: `-x <X_COORD> -y <Y_COORD>`
-  ```shell
-  python painter.py mouse_click -x 800 -y 600
-  ```
-
-- 在指定位置模拟鼠标右键点击  
-  格式: `-x <X_COORD> -y <Y_COORD>`
-  ```shell
-  python painter.py right_click -x 800 -y 600
-  ```
-
----
-
 ## 图层控制命令
 
 - 添加新图层  
@@ -252,6 +230,30 @@
   ```
 ---
 
+## 注释格式
+
+1. 标题
+
+```shell
+# ======================
+# this is the title
+# ======================
+```
+
+2. 步骤
+
+```shell
+# 1. this is step1
+```
+
+3. 普通注释
+
+```shell
+# this is a normal annotation
+```
+
+---
+
 ## 批量执行命令文件格式
 
 命令文件(.txt)应包含一系列绘图命令，每行一个命令，格式如下：
@@ -262,19 +264,20 @@
 
 ### 示例命令文件 (command.txt)
 ```shell
-# 激活画布窗口
-mouse_click -x 1000 -y 50
+# ======================
+# 简笔画房子
+# ======================
 
-# 设置黑色为默认线条颜色
+# 1. 设置黑色为默认线条颜色
 -color black
 
-# 绘制地基（横长方形）
+# 2. 绘制地基（横长方形）
 rectangle -center 960 860 800 100
 
-# 绘制主体（竖长方形）
+# 3. 绘制主体（竖长方形）
 rectangle -center 960 660 600 400
 
-# 绘制门
+# 4. 绘制门
 rectangle -center 760 715 100 180
 
 # 更多命令...

@@ -1,57 +1,57 @@
-# 绘制 configs 包矩形（分上下两部分）
+# 1. 绘制 configs 包矩形（分上下两部分）
 rectangle -center 510 510 200 150
 # 添加分割线 (中心Y - 高度/6)
 line -points 410 485 610 485
 # 在名称区域添加文本（文本左上角位置，上移15）
 text -text "configs" -x 470 -y 455
 
-# 绘制 configs 包内的子包矩形（水平排列）
+# 2. 绘制 configs 包内的子包矩形（水平排列）
 rectangle -center 465 545 80 40
 text -text "config1" -x 425 -y 523
 rectangle -center 555 545 80 40
 text -text "config2" -x 525 -y 523
 
-# 绘制 command_parser 包矩形
+# 3. 绘制 command_parser 包矩形
 rectangle -center 760 510 200 150
 line -points 660 485 860 485
 text -text "command_parser" -x 700 -y 455
 
-# 绘制 tools 包矩形
+# 4. 绘制 tools 包矩形
 rectangle -center 1010 510 200 150
 line -points 910 485 1110 485
 text -text "tools" -x 980 -y 455
 
-# 绘制 tools 包内的子包矩形（水平排列）
+# 5. 绘制 tools 包内的子包矩形（水平排列）
 rectangle -center 965 545 80 40
 text -text "tool1" -x 925 -y 523
 rectangle -center 1055 545 80 40
 text -text "tool2" -x 1025 -y 523
 
-# 绘制 ui 包矩形
+# 6. 绘制 ui 包矩形
 rectangle -center 1260 510 200 150
 line -points 1160 485 1360 485
 text -text "ui" -x 1240 -y 455
 
-# 绘制 input 包矩形
+# 7. 绘制 input 包矩形
 rectangle -center 510 760 200 150
 line -points 410 735 610 735
 text -text "input" -x 470 -y 705
 
-# 绘制 output 包矩形
+# 8. 绘制 output 包矩形
 rectangle -center 760 760 200 150
 line -points 660 735 860 735
 text -text "output" -x 720 -y 705
 
-# 绘制 document 包矩形
+# 9. 绘制 document 包矩形
 rectangle -center 1010 760 200 150
 line -points 910 735 1110 735
 text -text "document" -x 970 -y 705
 
-# 绘制 document 包内的子包矩形（水平居中）
+# 10. 绘制 document 包内的子包矩形（水平居中）
 rectangle -center 1010 805 80 40
 text -text "doc1" -x 970 -y 783
 
-# 绘制包之间的关系箭头（统一从上边中心指向下边中心）
+# 11. 绘制包之间的关系箭头（统一从上边中心指向下边中心）
 
 # configs -> command_parser
 line -points 610 460 660 460
