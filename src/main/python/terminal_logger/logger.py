@@ -145,4 +145,4 @@ def debug(show: bool, message: str, show_caller: bool = False) -> None:
         caller_frame = inspect.stack()[1]
         caller_file = caller_frame.filename
         source_file = os.path.basename(caller_file)
-    log("DEBUG", True, message, source_file, COLOR_BLUE)
+    log("DEBUG", show, message, source_file, COLOR_BLUE)
