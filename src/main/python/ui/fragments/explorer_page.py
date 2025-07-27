@@ -12,7 +12,7 @@ from src.main.python.configs.ui_config import TITLE_HEIGHT
 from src.main.python.terminal_logger.logger import info
 from src.main.python.ui.fragments.tool_bar import PreviewToolbar
 from src.main.python.ui.utils.command_generator import execute_command_file
-from src.main.python.ui.utils.file_displayer import FileDisplayUtils
+from src.main.python.ui.utils.file_displayer import file_display_utils
 from src.main.python.ui.utils.file_manager import FileTreeUtils
 from src.main.python.ui.utils.style_loader import load_stylesheets
 
@@ -154,7 +154,7 @@ class FileExplorer(QWidget):
         # STEP 4: 显示文件内容或清空预览区
         if path and os.path.isfile(path):
             # 调用工具类方法显示文件内容
-            FileDisplayUtils.display_file_content(
+            file_display_utils.display_file_content(
                 path,
                 self.text_view,
                 self.image_view,
@@ -196,7 +196,7 @@ class FileExplorer(QWidget):
     def refresh_commands(self):
         """刷新当前预览的文件内容"""
         # 调用工具类方法刷新显示
-        FileDisplayUtils.display_file_content(
+        file_display_utils.display_file_content(
             self.current_file_path,
             self.text_view,
             self.image_view,

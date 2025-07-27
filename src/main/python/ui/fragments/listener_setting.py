@@ -44,9 +44,7 @@ class ListenerSettingsWidget(QWidget):
 
         # 1. Action选择
         action_layout = QHBoxLayout()
-        action_label = QLabel("操作类型:")
-        action_label.setObjectName("listenerSettingActionLabel")
-        action_label.setFixedWidth(LABEL_WIDTH)
+        action_label = self._create_label("操作类型:", "listenerSettingActionLabel")
         self.action_combo = QComboBox()
         self.action_combo.addItems(ACTION_CHOICE)
         
@@ -58,15 +56,9 @@ class ListenerSettingsWidget(QWidget):
 
         # 2. Input File设置
         input_layout = QHBoxLayout()
-        input_label = QLabel("输入文件:")
-        input_label.setObjectName("listenerSettingInputLabel")
-        input_label.setFixedWidth(LABEL_WIDTH)
-        self.input_file_edit = QLineEdit()
-        self.input_file_edit.setPlaceholderText("输入文件路径（可选）")
-        input_btn = QPushButton("浏览...")
-        input_btn.setObjectName("exploreBtn")
-        input_btn.setFixedWidth(70)
-        input_btn.clicked.connect(self._select_input_file)
+        input_label = self._create_label("输入文件:", "listenerSettingInputLabel")
+        self.input_file_edit = self._create_edit_line("输入文件路径（可选）")
+        input_btn = self._create_btn("浏览...", "exploreBtn", 70, self._select_input_file)
         input_layout.addWidget(input_label)
         input_layout.addWidget(self.input_file_edit)
         input_layout.addWidget(input_btn)
@@ -78,31 +70,30 @@ class ListenerSettingsWidget(QWidget):
 
         # 3.1 输出文件夹
         folder_layout = QHBoxLayout()
-        folder_label = QLabel("保存文件夹:")
-        folder_label.setObjectName("listenerSettingFolderLabel")
-        folder_label.setFixedWidth(LABEL_WIDTH)
-        self.output_folder_edit = QLineEdit()
-        self.output_folder_edit.setPlaceholderText("输出文件夹路径（可选）")
-        folder_btn = QPushButton("浏览...")
-        folder_btn.setObjectName("exploreBtn")
-        folder_btn.setFixedWidth(70)
-        folder_btn.clicked.connect(self._select_output_folder)
+        folder_label = self._create_label("保存文件夹:", "listenerSettingFolderLabel")
+        self.output_folder_edit = self._create_edit_line("输出文件夹路径（可选）")
+        folder_btn = self._create_btn("浏览...", "exploreBtn", 70, self._select_output_folder)
         folder_layout.addWidget(folder_label)
         folder_layout.addWidget(self.output_folder_edit)
         folder_layout.addWidget(folder_btn)
 
-        # 3.2 输出文件名
+        # 3.2 输出画作名
+        painting_name_layout = QHBoxLayout()
+        painting_name_label = self._create_label("画作名:", "listenerSettingPaintingNameLabel")
+        self.painting_name_edit = self._create_edit_line("输出画作名称（可选）")
+        painting_name_layout.addWidget(painting_name_label)
+        painting_name_layout.addWidget(self.painting_name_edit)
+
+        # 3.3 输出文件名
         filename_layout = QHBoxLayout()
-        filename_label = QLabel("文件名称:")
-        filename_label.setObjectName("listenerSettingFilenameLabel")
-        filename_label.setFixedWidth(LABEL_WIDTH)
-        self.output_filename_edit = QLineEdit()
-        self.output_filename_edit.setPlaceholderText("输出文件名称（可选）")
+        filename_label = self._create_label("文件名称:", "listenerSettingFilenameLabel")
+        self.output_filename_edit = self._create_edit_line("输出文件名称（可选）")
         filename_layout.addWidget(filename_label)
         filename_layout.addWidget(self.output_filename_edit)
 
         # 将文件夹和文件名布局添加到输出文件组
         output_group_layout.addLayout(folder_layout)
+        output_group_layout.addLayout(painting_name_layout)
         output_group_layout.addLayout(filename_layout)
 
         # 将输出文件组添加到设置布局
@@ -155,6 +146,37 @@ class ListenerSettingsWidget(QWidget):
         <p>3. 对于需要输出文件的操作，请指定保存路径</p>
         <p>4. 操作执行结果将在输出面板显示</p>
         """
+    
+    def _create_label(self, text, object_name):
+        """创建标签的工具方法"""
+        label = QLabel(text)
+        label.setObjectName(object_name)
+        label.setFixedWidth(LABEL_WIDTH)
+        return label
+    
+    def _create_btn(self, text, object_name, fixed_width, clicked_callback):
+        """
+        创建按钮的工具方法
+        
+        Args:
+            text: 按钮显示文本
+            object_name: 按钮对象名
+            fixed_width: 按钮固定宽度
+            clicked_callback: 点击事件回调函数
+        
+        Returns:
+            QPushButton: 创建好的按钮实例
+        """
+        btn = QPushButton(text)
+        btn.setObjectName(object_name)
+        btn.setFixedWidth(fixed_width)
+        btn.clicked.connect(clicked_callback)
+        return btn
+    
+    def _create_edit_line(self, text):
+        edit_line = QLineEdit()
+        edit_line.setPlaceholderText(text)
+        return edit_line
 
     def update_ui_state(self, action):
         """根据选择的action更新UI状态"""
@@ -167,6 +189,7 @@ class ListenerSettingsWidget(QWidget):
         # 根据操作类型启用/禁用输出文件相关字段
         output_enabled = action in ['export', 'parse_and_save']
         self.output_folder_edit.setEnabled(output_enabled)
+        self.painting_name_edit.setEnabled(output_enabled)
         self.output_filename_edit.setEnabled(output_enabled)
 
         # 更新占位符文本
@@ -179,8 +202,12 @@ class ListenerSettingsWidget(QWidget):
             if action == 'export':
                 self.output_folder_edit.setPlaceholderText(json_dir)
                 self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_JSON_NAME)
+                self.painting_name_edit.setText("")         # 设为空串
+                self.painting_name_edit.setEditable(False)  # 不可编辑
+                self.painting_name_edit.setVisible(False)   # 隐藏控件
             if action == 'parse_and_save':
-                self.output_folder_edit.setPlaceholderText(os.path.join(input_dir, "Sample-1"))
+                self.output_folder_edit.setPlaceholderText(input_dir)
+                self.painting_name_edit.setPlaceholderText("Sample-1")
                 self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_PCMD_NAME)
         else:
             self.output_folder_edit.setPlaceholderText("当前操作不需要输出文件夹")
@@ -214,4 +241,15 @@ class ListenerSettingsWidget(QWidget):
 
     def get_output_file(self):
         """获取输出文件路径"""
-        return self.output_file_edit.text().strip()
+        # 获取各字段值，为空时使用默认占位符或空字符串
+        folder = self.output_folder_edit.text().strip()
+        painting_name = self.painting_name_edit.text().strip()
+        filename = self.output_filename_edit.text().strip()
+
+        # 过滤空值（避免多余的路径层级）
+        path_parts = [part for part in [folder, painting_name, filename] if part]
+        
+        if not path_parts:
+            raise ValueError("输出文件路径无效：文件夹、画作名和文件名不能同时为空")
+        
+        return os.path.join(*path_parts)
