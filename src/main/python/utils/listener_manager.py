@@ -77,4 +77,4 @@ class ListenerConfig:
                 f")")
 
 listener_config = ListenerConfig()
-debug(True, listener_config)
+debug(False, listener_config)

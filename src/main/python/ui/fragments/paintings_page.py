@@ -12,7 +12,7 @@ from src.main.python.configs import ui_config
 from src.main.python.configs.project_config import input_dir, output_dir
 from src.main.python.configs.ui_config import TITLE_HEIGHT
 from src.main.python.ui.fragments.navigate_bar import NavigationBar
-from src.main.python.ui.utils.file_displayer import FileDisplayUtils
+from src.main.python.ui.utils.file_displayer import file_display_utils
 from src.main.python.ui.utils.previewer import preview_command_file
 
 
@@ -78,7 +78,7 @@ class PaintingsPage(QWidget):
         # STEP 4: 创建左侧名称列表
         # ====================================================================
         # 加载共有名称并创建导航栏
-        self.name_list = NavigationBar(FileDisplayUtils.load_common_names(), 200)
+        self.name_list = NavigationBar(file_display_utils.load_common_names(), 200)
         body_horizontal_layout.addWidget(self.name_list)  # 添加到水平布局
 
         # 连接点击事件
@@ -173,7 +173,7 @@ class PaintingsPage(QWidget):
         if target_image:
             # 更新当前图片路径并显示图片
             self.current_image_path = target_image
-            FileDisplayUtils.update_image_display(self.current_image_path, self.image_view)
+            file_display_utils.update_image_display(self.current_image_path, self.image_view)
         else:
             # 未找到图片时显示提示信息
             self.current_image_path = None
@@ -196,4 +196,4 @@ class PaintingsPage(QWidget):
             # ================================================================
             # STEP 2: 更新图片显示
             # ================================================================
-            FileDisplayUtils.update_image_display(self.current_image_path, self.image_view)
+            file_display_utils.update_image_display(self.current_image_path, self.image_view)

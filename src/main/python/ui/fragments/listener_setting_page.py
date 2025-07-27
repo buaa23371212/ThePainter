@@ -16,7 +16,7 @@ class ListenerSettingPage(QWidget):
         self.print_commands_checkbox = QCheckBox("启用命令打印 (print_commands)")
 
         # 设置默认状态（例如默认不启用）
-        debug(True, repr(listener_config.DEFAULT_PRINT_STATE))
+        debug(False, repr(listener_config.DEFAULT_PRINT_STATE))
         self.print_commands_checkbox.setChecked(listener_config.DEFAULT_PRINT_STATE)
         
         self.print_commands_checkbox.stateChanged.connect(self.update_print_state)

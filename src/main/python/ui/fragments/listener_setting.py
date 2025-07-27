@@ -1,3 +1,4 @@
+import os
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QHBoxLayout, QComboBox, QLineEdit,
     QPushButton, QGroupBox, QScrollArea, QFrame, QSizePolicy, QTextEdit
@@ -49,7 +50,7 @@ class ListenerSettingsWidget(QWidget):
         self.action_combo = QComboBox()
         self.action_combo.addItems(ACTION_CHOICE)
         
-        debug(True, f"当前DEFAULT_ACTION_CHOICE值：{repr(listener_config.DEFAULT_ACTION_CHOICE)}")
+        debug(False, f"当前DEFAULT_ACTION_CHOICE值：{repr(listener_config.DEFAULT_ACTION_CHOICE)}")
         self.action_combo.setCurrentText(listener_config.DEFAULT_ACTION_CHOICE)
         action_layout.addWidget(action_label)
         action_layout.addWidget(self.action_combo)
@@ -179,7 +180,7 @@ class ListenerSettingsWidget(QWidget):
                 self.output_folder_edit.setPlaceholderText(json_dir)
                 self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_JSON_NAME)
             if action == 'parse_and_save':
-                self.output_folder_edit.setPlaceholderText(input_dir)
+                self.output_folder_edit.setPlaceholderText(os.path.join(input_dir, "Sample-1"))
                 self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_PCMD_NAME)
         else:
             self.output_folder_edit.setPlaceholderText("当前操作不需要输出文件夹")

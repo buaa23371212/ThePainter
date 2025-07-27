@@ -55,11 +55,23 @@ def get_scaled_pixmap(image_path, container_size, min_size=QSize(100, 100)):
         Qt.SmoothTransformation
     ), ""
 
+
 class FileDisplayUtils:
     """文件显示工具类，用于处理不同类型文件的内容展示"""
+    _instance = None  # 存储唯一实例
 
-    @staticmethod
-    def display_file_content(path, text_view, image_view, stack):
+    def __new__(cls, *args, **kwargs):
+        # 确保只创建一个实例
+        if not cls._instance:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
+
+    def __init__(self):
+        # 初始化实例属性（仅在首次创建时执行）
+        self.input_folders = []
+        self.output_image_names = []
+
+    def display_file_content(self, path, text_view, image_view, stack):
         """
         根据文件路径显示文件内容到指定的视图组件
 
@@ -105,8 +117,7 @@ class FileDisplayUtils:
             text_view.setPlainText(f"无法读取文件内容: {e}")
             stack.setCurrentIndex(0)
 
-    @staticmethod
-    def load_common_names():
+    def load_common_names(self):
         """
         加载 input 和 output 目录中公有的名称
         - 从 input 目录获取所有文件夹名称
@@ -140,8 +151,7 @@ class FileDisplayUtils:
 
         return common_names
 
-    @staticmethod
-    def update_image_display(image_path, image_label: QLabel):
+    def update_image_display(self, image_path, image_label: QLabel):
         """
         优化图片显示逻辑
         - 根据当前可用空间缩放图片
@@ -164,3 +174,5 @@ class FileDisplayUtils:
             image_label.setPixmap(scaled_pixmap)
         else:
             image_label.setText(error_msg)
+
+file_display_utils = FileDisplayUtils()

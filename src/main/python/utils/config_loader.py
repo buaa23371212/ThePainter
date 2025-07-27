@@ -38,8 +38,8 @@ def parse_config_file(path):
     return configs
 
 def replace_lines(lines: list, base_configs: dict) -> list:
-    debug(True, lines)
-    debug(True, base_configs)
+    debug(False, lines)
+    debug(False, base_configs)
 
     # 替换配置值，保留注释和格式
     new_lines = []
@@ -68,6 +68,6 @@ def replace_lines(lines: list, base_configs: dict) -> list:
         if not replaced:
             new_lines.append(line)
 
-    debug(True, new_lines)
+    debug(False, new_lines)
     
     return new_lines
