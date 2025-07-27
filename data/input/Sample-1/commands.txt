@@ -1,0 +1,132 @@
+# 说明：
+# 绘制图形时，先设置线条颜色
+# 海鸥画的不行
+# 填充一定是图形内部
+
+# ======================
+# 海景简笔画
+# ======================
+
+# 1. 绘制海平面（地平线）
+-color black
+line -points 300 700 1450 700
+
+# 2. 填充天空（浅蓝色）
+fill -color lightcyan -x 500 -y 300
+
+# 3. 填充海洋（靛蓝色）
+fill -color blue -x 500 -y 750
+
+# 4. 绘制太阳（圆形）
+-color black
+circle -center 1300 400 50
+
+# 5. 填充太阳（黄色）
+fill -color yellow -x 1300 -y 400
+
+# 6. 绘制云朵（左侧）
+-color black
+curve -points 500 350 450 300 400 320 450 350
+curve -points 450 350 500 370 550 330 500 350
+
+# 7. 绘制云朵（右侧）
+curve -points 1100 380 1050 350 1000 370 1050 390
+curve -points 1050 390 1100 410 1150 380 1100 380
+
+# 8. 填充云朵（白色）
+fill -color white -x 450 -y 335
+fill -color white -x 1050 -y 375
+
+# 9. 新建图层（用于绘制海浪）
+add_layer
+
+# 10. 绘制海浪（多条曲线）
+curve -points 350 700 400 690 450 710 500 700
+curve -points 600 700 650 690 700 710 750 700
+curve -points 800 700 850 690 900 710 950 700
+curve -points 1000 700 1050 690 1100 710 1150 700
+curve -points 1200 700 1250 690 1300 710 1350 700
+
+# 11. 设置线条颜色为白色（海浪）
+-color white
+
+# 12. 新建图层（用于绘制小岛）
+add_layer
+
+# 13. 绘制小岛（多边形）
+-color black
+polygon -points 400 700 500 650 600 680 700 650 800 700
+
+# 14. 填充小岛（绿色）
+fill -color green -x 600 -y 690
+
+# 15. 绘制棕榈树树干
+-color black
+line -points 550 680 550 620
+line -points 600 670 600 610
+
+# 16. 绘制棕榈树叶
+-color black
+curve -points 550 620 500 600 520 580 550 600
+curve -points 550 620 600 600 580 580 550 600
+curve -points 600 610 550 590 570 570 600 590
+curve -points 600 610 650 590 630 570 600 590
+
+# 17. 填充树叶（深绿色）
+fill -color darkred -x 550 -y 610
+fill -color darkred -x 600 -y 600
+
+# 18. 新建图层（用于绘制帆船）
+add_layer
+-color black
+
+# 19. 绘制船体（曲线）
+curve -points 850 750 850 780 950 780 950 750
+
+# 20. 绘制船体上部（直线）
+line -points 850 750 950 750
+
+# 21. 绘制主帆（三角形）
+polygon -points 900 750 900 650 850 750
+
+# 22. 绘制前帆（三角形）
+polygon -points 900 750 900 700 930 750
+
+# 23. 填充船体（棕色）
+fill -color brown -x 900 -y 760
+
+# 24. 填充船帆（白色）
+fill -color white -x 890 -y 720
+fill -color white -x 910 -y 730
+
+# 25. 新建图层（用于绘制海鸥）
+add_layer
+
+# 26. 设置线条颜色为白色（海鸥）
+-color white
+
+# 27. 绘制海鸥（多条曲线）
+curve -points 400 500 380 480 360 500 380 520
+curve -points 380 520 400 500 420 520 440 500
+
+curve -points 700 450 680 430 660 450 680 470
+curve -points 680 470 700 450 720 470 740 450
+
+curve -points 1000 550 980 530 960 550 980 570
+curve -points 980 570 1000 550 1020 570 1040 550
+
+# 28. 新建图层（用于绘制太阳光芒）
+add_layer
+
+# 29. 设置线条颜色为黄色（太阳光芒）
+-color yellow
+
+# 30. 绘制太阳光芒
+line -vector 1350 400 50 0
+line -vector 1250 400 -50 0
+line -vector 1300 450 0 50
+line -vector 1300 350 0 -50
+line -vector 1340 440 25 25
+line -vector 1340 360 25 -25
+line -vector 1260 440 -25 25
+line -vector 1260 360 -25 -25

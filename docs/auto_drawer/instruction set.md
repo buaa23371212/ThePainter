@@ -170,9 +170,9 @@
 ### 多边形
 
 - 直接指定顶点绘制多边形  
-  格式: `-vertices <x1> <y1> <x2> <y2> ...`
+  格式: `-points <x1> <y1> <x2> <y2> ...`
   ```shell
-  python painter.py polygon -vertices 500 300 700 500 300 500
+  python painter.py polygon -points 500 300 700 500 300 500
   ```
 
 - 通过JSON文件和名称绘制多边形  

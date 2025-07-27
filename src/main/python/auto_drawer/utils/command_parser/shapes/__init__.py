@@ -6,7 +6,7 @@ SUPPORTED_SHAPES = [
     "rounded_rectangle",
     "polygon",
     "line",
-    "polyline"
+    "polyline",
     "curve",
     "multicurve"
 ]

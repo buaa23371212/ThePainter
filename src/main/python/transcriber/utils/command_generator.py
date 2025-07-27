@@ -85,7 +85,7 @@ def generate_shape_command() -> Optional[str]:
                         px, py = point
                         vertices.append(f"{px} {py}")
                     # 拼接成完整的字符串
-                    return f"polygon -vertices {' '.join(vertices)}"
+                    return f"polygon -points {' '.join(vertices)}"
             else:
                 raise ValueError('未记录控制点')
 

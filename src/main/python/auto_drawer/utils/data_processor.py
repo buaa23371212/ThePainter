@@ -98,8 +98,9 @@ def validate_shape_args(args):
             raise ValueError("不能同时使用-id和-name参数")
 
     # Step 2: 验证顶点方式参数
-    elif args.vertices:
-        if len(args.vertices) % 2 != 0:
+    # TODO: 需要统一
+    elif args.points:
+        if len(args.points) % 2 != 0:
             raise ValueError("顶点坐标数量必须为偶数")
         if args.id or args.name:
             raise ValueError("直接指定顶点时，不能使用-id或-name参数")

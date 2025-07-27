@@ -146,9 +146,9 @@ def draw_polygon_command(args):
         if args.file:
             # 从JSON文件加载多边形
             points = load_polygon_from_json(args.file, args.id, args.name)
-        elif args.vertices:
+        elif args.points:
             # 转换顶点列表为点元组
-            points = convert_points_to_coords(args.vertices)
+            points = convert_points_to_coords(args.points)
         
         validate_point_count(points)
         

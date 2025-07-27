@@ -15,7 +15,7 @@ def add_polygon_arguments(subparsers):
     
     # 直接坐标选项
     source_group.add_argument(
-        '-vertices', 
+        '-points', 
         nargs='+', 
         type=int,
         metavar=('X', 'Y'),
