@@ -52,7 +52,9 @@ ListenerPage Structure:
                                      │           ├── 输出文件设置（QHBoxLayout）
                                      │           │     ├── 标签（QLabel，"输出文件:"）
                                      │           │     ├── 输入框（QLineEdit）
-                                     │           │     └── 浏览按钮（QPushButton，"浏览..."）
+                                     │           │     ├── 浏览按钮（QPushButton，"浏览..."）
+                                     │           │     ├── 输入框（QLineEdit）
+                                     │           │     └── 输入框（QLineEdit）
                                      │           └── 弹性空间（Stretch）
                                      └── 帮助信息框（QFrame）
                                            └── 垂直布局（QVBoxLayout）
