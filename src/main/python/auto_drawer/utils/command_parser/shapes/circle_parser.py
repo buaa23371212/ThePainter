@@ -17,5 +17,7 @@ def add_circle_arguments(subparsers):
         metavar=('center_x', 'center_y', 'radius'),
         help='通过圆心和半径绘制圆形'
     )
+
+    # TODO: 相对坐标
     
     return circle_parser
