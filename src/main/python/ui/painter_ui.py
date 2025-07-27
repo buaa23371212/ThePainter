@@ -129,6 +129,12 @@ class MainWindow(QWidget):
                          "scroll_bar.css", "splitter.css",
                          "text_edit.css", "title.css", "tree.css")
 
+# TODO
+flags = {
+    'debug': False
+}
+
+
 if __name__ == "__main__":
     # ====================================================================
     # STEP 10: 启动应用程序
