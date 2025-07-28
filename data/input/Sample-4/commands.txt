@@ -1,0 +1,231 @@
+# 说明:
+# 树叶和树干分家了
+
+# ======================
+# 简笔画城市
+# ======================
+
+# 1. 绘制地平线
+-color black
+line -points 300 700 1450 700
+
+# current color: black
+# 2. 填充天空（浅蓝色）
+fill -color lightcyan -x 500 -y 300
+
+# 3. 填充地面（灰色）
+fill -color gray -x 500 -y 750
+
+# 4. 新建图层（建筑物）
+add_layer
+
+# 5. 绘制建筑物1（左侧高楼）
+-color black
+rectangle -center 400 650 80 200
+fill -color bluegray -x 400 -y 650
+
+# current color: bluegray
+# 6. 绘制建筑物1窗户
+-color black
+rectangle -center 380 600 10 15
+rectangle -center 380 650 10 15
+rectangle -center 380 700 10 15
+rectangle -center 420 600 10 15
+rectangle -center 420 650 10 15
+rectangle -center 420 700 10 15
+fill -color lightcyan -x 380 -y 600
+fill -color lightcyan -x 380 -y 650
+fill -color lightcyan -x 380 -y 700
+fill -color lightcyan -x 420 -y 600
+fill -color lightcyan -x 420 -y 650
+fill -color lightcyan -x 420 -y 700
+
+# current color: lightcyan
+# 7. 绘制建筑物2（中间办公楼）
+-color black
+rectangle -center 700 700 150 150
+fill -color darkred -x 700 -y 700
+
+# current color: darkred
+# 8. 绘制建筑物2窗户
+-color black
+rectangle -center 640 650 20 20
+rectangle -center 640 700 20 20
+rectangle -center 640 750 20 20
+rectangle -center 700 650 20 20
+rectangle -center 700 700 20 20
+rectangle -center 700 750 20 20
+rectangle -center 760 650 20 20
+rectangle -center 760 700 20 20
+rectangle -center 760 750 20 20
+fill -color lightyellow -x 640 -y 650
+fill -color lightyellow -x 640 -y 700
+fill -color lightyellow -x 640 -y 750
+fill -color lightyellow -x 700 -y 650
+fill -color lightyellow -x 700 -y 700
+fill -color lightyellow -x 700 -y 750
+fill -color lightyellow -x 760 -y 650
+fill -color lightyellow -x 760 -y 700
+fill -color lightyellow -x 760 -y 750
+
+# current color: lightyellow
+# 9. 绘制建筑物3（右侧公寓楼）
+# 10. 绘制建筑物3阳台
+# 这部分阳台的一部分会被建筑遮住
+-color black
+rectangle -center 950 630 20 10
+rectangle -center 950 680 20 10
+rectangle -center 950 730 20 10
+rectangle -center 1050 630 20 10
+rectangle -center 1050 680 20 10
+rectangle -center 1050 730 20 10
+fill -color lightpurple -x 950 -y 630
+fill -color lightpurple -x 950 -y 680
+fill -color lightpurple -x 950 -y 730
+fill -color lightpurple -x 1050 -y 630
+fill -color lightpurple -x 1050 -y 680
+fill -color lightpurple -x 1050 -y 730
+
+add_layer
+
+# current color: lightpurple
+-color black
+rectangle -center 1000 680 100 180
+fill -color blue -x 1000 -y 680
+
+# current color: blue
+-color black
+rectangle -center 1000 630 20 10
+rectangle -center 1000 680 20 10
+rectangle -center 1000 730 20 10
+fill -color lightpurple -x 1000 -y 630
+fill -color lightpurple -x 1000 -y 680
+fill -color lightpurple -x 1000 -y 730
+
+# 11. 绘制建筑物4（银行圆顶）
+-color black
+ellipse -bounding 1150 600 1250 650
+fill -color darkred -x 1200 -y 625
+
+# 将椭圆的下半部分遮住
+add_layer
+
+# current color: darkred
+# 12. 绘制主体
+-color black
+rectangle -center 1200 700 100 150
+fill -color gold -x 1200 -y 700
+
+# 13. 新建图层（道路和车辆）
+add_layer
+
+# 14. 绘制主干道
+-color black
+rectangle -center 875 850 1150 40
+fill -color black -x 875 -y 850
+
+# 15. 绘制道路标线
+-color yellow
+line -points 300 850 1450 850
+
+# 16. 绘制车辆1（左侧小汽车）
+-color black
+rectangle -center 500 820 60 30
+fill -color red -x 500 -y 820
+circle -center 480 835 10
+circle -center 520 835 10
+fill -color black -x 500 -y 835
+
+# current color: black
+# 17. 绘制车辆2（右侧卡车）
+rectangle -center 1100 820 80 40
+fill -color green -x 1100 -y 820
+circle -center 1070 840 12
+circle -center 1130 840 12
+fill -color black -x 1100 -y 840
+
+# 18. 新建图层（树木和行人）
+add_layer
+
+# 19. 绘制树木（三棵）
+# 树1
+rectangle -center 350 800 20 60
+fill -color brown -x 350 -y 800
+
+# 让椭圆遮住矩形上部
+add_layer
+
+# current color: brown
+-color black
+ellipse -center 350 770 40 30
+fill -color green -x 350 -y 770
+
+# current color: green
+# 树2
+-color black
+rectangle -center 800 800 20 60
+fill -color brown -x 800 -y 800
+
+# 让椭圆遮住矩形上部
+add_layer
+
+# current color: brown
+-color black
+ellipse -center 800 770 40 30
+fill -color green -x 800 -y 770
+
+# 树3
+-color black
+rectangle -center 1300 800 20 60
+fill -color brown -x 1300 -y 800
+
+# 让椭圆遮住矩形上部
+add_layer
+
+# current color: brown
+-color black
+ellipse -center 1300 770 40 30
+fill -color green -x 1300 -y 770
+
+# current color: green
+# 20. 绘制行人
+-color black
+# 行人1（向上移动40后）
+circle -center 600 760 8
+line -points 600 768 600 790
+line -points 600 778 580 770
+line -points 600 778 620 770
+line -points 600 790 590 810
+line -points 600 790 610 810
+
+# 行人2（向上移动40后）
+circle -center 900 760 8
+line -points 900 768 900 790
+line -points 900 778 880 770
+line -points 900 778 920 770
+line -points 900 790 890 810
+line -points 900 790 910 810
+
+# 21. 新建图层（云朵和太阳）
+add_layer
+
+# 22. 绘制太阳
+-color black
+circle -center 1300 400 50
+fill -color yellow -x 1300 -y 400
+
+# current color: yellow
+# 23. 绘制云朵
+-color white
+# 云朵1
+curve -points 500 350 450 300 400 320 450 350
+curve -points 450 350 500 370 550 330 500 350
+fill -color white -x 450 -y 335
+
+# 云朵2
+curve -points 800 380 750 350 700 370 750 390
+curve -points 750 390 800 410 850 380 800 380
+fill -color white -x 750 -y 375
+
+# 24. 添加城市标题文本
+text -text "Stick Figure City" -x 700 -y 330
