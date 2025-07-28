@@ -1,4 +1,4 @@
 # multicurve -file data/input/Test/shapes.json -id path1
 # polyline -points 500 500 600 600 700 500 800 600
 # curve -points 500 500 600 600 700 500 800 600
-polygon -points 500 500 600 600 700 500 800 600
+polygon -points 500 500 600 600 700 500 800 600     # TEST
