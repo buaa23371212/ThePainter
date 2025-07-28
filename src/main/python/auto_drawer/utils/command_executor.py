@@ -283,6 +283,7 @@ def process_batch_commands(input_file_path, flags={}):
     
     :param input_file_path: 命令文件路径
     """
+    # TODO: jump to step 27
     with open(input_file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
         i = 0
