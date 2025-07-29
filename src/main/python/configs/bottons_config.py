@@ -1,6 +1,7 @@
 from src.main.python.configs.drawer_panel_config import SHAPE_PANEL_KEY_MAP, FILL_COLOR_KEY_MAP
 from src.main.python.transcriber.utils.button_manager import ButtonManager
 from src.main.python.transcriber.utils.button_recorder import ButtonRecorder
+from src.main.python.terminal_logger.logger import debug
 
 # 创建按钮管理器
 manager = ButtonManager()
@@ -72,7 +73,7 @@ def create_toolbar_buttons(
         items = sorted_items[start:end]
 
     for item_name, index in items:
-        left = first_button_left + index * (button_width + button_spacing)
+        left = first_button_left + (index - start_index) * (button_width + button_spacing)
         right = left + button_width
 
         # 创建按钮
@@ -108,7 +109,8 @@ shape_buttons = create_toolbar_buttons(
     button_width=SHAPE_BUTTON_WIDTH,
     button_height=SHAPE_BUTTON_HEIGHT,
     button_top=SHAPE_BUTTON_TOP,
-    button_spacing=SHAPE_BUTTON_SPACING
+    button_spacing=SHAPE_BUTTON_SPACING,
+    item_count=9
 )
 manager.add_buttons(shape_buttons)
 
@@ -137,19 +139,27 @@ color_buttons = create_toolbar_buttons(
     item_count=10
 )
 
+COLOR_BUTTON_TOP_2 = 120
+
 color_buttons_2 = create_toolbar_buttons(
     button_map=FILL_COLOR_KEY_MAP,
     prefix="Color",
     first_button_left=first_color_button_left,
     button_width=COLOR_BUTTON_WIDTH,
     button_height=COLOR_BUTTON_HEIGHT,
-    button_top=COLOR_BUTTON_TOP,
+    button_top=COLOR_BUTTON_TOP_2,
     button_spacing=COLOR_BUTTON_SPACING,
     start_index=10,
     item_count=10
 )
 
 manager.add_buttons(color_buttons)
+manager.add_buttons(color_buttons_2)
+
+debug(True, manager.get_button_by_name("Shape_right_triangle"))
+debug(True, manager.get_button_by_name("Color_black"))
+debug(True, manager.get_button_by_name("Color_white"))
+debug(True, manager.get_button_by_name("Color_lightpurple"))
 
 # ====================================================
 # 添加其他重要按钮
