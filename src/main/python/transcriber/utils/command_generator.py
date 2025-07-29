@@ -195,7 +195,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 def print_command(commands: List[str]):
     print("\nGenerated Drawing Commands:")
     for i, cmd in enumerate(commands, 1):
-        print(f"{i:>2}. {cmd}")
+        print(f"{cmd}")
 
 def export2pcmd(commands: List[str], folder: Union[str, None] = None) -> None:
     """
