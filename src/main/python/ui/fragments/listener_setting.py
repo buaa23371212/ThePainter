@@ -8,13 +8,14 @@ from PyQt5.QtCore import Qt, QSize
 from src.main.python.configs.ui_config import LABEL_WIDTH
 from src.main.python.configs.project_config import json_dir, input_dir
 from src.main.python.ui.fragments import HELP_CONTENT
+from src.main.python.ui.utils.file_manager import FileManager
 from src.main.python.utils.listener_manager import listener_config
 from src.main.python.terminal_logger.logger import debug
 from src.main.python.transcriber import ACTION_CHOICE
 
 class ListenerSettingsWidget(QWidget):
     """监听器参数设置组件 - 重新设计版本"""
-    def __init__(self, file_manager, parent=None):
+    def __init__(self, file_manager: FileManager, parent=None):
         super().__init__(parent)
         self.file_manager = file_manager
         self.init_ui()
@@ -245,12 +246,12 @@ class ListenerSettingsWidget(QWidget):
         painting_name = self.painting_name_edit.text().strip()
         filename = self.output_filename_edit.text().strip()
 
-        debug(True, f"{folder}, {painting_name}, {filename}")
+        debug(False, f"{folder}, {painting_name}, {filename}")
 
         # 过滤空值（避免多余的路径层级）
         path_parts = [part for part in [folder, painting_name, filename] if part]
 
-        debug(True, path_parts)
+        debug(False, path_parts)
 
         if not self.output_enabled:
             return ""

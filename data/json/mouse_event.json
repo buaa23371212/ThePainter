@@ -1,354 +1,74 @@
 [
     {
         "state": "pressed",
-        "start_time": 0.9943037033081055,
+        "start_time": 2.920957565307617,
         "start_position": [
-            1376,
-            1049
+            1362,
+            1060
         ],
         "button": "left",
         "current_position": [
-            1376,
-            1049
+            1363,
+            1060
         ],
-        "end_time": 1.0625495910644531,
+        "end_time": 3.016258955001831,
         "end_position": [
-            1376,
-            1049
+            1363,
+            1060
         ],
         "path": [],
         "button_name": "WinTaskbar"
     },
     {
         "state": "pressed",
-        "start_time": 2.225407361984253,
+        "start_time": 4.7655839920043945,
         "start_position": [
-            354,
-            59
+            971,
+            114
         ],
         "button": "left",
         "current_position": [
-            354,
-            59
+            971,
+            114
         ],
-        "end_time": 2.299201488494873,
+        "end_time": 4.846182346343994,
         "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 2.367086410522461,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 2.4189774990081787,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 2.479766845703125,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 2.56978440284729,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 2.6520917415618896,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 2.7195699214935303,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 2.7869343757629395,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 2.8689088821411133,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 2.944615364074707,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.0123255252838135,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.0949482917785645,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.161508321762085,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.2294085025787354,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.2964181900024414,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.372159957885742,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.439004421234131,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.5141730308532715,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.589383363723755,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.664609909057617,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.732173204421997,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.792520761489868,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 3.874793529510498,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 3.942267656326294,
-        "start_position": [
-            354,
-            59
-        ],
-        "button": "left",
-        "current_position": [
-            354,
-            59
-        ],
-        "end_time": 4.2198100090026855,
-        "end_position": [
-            354,
-            59
-        ],
-        "path": [],
-        "button_name": "Redo"
-    },
-    {
-        "state": "pressed",
-        "start_time": 5.232034921646118,
-        "start_position": [
-            958,
-            101
-        ],
-        "button": "left",
-        "current_position": [
-            958,
-            101
-        ],
-        "end_time": 5.284669399261475,
-        "end_position": [
-            958,
-            101
+            971,
+            114
         ],
         "path": [],
         "button_name": "Color_black"
     },
     {
-        "state": "pressed",
-        "start_time": 6.175266742706299,
-        "start_position": [
-            541,
-            94
-        ],
-        "button": "left",
-        "current_position": [
-            541,
-            94
-        ],
-        "end_time": 6.234761476516724,
-        "end_position": [
-            541,
-            94
-        ],
-        "path": [],
-        "button_name": "Shape_line"
-    },
-    {
         "state": "dragging",
-        "start_time": 12.129124164581299,
+        "start_time": 8.698447704315186,
         "start_position": [
-            383,
-            783
+            892,
+            608
         ],
         "button": "left",
         "current_position": [
-            389,
-            783
+            897,
+            613
         ],
-        "end_time": 15.50107455253601,
+        "end_time": 10.51829719543457,
         "end_position": [
-            1534,
-            782
+            1104,
+            814
         ],
         "path": [
             {
-                "time": "12.129s",
+                "time": "8.698s",
                 "position": [
-                    389,
-                    783
+                    897,
+                    613
                 ]
             },
             {
-                "time": "15.501s",
+                "time": "10.518s",
                 "position": [
-                    1534,
-                    782
+                    1104,
+                    814
                 ]
             }
         ],
@@ -356,54 +76,94 @@
     },
     {
         "state": "pressed",
-        "start_time": 15.888707399368286,
+        "start_time": 15.77431583404541,
         "start_position": [
-            1648,
-            771
+            342,
+            54
         ],
         "button": "left",
         "current_position": [
-            1648,
-            771
+            342,
+            54
         ],
-        "end_time": 15.963474988937378,
+        "end_time": 15.872962713241577,
         "end_position": [
-            1648,
-            771
+            342,
+            54
         ],
         "path": [],
-        "button_name": null
+        "button_name": "Redo"
+    },
+    {
+        "state": "pressed",
+        "start_time": 17.569953441619873,
+        "start_position": [
+            620,
+            105
+        ],
+        "button": "left",
+        "current_position": [
+            620,
+            105
+        ],
+        "end_time": 17.673097133636475,
+        "end_position": [
+            620,
+            105
+        ],
+        "path": [],
+        "button_name": "Shape_rectangle"
+    },
+    {
+        "state": "pressed",
+        "start_time": 17.995133638381958,
+        "start_position": [
+            642,
+            105
+        ],
+        "button": "left",
+        "current_position": [
+            642,
+            105
+        ],
+        "end_time": 18.054715633392334,
+        "end_position": [
+            642,
+            105
+        ],
+        "path": [],
+        "button_name": "Shape_rectangle"
     },
     {
         "state": "dragging",
-        "start_time": 18.985037088394165,
+        "start_time": 20.423885107040405,
         "start_position": [
-            522,
-            782
+            876,
+            583
         ],
         "button": "left",
         "current_position": [
-            529,
-            772
+            880,
+            588
         ],
-        "end_time": 19.910975694656372,
+        "end_time": 23.58489179611206,
         "end_position": [
-            746,
-            472
+            975,
+            862
         ],
         "path": [
             {
-                "time": "18.985s",
+                "time": "20.424s",
                 "position": [
-                    529,
-                    772
+                    880,
+                    588
                 ]
             },
             {
-                "time": "19.911s",
+                "time": "23.585s",
                 "position": [
-                    746,
-                    472
+                    975,
+                    862
                 ]
             }
         ],
@@ -411,345 +171,255 @@
     },
     {
         "state": "pressed",
-        "start_time": 20.674665927886963,
+        "start_time": 25.63550853729248,
         "start_position": [
-            1620,
-            742
+            252,
+            488
         ],
         "button": "left",
         "current_position": [
-            1620,
-            742
+            252,
+            488
         ],
-        "end_time": 20.738973379135132,
+        "end_time": 25.7331964969635,
         "end_position": [
-            1620,
-            742
-        ],
-        "path": [],
-        "button_name": null
-    },
-    {
-        "state": "dragging",
-        "start_time": 23.091331958770752,
-        "start_position": [
-            746,
-            471
-        ],
-        "button": "left",
-        "current_position": [
-            749,
-            478
-        ],
-        "end_time": 24.304592609405518,
-        "end_position": [
-            955,
-            784
-        ],
-        "path": [
-            {
-                "time": "23.091s",
-                "position": [
-                    749,
-                    478
-                ]
-            },
-            {
-                "time": "24.305s",
-                "position": [
-                    955,
-                    784
-                ]
-            }
-        ],
-        "button_name": "Canvas"
-    },
-    {
-        "state": "pressed",
-        "start_time": 24.91020965576172,
-        "start_position": [
-            1646,
-            726
-        ],
-        "button": "left",
-        "current_position": [
-            1646,
-            726
-        ],
-        "end_time": 24.958460569381714,
-        "end_position": [
-            1646,
-            726
-        ],
-        "path": [],
-        "button_name": null
-    },
-    {
-        "state": "dragging",
-        "start_time": 27.002328634262085,
-        "start_position": [
-            953,
-            779
-        ],
-        "button": "left",
-        "current_position": [
-            963,
-            776
-        ],
-        "end_time": 28.823219776153564,
-        "end_position": [
-            1205,
-            651
-        ],
-        "path": [
-            {
-                "time": "27.002s",
-                "position": [
-                    963,
-                    776
-                ]
-            },
-            {
-                "time": "28.823s",
-                "position": [
-                    1205,
-                    651
-                ]
-            }
-        ],
-        "button_name": "Canvas"
-    },
-    {
-        "state": "pressed",
-        "start_time": 29.26950693130493,
-        "start_position": [
-            1678,
-            693
-        ],
-        "button": "left",
-        "current_position": [
-            1678,
-            693
-        ],
-        "end_time": 29.317111492156982,
-        "end_position": [
-            1678,
-            693
-        ],
-        "path": [],
-        "button_name": null
-    },
-    {
-        "state": "dragging",
-        "start_time": 30.57717800140381,
-        "start_position": [
-            1206,
-            652
-        ],
-        "button": "left",
-        "current_position": [
-            1212,
-            652
-        ],
-        "end_time": 31.487914562225342,
-        "end_position": [
-            1459,
-            781
-        ],
-        "path": [
-            {
-                "time": "30.577s",
-                "position": [
-                    1212,
-                    652
-                ]
-            },
-            {
-                "time": "31.488s",
-                "position": [
-                    1459,
-                    781
-                ]
-            }
-        ],
-        "button_name": "Canvas"
-    },
-    {
-        "state": "pressed",
-        "start_time": 31.79133439064026,
-        "start_position": [
-            1660,
-            753
-        ],
-        "button": "left",
-        "current_position": [
-            1660,
-            753
-        ],
-        "end_time": 31.83923864364624,
-        "end_position": [
-            1660,
-            753
+            252,
+            488
         ],
         "path": [],
         "button_name": null
     },
     {
         "state": "pressed",
-        "start_time": 33.5926079750061,
+        "start_time": 28.578959941864014,
         "start_position": [
-            369,
-            112
+            1021,
+            136
         ],
         "button": "left",
         "current_position": [
-            369,
-            112
+            1021,
+            136
         ],
-        "end_time": 33.65655064582825,
+        "end_time": 28.648229360580444,
         "end_position": [
-            369,
-            112
+            1021,
+            136
+        ],
+        "path": [],
+        "button_name": null
+    },
+    {
+        "state": "pressed",
+        "start_time": 29.971080541610718,
+        "start_position": [
+            352,
+            106
+        ],
+        "button": "left",
+        "current_position": [
+            352,
+            106
+        ],
+        "end_time": 30.029033422470093,
+        "end_position": [
+            352,
+            106
         ],
         "path": [],
         "button_name": "Tool_fill"
     },
     {
         "state": "pressed",
-        "start_time": 35.111318588256836,
+        "start_time": 31.231038570404053,
         "start_position": [
-            1139,
-            109
+            919,
+            696
         ],
         "button": "left",
         "current_position": [
-            1139,
-            109
+            919,
+            696
         ],
-        "end_time": 35.17615580558777,
+        "end_time": 31.330045461654663,
         "end_position": [
-            1139,
-            109
-        ],
-        "path": [],
-        "button_name": "Color_green"
-    },
-    {
-        "state": "pressed",
-        "start_time": 35.715882539749146,
-        "start_position": [
-            763,
-            609
-        ],
-        "button": "left",
-        "current_position": [
-            763,
-            609
-        ],
-        "end_time": 35.77919149398804,
-        "end_position": [
-            763,
-            609
+            919,
+            696
         ],
         "path": [],
         "button_name": "Canvas"
     },
     {
         "state": "pressed",
-        "start_time": 36.14615821838379,
+        "start_time": 33.61095690727234,
         "start_position": [
-            1208,
-            711
+            1437,
+            138
         ],
         "button": "left",
         "current_position": [
-            1208,
-            711
+            1437,
+            138
         ],
-        "end_time": 36.21008610725403,
+        "end_time": 33.68919277191162,
         "end_position": [
-            1208,
-            711
+            1437,
+            138
         ],
         "path": [],
+        "button_name": "Tool_layer"
+    },
+    {
+        "state": "pressed",
+        "start_time": 38.10692763328552,
+        "start_position": [
+            609,
+            103
+        ],
+        "button": "left",
+        "current_position": [
+            609,
+            103
+        ],
+        "end_time": 38.19898772239685,
+        "end_position": [
+            609,
+            103
+        ],
+        "path": [],
+        "button_name": "Shape_ellipse"
+    },
+    {
+        "state": "dragging",
+        "start_time": 39.75878953933716,
+        "start_position": [
+            642,
+            398
+        ],
+        "button": "left",
+        "current_position": [
+            645,
+            404
+        ],
+        "end_time": 41.9650137424469,
+        "end_position": [
+            1037,
+            684
+        ],
+        "path": [
+            {
+                "time": "39.759s",
+                "position": [
+                    645,
+                    404
+                ]
+            },
+            {
+                "time": "41.965s",
+                "position": [
+                    1037,
+                    684
+                ]
+            }
+        ],
         "button_name": "Canvas"
     },
     {
         "state": "pressed",
-        "start_time": 37.05553102493286,
+        "start_time": 43.11288571357727,
         "start_position": [
-            1144,
-            142
+            969,
+            98
         ],
         "button": "left",
         "current_position": [
-            1144,
-            142
+            969,
+            98
         ],
-        "end_time": 37.11984086036682,
+        "end_time": 43.18818688392639,
         "end_position": [
-            1144,
-            142
+            969,
+            98
+        ],
+        "path": [],
+        "button_name": "Color_black"
+    },
+    {
+        "state": "pressed",
+        "start_time": 46.663782358169556,
+        "start_position": [
+            1501,
+            618
+        ],
+        "button": "left",
+        "current_position": [
+            1501,
+            618
+        ],
+        "end_time": 46.763877868652344,
+        "end_position": [
+            1501,
+            618
         ],
         "path": [],
         "button_name": null
     },
     {
         "state": "pressed",
-        "start_time": 37.83681130409241,
+        "start_time": 48.5326988697052,
         "start_position": [
-            1159,
-            835
+            1141,
+            110
         ],
         "button": "left",
         "current_position": [
-            1159,
-            835
+            1141,
+            110
         ],
-        "end_time": 37.90085744857788,
+        "end_time": 48.629634857177734,
         "end_position": [
-            1159,
-            835
+            1141,
+            110
         ],
         "path": [],
-        "button_name": "Canvas"
+        "button_name": "Shape_heart"
     },
     {
         "state": "pressed",
-        "start_time": 38.759697675704956,
+        "start_time": 50.90007758140564,
         "start_position": [
-            1205,
-            91
+            378,
+            110
         ],
         "button": "left",
         "current_position": [
-            1204,
-            93
+            378,
+            110
         ],
-        "end_time": 38.85569715499878,
+        "end_time": 50.960273027420044,
         "end_position": [
-            1204,
-            93
+            378,
+            110
         ],
         "path": [],
-        "button_name": "Color_blue"
+        "button_name": "Tool_fill"
     },
     {
         "state": "pressed",
-        "start_time": 39.49538516998291,
+        "start_time": 51.7526068687439,
         "start_position": [
-            1180,
-            433
+            825,
+            485
         ],
         "button": "left",
         "current_position": [
-            1180,
-            434
+            825,
+            485
         ],
-        "end_time": 39.54256224632263,
+        "end_time": 51.831533432006836,
         "end_position": [
-            1180,
-            434
+            825,
+            485
         ],
         "path": [],
         "button_name": "Canvas"

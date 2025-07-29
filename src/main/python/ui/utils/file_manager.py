@@ -7,6 +7,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QTreeWidgetItem
 
+from src.main.python.configs.project_config import json_dir
+
 class FileTreeUtils:
     """文件树操作工具类"""
 
@@ -83,7 +85,8 @@ class FileManager:
         file_path = filedialog.askopenfilename(
             parent=self.root,
             title="选择文件",
-            filetypes=selected_types
+            filetypes=selected_types,
+            initialdir=json_dir
         )
 
         # 如果选择了文件，记录到最近文件列表

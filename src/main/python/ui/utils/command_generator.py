@@ -104,7 +104,10 @@ def execute_listening_command(text_view, action="record", input_file=None, outpu
         command += f" -f \"{input_file}\""
 
     # 添加输出文件参数
-    if output_file and action in ['export', 'parse_and_save']:
+    if output_file and action in ['export']:
+        command += f" -f \"{output_file}\""
+
+    if output_file and action in ['parse_and_save']:
         command += f" -c \"{output_file}\""
 
     # 添加打印命令参数
