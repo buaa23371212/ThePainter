@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt, QSize
 
 from src.main.python.configs.ui_config import LABEL_WIDTH
 from src.main.python.configs.project_config import json_dir, input_dir
+from src.main.python.ui.fragments import HELP_CONTENT
 from src.main.python.utils.listener_manager import listener_config
 from src.main.python.terminal_logger.logger import debug
 from src.main.python.transcriber import ACTION_CHOICE
@@ -55,18 +56,19 @@ class ListenerSettingsWidget(QWidget):
         settings_layout.addLayout(action_layout)
 
         # 2. Input File设置
-        input_layout = QHBoxLayout()
+        self.input_widget = QWidget()
+        input_layout = QHBoxLayout(self.input_widget)
         input_label = self._create_label("输入文件:", "listenerSettingInputLabel")
         self.input_file_edit = self._create_edit_line("输入文件路径（可选）")
         input_btn = self._create_btn("浏览...", "exploreBtn", 70, self._select_input_file)
         input_layout.addWidget(input_label)
         input_layout.addWidget(self.input_file_edit)
         input_layout.addWidget(input_btn)
-        settings_layout.addLayout(input_layout)
+        settings_layout.addWidget(self.input_widget)
 
         # 3. Output File设置
-        output_group = QGroupBox("输出文件设置")
-        output_group_layout = QVBoxLayout(output_group)
+        self.output_group = QGroupBox("输出文件设置")
+        output_group_layout = QVBoxLayout(self.output_group)
 
         # 3.1 输出文件夹
         folder_layout = QHBoxLayout()
@@ -97,7 +99,7 @@ class ListenerSettingsWidget(QWidget):
         output_group_layout.addLayout(filename_layout)
 
         # 将输出文件组添加到设置布局
-        settings_layout.addWidget(output_group)
+        settings_layout.addWidget(self.output_group)
 
         # 添加弹性空间
         settings_layout.addStretch(1)
@@ -131,21 +133,7 @@ class ListenerSettingsWidget(QWidget):
 
     def get_help_text(self):
         """返回格式化的帮助文本"""
-        return """
-        <p><strong>操作说明：</strong></p>
-        <p><b>record</b>：记录并打印鼠标事件（默认）</p>
-        <p><b>export</b>：记录并导出到文件</p>
-        <p><b>convert</b>：记录并转换为绘图命令</p>
-        <p><b>full</b>：记录、转换并打印绘图命令</p>
-        <p><b>parse</b>：从文件解析并转换为绘图命令</p>
-        <p><b>parse_and_save</b>：从文件解析、转换并保存绘图命令</p>
-        
-        <p><strong>使用提示：</strong></p>
-        <p>1. 选择操作类型后，相关输入/输出字段会自动启用</p>
-        <p>2. 对于需要输入文件的操作，请点击"浏览"按钮选择文件</p>
-        <p>3. 对于需要输出文件的操作，请指定保存路径</p>
-        <p>4. 操作执行结果将在输出面板显示</p>
-        """
+        return HELP_CONTENT
     
     def _create_label(self, text, object_name):
         """创建标签的工具方法"""
@@ -155,18 +143,7 @@ class ListenerSettingsWidget(QWidget):
         return label
     
     def _create_btn(self, text, object_name, fixed_width, clicked_callback):
-        """
-        创建按钮的工具方法
-        
-        Args:
-            text: 按钮显示文本
-            object_name: 按钮对象名
-            fixed_width: 按钮固定宽度
-            clicked_callback: 点击事件回调函数
-        
-        Returns:
-            QPushButton: 创建好的按钮实例
-        """
+        """创建按钮的工具方法"""
         btn = QPushButton(text)
         btn.setObjectName(object_name)
         btn.setFixedWidth(fixed_width)
@@ -180,46 +157,60 @@ class ListenerSettingsWidget(QWidget):
 
     def update_ui_state(self, action):
         """根据选择的action更新UI状态"""
-        # TODO: 优化逻辑
+        # 保存当前操作类型
         listener_config.DEFAULT_ACTION_CHOICE = action
+        
+        # 清空所有编辑框
         self.input_file_edit.clear()
         self.output_folder_edit.clear()
         self.painting_name_edit.clear()
         self.output_filename_edit.clear()
-
-        # 根据操作类型启用/禁用输入文件字段
+        
+        # 根据操作类型设置输入输出状态
         input_enabled = action in ['parse', 'parse_and_save']
-        self.input_file_edit.setEnabled(input_enabled)
-
-        # 根据操作类型启用/禁用输出文件相关字段
-        self.output_enabled = action in ['export', 'parse_and_save']
-        self.output_folder_edit.setEnabled(self.output_enabled)
-        self.painting_name_edit.setEnabled(self.output_enabled)
-        self.output_filename_edit.setEnabled(self.output_enabled)
-
-        # 更新占位符文本
+        output_enabled = action in ['export', 'parse_and_save']
+        
+        # 设置输入部分可见性和状态
+        self.input_widget.setVisible(input_enabled)
         if input_enabled:
+            self.input_file_edit.setEnabled(True)
             self.input_file_edit.setPlaceholderText("请选择输入文件")
         else:
+            self.input_file_edit.setEnabled(False)
             self.input_file_edit.setPlaceholderText("当前操作不需要输入文件")
-
-        if self.output_enabled:
+        
+        # 设置输出部分可见性和状态
+        self.output_group.setVisible(output_enabled)
+        if output_enabled:
+            # 设置输出部分默认值
             if action == 'export':
                 self.output_folder_edit.setText(json_dir)
                 self.output_filename_edit.setText(listener_config.DEFAULT_JSON_NAME)
-                self.painting_name_edit.setText("")         # 设为空串
-                self.painting_name_edit.setEnabled(False)   # 不可编辑
+                # 隐藏画作名相关控件
                 self.painting_name_label.setVisible(False)
-                self.painting_name_edit.setVisible(False)   # 隐藏控件
-            if action == 'parse_and_save':
+                self.painting_name_edit.setVisible(False)
+            elif action == 'parse_and_save':
                 self.output_folder_edit.setText(input_dir)
                 self.painting_name_edit.setText("Sample-1")
+                self.output_filename_edit.setText(listener_config.DEFAULT_PCMD_NAME)
+                # 显示画作名相关控件
                 self.painting_name_label.setVisible(True)
                 self.painting_name_edit.setVisible(True)
-                self.output_filename_edit.setText(listener_config.DEFAULT_PCMD_NAME)
+            
+            # 启用输出部分控件
+            self.output_folder_edit.setEnabled(True)
+            self.painting_name_edit.setEnabled(True)
+            self.output_filename_edit.setEnabled(True)
         else:
+            # 禁用输出部分控件
+            self.output_folder_edit.setEnabled(False)
+            self.painting_name_edit.setEnabled(False)
+            self.output_filename_edit.setEnabled(False)
             self.output_folder_edit.setPlaceholderText("当前操作不需要输出文件夹")
             self.output_filename_edit.setPlaceholderText("当前操作不需要文件名")
+        
+        # 保存输出状态供其他方法使用
+        self.output_enabled = output_enabled
 
     def _select_input_file(self):
         """选择输入文件"""
