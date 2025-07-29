@@ -2,10 +2,18 @@
 # Examples
 # ===========================
 
-# 太阳
+# ===========================
+# 说明：
+# ===========================
+# a. 使用时，可以平移缩放
+
+# ===========================
+# 太阳示例
+# ===========================
 -color black
 ellipse -bounding 810 471 1029 685
 fill -x 933 -y 567
+# 八条线，表示太阳发出的光
 line -points 918 313 919 436
 line -points 1070 572 1253 570
 line -points 914 719 913 863
@@ -15,12 +23,47 @@ line -points 1019 476 1125 364
 line -points 1031 688 1160 791
 line -points 797 677 692 780
 
-# 树
+# ===========================
+# 树示例
+# ===========================
 -color black
 rectangle -bounding 811 575 911 843
 fill -x 871 -y 690
+# 增加图层，使树叶在视觉上遮住树干
 add_layer
 -color black
 ellipse -bounding 672 418 1058 667
 -color green
 fill -x 858 -y 498
+
+# ===========================
+# 楼房实例
+# ===========================
+-color black
+# 主体
+rectangle -bounding 678 415 977 836
+# 门
+rectangle -bounding 839 835 905 731
+# 六个窗
+rectangle -bounding 738 446 787 494
+rectangle -bounding 874 452 922 499
+rectangle -bounding 740 556 793 606
+rectangle -bounding 871 558 923 607
+rectangle -bounding 744 652 802 708
+rectangle -bounding 875 651 925 705
+# 门把手
+circle -bounding 878 780 892 795
+# 主体灰色
+-color gray
+fill -x 831 -y 505
+# 门蓝灰色
+-color bluegray
+fill -x 863 -y 755
+# 窗户黄色，表示房间内亮灯
+-color yellow
+fill -x 759 -y 463
+fill -x 775 -y 577
+fill -x 783 -y 681
+fill -x 900 -y 672
+fill -x 896 -y 571
+fill -x 895 -y 470
