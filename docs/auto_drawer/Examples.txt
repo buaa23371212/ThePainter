@@ -1,0 +1,16 @@
+# ===========================
+# Examples
+# ===========================
+
+# 太阳
+-color black
+ellipse -bounding 810 471 1029 685
+fill -x 933 -y 567
+line -points 918 313 919 436
+line -points 1070 572 1253 570
+line -points 914 719 913 863
+line -points 767 586 587 591
+line -points 810 483 696 388
+line -points 1019 476 1125 364
+line -points 1031 688 1160 791
+line -points 797 677 692 780
