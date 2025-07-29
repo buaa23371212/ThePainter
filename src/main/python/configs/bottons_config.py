@@ -136,6 +136,19 @@ color_buttons = create_toolbar_buttons(
     start_index=0,
     item_count=10
 )
+
+color_buttons_2 = create_toolbar_buttons(
+    button_map=FILL_COLOR_KEY_MAP,
+    prefix="Color",
+    first_button_left=first_color_button_left,
+    button_width=COLOR_BUTTON_WIDTH,
+    button_height=COLOR_BUTTON_HEIGHT,
+    button_top=COLOR_BUTTON_TOP,
+    button_spacing=COLOR_BUTTON_SPACING,
+    start_index=10,
+    item_count=10
+)
+
 manager.add_buttons(color_buttons)
 
 # ====================================================

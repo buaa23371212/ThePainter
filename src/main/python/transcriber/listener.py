@@ -1,56 +1,12 @@
-import os
-import argparse
-
-from src.main.python.configs.project_config import json_dir, input_dir, test_json_dir
-
 from src.main.python.terminal_logger.logger import info, error
-from src.main.python.transcriber import ACTION_CHOICE
 
 from src.main.python.transcriber.utils.command_generator import convert_events_to_drawing_commands, print_command, \
     export2pcmd
 from src.main.python.transcriber.utils.mouse_recorder import record_mouse, print_record, export2json, parse_from_file
-
-# 默认文件路径
-DEFAULT_FILE_PATH = os.path.join(
-    test_json_dir,
-    "mouse_event.json"
-)
+from src.main.python.transcriber.utils.cmd_parser import parse_arguments
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Mouse Event Recorder and Processor",
-        formatter_class=argparse.RawTextHelpFormatter
-    )
-    parser.add_argument(
-        '-a', '--action',
-        choices=ACTION_CHOICE,
-        default='record',
-        help="""
-选择要执行的操作：
-  record          : 记录并打印鼠标事件（默认）
-  export          : 记录并导出到文件
-  convert         : 记录并转换为绘图命令
-  full            : 记录、转换并打印绘图命令
-  parse           : 从文件解析并转换为绘图命令
-  parse_and_save  : 从文件解析、转换并保存绘图命令
-        """
-    )
-    parser.add_argument(
-        '-f', '--file',
-        default=DEFAULT_FILE_PATH,
-        help=f"指定鼠标事件输入/输出文件路径（默认：{DEFAULT_FILE_PATH}）"
-    )
-    parser.add_argument(
-        '-c', '--command-file',
-        help="指定绘图命令输出文件路径（仅对parse_and_save操作有效）"
-    )
-    parser.add_argument(
-        '-p', '--print-commands',
-        action='store_true',
-        help="在转换后打印绘图命令（仅对convert/parse操作有效）"
-    )
-
-    args = parser.parse_args()
+    args = parse_arguments()
 
     # 操作1：默认行为（记录并打印）
     if args.action == 'record':
