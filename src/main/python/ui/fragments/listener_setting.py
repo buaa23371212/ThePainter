@@ -79,9 +79,9 @@ class ListenerSettingsWidget(QWidget):
 
         # 3.2 输出画作名
         painting_name_layout = QHBoxLayout()
-        painting_name_label = self._create_label("画作名:", "listenerSettingPaintingNameLabel")
+        self.painting_name_label = self._create_label("画作名:", "listenerSettingPaintingNameLabel")
         self.painting_name_edit = self._create_edit_line("输出画作名称（可选）")
-        painting_name_layout.addWidget(painting_name_label)
+        painting_name_layout.addWidget(self.painting_name_label)
         painting_name_layout.addWidget(self.painting_name_edit)
 
         # 3.3 输出文件名
@@ -180,7 +180,12 @@ class ListenerSettingsWidget(QWidget):
 
     def update_ui_state(self, action):
         """根据选择的action更新UI状态"""
+        # TODO: 优化逻辑
         listener_config.DEFAULT_ACTION_CHOICE = action
+        self.input_file_edit.clear()
+        self.output_folder_edit.clear()
+        self.painting_name_edit.clear()
+        self.output_filename_edit.clear()
 
         # 根据操作类型启用/禁用输入文件字段
         input_enabled = action in ['parse', 'parse_and_save']
@@ -200,15 +205,18 @@ class ListenerSettingsWidget(QWidget):
 
         if self.output_enabled:
             if action == 'export':
-                self.output_folder_edit.setPlaceholderText(json_dir)
-                self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_JSON_NAME)
+                self.output_folder_edit.setText(json_dir)
+                self.output_filename_edit.setText(listener_config.DEFAULT_JSON_NAME)
                 self.painting_name_edit.setText("")         # 设为空串
-                self.painting_name_edit.setEditable(False)  # 不可编辑
+                self.painting_name_edit.setEnabled(False)   # 不可编辑
+                self.painting_name_label.setVisible(False)
                 self.painting_name_edit.setVisible(False)   # 隐藏控件
             if action == 'parse_and_save':
-                self.output_folder_edit.setPlaceholderText(input_dir)
-                self.painting_name_edit.setPlaceholderText("Sample-1")
-                self.output_filename_edit.setPlaceholderText(listener_config.DEFAULT_PCMD_NAME)
+                self.output_folder_edit.setText(input_dir)
+                self.painting_name_edit.setText("Sample-1")
+                self.painting_name_label.setVisible(True)
+                self.painting_name_edit.setVisible(True)
+                self.output_filename_edit.setText(listener_config.DEFAULT_PCMD_NAME)
         else:
             self.output_folder_edit.setPlaceholderText("当前操作不需要输出文件夹")
             self.output_filename_edit.setPlaceholderText("当前操作不需要文件名")
@@ -246,8 +254,12 @@ class ListenerSettingsWidget(QWidget):
         painting_name = self.painting_name_edit.text().strip()
         filename = self.output_filename_edit.text().strip()
 
+        debug(True, f"{folder}, {painting_name}, {filename}")
+
         # 过滤空值（避免多余的路径层级）
         path_parts = [part for part in [folder, painting_name, filename] if part]
+
+        debug(True, path_parts)
 
         if not self.output_enabled:
             return ""
