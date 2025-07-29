@@ -14,3 +14,13 @@ line -points 810 483 696 388
 line -points 1019 476 1125 364
 line -points 1031 688 1160 791
 line -points 797 677 692 780
+
+# 树
+-color black
+rectangle -bounding 811 575 911 843
+fill -x 871 -y 690
+add_layer
+-color black
+ellipse -bounding 672 418 1058 667
+-color green
+fill -x 858 -y 498
