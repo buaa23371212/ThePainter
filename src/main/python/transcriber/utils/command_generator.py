@@ -133,6 +133,10 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 
         # Step 3.2：处理按钮按下事件
         if event_type == 'pressed':
+            # TODO: 常量写在init
+            if button_name == "AddLayer":
+                commands.append("add_layer")
+
             # Step 3.2.1：形状工具选择
             if button_name.startswith('Shape_'):
                 current_tool = 'shape'
