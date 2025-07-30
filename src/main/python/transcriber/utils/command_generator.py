@@ -1,6 +1,7 @@
 import os.path
 from typing import List, Dict, Optional, Union
 
+from src.main.python.transcriber.utils import POLYGON_TOLERANCE
 from src.main.python.utils.file_manager import generate_input_path
 from src.main.python.terminal_logger.logger import warn
 
@@ -31,6 +32,32 @@ control_points = None
 # ======================================================================
 # 模块2：命令生成工具
 # ======================================================================
+def is_curve_completed(control_points: List[tuple]) -> bool:
+    """判断曲线是否绘制完成（拥有两个控制点）"""
+    return len(control_points) == 2
+
+
+def is_polygon_completed(control_points: List[tuple], start_position: tuple, tolerance: float = POLYGON_TOLERANCE) -> bool:
+    """
+    判断多边形是否绘制完成（最后一个控制点与起始点距离小于阈值）
+    
+    参数:
+        control_points: 控制点列表
+        start_position: 起始点坐标
+        tolerance: 距离阈值（默认使用全局常量）
+    """
+    if not control_points or not start_position:
+        return False
+        
+    last_point = control_points[-1]
+    # 计算欧氏距离
+    dx = last_point[0] - start_position[0]
+    dy = last_point[1] - start_position[1]
+    distance = (dx**2 + dy**2) ** 0.5  # 开平方获取实际距离
+    
+    return distance < tolerance
+
+
 def generate_shape_command() -> Optional[str]:
     """
     根据当前工具和位置生成绘图命令
@@ -58,14 +85,13 @@ def generate_shape_command() -> Optional[str]:
         # Step 2.1.3：处理曲线
         if current_shape == 'curve':
             if control_points:
-                if len(control_points) != 2:
-                    raise ValueError('曲线应有两个控制点')
-                else:
-                    x0, y0 = start_position
-                    x1, y1 = control_points[0]
-                    x2, y2 = control_points[1]
-                    x3, y3 = end_position
-                    return f"curve -points {x0} {y0} {x1} {y1} {x2} {y2} {x3} {y3}"
+                if not is_curve_completed(control_points):
+                    raise ValueError(f'曲线需要2个控制点，当前已添加{len(control_points)}个')
+                x0, y0 = start_position
+                x1, y1 = control_points[0]
+                x2, y2 = control_points[1]
+                x3, y3 = end_position
+                return f"curve -points {x0} {y0} {x1} {y1} {x2} {y2} {x3} {y3}"
             else:
                 raise ValueError('未记录控制点')
 
@@ -73,19 +99,15 @@ def generate_shape_command() -> Optional[str]:
         if current_shape == 'polygon':
             if control_points:
                 last_point = control_points[-1]
-                if last_point != start_position:
-                    raise ValueError('多边形未闭合')
-                else:
-                    x1, y1 = start_position
-                    x2, y2 = end_position
-                    # 先构建初始顶点字符串
-                    vertices = [f"{x1} {y1}", f"{x2} {y2}"]
-                    # 添加control_points中除最后一个点之外的所有点
-                    for point in control_points[:-1]:
-                        px, py = point
-                        vertices.append(f"{px} {py}")
-                    # 拼接成完整的字符串
-                    return f"polygon -points {' '.join(vertices)}"
+                if not is_polygon_completed(control_points, start_position):
+                    raise ValueError(f'多边形未闭合（最后一点与起点距离超过阈值）')
+                x1, y1 = start_position
+                x2, y2 = end_position
+                vertices = [f"{x1} {y1}", f"{x2} {y2}"]
+                for point in control_points[:-1]:
+                    px, py = point
+                    vertices.append(f"{px} {py}")
+                return f"polygon -points {' '.join(vertices)}"
             else:
                 raise ValueError('未记录控制点')
 
@@ -139,54 +161,74 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 
             # Step 3.2.1：形状工具选择
             if button_name.startswith('Shape_'):
+                if is_graphic_selected == True:
+                    after_unselecting(commands)
+
                 current_tool = 'shape'
-                current_shape = button_name[len('Shape_'):]  # 提取形状类型
+                current_shape = button_name[len('Shape_'):]         # 提取形状类型
 
                 if current_shape in ['curve', 'polygon']:
                     control_points = []
 
             # Step 3.2.2：颜色选择
             elif button_name.startswith('Color_'):
+                if is_graphic_selected == True:
+                    after_unselecting(commands)
+
                 current_color = button_name[len('Color_'):]
-                commands.append(generate_color_command())  # 生成颜色命令
+                commands.append(generate_color_command())           # 生成颜色命令
 
             # Step 3.2.3：工具选择
             elif button_name.startswith('Tool_'):
+                if is_graphic_selected == True:
+                    after_unselecting(commands)
+
                 current_tool = button_name[len('Tool_'):]
 
             # Step 3.2.4：图形控制点操作
             elif button_name == 'Canvas' and current_tool == 'shape' and is_graphic_selected == True:
-                if current_shape in ['curve', 'polygon']:
+                if current_shape == 'curve' and not is_curve_completed(control_points):
                     control_points.append(event['start_position'])
+
+                elif current_shape == 'polygon' and not is_polygon_completed(control_points):
+                    control_points.append(event['start_position'])
+
+                else:
+                    after_unselecting(commands)
 
             # Step 3.2.5：填充操作
             elif button_name == 'Canvas' and current_tool == 'fill':
-                start_position = event['start_position']  # 获取填充位置
-                commands.append(generate_fill_command())  # 生成填充命令
+                start_position = event['start_position']            # 获取填充位置
+                commands.append(generate_fill_command())            # 生成填充命令
 
             # Step 3.2.6：取消图形选中状态
             elif (button_name == 'Canvas' or button_name == 'N/A') and is_graphic_selected == True:
-                is_graphic_selected = False
-                try:
-                    cmd = generate_shape_command()
-                except Exception as e:
-                    # 捕获所有异常，将异常信息格式化为注释命令
-                    cmd = f"# {e}"
-                control_points = []
-                if cmd:
-                    commands.append(cmd)  # 生成最终形状命令
-                else:
-                    warn(True, 'line172', True)
+                after_unselecting(commands)
 
         # Step 3.3：处理拖拽事件（图形绘制）
         if event_type == 'dragging':
             is_graphic_selected = True
-            start_position = event['start_position']  # 记录起始位置
-            end_position = event['end_position']      # 记录结束位置
+            start_position = event['start_position']                # 记录起始位置
+            end_position = event['end_position']                    # 记录结束位置
 
-        i += 1  # 处理下一个事件
+        i += 1                                                      # 处理下一个事件
 
     return commands
+
+def after_unselecting(commands):
+    global is_graphic_selected, control_points
+
+    is_graphic_selected = False
+    try:
+        cmd = generate_shape_command()
+    except Exception as e:
+                    # 捕获所有异常，将异常信息格式化为注释命令
+        cmd = f"# {e}"
+    control_points = []
+    if cmd:
+        commands.append(cmd)  # 生成最终形状命令
+    else:
+        warn(True, '空指令生成', True)
 
 
 # ======================================================================
