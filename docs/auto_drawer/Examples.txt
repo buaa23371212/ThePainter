@@ -8,10 +8,11 @@
 # a. 使用时，可以平移缩放
 
 # ===========================
-# Example: 太阳
+# Example 1: 太阳
 # ===========================
 -color black
 ellipse -bounding 810 471 1029 685
+-color yellow
 fill -x 933 -y 567
 # 八条线，表示太阳发出的光
 line -points 918 313 919 436
@@ -24,7 +25,7 @@ line -points 1031 688 1160 791
 line -points 797 677 692 780
 
 # ===========================
-# Example: 树
+# Example 2: 树
 # ===========================
 -color black
 rectangle -bounding 811 575 911 843
@@ -37,7 +38,7 @@ ellipse -bounding 672 418 1058 667
 fill -x 858 -y 498
 
 # ===========================
-# Example: 楼房
+# Example 3: 楼房
 # ===========================
 -color black
 # 主体
@@ -69,9 +70,117 @@ fill -x 896 -y 571
 fill -x 895 -y 470
 
 # ===========================
-# Example: 远在天边的鸟
+# Example 4: 远在天边的鸟
 # ===========================
 -color black
 curve -points 875 782 923 735 994 738 1042 781
+# 两个翅膀
 curve -points 957 746 904 648 789 619 694 692
 curve -points 957 744 990 666 1114 637 1187 685
+
+# ===========================
+# Example 5: 站立的人
+# ===========================
+-color black
+# 头
+ellipse -bounding 898 352 1005 460
+# 身体
+line -points 952 461 952 657
+# 上肢
+line -points 950 510 788 564
+line -points 956 508 1123 564
+# 下肢
+line -points 952 657 856 754
+line -points 952 655 1049 762
+
+# ===========================
+# Example 6: 笑脸
+# ===========================
+-color black
+# 头
+ellipse -bounding 762 451 1101 782
+# 表示眼睛
+line -points 880 534 880 620
+line -points 975 537 975 624
+# 表示笑
+curve -points 858 692 890 742 973 749 1008 692
+
+# ===========================
+# Example 7: 沮丧脸
+# ===========================
+-color black
+# 头
+ellipse -bounding 838 443 1086 691
+# 表示眼睛
+line -points 915 495 915 565
+line -points 991 497 990 563
+# 表示撅嘴
+curve -points 912 617 935 585 982 590 1000 616
+
+# ===========================
+# Example 8: 小屋
+# ===========================
+# 主体
+-color black
+rectangle -bounding 652 605 1045 863
+# 屋顶
+line -points 653 603 829 449
+line -points 831 448 1044 605
+# 门窗
+rectangle -bounding 814 750 888 862
+rectangle -bounding 712 639 789 712
+rectangle -bounding 920 644 986 712
+-color brown
+fill -x 849 -y 563
+-color yellow
+fill -x 746 -y 666
+fill -x 974 -y 681
+-color gold
+fill -x 867 -y 655
+fill -x 863 -y 812
+# 增加图层，使烟囱在视觉上遮住屋顶
+add_layer
+# 烟囱
+-color black
+rectangle -bounding 932 442 987 584
+-color darkred
+fill -x 968 -y 492
+# 烟
+-color black
+curve -points 962 343 950 375 980 409 962 428
+curve -points 936 365 913 370 956 397 939 413
+curve -points 995 372 978 378 1028 414 986 416
+
+# ===========================
+# Example 9: 小鸟
+# ===========================
+# 身体
+-color black
+ellipse -bounding 679 493 1139 652
+# 增加图层，使鸟头在视觉上遮住身体
+add_layer
+# 灰色鸟头
+ellipse -bounding 569 481 773 671
+-color lightgray
+fill -x 641 -y 571
+# 尾巴
+-color black
+line -points 1116 534 1228 463
+line -points 1116 616 1228 680
+line -points 1229 461 1228 680
+line -points 1138 559 1226 517
+line -points 1139 575 1231 577
+line -points 1133 592 1229 629
+# 鸟嘴
+line -points 573 603 508 639
+line -points 509 639 574 644
+line -points 573 643 560 681
+line -points 561 680 616 654
+# 眼睛
+ellipse -bounding 626 535 666 577
+# 上翅膀
+curve -points 931 409 926 311 866 327 863 493
+curve -points 931 407 972 324 1045 379 975 497
+# 下翅膀
+curve -points 930 720 922 843 854 819 863 652
+curve -points 929 720 964 856 1045 839 974 649
