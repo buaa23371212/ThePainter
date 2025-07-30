@@ -156,11 +156,6 @@ color_buttons_2 = create_toolbar_buttons(
 manager.add_buttons(color_buttons)
 manager.add_buttons(color_buttons_2)
 
-debug(True, manager.get_button_by_name("Shape_right_triangle"))
-debug(True, manager.get_button_by_name("Color_black"))
-debug(True, manager.get_button_by_name("Color_white"))
-debug(True, manager.get_button_by_name("Color_lightpurple"))
-
 # ====================================================
 # 添加其他重要按钮
 # ====================================================

@@ -44,7 +44,7 @@ class ListenerToolbar(QFrame):
         toolbar_layout.setAlignment(Qt.AlignRight)
 
         # 执行按钮
-        self.execute_btn = QPushButton("开始监听")
+        self.execute_btn = QPushButton("开始")
         self.execute_btn.setObjectName("executeButton")  # 添加对象名
         toolbar_layout.addWidget(self.execute_btn)
 

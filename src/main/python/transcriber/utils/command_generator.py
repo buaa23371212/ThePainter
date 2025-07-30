@@ -157,7 +157,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
             # Step 3.2.4：图形控制点操作
             elif button_name == 'Canvas' and current_tool == 'shape' and is_graphic_selected == True:
                 if current_shape in ['curve', 'polygon']:
-                    control_points.append[event['start_position']]
+                    control_points.append(event['start_position'])
 
             # Step 3.2.5：填充操作
             elif button_name == 'Canvas' and current_tool == 'fill':
