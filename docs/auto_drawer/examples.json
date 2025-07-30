@@ -1,0 +1,51 @@
+// shapes.json
+{
+  "sun": {
+    "type": "composite",
+    "elements": [
+      {
+        "type": "ellipse",
+        "bounding": [810, 471, 1029, 685],
+        "fill_point": [933, 567]
+      },
+      {
+        "type": "line_group",
+        "lines": [
+          [918, 313, 919, 436],
+          [1070, 572, 1253, 570],
+          // 其他6条线...
+        ]
+      }
+    ],
+    "bounding_box": [x1, y1, x2, y2],
+    "center_point": [x0, y0]
+  },
+  "tree": {
+    "type": "layered",
+    "layers": [
+      {
+        "type": "rectangle",
+        "bounding": [811, 575, 911, 843],
+        "fill_point": [871, 690]
+      },
+      {
+        "type": "ellipse",
+        "bounding": [672, 418, 1058, 667],
+        "fill_point": [858, 498],
+        "fill_color": "green"
+      }
+    ]
+  },
+  "building": {
+    "type": "composite",
+    "elements": [
+      {
+        "type": "rectangle",
+        "bounding": [678, 415, 977, 836],
+        "fill_color": "gray",
+        "fill_point": [831, 505]
+      },
+      // 门窗等元素...
+    ]
+  }
+}
