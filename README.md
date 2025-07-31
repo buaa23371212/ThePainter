@@ -123,6 +123,10 @@ manager.find_button_at_point(30, 40, method="grid")  # 使用网格搜索按钮
 - **transcriber流程图**：[流程图.md](transcriber/流程图.md)
 - **transcriber指令集**：[instruction set.md](transcriber/instruction%20set.md)
 
+## database 素材来源
+
+<http://www.jianbihuaw.com/jianbihua/>
+
 ## 贡献指南
 > 待补充：项目贡献规范、代码提交流程和分支管理策略
 
@@ -130,4 +134,4 @@ manager.find_button_at_point(30, 40, method="grid")  # 使用网格搜索按钮
 > 待补充：项目使用的开源许可证信息
 
 ## 技术支持
-如有任何问题，请提交issue至项目仓库或联系：待补充
+> 待补充: 如有任何问题，请提交issue至项目仓库或联系：......

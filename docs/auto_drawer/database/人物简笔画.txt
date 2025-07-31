@@ -1,0 +1,14 @@
+# ===========================
+# Example 1: 站立的火柴人
+# ===========================
+-color black
+# 头
+ellipse -bounding 898 352 1005 460
+# 身体
+line -points 952 461 952 657
+# 上肢
+line -points 950 510 788 564
+line -points 956 508 1123 564
+# 下肢
+line -points 952 657 856 754
+line -points 952 655 1049 762

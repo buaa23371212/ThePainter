@@ -1,0 +1,12 @@
+# ===========================
+# Example 1: 树
+# ===========================
+-color black
+rectangle -bounding 811 575 911 843
+fill -x 871 -y 690
+# 增加图层，使树叶在视觉上遮住树干
+add_layer
+-color black
+ellipse -bounding 672 418 1058 667
+-color green
+fill -x 858 -y 498

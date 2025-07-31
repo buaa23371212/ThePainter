@@ -1,0 +1,42 @@
+# ===========================
+# Example 1: 远在天边的鸟
+# ===========================
+-color black
+curve -points 875 782 923 735 994 738 1042 781
+# 两个翅膀
+curve -points 957 746 904 648 789 619 694 692
+curve -points 957 744 990 666 1114 637 1187 685
+
+# ===========================
+# Example 2: 小鸟
+# ===========================
+# 身体
+-color black
+ellipse -bounding 679 493 1139 652
+# 增加图层，使鸟头在视觉上遮住身体
+add_layer
+# 灰色鸟头
+ellipse -bounding 569 481 773 671
+-color lightgray
+fill -x 641 -y 571
+# 尾巴
+-color black
+line -points 1116 534 1228 463
+line -points 1116 616 1228 680
+line -points 1229 461 1228 680
+line -points 1138 559 1226 517
+line -points 1139 575 1231 577
+line -points 1133 592 1229 629
+# 鸟嘴
+line -points 573 603 508 639
+line -points 509 639 574 644
+line -points 573 643 560 681
+line -points 561 680 616 654
+# 眼睛
+ellipse -bounding 626 535 666 577
+# 上翅膀
+curve -points 931 409 926 311 866 327 863 493
+curve -points 931 407 972 324 1045 379 975 497
+# 下翅膀
+curve -points 930 720 922 843 854 819 863 652
+curve -points 929 720 964 856 1045 839 974 649

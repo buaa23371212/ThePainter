@@ -1,0 +1,65 @@
+# ===========================
+# Example 1: 楼房
+# ===========================
+-color black
+# 主体
+rectangle -bounding 678 415 977 836
+# 门
+rectangle -bounding 839 835 905 731
+# 六个窗
+rectangle -bounding 738 446 787 494
+rectangle -bounding 874 452 922 499
+rectangle -bounding 740 556 793 606
+rectangle -bounding 871 558 923 607
+rectangle -bounding 744 652 802 708
+rectangle -bounding 875 651 925 705
+# 门把手
+circle -bounding 878 780 892 795
+# 主体灰色
+-color gray
+fill -x 831 -y 505
+# 门蓝灰色
+-color bluegray
+fill -x 863 -y 755
+# 窗户黄色，表示房间内亮灯
+-color yellow
+fill -x 759 -y 463
+fill -x 775 -y 577
+fill -x 783 -y 681
+fill -x 900 -y 672
+fill -x 896 -y 571
+fill -x 895 -y 470
+
+# ===========================
+# Example 2: 小屋
+# ===========================
+# 主体
+-color black
+rectangle -bounding 652 605 1045 863
+# 屋顶
+line -points 653 603 829 449
+line -points 831 448 1044 605
+# 门窗
+rectangle -bounding 814 750 888 862
+rectangle -bounding 712 639 789 712
+rectangle -bounding 920 644 986 712
+-color brown
+fill -x 849 -y 563
+-color yellow
+fill -x 746 -y 666
+fill -x 974 -y 681
+-color gold
+fill -x 867 -y 655
+fill -x 863 -y 812
+# 增加图层，使烟囱在视觉上遮住屋顶
+add_layer
+# 烟囱
+-color black
+rectangle -bounding 932 442 987 584
+-color darkred
+fill -x 968 -y 492
+# 烟
+-color black
+curve -points 962 343 950 375 980 409 962 428
+curve -points 936 365 913 370 956 397 939 413
+curve -points 995 372 978 378 1028 414 986 416
