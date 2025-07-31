@@ -1,0 +1,30 @@
+# ===========================
+# Example 1: 苹果
+# ===========================
+
+-color black
+# 主体
+curve -points 873 753 907 769 1032 735 1046 597
+curve -points 869 750 846 768 747 746 720 607
+curve -points 871 503 832 462 731 480 718 603
+curve -points 871 503 910 473 1039 496 1044 595
+-color red
+fill -x 891 -y 610
+add_layer
+-color black
+# 果柄
+line -points 853 436 900 432
+curve -points 857 502 871 490 870 456 854 435
+curve -points 880 508 903 500 911 457 903 431
+line -points 854 500 878 510
+# 叶子
+line -points 905 465 945 450
+line -points 975 456 944 448
+line -points 973 458 963 479
+line -points 962 480 935 489
+line -points 897 489 932 488
+line -points 921 473 953 466
+-color brown
+fill -x 876 -y 461
+-color green
+fill -x 944 -y 460
