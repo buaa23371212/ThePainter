@@ -155,14 +155,14 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 
         # Step 3.2：处理按钮按下事件
         if event_type == 'pressed':
-            # TODO: 常量写在init
+            # TODO: 硬编码写在init
             if button_name == "AddLayer":
                 commands.append("add_layer")
 
             # Step 3.2.1：形状工具选择
             if button_name.startswith('Shape_'):
                 if is_graphic_selected == True:
-                    after_unselecting(commands)
+                    deselect_and_generate(commands)
 
                 current_tool = 'shape'
                 current_shape = button_name[len('Shape_'):]         # 提取形状类型
@@ -173,7 +173,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
             # Step 3.2.2：颜色选择
             elif button_name.startswith('Color_'):
                 if is_graphic_selected == True:
-                    after_unselecting(commands)
+                    deselect_and_generate(commands)
 
                 current_color = button_name[len('Color_'):]
                 commands.append(generate_color_command())           # 生成颜色命令
@@ -181,7 +181,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
             # Step 3.2.3：工具选择
             elif button_name.startswith('Tool_'):
                 if is_graphic_selected == True:
-                    after_unselecting(commands)
+                    deselect_and_generate(commands)
 
                 current_tool = button_name[len('Tool_'):]
 
@@ -194,7 +194,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                     control_points.append(event['start_position'])
 
                 else:
-                    after_unselecting(commands)
+                    deselect_and_generate(commands)
 
             # Step 3.2.5：填充操作
             elif button_name == 'Canvas' and current_tool == 'fill':
@@ -203,19 +203,25 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
 
             # Step 3.2.6：取消图形选中状态
             elif (button_name == 'Canvas' or button_name == 'N/A') and is_graphic_selected == True:
-                after_unselecting(commands)
+                deselect_and_generate(commands)
 
         # Step 3.3：处理拖拽事件（图形绘制）
         if event_type == 'dragging':
-            is_graphic_selected = True
-            start_position = event['start_position']                # 记录起始位置
-            end_position = event['end_position']                    # 记录结束位置
+            if is_graphic_selected == False:
+                is_graphic_selected = True
+                start_position = event['start_position']            # 记录起始位置
+                end_position = event['end_position']                # 记录结束位置
+
+            elif is_graphic_selected == True:
+                if current_shape == 'curve':
+                    if not is_curve_completed(control_points):
+                        control_points.append(event['end_position'])  # 添加控制点
 
         i += 1                                                      # 处理下一个事件
 
     return commands
 
-def after_unselecting(commands):
+def deselect_and_generate(commands):
     global is_graphic_selected, control_points
 
     is_graphic_selected = False
