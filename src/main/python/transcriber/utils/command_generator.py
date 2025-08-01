@@ -98,7 +98,6 @@ def generate_shape_command() -> Optional[str]:
         # Step 2.1.4：处理多边形
         if current_shape == 'polygon':
             if control_points:
-                last_point = control_points[-1]
                 if not is_polygon_completed(control_points, start_position):
                     raise ValueError(f'多边形未闭合（最后一点与起点距离超过阈值）')
                 x1, y1 = start_position
@@ -190,7 +189,7 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                 if current_shape == 'curve' and not is_curve_completed(control_points):
                     control_points.append(event['start_position'])
 
-                elif current_shape == 'polygon' and not is_polygon_completed(control_points):
+                elif current_shape == 'polygon' and not is_polygon_completed(control_points, start_position):
                     control_points.append(event['start_position'])
 
                 else:
@@ -212,16 +211,31 @@ def convert_events_to_drawing_commands(event_list: List[Dict]) -> List[str]:
                 start_position = event['start_position']            # 记录起始位置
                 end_position = event['end_position']                # 记录结束位置
 
-            elif is_graphic_selected == True:
+            elif is_graphic_selected == True and current_tool == 'shape':
                 if current_shape == 'curve':
                     if not is_curve_completed(control_points):
                         control_points.append(event['end_position'])  # 添加控制点
 
+                elif current_shape == 'polygon':
+                    if not is_polygon_completed(control_points, start_position):
+                        control_points.append(event['end_position'])
+
+                else:
+                    deselect_and_generate(commands)
+                    is_graphic_selected = True
+                    start_position = event['start_position']        # 更新起始位置
+                    end_position = event['end_position']            # 更新结束位置
+
         i += 1                                                      # 处理下一个事件
+
+    # Step 3.4：处理未完成的图形
+    if is_graphic_selected:
+        deselect_and_generate(commands)
 
     return commands
 
 def deselect_and_generate(commands):
+    """取消当前图形选中状态并生成最终形状命令"""
     global is_graphic_selected, control_points
 
     is_graphic_selected = False
