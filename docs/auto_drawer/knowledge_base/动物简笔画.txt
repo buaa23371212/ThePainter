@@ -42,7 +42,7 @@ curve -points 930 720 922 843 854 819 863 652
 curve -points 929 720 964 856 1045 839 974 649
 
 # ===========================
-# Example 2: 小鱼
+# Example 3: 小鱼
 # ===========================
 -color black
 # 身体
@@ -66,7 +66,7 @@ ellipse -bounding 714 608 745 644
 # 鱼嘴
 curve -points 681 684 710 676 744 699 727 719
 # 上鱼鳍
-# miss
+# miss curve
 line -points 965 475 930 541
 # 下鱼鳍
 curve -points 939 741 937 776 983 799 1016 791
@@ -75,8 +75,39 @@ add_layer
 curve -points 967 735 972 766 1049 800 1047 771
 line -points 996 724 1048 769
 # 气泡
-# misses * 2
+# misses * 2 ellipses
 ellipse -bounding 579 484 613 515
 # 鱼尾花纹
 curve -points 1080 638 1107 611 1189 604 1225 621
 curve -points 1087 667 1092 689 1135 694 1164 687
+
+# ===========================
+# Example 4: 小鲸鱼
+# ===========================
+-color black
+# 身体
+curve -points 897 446 1006 474 1047 538 1028 628
+curve -points 718 574 751 483 780 438 894 445
+curve -points 837 690 920 711 1000 692 1016 627
+curve -points 699 565 697 583 707 587 718 575
+curve -points 679 576 694 616 711 677 837 692
+# 嘴
+curve -points 894 587 905 601 927 620 1026 629
+# 身体花纹
+curve -points 909 605 885 639 843 673 796 683
+# 眼睛
+ellipse -bounding 869 526 909 564
+fill -x 887 -y 545
+# 身体花纹
+line -points 921 651 873 697
+line -points 948 656 927 697
+line -points 980 650 973 681
+# 尾巴
+curve -points 700 510 718 525 710 549 698 561
+curve -points 676 541 674 522 691 502 697 509
+curve -points 639 545 640 561 654 576 677 576
+curve -points 811 596 778 616 800 617 765 607
+# 头顶喷水
+curve -points 1623 756 802 630 772 626 1616 759
+curve -points 942 461 977 422 1009 405 1051 410
+curve -points 942 458 967 356 985 401 953 347

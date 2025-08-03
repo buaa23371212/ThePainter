@@ -1,5 +1,5 @@
 # ===========================
-# Example 1: 树
+# Example 1: 树1
 # ===========================
 -color black
 rectangle -bounding 811 575 911 843
@@ -10,3 +10,28 @@ add_layer
 ellipse -bounding 672 418 1058 667
 -color green
 fill -x 858 -y 498
+
+# ===========================
+# Example 2: 树2
+# ===========================
+-color black
+# 树叶
+ellipse -bounding 716 372 1044 674
+-color green
+fill -x 862 -y 489
+# 增加图层，使树冠在视觉上从树叶中露出
+add_layer
+-color black
+# 树干
+line -points 879 528 833 852
+line -points 919 847 836 852
+line -points 880 528 919 846
+# 树冠
+line -points 866 614 829 562
+line -points 860 659 828 564
+line -points 887 569 944 515
+line -points 895 624 943 519
+-color brown
+fill -x 903 -y 746
+fill -x 849 -y 618
+fill -x 897 -y 580

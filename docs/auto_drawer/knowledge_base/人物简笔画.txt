@@ -12,3 +12,22 @@ line -points 956 508 1123 564
 # 下肢
 line -points 952 657 856 754
 line -points 952 655 1049 762
+
+# ===========================
+# Example 2: 坐着的火柴人
+# ===========================
+-color black
+# 头
+ellipse -bounding 792 399 909 516
+# 身
+line -points 850 518 850 732
+# 弯曲的腿
+line -points 850 733 739 609
+line -points 739 608 657 761
+line -points 819 613 852 732
+line -points 819 613 786 782
+# 双手抱膝
+line -points 849 547 675 576
+line -points 674 573 721 654
+line -points 795 684 940 605
+line -points 851 546 940 606
